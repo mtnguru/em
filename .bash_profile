@@ -13,6 +13,8 @@ if [ -f $HOME/.bashrc ]; then
    . $HOME/.bashrc
 fi
 
+PATH="$PATH:$d/../vendor/drush/drush"
+
 #. xmodmap ~/.xmodmap
 #xhost +
 set -o vi

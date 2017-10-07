@@ -34,7 +34,6 @@ alias dus='FILE=/tmp/`basename $PWD`.`date "+%y%m%d"`.du;  \
               du -s * | sort -rn > $FILE;   \
 	      head $FILE'
 
-alias drush='/app/vendor/drush/drush/drush.php'
 alias dr='cd /app/web; drush'
 alias drcc='dr cc all'
 alias tc='echo Truncate cache table - database $USER; echo "truncate table cache; quit;" > mysql -u root -ptaichi $USER'
