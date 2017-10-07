@@ -1,0 +1,50 @@
+export d=/app/docroot
+export dt=$d/themes/custom/sa_neato
+export dn=$d/themes/contrib/neato
+export dtt=$d/themes/custom/sa_neato/templates
+export dta=$d/themes/custom/sa_seven
+export ds=$dt/scss
+export dj=$dt/js
+export df=$d/sites/default/files
+export di=$d/sites/default
+export dm=$d/modules/contrib
+export dc=$d/modules/custom
+
+#imager
+export i=$dc/imager
+export is=$i/sass
+export ic=$i/css
+export ij=$i/js
+
+# atomizer
+export a=$dc/atomizer
+export aj=$a/js
+export ab=$a/src/Plugin/Block 
+export ax=$a/src/Plugin/Ajax 
+export ac=$a/config
+export as=$a/sass
+export acs=$a/config/style
+export acc=$a/config/controls
+export aca=$a/config/atomizer
+export acn=$a/config/nucleus
+export acu=$a/config/nuclets
+
+export gt=$dc/d8-glossify-taxonomy_tooltip
+
+# glossify
+export l=$gt/glossify
+export lj=$gt/glossify/js
+
+# taxonomy_tooltip
+export t=$gt/taxonomy_tooltip
+export tj=$gt/taxonomy_tooltip/js
+
+
+CDPATH=$CDPATH:$dc:$dm:$ds:$aj:$ac
+
+
+export b=/var/www/html/bourbon
+export bs=$b/sass
+
+
+export ctt=$d/core/themes/classy/templates
