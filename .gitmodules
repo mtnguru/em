@@ -1,0 +1,9 @@
+[submodule "docroot/modules/custom/atomizer"]
+	path = docroot/modules/custom/atomizer
+	url = https://github.com/mtnguru/ab.git
+[submodule "docroot/modules/custom/imager"]
+	path = docroot/modules/custom/imager
+	url = https://github.com/mtnguru/imager.git
+[submodule "docroot/modules/contrib/drush"]
+	path = docroot/modules/contrib/drush
+	url = https://github.com/drush-ops/drush.git

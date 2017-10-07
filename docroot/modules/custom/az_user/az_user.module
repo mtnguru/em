@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Contains az_user.module.
+ */
+
+use Drupal\Component\Utility\Random;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function az_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return;
+}
+
+/**
+ * Implements HOOK_preprocess_user().
+ *
+ */
+function az_user_preprocess_user(&$variables) {
+  $user = $variables['user'];
+
+  // Create the fullname by concatenating the first and last names.
+  if (!empty($variables['content']['field_first_name'])) {
+    $variables['fullname'] = $variables['content']['field_first_name']['0']['#context']['value'] . ' ';
+  }
+  if (!empty($variables['content']['field_last_name'])) {
+    $variables['fullname'] .= $variables['content']['field_last_name']['0']['#context']['value'];
+  }
+
+  /*
+  // Create the byline by concatenating field_title and field_location
+  $flds = [];
+  if (!empty($user->field_title)) {
+    $flds[] = $user->field_title->value;
+  }
+
+  if (!empty($variables['content']['field_location'])) {
+    $flds[] = $user->field_location->value;
+  }
+
+  if (sizeof($flds)) {
+    $variables['byline'] = join(' - ', $flds);
+  } */
+
+  // Get the URL of the user
+  $variables['url'] = $variables['user']->url();
+  return;
+}
+
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter
+ *
+ * Suggest user--{view_mode}.html.twig file.
+ */
+function az_user_theme_suggestions_user_alter(array &$suggestions, array $variables, $hook) {
+  $suggestions[] = $variables['theme_hook_original'] . '__' . str_replace('-', '_', $variables['elements']['#view_mode']);
+  return $suggestions;
+}

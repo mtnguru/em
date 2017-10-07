@@ -1,0 +1,12 @@
+body.path-group {
+  main.outer-container {
+    @extend %layout-padding;
+  }
+
+  .page-title {
+    display: none;
+  }
+
+  #content {
+  }
+}

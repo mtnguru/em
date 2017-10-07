@@ -1,0 +1,16 @@
+#block-views-block-content-recent-block-1 {
+  ul {
+    list-style: none;
+    li {
+      margin-left: 0;
+
+    }
+  }
+  .views-field-changed {
+    font-size: 80%;
+    color: #999;
+    .changed {
+      font-style: italic;
+    }
+  }
+}

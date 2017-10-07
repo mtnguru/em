@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["components/_table.scss"],"sourcesContent":["table {\n  td {\n    .is-active {\n\n    }\n  }\n}\n"],"file":"components/_table.scss","sourceRoot":"/source/"}

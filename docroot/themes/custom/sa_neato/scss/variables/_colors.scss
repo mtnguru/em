@@ -1,0 +1,108 @@
+// Color definitions
+
+// Greys
+$color-black: #000000;
+$color-dark-grey: #333333 !default;
+$color-dim-grey: #666666;
+$color-medium-grey: #999999 !default;
+$color-light-grey: #DDDDDD !default;
+$color-white: #ffffff;
+
+/////////////// Color Scheme /////////////////////
+$color-dark-blue: #102e4a;
+$color-blue: #5887ff;
+$color-purple: #6020f0;
+$color-turquoise: #44d9e6;
+$color-purple-red: #a682ff;
+$color-green: #6fffa0;
+$color-dark-green: #0f5f20;
+$color-gold: #ffcc00;
+$color-light-turquoise: #a5ffd1;
+$color-off-white: #faf0ff;
+
+$transparent-captions-color: rgba($color-off-white, 0.56);
+$accent-line-color: $color-purple;
+
+// Headers
+$header-background: $color-blue;
+$header-background: $color-purple;
+$header-color: $color-light-turquoise;
+
+// Top Navigation
+$topnav-background: $color-dark-green;
+// $topnav-color: #CCFFDD;
+$topnav-color: $color-turquoise;
+
+// Base colors.
+$base-background-color: $color-dark-blue !default;
+$base-font-color: $color-off-white !default;
+
+$base-border-color: $color-green !default;
+$base-accent-color: $color-dark-green !default;
+$base-link-color: $color-green !default;
+
+$base-header-bar-color: $color-light-turquoise;
+$base-main-nav-color: $color-purple;
+$base-date-color: $color-medium-grey;
+
+$page-title-color: #9cf;
+
+// Hero colors.
+$hero-color: white;
+
+// Buttons
+$color-button-selected: #006688;
+$color-button-hover: #005577;
+$color-button-inactive: #999;
+
+// Messages colors.
+$alert-color: #fff6bf !default;
+$error-color: #fbe3e4 !default;
+$notice-color: #e5edf8 !default;
+$success-color: #e0ffee !default;
+/////////////////////////////////////////////////
+
+// Table colors.
+$table-border-color: $base-border-color;
+$table-background: $base-background-color;
+$table-header-background: lighten($table-background, 10);
+$table-hover-background: darken($table-background, 6);
+$table-stripe-background: darken($table-background, 5);
+$table-stripe-background-hover: darken($table-stripe-background, 5);
+
+// Tasks colors.
+$tab-link-color: $color-dark-grey;
+$tab-active-background: $base-background-color;
+$tab-inactive-color: $base-background-color;
+$tab-inactive-hover-color: silver;
+
+// Breadcrumb colors.
+$breadcrumb-border-color: $base-border-color;
+$breadcrumb-arrow-color: $breadcrumb-border-color;
+$breadcrumb-background: $base-background-color;
+$breadcrumb-inactive-hover-color: $breadcrumb-background;
+$breadcrumb-color: $color-medium-grey;
+$breadcrumb-color-hover: $base-link-color;
+$breadcrumb-color-active: $breadcrumb-color;
+
+// Flexbox colors.
+$flex-box-border-color: $color-light-grey;
+$flex-box-background: lighten($color-light-grey, 10%);
+$flex-box-color: transparentize($base-font-color, 0.3);
+$flex-box-top-colors:
+        tomato,
+        #72BFBF,
+        #92B1E3,
+        #E3D743,
+        #CCC,
+        #F6C05C;
+
+// Footer colors.
+// $footer-background: desaturate(darken($base-accent-color, 20%), 30%);
+$footer-background: #00404a;
+$footer-color: white;
+$footer-link-color: transparentize($footer-color, 0.6);
+$footer-disclaimer-color: transparentize($footer-color, 0.35);
+
+// Atomizer colors
+$atomizer-background: desaturate(darken($base-accent-color, 20%), 30%);

@@ -1,0 +1,383 @@
+// Main navigation header at top of the page.
+
+#site-header {
+  $base-border-radius: $base-border-radius !default;
+  $dark-gray: #333 !default;
+  $large-screen: 53.75em !default;
+  $centered-navigation-padding: 1em;
+  $centered-navigation-logo-height: 2em;
+  $centered-navigation-background: $topnav-background;
+  $centered-navigation-color: $topnav-color;
+  $centered-navigation-color-hover: lighten($topnav-color, 25%);
+  $centered-navigation-height: 50px;
+  $centered-navigation-item-padding: .75em;
+  $centered-navigation-submenu-padding: .75em;
+  $centered-navigation-submenu-width: 18em;
+  $centered-navigation-item-nudge: 2.2em;
+  $horizontal-bar-mode: $large-screen;
+
+  position: relative;
+
+  font-weight: bold;
+
+  background-color: $color-black;
+  border-bottom: 1px solid $color-purple;
+  min-height: $centered-navigation-height;
+  width: 100%;
+  z-index: 10;
+
+  .site-name,
+  .site-slogan {
+    display: none;
+  }
+
+  > .outer-container {
+    padding: 0;
+
+  }
+
+  #block-azgrouplogoblock {
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    background: #70c1b3;
+    height: 54px;
+    border-radius: 5px;
+    border: 1px solid #006;
+    box-shadow: 0px 0px 15px #138;
+    @include clearfix;
+
+    .content-container {
+      > div {
+        padding: 8px;
+      }
+    }
+
+    img {
+      float: left;
+      display: block;
+      width: 40px;
+      height: 40px;
+      margin-top: -2px;
+      border-radius: 5px;
+    }
+
+    .name {
+      font-size: 16px;
+      float: left;
+      max-width: 100px;
+      margin-left: 12px;
+      line-height: 1.1;
+    }
+
+    &.geo {
+      overflow: hidden;
+      border: 3px solid #541;
+
+      img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        width: auto;
+        height: auto;
+      }
+
+      .name {
+        color: cornsilk;
+        position: relative;
+        font-size: 130%;
+        margin-top: -5px;
+      }
+    }
+  }
+
+  #block-aztopnavblock {
+    display: inline-block;
+    background-image: url('/sites/default/files/etherealmatters..jpg');
+    background-size: cover;
+    background-position-y: 30%;
+    width: 100%;
+    .title-container {
+      display: inline-block;
+
+      h2 {
+        font-size: 1.3rem;
+        font-style: italic;
+        font-family: cursive;
+        text-shadow: 1px 1px 3px black;
+        margin: 0;
+        max-width: 20em;
+        line-height: 1.1;
+        word-wrap: break-word;
+        padding: 15px 30px;
+        color: $color-gold;
+      }
+    }
+    .content-container {
+
+      display: inline-block;
+      margin-left: 10px;
+    }
+  } // nav
+
+// Mobile view
+
+  .mobile-logo {
+    display: inline;
+    float: left;
+    max-height: $centered-navigation-height;
+    padding-left: $centered-navigation-padding;
+
+    img {
+      max-height: $centered-navigation-height;
+      opacity: 0.6;
+      padding: 0.8em 0;
+    }
+
+    @include media($horizontal-bar-mode) {
+      display: none;
+    }
+  }
+
+  .centered-navigation-mobile-menu {
+    color: $centered-navigation-color;
+    display: block;
+    float: right;
+    line-height: $centered-navigation-height;
+    margin: 0;
+    padding-right: $centered-navigation-submenu-padding;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    @include media ($horizontal-bar-mode) {
+      display: none;
+    }
+
+    &:focus,
+    &:hover {
+      color: $centered-navigation-color-hover;
+    }
+  }
+
+// Nav menu
+
+  .centered-navigation-wrapper {
+    @include clearfix;
+    position: relative;
+    z-index: 10;
+  }
+
+  ul.centered-navigation-menu {
+    clear: both;
+    display: none;
+    margin: 0 auto;
+    overflow: visible;
+    padding: 0;
+//  -webkit-transform-style: preserve-3d;
+
+// stop webkit flicker
+
+    width: 100%;
+
+    &.show {
+      display: block;
+    }
+
+    @include media ($horizontal-bar-mode) {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  
+// The nav items
+
+  .nav-link:first-child {
+    @include media($horizontal-bar-mode) {
+      margin-left: $centered-navigation-item-nudge;
+    }
+  }
+
+  ul li.nav-link {
+    background: $centered-navigation-background;
+    display: block;
+    line-height: $centered-navigation-height;
+    overflow: hidden;
+    padding-right: $centered-navigation-submenu-padding;
+    text-align: right;
+    text-shadow: 1px 1px 2px #138;
+    width: 100%;
+    z-index: 10;
+
+    a {
+      color: $centered-navigation-color;
+      display: inline-block;
+      outline: none;
+      text-decoration: none;
+
+      &:focus,
+      &:hover {
+        color: $centered-navigation-color-hover;
+      }
+    }
+
+    @include media($horizontal-bar-mode) {
+      background: transparent;
+      display: inline;
+      line-height: $centered-navigation-height;
+
+      a {
+        padding-right: $centered-navigation-item-padding;
+      }
+    }
+  }
+
+  .site-logo {
+    img {
+      display: initial;
+    }
+  }
+
+  li.logo.nav-link {
+    display: none;
+    line-height: 0;
+
+    @include media($horizontal-bar-mode) {
+      display: inline;
+    }
+  }
+
+  .logo img {
+    margin-bottom: -$centered-navigation-logo-height / 3;
+    max-height: $centered-navigation-logo-height;
+    opacity: 0.6;
+  }
+
+  
+// Sub menus
+
+  li.more.nav-link {
+    padding-right: 0;
+
+    @include media($large-screen) {
+      padding-right: $centered-navigation-submenu-padding;
+    }
+
+    > ul > li:first-child a  {
+      padding-top: .5em;
+    }
+
+    a {
+      margin-right: $centered-navigation-submenu-padding;
+    }
+
+    > a {
+      padding-right: 0.6em;
+    }
+
+    > a::after {
+      @include position(absolute, auto -0.4em auto auto);
+      color: $centered-navigation-color;
+      content: "\25BE";
+    }
+  }
+
+  li.more {
+    overflow: visible;
+    padding-right: 0;
+    font-size: 16px;
+
+    a {
+      padding-right: $centered-navigation-submenu-padding;
+    }
+
+    > a {
+      padding-right: 1.6em;
+      position: relative;
+
+      @include media($large-screen) {
+        margin-right: $centered-navigation-submenu-padding;
+      }
+
+      &::after {
+        content: "›";
+        font-size: 1.2em;
+        position: absolute;
+        right: $centered-navigation-submenu-padding / 2;
+      }
+    }
+
+    &:focus > .submenu,
+    &:hover > .submenu {
+      display: block;
+    }
+
+    @include media($horizontal-bar-mode) {
+      padding-right: $centered-navigation-submenu-padding;
+      position: relative;
+    }
+  }
+
+  ul.submenu {
+    display: none;
+    padding-left: 0;
+
+    @include media($horizontal-bar-mode) {
+      left: -$centered-navigation-submenu-padding;
+      position: absolute;
+      top: 1.5em;
+    }
+
+    .submenu.fly-out-right {
+      @include media($horizontal-bar-mode) {
+        left: $centered-navigation-submenu-width - 0.2em;
+        top: 0;
+      }
+    }
+
+    .submenu.fly-out-left {
+      @include media($horizontal-bar-mode) {
+        left: -$centered-navigation-submenu-width + 0.2em;
+        top: 0;
+      }
+    }
+
+    li {
+      display: block;
+      padding-right: 0;
+
+      @include media($horizontal-bar-mode) {
+        line-height: $centered-navigation-height / 1.3;
+
+        &:first-child > a {
+          border-top-left-radius: $base-border-radius;
+          border-top-right-radius: $base-border-radius;
+        }
+
+        &:last-child > a {
+          border-bottom-left-radius: $base-border-radius;
+          border-bottom-right-radius: $base-border-radius;
+          padding-bottom: 0.3em;
+        }
+      }
+
+      a {
+        background-color: darken($centered-navigation-background, 3%);
+        display: inline-block;
+        text-align: right;
+        text-decoration: none;
+        width: 100%;
+
+        @include media($horizontal-bar-mode) {
+          background-color: $centered-navigation-background;
+          padding-left: $centered-navigation-submenu-padding;
+          text-align: left;
+          width: $centered-navigation-submenu-width;
+        }
+      } // a
+    } // li
+  } // ul.submenu
+} // #site-header

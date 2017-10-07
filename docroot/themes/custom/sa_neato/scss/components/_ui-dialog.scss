@@ -1,0 +1,25 @@
+.ui-dialog.ui-widget-content {
+  .ui-dialog-titlebar {
+    background-color: darken($color-dark-green, 10%);
+    color: $color-white;
+  }
+  .ui-dialog-content {
+    background-color: $color-dark-green;
+    color: $color-white;
+
+    fieldset {
+      background-color: $color-dark-green;
+    }
+
+    input,
+    select {
+      background-color: lighten($color-dark-green, 10%);
+    }
+  }
+  .ui-dialog-buttonpane {
+    background-color: darken($color-dark-green, 10%);
+    button {
+      padding: .5em 1em;
+    }
+  }
+}

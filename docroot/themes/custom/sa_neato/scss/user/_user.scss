@@ -1,0 +1,60 @@
+.author-container {
+  vertical-align: top;
+  display: inline-block;
+  display: flex;
+
+  .author-text {
+    //  display: inline-block;
+    vertical-align: top;
+    margin-left: 1em;
+
+    .name {
+      line-height: 1.2;
+      font-size: 130%;
+      font-weight: bold;
+    }
+
+    .location {
+      font-size: 80%;
+    }
+
+    .title {
+      font-style: italic;
+      color: $base-date-color;
+      font-size: 80%;
+    }
+
+    .social-media {
+      margin: 1.5em 0 0 1em;
+    }
+
+    .website {
+    }
+
+    .linkedin {
+    }
+
+    .twitter {
+    }
+
+    .facebook {
+    }
+  } // .author-text
+} // .author-container
+
+.user--compact {
+  .image {
+    img {
+      display: block;
+      border-radius: 25%;
+    } // img
+  } // .image
+} // .user--compact
+
+.user--full {
+  margin-bottom: 2em;
+} // .user--full
+
+.user--views {
+  margin-bottom: 1em;
+}

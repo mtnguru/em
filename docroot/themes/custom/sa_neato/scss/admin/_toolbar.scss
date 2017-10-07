@@ -1,0 +1,17 @@
+#toolbar-bar {
+  font-size: 10px;
+
+  .toolbar-box {
+    a::before {
+      width: 16px;
+    }
+  }
+
+  .toolbar-icon {
+    height: 32px;
+  }
+
+  a {
+    color: #56d;
+  }
+}

@@ -1,0 +1,19 @@
+/* This file creates the SA (Structured Atom) styles.
+ * The zircon sass files have not been altered.
+ * All custom changes are to be done in one of the directories below.
+ */
+@import "variables/colors.scss";
+@import "variables/fontAwesome.scss";
+@import "base/_base.scss";
+@import "layouts/_baseLayouts.scss";
+@import "components/_blockAtomBuilder.scss";
+@import "components/_blockRecent.scss";
+@import "components/_datGui.scss";
+@import "components/_header.scss";
+@import "components/_links.scss";
+@import "components/_mediaGallery.scss";
+@import "components/_table.scss";
+@import "components/_views.scss";
+@import "pages/_image.scss";
+
+

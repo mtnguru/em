@@ -1,0 +1,5 @@
+name: Atomizer media module
+type: module
+description: Hooks for manipulating media
+core: 8.x
+package: AZ

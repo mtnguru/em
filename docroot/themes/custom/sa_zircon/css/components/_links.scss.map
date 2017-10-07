@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["components/_links.scss"],"sourcesContent":["a {\n  color: #3366dd;\n  &:hover {\n    color: #9933dd;\n  }\n}\n"],"file":"components/_links.scss","sourceRoot":"/source/"}

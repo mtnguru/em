@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains az_maestro.module..
+ */
+
+use Drupal\az_maestro\AtomizerFiles;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_help().
+ */
+function az_maestro_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the az_maestro module.
+    case 'help.page.az_maestro':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('JavaScript library and accompanying Drupal php that manages the page content in the EM website.') . '</p>';
+      $output .= '<p>' . t('Features include:') . '</p>';
+
+      $output .= '<li>'. t('Wrap text area in divs to create a more slider, popup, hidden slider') . '</li>';
+      $output .= '</ul>';
+      return $output;
+
+    default:
+  }
+}
+

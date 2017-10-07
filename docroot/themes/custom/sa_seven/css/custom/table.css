@@ -1,0 +1,7 @@
+table td {
+  padding: 2px 10px;
+}
+
+table td .form-item {
+  margin: 0;
+}

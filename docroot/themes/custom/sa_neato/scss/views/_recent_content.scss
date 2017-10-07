@@ -1,0 +1,40 @@
+.main {
+  background-color: purple;
+  .views-element-container {
+
+    .title-container {
+      h2 {
+        margin-bottom: 20px;
+      } // h2
+    } // .title-container
+  } // .views-element- container
+} // .main does this do anything
+
+.view-id-content_recent {
+
+  .views-field-field-picture {
+    display: inline-block;
+  } // .views-field-field-picture
+
+  .views-row {
+    padding: 15px 0;
+
+    &:not(:last-child) {
+//    border-bottom: 1px solid gainsboro;
+    } // &:not(:last-child)
+  } // .views-row
+
+  .views-field-nothing {
+    display: inline-block;
+    width: 100%;
+
+    .teaser-label {
+
+    } // .teaser-label
+
+    .teaser-changed {
+      color: #666;
+      font-size: 80%;
+    } // .teaser-changed
+  } // .views-field-nothing
+} // .view-id-content_recent

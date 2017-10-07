@@ -1,0 +1,115 @@
+scenes:
+  dashboard:
+  group:
+  gallery:
+
+scene.dashboard:
+  blocks:
+    topnav:
+    header-block: ?  What is this?
+    account:
+    related-content:
+    filters:
+    main:
+    donate:
+    Recent News:
+
+scene.group:
+  blocks:
+    topnav:
+    group:
+    account:
+    related-content:
+    filters:
+    main:
+    donate:
+    Recent News:
+
+topnav:
+  EM logo
+
+  Center Menu
+    Mission:
+    Dashboard:
+    Groups:
+    Products:
+    Contact Us:
+
+  Account
+    If not logged in
+      Join Us!
+    If logged in
+      Logout
+      Account
+
+Content Selector - This is like the top nav bar except it should be on the left.
+  Group logo
+    Overview
+    Articles
+    Book
+    In the News
+    Media
+    if member
+      Leave group
+      Create article
+      Contributors
+      Members
+    if not a member
+      join group
+
+  EM Logo
+    Mission
+    Products
+    Groups
+    Topics
+    Media
+    Donate ? Doesn't really belong here - get to it somewhere else.
+   -Contact Us
+    Account
+
+  User Image
+    If member
+      Articles
+      Comments
+      Friends
+      Ranking
+      Resources
+      Account
+      Logout
+    If not a member
+      Join Us!
+
+Teasers:
+  Views listings:
+
+
+
+
+  dashboard:
+  header-block:
+  filters:
+  content:
+
+    blocks:
+      header:
+      content: nothing really needed to do here - this gets replaced.
+      filters: determines what is in the content block
+        members:
+        book: Some groups won't have this
+        options:
+          articles:
+            title: Articles
+            type: view
+            view-name: view-articles
+            options: {}
+          comments:
+            title: Comments
+            type: view
+            view-name: view-comments
+            options: {}
+          media:
+            title: Media
+            type: view
+            view-name: view-comments
+            options: {}
+

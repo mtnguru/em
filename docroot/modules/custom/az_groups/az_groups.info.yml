@@ -1,0 +1,5 @@
+name: Atomizer Groups enhancements
+type: module
+description: Module to enhance Groups
+core: 8.x
+package: AZ

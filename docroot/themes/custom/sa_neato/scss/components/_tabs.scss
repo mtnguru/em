@@ -1,0 +1,15 @@
+nav.tabs {
+  margin-bottom: 1em;
+
+  ul.tabs {
+
+    a {
+      &.is-active {
+        background-color: lighten($base-background-color, 15%);
+      }
+      &:hover {
+        background-color: lighten($base-background-color, 30%);
+      }
+    }
+  }
+}

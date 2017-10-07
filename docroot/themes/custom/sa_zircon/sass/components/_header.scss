@@ -1,0 +1,24 @@
+#header {
+  .site-logo-container {
+    margin-left: 10px;
+    vertical-align: top;
+    display: inline-block;
+  }
+  .site-block {
+    vertical-align: top;
+    display: inline-block;
+    padding: 15px 0 0 15px;
+  }
+  .site-name {
+    a {
+      font-size: 44px;
+      font-family: 'oswaldregular';
+      font-weight: 600;
+      color: #cc9900;
+    }
+  }
+  .site-slogan {
+    text-align: center;
+  }
+}
+

@@ -1,0 +1,121 @@
+.block-region-sidebar {
+  .views-element-container {
+    .content-container {
+      padding: .5em;
+    }
+  }
+}
+
+.view-id-az_groups {
+  .view-content {
+    @include clearfix;
+  }
+
+  .views-row {
+    float: left;
+    @include media(max-width $bp580max) {
+      padding: 10px;
+    }
+    @include media($bp960) {
+      padding: 10px 15px;
+    }
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    .group-label {
+      position: absolute;
+      z-index: 10;
+
+      @include media($bp320only) {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+      }
+
+      @include media($bp580) {
+        top: 15px;
+        left: 20px;
+        right: 20px;
+      }
+
+      a {
+        line-height: 1.1;
+        font-weight: bold;
+        color: White;
+        overflow-wrap: break-word;
+        display: block;
+        padding: 2px 7px;
+        background-color: rgba(0,0,0,.4);
+        border-radius: 5px;
+        box-shadow: 0 0 2px 3px rgba(0,0,0,0.4);
+
+        @include media($bp320only) {
+          font-size: 100%;
+        }
+        @include media($bp580only) {
+          font-size: 110%;
+        }
+        @include media($bp960only) {
+          font-size: 120%;
+        }
+        @include media($bp1280) {
+          font-size: 130%;
+        }
+      }
+    }
+
+    .group-image {
+      width: 100%;
+      img {
+        width: 100%;
+        border-radius: 8px;
+        margin: 0 auto;
+        height: auto;
+        display: block;
+      }
+    }
+  }
+}
+
+.block-system-main-block {
+  .view-id-az_groups {
+    .views-row {
+      @include media($bp320only) {
+        width: calc(100% / 2);
+      }
+      @include media($bp580only) {
+        width: calc(100% / 3);
+      }
+      @include media($bp960only) {
+        width: calc(100% / 4);
+      }
+      @include media($bp1280) {
+        width: calc(100% / 5);
+      }
+      @include media($bp1920) {
+        width: calc(100% / 7);
+      }
+    }
+  }
+}
+
+.block-region-sidebar {
+  .view-id-az_groups {
+    .views-row {
+      @include media($bp320only) {
+        width: 50%;
+      }
+      @include media($bp580only) {
+        width: calc(100% / 3);
+      }
+      @include media($bp960only) {
+        width: calc(100% / 1);
+      }
+      @include media($bp1280) {
+        width: calc(100% / 1);
+      }
+    }
+  }
+}

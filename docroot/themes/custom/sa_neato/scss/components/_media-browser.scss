@@ -1,0 +1,50 @@
+form.entity-browser-form {
+  nav.eb-tabs {
+    ul li.active {
+      a {
+        background-color: lighten($color-dark-blue, 10%);
+      }
+    }
+  }
+
+  .view.eb-media {
+
+    .views-exposed-form {
+      background-color: lighten($color-dark-blue, 10%);
+
+      .form--inline {
+        .form-actions {
+          margin: 1.5em 0 0 2em;
+        }
+      }
+    }
+
+    .views-row {
+      .views-col {
+        border-color: lighten($color-dark-blue, 10%);
+        &.selected {
+          border-color: $color-gold;
+        }
+      }
+    }
+  }
+
+  table.entities-list {
+    td {
+      border: none;
+    }
+  }
+
+}
+
+.field--name-field-media {
+  .details-wrapper {
+    .item-container {
+      > input {
+        margin: 1em 1em 0 0;
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * Contains az_media.module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+use Drupal\Component\Utility\Random;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function az_media_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == "entity_browser_image_browser_form" || $form_id == "entity_browser_media_browser_form") {
+    $fart = 5;
+  }
+  return;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function az_media_form_media_image_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#validate'][] = 'az_media_form_media_image_edit_form_validate';
+}
+
+function az_media_form_media_image_edit_form_validate(&$form, FormStateInterface &$formState) {
+  if (!empty($formState->errors['field_create_date'])) {
+    $date = $formState->getValue('field_create_date');
+  }
+  return;
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+function az_media_node_presave(Node $node) {
+  return;
+}
+
+/**
+ * Implements HOOK_entity_presave().
+ *
+ */
+function az_media_entity_presave(EntityInterface $entity) {
+  return;
+}
+
+/**
+ * Implements HOOK_media_presave().
+ *
+ */
+function az_media_media_presave(EntityInterface $entity) {
+  $image = $entity->getValue('image');
+  $name = $entity->name->value;
+//$entity->setValue(['image', 'alt'], $entity->getValue('name'));
+  foreach ($image as $field_item) {
+    $target_id =
+    $zowser = 5;
+  }
+$fid = $image->getValue([0, 'target_id']);
+  return;
+}
+
+/**
+ * Implements HOOK_file_presave().
+ *
+ */
+function az_media_file_presave(EntityInterface $entity) {
+  return;
+}

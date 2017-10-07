@@ -1,0 +1,6 @@
+az-maestro:
+  js:
+    js/az-maestro.js: {}
+# css:
+#   base:
+#     css/az-maestro.css: {}
