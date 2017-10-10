@@ -34,28 +34,35 @@ class azTopNavBlock extends BlockBase {
 
     // Build the typical default set of menu tree parameters.
     $parameters = new \Drupal\Core\Menu\MenuTreeParameters();
-//  $root = current($expandedParents);
-//  $parameters->setRoot($root);
     $parameters->setMaxDepth(3);
     $parameters->setMinDepth(1);
 
     // Load the tree based on this set of parameters.
-    $tree = $menu_tree_service->load('ethereal-matters', $parameters);
-
-//  //Set Cache for block
-//  $cache['max-age'] = 3600;
-//  $cache['contexts'][] = 'url.path';
-//  $cache['tags'][] = $root;
-
-    // Apply some manipulators (checking the access, sorting).
+    $tree = $menu_tree_service->load('top', $parameters);
     $manipulators = [
       ['callable' => 'menu.default_tree_manipulators:checkNodeAccess'],
       ['callable' => 'menu.default_tree_manipulators:checkAccess'],
       ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
     ];
     $tree = $menu_tree_service->transform($tree, $manipulators);
-    // And the last step is to actually build the tree.
-    return $menu_tree_service->build($tree);
+    $topMenu = $menu_tree_service->build($tree);
+
+    // Load the tree based on this set of parameters.
+    $tree = $menu_tree_service->load('account', $parameters);
+    $manipulators = [
+      ['callable' => 'menu.default_tree_manipulators:checkNodeAccess'],
+      ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+      ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+    ];
+    $tree = $menu_tree_service->transform($tree, $manipulators);
+    $accountMenu = $menu_tree_service->build($tree);
+
+    return [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['az-top']],
+      'top_menu' => $topMenu,
+      'account_menu' => $accountMenu,
+    ];
   }
 }
 
