@@ -44,7 +44,6 @@
         "drupal/file_mdm": "^1.1",
         "drupal/fontawesome": "^1.2",
         "drupal/g2": "1.x-dev",
-        "drupal/geofield_map": "^1.12",
         "drupal/geolocation": "^1.11",
         "drupal/geophp": "1.x-dev",
         "drupal/group": "1.x-dev",
