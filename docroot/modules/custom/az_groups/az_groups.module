@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Contains az_groups.module.
+ */
+
+function az_groups_preprocess_page(&$variables) {
+
+  if ($_SERVER['HTTP_HOST'] == 'atom' || $_SERVER['HTTP_HOST'] == 'structuredatom.org') {
+    if (\Drupal::currentUser()->isAnonymous() &&
+        $_SERVER['REDIRECT_URL'] != '/under-construction' &&
+        $_SERVER['REDIRECT_URL'] != '/user/login') {
+      drupal_set_message(t('You have been redirected because I felt like it ...'), 'status', TRUE);
+      $response = new RedirectResponse('/under-construction');
+      $response->send();
+    }
+  }
+  return;
+}
+
+function az_groups_preprocess_menu_tree(&$variables) {
+  return;
+}
+
+function az_groups_preprocess_block(&$variables) {
+  return;
+}
+
+function az_groups_preprocess_menu(&$variables) {
+  if ($variables['menu_name'] == 'account' && $variables['logged_in']) {
+    $user = \Drupal::entityManager()
+      ->getStorage('user')
+      ->load(\Drupal::currentUser()->id());
+    $picture = $user->field_picture->getValue();
+    if (empty($picture[0])) {
+      $variables['user_name'] = $user->name;
+    }
+    else {
+      $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
+      $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail_50_x_50')->buildUrl($file->getFileUri());
+    }
+  }
+
+  return;
+}

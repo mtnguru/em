@@ -92,7 +92,6 @@
   </div>
   {% endif %}
 
-  {# kint() #}
   {{ content|without('comment', 'links') }}
 
   {% if content.field_tags|length and not is_front %}
