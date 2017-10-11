@@ -187,8 +187,8 @@ function az_content_preprocess_page(&$variables) {
 
   if ($_SERVER['HTTP_HOST'] == 'atom' || $_SERVER['HTTP_HOST'] == 'structuredatom.org') {
     if (\Drupal::currentUser()->isAnonymous() &&
-        $_SERVER['REDIRECT_URL'] != '/under-construction' &&
-        $_SERVER['REDIRECT_URL'] != '/user/login') {
+        strstr($_SERVER['REQUEST_URI'], 'under-construction')  &&
+        strstr($_SERVER['REQUEST_URI'], 'user/login')) {
       drupal_set_message(t('You have been redirected because I felt like it ...'), 'status', TRUE);
       $response = new RedirectResponse('/under-construction');
       $response->send();

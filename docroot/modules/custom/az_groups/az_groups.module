@@ -6,16 +6,6 @@
  */
 
 function az_groups_preprocess_page(&$variables) {
-
-  if ($_SERVER['HTTP_HOST'] == 'atom' || $_SERVER['HTTP_HOST'] == 'structuredatom.org') {
-    if (\Drupal::currentUser()->isAnonymous() &&
-        $_SERVER['REDIRECT_URL'] != '/under-construction' &&
-        $_SERVER['REDIRECT_URL'] != '/user/login') {
-      drupal_set_message(t('You have been redirected because I felt like it ...'), 'status', TRUE);
-      $response = new RedirectResponse('/under-construction');
-      $response->send();
-    }
-  }
   return;
 }
 
