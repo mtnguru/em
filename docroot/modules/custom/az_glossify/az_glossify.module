@@ -64,7 +64,6 @@ function _az_glossify_process_text($text, &$matched) {
   }
 
   // Process text.
-  $matched = [];
   if (count($terms) > 0) {
     $text = GlossifyBase::parseTooltipMatch(
       $text,
@@ -97,33 +96,28 @@ function _az_glossify_add_topics(&$node, $matched) {
 function az_glossify_node_presave(EntityInterface $node) {
 
   $type = $node->getType();
+  $matched = [];
   if ($type == 'article') {
     $text = $node->field_body->value;
-    $matched = [];
     $newText = _az_glossify_process_text($text, $matched);
     $node->field_body->setValue([
       'value' => $newText,
       'format' => 'full_html'
     ]);
-    _az_glossify_add_topics($node, $matched);
   }
-  if ($type == 'pagie') {
+  if ($type == 'page') {
     $sections = $node->get('field_sections')->getValue();
-    foreach($sections as $section){
-      foreach($section['subform']['field_subsections'] as $subsection) {
-        $value = $subsection['subform']['field_body'][0]['value'];
-        $var = 5;
+    foreach($sections as &$section){
+      foreach($section['subform']['field_subsections'] as &$subsection) {
+        if (!empty($subsection['subform'])) {
+          $text = $subsection['subform']['field_body'][0]['value'];
+          $newText = _az_glossify_process_text($text, $matched);
+          $subsection['subform']['field_body'][0]['value'] = $newText;
+        }
       }
     }
-
-    $matched = [];
-    $newText = _az_glossify_process_text($text, $matched);
-    $node->field_body->setValue([
-      'value' => $newText,
-      'format' => 'full_html'
-    ]);
-    _az_glossify_add_topics($node, $matched);
   }
+  _az_glossify_add_topics($node, $matched);
 
   return;
 }

@@ -47,8 +47,29 @@ span.marker {
       } // .changed
     }
 
+    .block-right {
+      float: right;
+    }
+
     .topics {
       float: right;
+    }
+
+    .field--name-field-social-media {
+      clear: both;
+      float: right;
+
+      ul {
+        margin: 5px 0;
+      }
+      li {
+        margin-right: 0;
+        margin-left: 5px;
+      }
+
+      img {
+        width: 25px;
+      }
     }
   }
 

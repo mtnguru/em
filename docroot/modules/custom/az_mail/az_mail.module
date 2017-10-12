@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Contains az_mail.module.
+ * Handles all emailing of notifications to users of new content and group emails.
+ * Article Insert
+ */
+use Drupal\comment\Entity\Comment;
+use Drupal\Component\Utility\SafeMarkup;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+/**
+ * Implements HOOK_mail().
+ */
+function az_mail_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+
+  switch ($key) {
+    case 'node_insert':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Node created: @title', array('@title' => $params['node_title']), $options);
+      $message['body'][] = SafeMarkup::checkPlain($params['message']);
+      break;
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function d8mail_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() !== 'node') return;
+  if ($entity->bundle() !== 'article') return;
+
+  $mailManager = \Drupal::service('plugin.manager.mail');
+
+  $module = 'az_mail';
+  $key = 'node_insert';
+
+  // Send to current user.
+  $to = \Drupal::currentUser()->getEmail();
+  $params['message'] = $entity->get('body')->value;
+  $params['node_title'] = $entity->label();
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+  $send = true;
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] !== true) {
+    $message = t('There was a problem sending your email notification to @email for creating node @id.', array('@email' => $to, '@id' => $entity->id()));
+    drupal_set_message($message, 'error');
+    \Drupal::logger('d8mail')->error($message);
+    return;
+  }
+
+  $message = t('An email notification has been sent to @email for creating node @id.', array('@email' => $to, '@id' => $entity->id()));
+  drupal_set_message($message);
+  \Drupal::logger('d8mail')->notice($message);
+}
+/**
+ * Implements HOOK_node_presave().
+ **/
+function az_mail_node_presave(Node $node) {
+  if ($node->getType() == 'article') {
+    $articleId = $node->id();
+    $mediaRef = $node->get('field_media');
+  }
+  return;
+}
+
+/**
+ * Implements HOOK_entity_presave().
+ *
+ */
+function az_mail_entity_presave(EntityInterface $entity) {
+  return;
+}
+
+/**
+ * Implement HOOK_comment_presave().
+ *
+ * @param \Drupal\comment\Entity\Comment $comment
+ */
+function az_mail_comment_presave(Comment $comment) {
+  $articleId = $comment->get('entity_id')->getValue()[0]['target_id'];
+  $bodyRef = $comment->get('comment_body');
+  return;
+}
+
+/**
+ * Implements HOOK_media_presave().
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function az_mail_media_presave(EntityInterface $entity) {
+  return;
+}
+
+/**
+ * Implements HOOK_file_presave().
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function az_mail_file_presave(EntityInterface $entity) {
+  return;
+}
+

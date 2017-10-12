@@ -3736,7 +3736,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/geophp",
-                "reference": "fdcb4343ce3c4cf71a8ea0f0fd0948038b5ab442"
+                "reference": "cb7b8c6b8465e3af41f8f6f8b43c7057c4ca9128"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -3747,8 +3747,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta1+6-dev",
-                    "datestamp": "1463084639",
+                    "version": "8.x-1.0-beta2+0-dev",
+                    "datestamp": "1507629244",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -3773,12 +3773,12 @@
                     "homepage": "https://www.drupal.org/user/282415"
                 }
             ],
-            "description": "Wraps the geoPHP library: advanced geometry operations in PHP",
+            "description": "Wraps the geoPHP library: advanced geometry operations in PHP.",
             "homepage": "https://www.drupal.org/project/geophp",
             "support": {
                 "source": "http://cgit.drupalcode.org/geophp"
             },
-            "time": "2016-05-12 20:20:11"
+            "time": "2017-10-10 09:49:16"
         },
         {
             "name": "drupal/group",
@@ -4811,17 +4811,17 @@
         },
         {
             "name": "drupal/module_filter",
-            "version": "3.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/module_filter",
-                "reference": "8.x-3.0"
+                "reference": "8.x-3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/module_filter-8.x-3.0.zip",
-                "reference": "8.x-3.0",
-                "shasum": "a24171c8c7c1609cac584c371ede7fdf03faaf00"
+                "url": "https://ftp.drupal.org/files/projects/module_filter-8.x-3.1.zip",
+                "reference": "8.x-3.1",
+                "shasum": "39d627ce60280ae54bcf9beae217b85cce1969e4"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -4832,8 +4832,8 @@
                     "dev-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.0",
-                    "datestamp": "1483321444",
+                    "version": "8.x-3.1",
+                    "datestamp": "1507650844",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -10744,16 +10744,16 @@
         },
         {
             "name": "drush/drush",
-            "version": "9.0.0-beta6",
+            "version": "9.0.0-beta7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "84082c5c8e2b4c306c69a6127349dd0fa7780651"
+                "reference": "9826b66d4fe4c090cb8887bad2b6558b1c650a99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/84082c5c8e2b4c306c69a6127349dd0fa7780651",
-                "reference": "84082c5c8e2b4c306c69a6127349dd0fa7780651",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/9826b66d4fe4c090cb8887bad2b6558b1c650a99",
+                "reference": "9826b66d4fe4c090cb8887bad2b6558b1c650a99",
                 "shasum": ""
             },
             "require": {
@@ -10841,7 +10841,7 @@
             ],
             "description": "Drush is a command line shell and scripting interface for Drupal, a veritable Swiss Army knife designed to make life easier for those of us who spend some of our working hours hacking away at the command prompt.",
             "homepage": "http://www.drush.org",
-            "time": "2017-10-06 01:59:13"
+            "time": "2017-10-10 02:01:00"
         },
         {
             "name": "fabpot/goutte",
@@ -11185,16 +11185,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "5.2.4",
+            "version": "5.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "7ccb0e67ea8ace0f84c40900ca3c8a234467628c"
+                "reference": "0d4fda8efdf216ade084a7f0aad5637572ce9835"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/7ccb0e67ea8ace0f84c40900ca3c8a234467628c",
-                "reference": "7ccb0e67ea8ace0f84c40900ca3c8a234467628c",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/0d4fda8efdf216ade084a7f0aad5637572ce9835",
+                "reference": "0d4fda8efdf216ade084a7f0aad5637572ce9835",
                 "shasum": ""
             },
             "require": {
@@ -11247,7 +11247,7 @@
                 "json",
                 "schema"
             ],
-            "time": "2017-10-04 20:57:36"
+            "time": "2017-10-10 13:22:37"
         },
         {
             "name": "league/container",
