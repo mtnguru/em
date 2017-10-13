@@ -17,3 +17,19 @@ https://{default}/:
   ssi:
     enabled: false
   upstream: app:http
+https://RealScience.Rocks/:
+  type: upstream
+  redirects:
+    expires: -1s
+    paths: {}
+  cache:
+    enabled: true
+    default_ttl: 0
+    cookies:
+    - '*'
+    headers:
+    - Accept
+    - Accept-Language
+  ssi:
+    enabled: false
+  upstream: app:http
