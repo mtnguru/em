@@ -17,7 +17,23 @@ https://{default}/:
   ssi:
     enabled: false
   upstream: app:http
-http://structuredatom.org/:
+https://realscience.rocks/:
+  type: upstream
+  redirects:
+    expires: -1s
+    paths: {}
+  cache:
+    enabled: true
+    default_ttl: 0
+    cookies:
+    - '*'
+    headers:
+    - Accept
+    - Accept-Language
+  ssi:
+    enabled: false
+  upstream: app:http
+https://eugeology.rocks/:
   type: upstream
   redirects:
     expires: -1s
