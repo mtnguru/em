@@ -1,0 +1,6 @@
+# Define a library with the css file.
+az_wysiwyg:
+  version: VERSION
+  css:
+    component:
+      assets/css/az_wysiwyg.css: {}

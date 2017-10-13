@@ -40,7 +40,7 @@ function _az_glossify_process_text($text, &$matched) {
 
   $terms = [];
 
-  // Get taxonomyterm data.
+  // Query for topics taxonomy term data.
   $query = \Drupal::database()->select('taxonomy_term_field_data', 'tfd');
   $query->addfield('tfd', 'tid', 'id');
   $query->addfield('tfd', 'name');
@@ -106,9 +106,9 @@ function az_glossify_node_presave(EntityInterface $node) {
     ]);
   }
   if ($type == 'page') {
-    $sections = $node->get('field_sections')->getValue();
-    foreach($sections as &$section){
-      foreach($section['subform']['field_subsections'] as &$subsection) {
+    $sections = $node->field_sections->getValue();
+    foreach($sections as $section){
+      foreach($section['subform']['field_subsections'] as $subsection) {
         if (!empty($subsection['subform'])) {
           $text = $subsection['subform']['field_body'][0]['value'];
           $newText = _az_glossify_process_text($text, $matched);
@@ -116,6 +116,7 @@ function az_glossify_node_presave(EntityInterface $node) {
         }
       }
     }
+    $node->field_sections->setValue($sections);
   }
   _az_glossify_add_topics($node, $matched);
 
