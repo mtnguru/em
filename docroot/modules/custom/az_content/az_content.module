@@ -202,6 +202,7 @@ function az_content_preprocess_page(&$variables) {
 function az_content_preprocess_node(&$variables) {
   // Add marker if content is New, Updated or has already been read.
   $node = $variables['node'];
+  $view_mode = &drupal_static('az_view_mode');
   $view_mode = $variables['view_mode'];
 
   switch ($node->getType()) {

@@ -1,11 +1,6 @@
-name: Footnotes
-description: 'Add automatically numbered az_wysiwyg to your posts.'
-# core: 8.x
-# project: az_wysiwyg
+name: AZ WYSIWYG
+description: 'Add custom markup to ckeditor for footnotes, topics and page breaks.'
+core: 8.x
+package: AZ
+project: AZ Project
 type: module
-
-# Information added by Drupal.org packaging script on 2016-10-30
-version: '8.x-2.0'
-core: '8.x'
-project: 'az_wysiwyg'
-datestamp: 1477840478

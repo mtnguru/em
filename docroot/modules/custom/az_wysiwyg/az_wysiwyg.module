@@ -8,6 +8,8 @@
  * automatically numbered az_wysiwyg into Drupal texts.
  */
 
+use Drupal\az_wysiwyg\WysiwygBase;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 
@@ -31,14 +33,20 @@ function az_wysiwyg_help($route_name, RouteMatchInterface $route_match) {
  */
 function az_wysiwyg_theme() {
   return array(
-    'footnote_link' => array(
+    'az_tooltip' => [
+      'variables' => ['word' => NULL, 'tip' => NULL],
+    ],
+    'az_tooltip_link' => [
+      'variables' => ['word' => NULL, 'tip' => NULL, 'tipurl' => NULL],
+    ],
+    'az_footnote_link' => [
       'render element' => 'fn',
-      'function' => 'theme_footnote_link',
-    ),
-    'footnote_list' => array(
-      'render element' => 'az_wysiwyg',
-      'function' => 'theme_footnote_list',
-    ),
+      'function' => 'az_wysiwyg_theme_footnote_link',
+    ],
+    'az_footnote_list' => [
+      'render element' => 'az_footnotes',
+      'function' => 'az_wysiwyg_theme_footnote_list',
+    ],
   );
 }
 
@@ -56,7 +64,7 @@ function az_wysiwyg_theme() {
  *                the footnote listing, used to allow links to the list from the
  *                body.
  */
-function theme_footnote_link($fn) {
+function az_wysiwyg_theme_footnote_link($fn) {
   // Drupal 8 needs the use of render arrays, the array como as this ugly,
   // maybe latter fix this, but for now it works.
   // @todo: change this ugly array for arguments in the function.
@@ -80,17 +88,17 @@ function theme_footnote_link($fn) {
  *   ref_id - the globally unique identifier for the footnote's anchor in the
  *            footnote listing, used to allow links to the list from the body.
  */
-function theme_footnote_list($az_wysiwyg) {
+function az_wysiwyg_theme_footnote_list($footnotes) {
   // Drupal 8 needs the use of render arrays, the array as this ugly,
   // maybe latter fix this, but for now it works.
   // @todo: change this ugly array for arguments in the function.
-  $az_wysiwyg = $az_wysiwyg['az_wysiwyg']['#az_wysiwyg'];
-  $str = '<ul class="az_wysiwyg">';
+  $footnotes = $footnotes['az_footnotes']['#footnotes'];
+  $str = '<ul class="footnotes">';
   // Drupal 7 requires we use "render element" which just introduces a wrapper
   // around the old array.
-  // $az_wysiwyg = $az_wysiwyg['az_wysiwyg'];
-  // loop through the az_wysiwyg.
-  foreach ($az_wysiwyg as $fn) {
+  // $footnotes = $footnotes['footnotes'];
+  // loop through the footnotes.
+  foreach ($footnotes as $fn) {
     if (!is_array($fn['ref_id'])) {
       // Output normal footnote.
       $str .= '<li class="footnote" id="' . $fn['fn_id'] . '"><a class="footnote-label" href="#' . $fn['ref_id'] . '">' . $fn['value'] . '.</a> ';
@@ -137,13 +145,13 @@ function theme_footnote_list($az_wysiwyg) {
  * <code>
  * _filter_example_process( $text, $filter, $format ) {
  *   ...
- *   if(az_wysiwyg_is_az_wysiwyg_later($format, $filter)) {
+ *   if(footnotes_is_footnotes_later($format, $filter)) {
  *     //output markup which may include [fn] tags
  *   }
  *   else {
- *     // must make do without az_wysiwyg features
+ *     // must make do without footnotes features
  *     // can also emit warning/error that user should install and configure
- *     // az_wysiwyg module
+ *     // footnotes module
  *   }
  *   ...
  * }
@@ -161,109 +169,36 @@ function az_wysiwyg_is_az_wysiwyg_later($format, $caller_filter) {
   return $format['filter_az_wysiwyg']['weight'] > $caller_filter['weight'];
 }
 
-
-
-
 /**
- * Implements hook_theme().
+ * Implements HOOK_node_presave().
+ *
+ * - Extract topics from text and add to node.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $node
  */
-function az_wysiwyg_theme() {
-  return [
-    'az_wysiwyg_tooltip' => [
-      'variables' => ['word' => NULL, 'tip' => NULL],
-    ],
-    'az_wysiwyg_link' => [
-      'variables' => ['word' => NULL, 'tip' => NULL, 'tipurl' => NULL],
-    ],
-  ];
-}
-
-/**
- * {@inheritdoc}
- */
-function _az_wysiwyg_process_text($text, &$matched) {
-
-  $terms = [];
-
-  // Query for topics taxonomy term data.
-  $query = \Drupal::database()->select('taxonomy_term_field_data', 'tfd');
-  $query->addfield('tfd', 'tid', 'id');
-  $query->addfield('tfd', 'name');
-  $query->addfield('tfd', 'name', 'name_norm');
-  $query->addField('tfd', 'description__value', 'description');
-  $query->condition('tfd.vid', 'topics', 'IN');
-
-  $query->leftjoin('taxonomy_term__field_include_in_glossary', 'tfg', 'tfg.entity_id = tfd.tid');
-  $query->addField('tfg', 'field_include_in_glossary_value', 'in_glossary');
-  $query->condition('tfg.field_include_in_glossary_value', '1');
-
-  $query->leftjoin('taxonomy_term__field_tooltip', 'tft', 'tft.entity_id = tfd.tid' );
-  $query->addField('tft', 'field_tooltip_value', 'tooltip');
-
-  $results = $query->execute()->fetchAllAssoc('name_norm');
-  // Build terms array.
-  foreach ($results as $result) {
-    // Make name_norm lowercase, it seems not possible in PDO query?
-    $result->name_norm = strtolower($result->name_norm);
-    $terms[$result->name_norm] = $result;
-  }
-
-  // Process text.
-  if (count($terms) > 0) {
-    $text = GlossifyBase::parseTooltipMatch(
-      $text,
-      $terms,
-      false,  // case sensitivity
-      true,  // first only
-      'tooltips_links',
-      '/taxonomy/term/[id]',
-      $matched
-    );
-  }
-  return $text;
-}
-
-function _az_wysiwyg_add_topics(&$node, $matched) {
-  $tids = $node->field_topics->getValue();
-  foreach ($matched as $name => $tid) {
-    $found = false;
-    foreach ($tids as $i => $val) {
-      if ($val['target_id'] == $tid) {
-        $found = true;
-      }
-    }
-    if (!$found) {
-      $node->field_topics->appendItem($tid);
-    }
-  }
-}
-
 function az_wysiwyg_node_presave(EntityInterface $node) {
 
+  $topics = WysiwygBase::loadTopics();
   $type = $node->getType();
-  $matched = [];
+
+  // If this is an article then process field_body.
   if ($type == 'article') {
-    $text = $node->field_body->value;
-    $newText = _az_wysiwyg_process_text($text, $matched);
-    $node->field_body->setValue([
-      'value' => $newText,
-      'format' => 'full_html'
-    ]);
+    WysiwygBase::extractTopics($node->field_body->value, $topics);
   }
+
+  // If this is a page then it has sections with subsections - process separately
   if ($type == 'page') {
     $sections = $node->field_sections->getValue();
-    foreach($sections as $section){
-      foreach($section['subform']['field_subsections'] as $subsection) {
+    foreach($sections as &$section){
+      foreach($section['subform']['field_subsections'] as &$subsection) {
         if (!empty($subsection['subform'])) {
-          $text = $subsection['subform']['field_body'][0]['value'];
-          $newText = _az_wysiwyg_process_text($text, $matched);
-          $subsection['subform']['field_body'][0]['value'] = $newText;
+          WysiwygBase::extractTopics($subsection['subform']['field_body'][0]['value'], $topics);
         }
       }
     }
-    $node->field_sections->setValue($sections);
   }
-  _az_wysiwyg_add_topics($node, $matched);
+
+  WysiwygBase::addTopicsToNode($node, $topics);
 
   return;
 }
