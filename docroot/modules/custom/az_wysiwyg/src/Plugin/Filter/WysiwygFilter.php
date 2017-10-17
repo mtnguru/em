@@ -177,7 +177,13 @@ class WysiwygFilter extends FilterBase {
       $text .= "\n\n" . \Drupal::service('renderer')->render($footer, FALSE);
     }
 
-    return new FilterProcessResult($text);
+    $result = new FilterProcessResult($text);
+//  $result->setAttachments([
+//    'library' => [
+//      'az_wysiwyg/footnotes',
+//    ]
+//  ]);
+    return $result;
   }
 
   /**
