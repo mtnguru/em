@@ -65,3 +65,19 @@ https://RealScience.Rocks/:
   ssi:
     enabled: false
   upstream: app:http
+https://structuredatom.org/:
+  type: upstream
+  redirects:
+    expires: -1s
+    paths: {}
+  cache:
+    enabled: true
+    default_ttl: 0
+    cookies:
+    - '*'
+    headers:
+    - Accept
+    - Accept-Language
+  ssi:
+    enabled: false
+  upstream: app:http
