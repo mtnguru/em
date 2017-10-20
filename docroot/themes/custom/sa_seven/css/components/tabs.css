@@ -231,7 +231,7 @@ li.tabs__tab a {
 }
 .is-horizontal .tabs.primary a {
   background-image: none;
-  padding: 7px 2em 7px 2em;
+  padding: 6px 10px;
 }
 .is-horizontal .tabs__trigger {
   display: none;

@@ -139,12 +139,14 @@
 
           .menu {
             position: absolute;
+            width: 150px;
             top: 20px;
             right: -200px;
             background-color: $color-dark-green;
             border-radius: 8px;
-            padding: 1em;
+            padding: .4em .7em .7em;
             @include transition-3d;
+            border: 1px solid $color-green;
           }
 
           &:hover {

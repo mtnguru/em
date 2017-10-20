@@ -72,20 +72,4 @@ picture {
   height: auto;
 }
 
-textarea {
-  background-color: lighten($base-background-color, 10%);
-}
-
-fieldset {
-  background-color: $secondary-background-color;
-  border: $base-border;
-  margin: 0 0 $small-spacing;
-  padding: $base-spacing;
-
-  legend {
-    background-color: $secondary-background-color;
-    padding: .5em;
-    border: 1px solid $color-white;
-  }
-}
 

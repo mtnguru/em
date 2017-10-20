@@ -25,6 +25,23 @@ select {
   border-radius: $base-border-radius;
 }
 
+textarea {
+  background-color: lighten($base-background-color, 10%);
+}
+
+fieldset.fieldgroup {
+  background-color: $secondary-background-color;
+  border: $base-border;
+  margin: 0 0 $small-spacing;
+  padding: .5em 1em;
+
+  legend {
+    background-color: $secondary-background-color;
+    padding: .5em;
+    border: 1px solid $color-white;
+  }
+}
+
 #{$all-text-inputs},
 select[multiple=multiple] {
   border: $base-border;
@@ -65,13 +82,21 @@ input[type="search"] {
   appearance: none;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
-  display: inline;
-  margin-right: $small-spacing / 2;
+.form-checkboxes,
+.form-radios {
+  .form-type-checkbox.form-item,
+  .form-type-radio.form-item {
+    margin: .2em 0;
 
-  + label {
-    display: inline-block;
+    input {
+      display: inline;
+      margin-right: $small-spacing / 2;
+    }
+
+    label {
+      display: inline-block;
+      margin-bottom: 0;
+    }
   }
 }
 

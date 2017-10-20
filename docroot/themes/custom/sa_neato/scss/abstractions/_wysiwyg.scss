@@ -30,8 +30,29 @@ body.cke_editable,
     }
   }
 
+  .cke_path {
+    display: none;
+  }
+
   &.cke_maximized {
     z-index: 10000;
+  }
+}
+
+.filter-wrapper {
+  padding: 0;
+  .filter-help {
+    display: none;
+  }
+
+  .form-type-select {
+    label {
+      margin-left: 10px;
+    }
+    select {
+      display: inline;
+      margin: 5px;
+    }
   }
 }
 

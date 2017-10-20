@@ -62,7 +62,8 @@ class WysiwygBase {
    * @param $matched
    */
   static public function addTopicsToNode(&$node, $topics) {
-    $tids = $node->field_topics->getValue();
+//  $tids = $node->field_topics->getValue();
+    return;
     foreach ($topics as $name => $topic) {
       if (isset($topic->in_text)) {
         $found = false;
