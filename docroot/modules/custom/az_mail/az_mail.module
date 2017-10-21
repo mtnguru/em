@@ -46,8 +46,8 @@ function az_mail_mail($key, &$message, $params) {
     case 'email_presave':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = $params['subject'];
-//    $message['body'][] = SafeMarkup::checkPlain($params['message']);
-      $message['body'][] = $params['message'];
+      $message['body'][] = SafeMarkup::checkPlain($params['message']);
+//    $message['body'][] = $params['message'];
       break;
   }
 }
