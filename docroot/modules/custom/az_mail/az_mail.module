@@ -97,11 +97,23 @@ function az_mail_node_presave(Node $node) {
 
   $mailManager = \Drupal::service('plugin.manager.mail');
 
-  $set = [
-    'email_new_content' => 'immediate',
-    'group_member' => '5',
-    'group_role' => 'theories-contributor',
-  ];
+  $set = ['email_new_content' => 'immediate'];
+  if ($values = $node->field_roles->getValue()) {
+    foreach ($values as $value) {
+      $set['role'][] = $value['target_id'];
+    }
+  }
+  if ($values = $node->field_groups->getValue()) {
+    foreach ($values as $value) {
+      $set['group_member'][] = $value['target_id'];
+    }
+  }
+  if ($values = $node->field_group_role->getValue()) {
+    foreach ($values as $value) {
+      $set['qroup_role'][] = $value['target_id'];
+    }
+  }
+
   $recipients = CreateUserList::queryUsers($set);
 
   $params['message'] = $node->get('body')->value;
