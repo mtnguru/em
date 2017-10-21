@@ -13220,7 +13220,7 @@
         "drupal/shs": 20,
         "drupal/special_menu_items": 20,
         "drupal/url_embed": 20,
-        "drupal/views_advanced_routing": 20,
+        "drupal/views_advanced_routing": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
