@@ -1,3 +1,27 @@
+.field--name-field-media {
+  details.form-wrapper {
+    background: darken($color-dark-blue, 10);
+  }
+  .details-description {
+    display: none;
+  }
+
+  .details-wrapper {
+    > details {
+//    display: none;
+    }
+  }
+}
+
+#entity-browser {
+  h1 {
+    display: none;
+  }
+  main {
+    padding: 0;
+  }
+}
+
 form.entity-browser-form {
   nav.eb-tabs {
     ul li.active {
@@ -20,13 +44,87 @@ form.entity-browser-form {
     }
 
     .views-row {
-      .views-col {
-        border-color: lighten($color-dark-blue, 10%);
-        &.selected {
-          border-color: $color-gold;
+      min-width: 0;
+      float: left;
+      overflow: hidden;
+      clear: none;
+      margin: 0;
+
+      &:last-of-type {
+        padding-bottom: 0;
+      } // &:last-of-type
+
+      @include media($bp320only) {
+        width: calc(100% / 2);
+      } // $bp320only
+
+      @include media($bp580only) {
+        width: calc(100% / 4);
+      } // $bp580only
+
+      @include media($bp960only) {
+        width: calc(100% / 6);
+      } // $bp960only
+
+      @include media($bp1280) {
+        width: 200px;
+      } // $bp1280
+    } // .views-row
+
+    .views-col {
+      margin: .3em;
+      border: .3em solid lighten($color-dark-blue, 10%);
+      border-radius: 8px;
+      overflow: hidden;
+
+      &.selected {
+        border-color: $color-gold;
+        &::before {
+          animation: selected 1.5s ease-out;
+          z-index: 10;
         }
       }
     }
+
+    .views-field {
+      width: 100%;
+      @include fixed-aspect(1.35 * 100%, '.field-content');
+
+      .media-container {
+        text-align: center;
+        max-height: 180px;
+
+        img {
+          border-radius: 4px;
+          margin: 0 auto;
+          display: block;
+          height: auto;
+          max-height: 170px;
+          width: auto;
+        } // img
+      } // .media-container
+
+      .media-text-container {
+        padding: 0 5px 5px 5px;
+      }
+
+      .media-name {
+        font-size: 90%;
+        margin-top: 2px;
+        line-height: 1.1;
+      }
+
+      .media-dimensions {
+        font-size: 75%;
+        display: inline;
+       }
+
+      .media-mid {
+        font-size: 75%;
+        float: right;
+        margin-top: 1px;
+      }
+    } // .views-field
   }
 
   table.entities-list {
@@ -39,6 +137,7 @@ form.entity-browser-form {
 
 .field--name-field-media {
   .details-wrapper {
+    padding: .5em 0 0;
     .item-container {
       > input {
         margin: 1em 1em 0 0;
@@ -46,5 +145,4 @@ form.entity-browser-form {
     }
   }
 }
-
 

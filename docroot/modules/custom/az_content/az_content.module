@@ -41,6 +41,10 @@ function az_content_entity_embed_dialog_form_alter(&$form, FormStateInterface $f
   */
 }
 
+function az_content_form_article_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return;
+}
+
 function _az_content_embed_validate($form, FormStateInterface $form_state) {
   return;
 }

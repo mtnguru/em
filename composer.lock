@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "508638158e3c3bec8d09e797f261aba3",
-    "content-hash": "ac6577bcc13c6b3ffd97479feba7c3f0",
+    "hash": "c4f5dcb901a29960c0aa4ee0cd6b28b0",
+    "content-hash": "6e4b68f753a1bd6192080e9db452c383",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -3781,61 +3781,6 @@
             }
         },
         {
-            "name": "drupal/geophp",
-            "version": "1.0.0-beta2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/geophp",
-                "reference": "8.x-1.0-beta2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/geophp-8.x-1.0-beta2.zip",
-                "reference": "8.x-1.0-beta2",
-                "shasum": "c8bc85f4d646ff83591f10092d8ebf5390ac0ff3"
-            },
-            "require": {
-                "drupal/core": "~8.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.0-beta2",
-                    "datestamp": "1507629244",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Brandonian",
-                    "homepage": "https://www.drupal.org/user/77766"
-                },
-                {
-                    "name": "phayes",
-                    "homepage": "https://www.drupal.org/user/47098"
-                },
-                {
-                    "name": "plopesc",
-                    "homepage": "https://www.drupal.org/user/282415"
-                }
-            ],
-            "description": "Wraps the geoPHP library: advanced geometry operations in PHP.",
-            "homepage": "https://www.drupal.org/project/geophp",
-            "support": {
-                "source": "http://cgit.drupalcode.org/geophp"
-            }
-        },
-        {
             "name": "drupal/group",
             "version": "dev-1.x",
             "source": {
@@ -4499,11 +4444,17 @@
         },
         {
             "name": "drupal/media_entity_browser",
-            "version": "dev-1.x",
+            "version": "1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/media_entity_browser",
-                "reference": "df8d2de08699159dc54f5b9ee95deb4dd96b2736"
+                "reference": "8.x-1.0-beta3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/media_entity_browser-8.x-1.0-beta3.zip",
+                "reference": "8.x-1.0-beta3",
+                "shasum": "f6f9f13bb0aa6bfd0a61667a47ca60c5282341d5"
             },
             "require": {
                 "drupal/core": "~8.0",
@@ -4522,8 +4473,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta3+2-dev",
-                    "datestamp": "1488180483",
+                    "version": "8.x-1.0-beta3",
+                    "datestamp": "1487741885",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -4556,8 +4507,7 @@
             "homepage": "https://www.drupal.org/project/media_entity_browser",
             "support": {
                 "source": "http://cgit.drupalcode.org/media_entity_browser"
-            },
-            "time": "2017-02-27 07:23:31"
+            }
         },
         {
             "name": "drupal/media_entity_document",
@@ -11089,6 +11039,61 @@
             "time": "2017-09-13 19:54:23"
         },
         {
+            "name": "drupal/geophp",
+            "version": "1.0.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/geophp",
+                "reference": "8.x-1.0-beta2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/geophp-8.x-1.0-beta2.zip",
+                "reference": "8.x-1.0-beta2",
+                "shasum": "c8bc85f4d646ff83591f10092d8ebf5390ac0ff3"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta2",
+                    "datestamp": "1507629244",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Brandonian",
+                    "homepage": "https://www.drupal.org/user/77766"
+                },
+                {
+                    "name": "phayes",
+                    "homepage": "https://www.drupal.org/user/47098"
+                },
+                {
+                    "name": "plopesc",
+                    "homepage": "https://www.drupal.org/user/282415"
+                }
+            ],
+            "description": "Wraps the geoPHP library: advanced geometry operations in PHP.",
+            "homepage": "https://www.drupal.org/project/geophp",
+            "support": {
+                "source": "http://cgit.drupalcode.org/geophp"
+            }
+        },
+        {
             "name": "fabpot/goutte",
             "version": "v3.2.1",
             "source": {
@@ -13214,7 +13219,7 @@
         "drupal/libraries": 20,
         "drupal/livereload": 20,
         "drupal/masquerade": 20,
-        "drupal/media_entity_browser": 20,
+        "drupal/media_entity_browser": 10,
         "drupal/page_manager": 20,
         "drupal/realname": 20,
         "drupal/shs": 20,
