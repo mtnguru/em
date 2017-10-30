@@ -16,32 +16,8 @@ $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
-// Colors
-$dark-gray: #333;
-
-$medium-gray: #999;
-$light-gray: #ddd;
-
-// Font Colors
-$base-font-color: #faf0ff;
-
-// Border
-$base-border-color: $light-gray;
-$base-border: 1px solid $base-border-color;
-
-// Background Colors
-$base-background-color: $color-dark-blue;
-$secondary-background-color: lighten($base-background-color, 15%);
-
-// Forms
-$form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
-$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($base-link-color, $lightness: -5%, $alpha: -0.3);
-
-// Box Shadow
-$box-shadow: 1px 1px 3px 1px #666;
-
 // Animations
-$base-duration: 400ms;
+$base-duration: 500ms;
 $base-timing: ease;
 
 $images-path: '/themes/custom/sa_neato/images/';

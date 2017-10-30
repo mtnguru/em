@@ -1,0 +1,2 @@
+!function(e){"use strict";Drupal.behaviors.menu={attach:function(a,s){var t="menu-item--expanded";e(a).find("#book-pages").once("menuAttached").each(function(){e("#book-pages .menu-item--children",a).click(function(a){"LI"===a.target.tagName&&(a.stopPropagation(),e(this).hasClass(t)?e(this).removeClass(t):(e(this).siblings().removeClass(t),e(this).addClass(t)))})})}}}(jQuery);
+//# sourceMappingURL=maps/menu.js.map

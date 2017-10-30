@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Entity\EntityInterface;
+
 /**
  * @file
  * Contains az_groups.module.
@@ -17,9 +19,23 @@ function az_groups_preprocess_block(&$variables) {
   return;
 }
 
+function az_groups_preprocess_group(&$variables) {
+
+  $block_entity = Drupal\block\Entity\Block::load('groupoperations');// BLOCK_ID
+  $variables['block_groupoperations'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+
+  $block_entity = Drupal\block\Entity\Block::load('azdonateblock');// BLOCK_ID
+  $variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+
+  $variables['view_group_members'] = views_embed_view('group_members', 'group_members');
+
+  $variables['view_group_content'] = views_embed_view('group_content', 'content_teaser_block');
+  return;
+}
+
 function az_groups_preprocess_menu(&$variables) {
   if ($variables['menu_name'] == 'account' && $variables['logged_in']) {
-    $user = \Drupal::entityManager()
+    $user = \Drupal::entityTypeManager()
       ->getStorage('user')
       ->load(\Drupal::currentUser()->id());
     $picture = $user->field_picture->getValue();

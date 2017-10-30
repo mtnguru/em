@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Default theme implementation for rendering book outlines within a block.
+ *
+ * This template is used only when the block is configured to "show block on all
+ * pages", which presents multiple independent books on all pages.
+ *
+ * Available variables:
+ * - book_menus: Book outlines.
+ *   - id: The parent book ID.
+ *   - title: The parent book title.
+ *   - menu: The top-level book links.
+ *
+ * @see template_preprocess_book_all_books_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('sa_neato/menu') }}
+
+<nav role="navigation" aria-label="{% trans %}Book outline for {{ title }}{% endtrans %}">
+  {% macro buildMenu(page) %}
+    {% import _self as self %}
+    <li class="{{ page.class }}">{{ page.link }}
+
+      {% if page.children|length %}
+        <ul>
+          {% for child in page.children %}
+            {{ self.buildMenu(child) }}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endmacro %}
+
+  {% from _self import buildMenu %}
+
+  {% if book_pages %}
+    <div id="book-pages">
+      <ul>
+        {% for page in book_pages %}
+          {{ buildMenu(page) }}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</nav>

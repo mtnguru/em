@@ -39,19 +39,32 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
-    {{ title_prefix }}
-    {% if not page %}
-        <h2{{ title_attributes }}>
-            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-    {% endif %}
-    {{ title_suffix }}
+<div{{ attributes.setAttribute('id', 'main-content-group') }}>
 
-    {{ hero_image_url }}
-
-    <div{{ content_attributes }}>
-        {{ content }}
+    <div class='sidebar-left'>
+      {{ block_donate }}
+      {{ block_groupoperations }}
+      <div class="block-members block">
+        <div class="title-container">
+          <h2>Members</h2>
+        </div>
+        {{ view_group_members }}
+      </div>
     </div>
+    <div class="main-center">
+      <div class="hero-wrapper">
+        <div class="title-wrapper">
+          <h1{{ title_attributes }}>
+            <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+          </h1>
+        </div>
+        {{ content }}
+      </div>
 
+      <hr>
+
+      <h2>Recent Content</h2>
+        {{ view_group_content }}
+      </div>
+    </div>
 </div>

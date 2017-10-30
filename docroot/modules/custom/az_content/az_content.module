@@ -16,6 +16,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
  * Implements hook_form_alter().
  */
+function az_content_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
 function az_content_entity_embed_dialog_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   return;
   /*
@@ -41,7 +48,15 @@ function az_content_entity_embed_dialog_form_alter(&$form, FormStateInterface $f
   */
 }
 
-function az_content_form_article_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function az_content_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!empty($form['panelizer'])) {
+    if (!empty($form['panelizer']['widget']['0']['default']['#title'])) {
+      $form['panelizer']['widget']['0']['default']['#title'] = t('Page Display Format');
+    }
+  }
+  return;
+}
+function az_content_form_node_book_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   return;
 }
 
@@ -187,6 +202,14 @@ function az_content_group_content_alter($group_content_entity, $entity) {
 //return;
 }
 
+/**
+ * Implements HOOK_preprocess_page().
+ *
+ * If this is the structuredatom.com and the user is not logged in then redirect
+ * to the /under-construction.
+ *
+ * @param $variables
+ */
 function az_content_preprocess_page(&$variables) {
 
   if ($_SERVER['HTTP_HOST'] == 'atom' ||
@@ -225,7 +248,20 @@ function az_content_preprocess_node(&$variables) {
         $variables['content']['view_image_gallery'] = views_embed_view('az_media_block', 'media_block_article');
       }
 
+      // Add the New/Updated marker.
       if ($view_mode == 'main_content' || $view_mode == 'teaser') {
+        // Query to see if this content is in a group
+        // if so load group and add to output.
+        $query = \Drupal::database()->select('group_content_field_data', 'gcfd');
+        $query->addField('gcfd', 'gid');
+        $query->condition('gcfd.entity_id', $node->id());
+        $results = $query->execute()->fetchAll();
+        if (count($results)) {
+          $gid = $results[0]->gid;
+          $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
+          $variables['group'] = $group;
+        }
+
         // Add has_new_content - New or Updated
         switch (node_mark($node->id(), $node->getChangedTime())) {
 //  case 0: $mark = 'Read'; break;
@@ -271,7 +307,7 @@ function az_content_preprocess_media(&$variables) {
   return;
 }
 
-//////////////////////// Start embed api code
+//////////////////////// Start entity_embed module api functions
 
 /**
  * @addtogroup hooks

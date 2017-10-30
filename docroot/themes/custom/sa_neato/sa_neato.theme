@@ -59,7 +59,7 @@ function sa_neato_preprocess(&$variables) {
   }
 
   // Make the full node content-type available to all templates.
-  $variables['em_route_name'] = \Drupal::routeMatch()->getRouteName();
+  $variables['az_route_name'] = \Drupal::routeMatch()->getRouteName();
   $route_match = \Drupal::routeMatch();
   if ($route_match->getParameter('node') && is_object($route_match->getParameter('node'))) {
     $variables['em_root_content_type'] = $route_match->getParameter('node')->bundle();
@@ -199,9 +199,9 @@ function sa_neato_preprocess_group(&$variables) {
     // Trying to figure out how this works
     $fid = $variables['elements']['field_hero_image'][0]['#media']->image->target_id;
     $file =  \Drupal\file\Entity\File::load($fid);
-    $variables['em_hero_image_uri'] = $file->uri;
+    $variables['az_hero_image_uri'] = $file->uri;
 //$variables['hero_image_url'] = Url::fromUri($file->uri->value);
-    $variables['em_hero_image_url'] = file_create_url($file->uri->value);
+    $variables['az_hero_image_url'] = file_create_url($file->uri->value);
   }
   return;
 }

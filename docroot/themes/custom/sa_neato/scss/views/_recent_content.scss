@@ -1,14 +1,21 @@
-.main {
-  background-color: purple;
-  .views-element-container {
 
+section#content,
+.radix-layouts-content {
+
+  // Needs to be more specific - commented out for now.
+  /*
+  .views-element-container {
+    border-top: 5px solid lighten($base-background-color, 15%);
+    //border-top: 5px solid $color-purple-red;
+    padding-top: 1em;
     .title-container {
       h2 {
         margin-bottom: 20px;
       } // h2
     } // .title-container
   } // .views-element- container
-} // .main does this do anything
+  */
+}
 
 .view-id-content_recent {
 

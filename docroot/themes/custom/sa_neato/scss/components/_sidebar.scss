@@ -1,4 +1,5 @@
 .block-region-sidebar,
+.sidebar-left,
 .sidebar {
 
   .block {
@@ -21,6 +22,7 @@
     } // h2
   } // .title-container
 
+  .views-element-container,
   .content-container {
     padding: 10px 20px;
 
@@ -28,6 +30,15 @@
       margin-left: 0;
     } // ul
   } // .content-container
+
+  .block-ctools {
+    .contextual-region h2 {
+      display: none;
+    }
+    .content-container {
+//    padding: 0 20px;
+    }
+  }
 } // .sidebar
 
 

@@ -33,8 +33,8 @@ class MoreSliderFormatter extends FormatterBase {
    */
   public static function defaultSettings() {
     return [
-      'height' => '150',
-      'overlayHeight' => '75',
+      'height' => '80',
+      'overlayHeight' => '60',
     ];
   }
 
@@ -102,22 +102,33 @@ class MoreSliderFormatter extends FormatterBase {
           '0' => 'az_components/az-more-slider',
         ],
       ],
+      '#attributes' => ['class' => ['az-more-field']],
       '0' => [
         '#type' => 'container',
-        '#attributes' => [ 'class' => ['az-more-wrapper'], ],
+        '#attributes' => [
+          'class' => ['az-more-wrapper'],
+        ],
 
         'body' => [
           '#type' => 'container',
-          '#attributes' => [ 'class' => ['az-body-wrapper', 'az-more-slider'], ],
+          '#attributes' => [
+            'class' => ['az-body-wrapper', 'az-more-slider'],
+            'style' => 'max-height: ' . $this->getSetting('height') . 'px',
+          ],
           'content' => $content[0],
           'overlay' => [
             '#type' => 'container',
-            '#attributes' => [ 'class' => ['az-more-slider-overlay'], ],
+            '#attributes' => [
+              'class' => ['az-more-slider-overlay'],
+              'style' => 'height: ' . $this->getSetting('overlayHeight') . 'px',
+            ],
           ]
         ],
         'button' => [
           '#type' => 'container',
-          '#attributes' => [ 'class' => ['az-more-slider-button'], ],
+          '#attributes' => [
+            'class' => ['az-more-slider-button'],
+          ],
           'more' => ['#markup' => t('-- more --')],
         ],
       ],

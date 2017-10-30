@@ -8,12 +8,9 @@ libraries:
   - sa_neato/global-scripts
 regions:
   header: Header
-  hero: Hero
   featured: Featured
   breadcrumb: Breadcrumb
-  sidebar_first: 'Sidebar first'
   content: Content
-  sidebar_second: 'Sidebar second'
   footer_top: 'Footer Top'
   footer_bottom: 'Footer Bottom'
 ckeditor_stylesheets:

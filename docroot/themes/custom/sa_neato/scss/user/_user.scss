@@ -2,6 +2,7 @@
   vertical-align: top;
   display: inline-block;
   display: flex;
+  margin-bottom: 1em;
 
   .author-text {
     //  display: inline-block;
@@ -52,7 +53,7 @@
 } // .user--compact
 
 .user--full {
-  margin-bottom: 2em;
+//margin-bottom: 2em;
 } // .user--full
 
 .user--views {

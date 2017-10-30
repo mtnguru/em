@@ -11,7 +11,7 @@
       top: rem(-10);
       left: 0;
       right: 0;
-      border-top: 1px solid lighten($base-background-color, 15%);
+      border-top: 1px solid $base-separator-color;
     }
 
     &:first-child {

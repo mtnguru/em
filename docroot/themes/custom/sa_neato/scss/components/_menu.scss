@@ -1,0 +1,69 @@
+
+.block-az-book {
+  line-height: 1.2;
+  font-size: 90%;
+
+  div.content-container {
+    padding: 0 20px;
+    #book-pages {
+      margin-left: -.7em;
+
+      ul {
+        padding: 0 0 0 .8em;
+        @include transition-3d;
+      }
+    }
+  }
+
+  .menu-item {
+    list-style-image: none;
+    list-style-type: none;
+    position: relative;
+    padding: .25em 0;
+    @include transition-3d;
+
+    &::before {
+      content: '';
+      width: 1em;
+      height: 1em;
+      display: block;
+      position: absolute;
+      top: .25em;
+      left: -1em;
+    }
+
+    a {
+      color: $color-green;
+    }
+
+    &.menu-item--children {
+      &::before {
+        background-image: url($images-path + 'right-arrow.svg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      > ul {
+        display: none;
+      }
+    }
+
+    &.menu-item--expanded {
+      &::before {
+        @include transform(rotate(90deg));
+        background-image: url($images-path + 'right-arrow.svg');
+        display: block;
+      }
+
+      > ul {
+        display: block;
+      }
+    }
+
+    &.menu-item--active {
+      > a {
+        color: $color-gold;
+      }
+    }
+  }
+}

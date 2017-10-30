@@ -1,6 +1,20 @@
-#block-views-block-group-members-group-members {
+.block-members {
 
   table {
     margin: 0;
+    font-size: 80%;
+
+    .views-field-created {
+    }
+
+    td {
+      padding: .2em 0;
+    }
+
+    th {
+      a{
+        color: $color-gold;
+      }
+    }
   } // table
 } // #block-views-block-group-members-group-members

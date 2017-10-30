@@ -42,11 +42,6 @@
 %}
 
 <div{{ attributes.addClass(classes) }}>
-  <div class="content-container">
-    {% block content %}
-      {{ content }}
-    {% endblock %}
-  </div>
 
   <div class="title-container">
     {{ title_prefix }}
@@ -55,5 +50,11 @@
     {% endif %}
     {{ title_suffix }}
   </div>
-  
+
+  <div class="content-container">
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+
 </div>

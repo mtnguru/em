@@ -48,6 +48,6 @@ custom_event:
   js:
     js/customEvent.js: {}
 
-
-
-     
+menu:
+  js:
+    js/js-src/menu.js: {}     

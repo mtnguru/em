@@ -90,3 +90,23 @@
 .az-clear-right {
   clear: right;
 }
+
+.az-float-right {
+  float: right;
+}
+
+.az-float-left {
+  float: left;
+}
+
+.az-float-none {
+  float: none;
+}
+
+.az-inline-block {
+  display: inline-block;
+}
+
+.az-clearfix {
+  @include clearfix;
+}

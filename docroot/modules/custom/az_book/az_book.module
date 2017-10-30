@@ -1,0 +1,22 @@
+<?php
+
+
+/**
+ * Implements hook_theme().
+ */
+function az_book_theme() {
+  return [
+    'az_book_navigation' => [
+      'variables' => [
+        'book_pages' => [],
+        'title' => NULL,
+      ],
+    ],
+  ];
+}
+
+
+function template_preprocess_az_book_navigation(&$variables) {
+  // Remove all non-renderable elements.
+  return;
+}
