@@ -17,6 +17,9 @@ use Drupal\Core\Database\Connection;
 class AzBookNavigationBlock extends BookNavigationBlock {
 
   private static function comparePages($a, $b) {
+    if ($a->weight == $b->weight) {
+      return $a->title <=> $b->title;
+    }
     return ($a->weight <=> $b->weight);
   }
   private function buildMenuRecursive($results, $nid, $level) {
@@ -84,7 +87,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
 
       // Join node_field_data to get node title.
       $roles = \Drupal::currentUser()->getRoles();
-      if (in_array('administrator', \Drupal::currentUser()->getRoles())) {
+      if (in_array('ninja', \Drupal::currentUser()->getRoles())) {
         $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid');
       }
       else {
