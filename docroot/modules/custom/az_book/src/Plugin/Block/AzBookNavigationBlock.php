@@ -32,6 +32,9 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         $classes[] = 'menu-item--active';
       }
       if (!empty($child->moderation_state)) {
+        if ($child->moderation_state == 'placeholder') {
+          $classes[] = 'menu-item--placeholder';
+        }
         if ($child->moderation_state == 'draft') {
           $classes[] = 'menu-item--draft';
         }
@@ -86,8 +89,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       $query->condition('bid', $bid);
 
       // Join node_field_data to get node title.
-      $roles = \Drupal::currentUser()->getRoles();
-      if (in_array('ninja', \Drupal::currentUser()->getRoles())) {
+      if (\Drupal::currentUser()->hasPermission('show unpublished book pages')) {
         $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid');
       }
       else {

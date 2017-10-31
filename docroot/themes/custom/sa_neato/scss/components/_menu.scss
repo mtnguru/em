@@ -60,9 +60,9 @@
       }
     }
 
-    &.menu-item--active {
+    &.menu-item--placeholder {
       > a {
-        color: $color-white;
+        color: $color-light-grey;
       }
     }
 
@@ -76,5 +76,12 @@
       > a {
         color: #55aaff;      }
     }
+
+    &.menu-item--active {
+      > a {
+        color: $color-white;
+      }
+    }
+
   }
 }

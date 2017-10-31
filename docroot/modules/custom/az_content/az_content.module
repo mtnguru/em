@@ -217,7 +217,8 @@ function az_content_preprocess_page(&$variables) {
       $_SERVER['HTTP_HOST'] == 'structuredatom.com') {
     if (\Drupal::currentUser()->isAnonymous() &&
         strstr($_SERVER['REQUEST_URI'], 'under-construction') == null  &&
-        strstr($_SERVER['REQUEST_URI'], 'user/login') == null) {
+        strstr($_SERVER['REQUEST_URI'], 'user/login') == null  &&
+        strstr($_SERVER['REQUEST_URI'], 'user/password') == null) {
       drupal_set_message(t('The Structured Atom site is currently under construction ...'), 'status', TRUE);
       $response = new RedirectResponse('/under-construction');
       $response->send();
