@@ -16,14 +16,25 @@ use Drupal\Core\Database\Connection;
  */
 class AzBookNavigationBlock extends BookNavigationBlock {
 
+  private static function comparePages($a, $b) {
+    return ($a->weight <=> $b->weight);
+  }
   private function buildMenuRecursive($results, $nid, $level) {
     $items = [];
 
-    usort($results[$nid]->children, '\Drupal\ctools_views\Plugin\Display\Block::sortFieldsByWeight');
+    usort($results[$nid]->children, 'self::comparePages');
     foreach ($results[$nid]->children as $num => $child) {
       $classes = ['menu-item'];
       if (!empty($child->activeTrail)) {
         $classes[] = 'menu-item--active';
+      }
+      if (!empty($child->moderation_state)) {
+        if ($child->moderation_state == 'draft') {
+          $classes[] = 'menu-item--draft';
+        }
+        if ($child->moderation_state == 'needs_review') {
+          $classes[] = 'menu-item--needs-review';
+        }
       }
       if (empty($child->children)) {
         $build = [
@@ -54,27 +65,44 @@ class AzBookNavigationBlock extends BookNavigationBlock {
   public function build() {
     if ($node = $this->requestStack->getCurrentRequest()->get('node')) {
       $bid = $node->book['bid'];
+    }
+    if ($group = $this->requestStack->getCurrentRequest()->get('group')) {
+      // Take the group title? machine name? Find a book by the same name - what is a book?
+      if ($value = $group->field_directory->getValue()) {
+        $bid = $value[0]['target_id'];
+      }
+    }
 
+    if (!empty($bid)) {
       // Query for all pages in this book
       $query = \Drupal::database()->select('book');
       $query->fields('book');
       for ($i = 1; $i <= 9; $i++) {
         $query->orderBy('p' . $i, 'ASC');
       }
-      $query->condition('bid', $node->book['bid']);
+      $query->condition('bid', $bid);
 
       // Join node_field_data to get node title.
-      $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid');
+      $roles = \Drupal::currentUser()->getRoles();
+      if (in_array('administrator', \Drupal::currentUser()->getRoles())) {
+        $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid');
+      }
+      else {
+        $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid AND nfd.moderation_state = :published', [':published' => 'published']);
+      }
+      $query->addField('nfd', 'moderation_state');
       $query->addField('nfd', 'title');
       $results = $query->execute()->fetchAllAssoc('nid');
 
       if (count($results) == 0) return [];
 
-      // Set the active trail
-      $result = &$results[$node->id()];
-      for ($i = 1; $i <= $result->depth; $i++) {
-        $n = 'p' . $i;
-        $results[$result->$n]->activeTrail = true;
+      // If this is a book page, set the active trail
+      if ($node) {
+        $result = &$results[$node->id()];
+        for ($i = 1; $i <= $result->depth; $i++) {
+          $n = 'p' . $i;
+          $results[$result->$n]->activeTrail = true;
+        }
       }
 
       // Append children to their parent.

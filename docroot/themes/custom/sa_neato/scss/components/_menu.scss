@@ -29,7 +29,7 @@
       display: block;
       position: absolute;
       top: .25em;
-      left: -1em;
+      left: -1.2em;
     }
 
     a {
@@ -62,8 +62,19 @@
 
     &.menu-item--active {
       > a {
-        color: $color-gold;
+        color: $color-white;
       }
+    }
+
+    &.menu-item--needs-review {
+      > a {
+        color: #cc66ff;
+      }
+    }
+
+    &.menu-item--draft {
+      > a {
+        color: #55aaff;      }
     }
   }
 }

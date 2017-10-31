@@ -21,11 +21,14 @@ function az_groups_preprocess_block(&$variables) {
 
 function az_groups_preprocess_group(&$variables) {
 
-  $block_entity = Drupal\block\Entity\Block::load('groupoperations');// BLOCK_ID
+  $block_entity = Drupal\block\Entity\Block::load('groupoperations');
   $variables['block_groupoperations'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 
-  $block_entity = Drupal\block\Entity\Block::load('azdonateblock');// BLOCK_ID
+  $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
   $variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+
+  $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
+  $variables['block_booknavigation'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 
   $variables['view_group_members'] = views_embed_view('group_members', 'group_members');
 

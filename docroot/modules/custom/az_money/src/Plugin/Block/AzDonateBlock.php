@@ -45,13 +45,22 @@ class AzDonateBlock extends BlockBase {
   public function build() {
     $config = $this->getConfiguration();
     $node = \Drupal::entityTypeManager()->getStorage('node')->load($config['nid']);
+    if ($node) {
+      return [
+        '#theme' => 'az_donate_block',
+        '#attributes' => ['class' => ['donate-block']],
+        '#description' => $node->field_short_description->value,
+        '#more_url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$node->id()),
+      ];
+    }
+    else {
+      return [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['donate-block']],
+        'description' => ['#markup' => 'No node selected to display'],
+      ];
+    }
 
-    return [
-      '#theme' => 'az_donate_block',
-      '#attributes' => ['class' => ['donate-block']],
-      '#description' => $node->field_short_description->value,
-      '#more_url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$node->id()),
-    ];
   }
 }
 
