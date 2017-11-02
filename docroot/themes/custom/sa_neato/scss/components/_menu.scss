@@ -82,5 +82,12 @@
     > a {
       color: $color-white;
     }
+
+    &.menu-item--active {
+      > a {
+        color: $color-white;
+      }
+    }
+
   }
 }
