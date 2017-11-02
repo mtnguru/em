@@ -217,7 +217,8 @@ function az_content_preprocess_page(&$variables) {
       $_SERVER['HTTP_HOST'] == 'structuredatom.com') {
     if (\Drupal::currentUser()->isAnonymous() &&
         strstr($_SERVER['REQUEST_URI'], 'under-construction') == null  &&
-        strstr($_SERVER['REQUEST_URI'], 'user/login') == null) {
+        strstr($_SERVER['REQUEST_URI'], 'user/login') == null  &&
+        strstr($_SERVER['REQUEST_URI'], 'user/password') == null) {
       drupal_set_message(t('The Structured Atom site is currently under construction ...'), 'status', TRUE);
       $response = new RedirectResponse('/under-construction');
       $response->send();
@@ -226,6 +227,26 @@ function az_content_preprocess_page(&$variables) {
   return;
 }
 
+/**
+ * Given a node, look to see if it is content in a group and return tne gid.
+ *
+ * @param $node
+ * @return null
+ */
+function _az_content_get_node_group($node) {
+  $query = \Drupal::database()->select('group_content_field_data', 'gcfd');
+  $query->fields('gcfd', ['gid', 'entity_id', 'type']);
+  $query->condition('gcfd.entity_id', $node->id());
+  $query->condition('gcfd.type', 'theories-group_node-' . $node->getType());
+  $results = $query->execute()->fetchAll();
+  return (count($results)) ? $results[0]->gid : null;
+}
+
+/**
+ * Implements HOOK_preprocess_node().
+ *
+ * @param $variables
+ */
 function az_content_preprocess_node(&$variables) {
   // Add marker if content is New, Updated or has already been read.
   $node = $variables['node'];
@@ -252,14 +273,10 @@ function az_content_preprocess_node(&$variables) {
       if ($view_mode == 'main_content' || $view_mode == 'teaser') {
         // Query to see if this content is in a group
         // if so load group and add to output.
-        $query = \Drupal::database()->select('group_content_field_data', 'gcfd');
-        $query->addField('gcfd', 'gid');
-        $query->condition('gcfd.entity_id', $node->id());
-        $results = $query->execute()->fetchAll();
-        if (count($results)) {
-          $gid = $results[0]->gid;
-          $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
-          $variables['group'] = $group;
+        if ($gid = _az_content_get_node_group($node)) {
+          $group = \Drupal::entityManager()->getStorage('group')->load($gid);
+          $variables['content']['group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$gid);
+          $variables['content']['group_label'] = $group->label->value;
         }
 
         // Add has_new_content - New or Updated

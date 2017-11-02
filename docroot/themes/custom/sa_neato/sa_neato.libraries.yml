@@ -51,3 +51,7 @@ custom_event:
 menu:
   js:
     js/js-src/menu.js: {}     
+
+form:
+  js:
+    js/js-src/form.js: {}

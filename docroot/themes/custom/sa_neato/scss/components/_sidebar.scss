@@ -14,7 +14,7 @@
     background: $header-background;
     color: $header-color;
     border-radius: $base-border-radius $base-border-radius 0 0;
-    text-shadow: 1px 1px 1px #138;
+    @extend %text-shadow;
 
     h2 {
       font-size: 110%;
@@ -22,9 +22,12 @@
     } // h2
   } // .title-container
 
-  .views-element-container,
+  .view-group-members {
+    padding: 10px;
+  }
+
   .content-container {
-    padding: 10px 10px;
+    padding: 10px;
 
     ul {
       margin-left: 0;

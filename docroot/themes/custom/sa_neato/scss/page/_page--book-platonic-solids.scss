@@ -1,9 +1,5 @@
-body.book-platonic-solids {
-  table {
-    img {
-      width: 60px;
-      height: 60px;
-      border-radius: 5px;
-    }
+body.page-node-type-book {
+  .block-page-title-block {
+    display: none;
   }
 }

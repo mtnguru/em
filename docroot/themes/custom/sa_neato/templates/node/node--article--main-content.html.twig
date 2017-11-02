@@ -80,6 +80,12 @@
     <div class="header-container">
       <div class="header">
         <div class="block-right">
+          {% if content.group_label is not empty %}
+            <div class="group field--label-inline">
+              <div class="field__label">Community</div>
+              <div class="field__items"><a href="{{ content.group_url }}">{{ content.group_label }}</a></div>
+            </div>
+          {% endif %}
           {% if content.field_topics is not empty %}
             <div class="topics">
               {{ content.field_topics }}

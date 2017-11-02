@@ -15,7 +15,7 @@ h6 {
   font-size: $base-font-size;
   line-height: $heading-line-height;
   margin: 0 0 $small-spacing;
-  text-shadow: 1px 1px 3px #004;
+  @extend %text-shadow;
 }
 
 h1 {

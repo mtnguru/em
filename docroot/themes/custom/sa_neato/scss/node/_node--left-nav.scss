@@ -122,7 +122,7 @@ body.page-node-type-page {
         padding-bottom: rem(10);
         font-weight: bold;
         color: lighten($color-gold, 20%);
-        text-shadow: 1px 1px 4px darken($color-blue,30%);
+        @extend %text-shadow;
         @extend %layout-padding;
         @include outline($color-white);
         text-decoration: none;

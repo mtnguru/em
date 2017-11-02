@@ -1,7 +1,7 @@
 .block-region-sidebar {
   .views-element-container {
     .content-container {
-      padding: .5em;
+      padding: 7px 0;
     }
   }
 }
@@ -17,7 +17,7 @@
       padding: 10px;
     }
     @include media($bp960) {
-      padding: 10px 15px;
+      padding: 8px 15px;
     }
     overflow: hidden;
     position: relative;

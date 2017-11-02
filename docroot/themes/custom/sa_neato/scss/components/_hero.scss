@@ -30,7 +30,7 @@
       a {
         font-size: 40px;
         color: $color-green;
-        text-shadow: 1px 1px 1px #303;
+        @extend %text-shadow;
       } // a
     } // h1
   } // .title-wrapper

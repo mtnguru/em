@@ -1,5 +1,0 @@
-name: AZ Twig Extensions
-type: module
-description: Twig Utilities for the Atomizer
-core: 8.x
-package: AZ

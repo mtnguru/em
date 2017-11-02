@@ -4,15 +4,15 @@
 $color-black: #000000;
 $color-dark-grey: #333333 !default;
 $color-dim-grey: #666666;
-$color-medium-grey: #999999 !default;
+$color-medium-grey: #888888 !default;
 $color-light-grey: #DDDDDD !default;
 $color-white: #ffffff;
 
 /////////////// Color Scheme /////////////////////
 $color-dark-blue: #102e4a;
 $color-blue: #5887ff;
-$color-purple: #6020f0;
 $color-turquoise: #44d9e6;
+$color-purple: #4010d0;
 $color-purple-red: #a682ff;
 $color-green: #7fffb0;
 $color-dark-green: #0f5f20;
@@ -47,7 +47,7 @@ $base-link-color: $color-green !default;
 $base-header-bar-color: $color-light-turquoise;
 $base-date-color: $color-medium-grey;
 
-$base-separator-color: lighten($base-background-color, 15%);
+$base-separator-color: lighten($base-background-color, 25%);
 
 $page-title-color: #9cf;
 

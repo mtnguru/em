@@ -48,11 +48,26 @@ span.marker {
     }
 
     .block-right {
+      line-height: 1.2em;
       float: right;
+      width: 255px;
     }
 
+    .group,
     .topics {
       float: right;
+
+      .field__items {
+        width: 150px;
+        padding-right: 0;
+      }
+      .field__item {
+        padding: 0 0 .2em;
+      }
+    }
+
+    .group {
+      padding-bottom: 10px;
     }
 
     .field--name-field-social-media {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\az_twig\TwigExtension;
+namespace Drupal\az_theme\TwigExtension;
 use Twig_Extension;
 use Drupal\Core\Render\Element;
 use Drupal\Component\Utility\Html;
@@ -24,7 +24,7 @@ class AzTwig extends Twig_Extension {
    * Gets a unique identifier for this Twig extension.
    */
   public function getName() {
-    return 'az_twig.twig_extension';
+    return 'az_theme.twig_extension';
   }
 
   /**

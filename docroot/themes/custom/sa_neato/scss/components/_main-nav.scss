@@ -108,13 +108,13 @@
 
         font-style: italic;
         font-family: cursive;
-        text-shadow: 1px 1px 3px black;
         margin: 0;
         max-width: 20em;
         line-height: 1.1;
         word-wrap: break-word;
         padding: 15px 30px;
         color: $color-gold;
+        @extend %text-shadow;
       }
     }
     .content-container {
@@ -139,10 +139,11 @@
 
           .menu {
             position: absolute;
-            width: 150px;
+            width: 160px;
             top: 20px;
             right: -200px;
             background-color: $color-dark-green;
+            @extend %text-shadow;
             border-radius: 8px;
             padding: .4em .7em .7em;
             @include transition-3d;
@@ -246,7 +247,6 @@
     overflow: hidden;
     padding-right: $centered-navigation-submenu-padding;
     text-align: right;
-    text-shadow: 1px 1px 2px #138;
     width: 100%;
     z-index: 10;
 
@@ -255,6 +255,7 @@
       display: inline-block;
       outline: none;
       text-decoration: none;
+      @extend %text-shadow;
 
       &:focus,
       &:hover {
@@ -309,7 +310,7 @@
     }
 
     a {
-      margin-right: $centered-navigation-submenu-padding;
+//    margin-right: $centered-navigation-submenu-padding;
     }
 
     > a {
@@ -348,9 +349,11 @@
       }
     }
 
-    &:focus > .submenu,
-    &:hover > .submenu {
-      display: block;
+    &:focus,
+    &:hover {
+      > .submenu {
+        display: block;
+      }
     }
 
     @include media($horizontal-bar-mode) {
@@ -362,6 +365,9 @@
   ul.submenu {
     display: none;
     padding-left: 0;
+    background-color: $color-purple;
+    border-radius: 8px;
+    border: 1px solid $color-light-turquoise;
 
     @include media($horizontal-bar-mode) {
       left: -$centered-navigation-submenu-padding;
@@ -403,14 +409,14 @@
       }
 
       a {
-        background-color: darken($centered-navigation-background, 3%);
         display: inline-block;
         text-align: right;
         text-decoration: none;
         width: 100%;
+        color: $color-light-turquoise;
 
         @include media($horizontal-bar-mode) {
-          background-color: $centered-navigation-background;
+//        background-color: $centered-navigation-background;
           padding-left: $centered-navigation-submenu-padding;
           text-align: left;
           width: $centered-navigation-submenu-width;

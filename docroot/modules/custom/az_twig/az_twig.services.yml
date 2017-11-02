@@ -1,6 +1,0 @@
-services:
-  az_twig.twig_extension:
-    arguments: ['@renderer']
-    class: Drupal\az_twig\TwigExtension\AzTwig
-    tags:
-      - { name: twig.extension }
