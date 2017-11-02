@@ -19,6 +19,10 @@ function az_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
  * Implements hook_form_FORM_ID_alter().   user_form
  */
 function az_user_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (!\Drupal::currentUser()->hasPermission('administer account settings')) {
+    $form['field_address']['#access'] = false;
+    $form['field_phone']['#access'] = false;
+  }
   return;
 }
 
