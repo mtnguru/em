@@ -2,6 +2,7 @@
 
 namespace Drupal\az_book\Plugin\Block;
 
+use Drupal\az_groups\azGroupQuery;
 use Drupal\book\Plugin\Block\BookNavigationBlock;
 use Drupal\Core\Database\Connection;
 
@@ -34,12 +35,15 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       if (!empty($child->moderation_state)) {
         if ($child->moderation_state == 'placeholder') {
           $classes[] = 'menu-item--placeholder';
+          $classes[] = 'menu-item--unpublished';
         }
         if ($child->moderation_state == 'draft') {
           $classes[] = 'menu-item--draft';
+          $classes[] = 'menu-item--unpublished';
         }
         if ($child->moderation_state == 'needs_review') {
           $classes[] = 'menu-item--needs-review';
+          $classes[] = 'menu-item--unpublished';
         }
       }
       if (empty($child->children)) {
@@ -69,11 +73,15 @@ class AzBookNavigationBlock extends BookNavigationBlock {
    * {@inheritdoc}
    */
   public function build() {
+    // If this is a node page then find which book it is associated with.
     if ($node = $this->requestStack->getCurrentRequest()->get('node')) {
       $bid = $node->book['bid'];
+      if ($gid = azGroupQuery::inGroup($node)) {
+        $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
+      }
     }
+    // If this is a group page then get bid from field_directory
     if ($group = $this->requestStack->getCurrentRequest()->get('group')) {
-      // Take the group title? machine name? Find a book by the same name - what is a book?
       if ($value = $group->field_directory->getValue()) {
         $bid = $value[0]['target_id'];
       }
@@ -99,7 +107,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       $query->addField('nfd', 'title');
       $results = $query->execute()->fetchAllAssoc('nid');
 
-      if (count($results) == 0) return [];
+      if (count($results) <= 1) return [];
 
       // If this is a book page, set the active trail
       if ($node) {
@@ -126,11 +134,18 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         }
       }
 
+      if ($group) {
+        $style = \Drupal::entityTypeManager()->getStorage('image_style')->load('thumbnail');
+        $image_url = $style->buildUrl($group->field_logo_image->entity->getFileUri());
+      }
+      $pages = $this->buildMenuRecursive($results, $bid, 1);
       return [
         '#theme' => 'az_book_navigation',
         '#title' => $results[$bid]->title,
+//      '#image' => $image_url,
         '#attributes' => ['class' => ['item-top']],
         '#book_pages' => $this->buildMenuRecursive($results, $bid, 1),
+        '#hide_unpublished' => (\Drupal::currentUser()->hasPermission('show unpublished book pages')),
       ];
     }
 

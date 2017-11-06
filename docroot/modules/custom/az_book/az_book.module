@@ -10,13 +10,21 @@ function az_book_theme() {
       'variables' => [
         'book_pages' => [],
         'title' => NULL,
+        'hide_unpublished' => false,
       ],
     ],
   ];
 }
 
+function az_book_preprocess_node(&$variables) {
+  $node = $variables['node'];
 
-function template_preprocess_az_book_navigation(&$variables) {
-  // Remove all non-renderable elements.
-  return;
+  switch ($node->getType()) {
+     case 'article':
+     case 'book':
+       $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
+       $variables['block_booknavigation'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+       break;
+  }
 }
+

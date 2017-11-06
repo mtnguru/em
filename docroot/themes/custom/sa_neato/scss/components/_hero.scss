@@ -27,11 +27,9 @@
 
     h1 {
       margin: 0;
-      a {
-        font-size: 40px;
-        color: $color-green;
-        @extend %text-shadow;
-      } // a
+      font-size: 40px;
+      color: $color-green;
+      @extend %text-shadow;
     } // h1
   } // .title-wrapper
 

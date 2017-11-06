@@ -78,7 +78,10 @@ class WysiwygFilter extends FilterBase {
 
   private function processText($text, &$topics, &$footnotes) {
     $view_mode = &drupal_static('az_view_mode');
-    $deleteMarkup = (!isset($view_mode) || $view_mode != 'main_content') ? true : false;
+    $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;
+
+    // Remove &nbsp; characters that do not have a space before or after them.
+    $text = preg_replace('/([^ ])\&nbsp;([^ ])/', '$1 $2', $text);
 
     $reg = '&lt;([a-z]+) *(.*?)&gt;(.*?)&lt;\/([a-z]+?)&gt;';
     $pagebreakReg = '&lt;(pb)&gt;';
@@ -111,10 +114,19 @@ class WysiwygFilter extends FilterBase {
                 $name = strtolower($attributes[1]);
               }
             }
-            if (empty($topics[$name]) || $deleteMarkup ) {
+
+            $topic = null;
+            if ($deleteMarkup ) {
               $ntext .= $matches[4][$key][0];
-            } else {
+            }
+            else {
               $topic = $topics[$name];
+              if (!$topic) {
+                $topic = $topics[substr($name, 0, -1)];
+              }
+            }
+
+            if ($topic) {
               $tip = $this->sanitizeTip($topic->tooltip);
               $ntext .= '<a href="' . $topic->url . '" ' .
                 'class="taxonomy-tooltip-link" ' .

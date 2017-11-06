@@ -30,16 +30,22 @@ form {
     background-color: lighten($base-background-color, 10%);
   }
 
-  fieldset.fieldgroup {
-    background-color: $secondary-background-color;
+  fieldset {
     border: $base-border;
     margin: 0 0 $small-spacing;
     padding: .5em 1em;
 
-    legend {
+    &.fieldgroup {
       background-color: $secondary-background-color;
-      padding: .5em;
-      border: 1px solid $color-green;
+      border: $base-border;
+      margin: 0 0 $small-spacing;
+      padding: .5em 1em;
+
+      legend {
+        background-color: $secondary-background-color;
+        padding: .5em;
+        border: 1px solid $color-green;
+      }
     }
   }
 

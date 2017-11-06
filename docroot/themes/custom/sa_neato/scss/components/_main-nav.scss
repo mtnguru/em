@@ -245,7 +245,7 @@
     display: block;
     line-height: $centered-navigation-height;
     overflow: hidden;
-    padding-right: $centered-navigation-submenu-padding;
+    padding: 0 $centered-navigation-submenu-padding 0 0;
     text-align: right;
     width: 100%;
     z-index: 10;
@@ -391,7 +391,7 @@
 
     li {
       display: block;
-      padding-right: 0;
+      padding: 0;
 
       @include media($horizontal-bar-mode) {
         line-height: $centered-navigation-height / 1.3;

@@ -12,7 +12,7 @@ $color-white: #ffffff;
 $color-dark-blue: #102e4a;
 $color-blue: #5887ff;
 $color-turquoise: #44d9e6;
-$color-purple: #4010d0;
+$color-purple: #53c;
 $color-purple-red: #a682ff;
 $color-green: #7fffb0;
 $color-dark-green: #0f5f20;
@@ -39,7 +39,7 @@ $base-font-color: $color-off-white !default;
 $secondary-background-color: lighten($base-background-color, 15%);
 
 $base-border-color: $color-green !default;
-$base-border: 1px solid $base-border-color;
+$base-border: 2px solid $base-border-color;
 
 $base-accent-color: $color-dark-green !default;
 $base-link-color: $color-green !default;

@@ -79,12 +79,20 @@ class WysiwygBase {
   }
 
   static public function extractTopics($text, &$topics) {
-    $topicReg = '/\&lt;topic(.*?)\&gt;(.*?)\&lt;\/topic\&gt;/';
+    $topicReg = '/&lt;topic(.*?)&gt;(.*?)&lt;\/topic&gt;/';
+//  $topicReg = '/&lt;([a-z]+) *(.*?)&gt;(.*?)&lt;\/([a-z]+?)&gt;/';
+    // Remove &nbsp; characters that do not have a space before or after them.
+    $text = preg_replace('/([^ ])\&nbsp;([^ ])/', '$1 $2', $text);
 
     $hitcount = preg_match_all($topicReg, $text, $matches, PREG_OFFSET_CAPTURE);
 
     foreach ($matches[0] as $key => $match) {
       $name = strtolower($matches[2][$key][0]);
+      if (!empty($matches[1][$key][0])) {
+        if (preg_match('/name=\"*([a-z ]+)\"*/', $matches[1][$key][0], $attributes)) {
+          $name = strtolower($attributes[1]);
+        }
+      }
       if (!empty($topics[$name])) {
         $topics[$name]->in_text = true;
       }

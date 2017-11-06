@@ -6,12 +6,30 @@
   div.content-container {
     padding: 0 20px;
     #book-pages {
-      margin-left: -.7em;
+      margin-left: -1em;
+
+      &.hide-unpublished {
+        .menu-item--unpublished {
+          display: none;
+        }
+      }
 
       ul {
         padding: 0 0 0 .8em;
-        @include transition-3d;
       }
+    }
+  }
+
+  #book-show-all {
+    padding: 7px;
+    position: absolute;
+    top: 35px;
+    right: 0;
+    opacity: .25;
+    @include transition-3d;
+
+    &:hover {
+      opacity: 1;
     }
   }
 
@@ -19,8 +37,7 @@
     list-style-image: none;
     list-style-type: none;
     position: relative;
-    padding: .25em 0;
-    @include transition-3d;
+//  padding: .25em 0 .25em .25em;
 
     &::before {
       content: '';
@@ -29,11 +46,12 @@
       display: block;
       position: absolute;
       top: .25em;
-      left: -1.2em;
+      left: -.75em;
     }
 
     a {
       color: $color-green;
+      padding: .25em 0 .25em .25em;
     }
   }
 
@@ -44,50 +62,63 @@
       background-position: center;
     }
 
-    > ul {
-      display: none;
+    > .list-wrapper {
+      max-height: 0;
+      @include transition-3d($duration: 1500ms);
+      overflow-y: hidden;
     }
   }
 
-  li.menu-item--expanded {
-    &::before {
-      @include transform(rotate(90deg));
-      background-image: url($images-path + 'right-arrow.svg');
-      display: block;
+  li {
+    &.menu-item--children:hover {
+      > .list-wrapper {
+//      height: inherit;
+      }
     }
 
-    > ul {
-      display: block;
+    &.menu-item--expanded {
+      &::before {
+        @include transform(rotate(90deg));
+        background-image: url($images-path + 'right-arrow.svg');
+        display: block;
+      }
+
+      > .list-wrapper {
+        max-height: 400px;
+        > ul {
+          display: block;
+        }
+      }
     }
-  }
 
-  &.menu-item--placeholder {
-    > a {
-      color: $color-medium-grey;
+    &.menu-item--placeholder {
+      > a {
+        color: $color-medium-grey;
+      }
     }
-  }
 
-  &.menu-item--needs-review {
-    > a {
-      color: #cc66ff;
+    &.menu-item--needs-review {
+      > a {
+        color: #ec76ff;
+      }
     }
-  }
 
-  &.menu-item--draft {
-    > a {
-      color: #55aaff;      }
-  }
-
-  &.menu-item--active {
-    > a {
-      color: $color-white;
+    &.menu-item--draft {
+      > a {
+        color: #55aaff;
+      }
     }
 
     &.menu-item--active {
       > a {
         color: $color-white;
       }
-    }
 
+      &.menu-item--active {
+        > a {
+          color: $color-white;
+        }
+      }
+    }
   }
 }

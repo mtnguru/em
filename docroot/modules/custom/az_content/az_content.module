@@ -5,9 +5,9 @@
  * Contains az_content.module.
  */
 
+use Drupal\az_groups\azGroupQuery;
 use Drupal\comment\Entity\Comment;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Form\FormStateInterface;
@@ -228,21 +228,6 @@ function az_content_preprocess_page(&$variables) {
 }
 
 /**
- * Given a node, look to see if it is content in a group and return tne gid.
- *
- * @param $node
- * @return null
- */
-function _az_content_get_node_group($node) {
-  $query = \Drupal::database()->select('group_content_field_data', 'gcfd');
-  $query->fields('gcfd', ['gid', 'entity_id', 'type']);
-  $query->condition('gcfd.entity_id', $node->id());
-  $query->condition('gcfd.type', 'theories-group_node-' . $node->getType());
-  $results = $query->execute()->fetchAll();
-  return (count($results)) ? $results[0]->gid : null;
-}
-
-/**
  * Implements HOOK_preprocess_node().
  *
  * @param $variables
@@ -255,6 +240,7 @@ function az_content_preprocess_node(&$variables) {
 
   switch ($node->getType()) {
     case 'article':
+    case 'book':
     case 'page':
 
       // Add the views map showing locations of images
@@ -270,14 +256,17 @@ function az_content_preprocess_node(&$variables) {
       }
 
       // Add the New/Updated marker.
-      if ($view_mode == 'main_content' || $view_mode == 'teaser') {
+      if ($view_mode == 'main_content' || $view_mode == 'full' || $view_mode == 'teaser') {
         // Query to see if this content is in a group
         // if so load group and add to output.
-        if ($gid = _az_content_get_node_group($node)) {
+        if ($gid = azGroupQuery::inGroup($node)) {
           $group = \Drupal::entityManager()->getStorage('group')->load($gid);
           $variables['content']['group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$gid);
           $variables['content']['group_label'] = $group->label->value;
         }
+
+        $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+        $variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 
         // Add has_new_content - New or Updated
         switch (node_mark($node->id(), $node->getChangedTime())) {
@@ -294,6 +283,7 @@ function az_content_preprocess_node(&$variables) {
           'label' => ['#markup' => $mark],
         ];
       }
+
       break;
   }
 }

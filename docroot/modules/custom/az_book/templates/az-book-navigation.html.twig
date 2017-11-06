@@ -25,11 +25,13 @@
     <li class="{{ page.class }}">{{ page.link }}
 
       {% if page.children|length %}
-        <ul>
-          {% for child in page.children %}
-            {{ self.buildMenu(child) }}
-          {% endfor %}
-        </ul>
+        <div class="list-wrapper">
+          <ul>
+            {% for child in page.children %}
+              {{ self.buildMenu(child) }}
+            {% endfor %}
+          </ul>
+        </div>
       {% endif %}
     </li>
   {% endmacro %}
@@ -37,7 +39,10 @@
   {% from _self import buildMenu %}
 
   {% if book_pages %}
-    <div id="book-pages">
+    <div id="book-pages" class="hide-unpublished">
+      {% if hide_unpublished %}
+        <div title="Show unpublished pages" id="book-show-all" class="fa fa-bolt"></div>
+      {% endif %}
       <ul>
         {% for page in book_pages %}
           {{ buildMenu(page) }}

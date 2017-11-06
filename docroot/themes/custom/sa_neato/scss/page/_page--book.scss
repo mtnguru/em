@@ -1,11 +1,35 @@
 // body.user-login
-body.user-login {
-
-  main.outer-wrapper {
-    width: 400px;
-    margin: 0 auto;
+body.page-node-type-book {
+  .block-page-title-block {
+    display: none;
   }
-} // body.page-node-type-article
 
+  .sidebar-left {
+    float: left;
 
+    @include media(max-width $bp580) {
+      width: 100%;
+    }
+    @include media($bp960) {
+      width: 30%;
+      max-width: 350px;
+      padding-right: 40px;
+    }
+  }
+
+  .main-center {
+    float: left;
+
+    @include media(max-width $bp580) {
+      width: 100%;
+    }
+    @include media($bp960) {
+      width: 70%;
+    }
+  }
+
+  .field--name-body {
+    margin-bottom: 20px;
+  }
+}
 

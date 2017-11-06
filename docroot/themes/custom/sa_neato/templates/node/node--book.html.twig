@@ -75,43 +75,42 @@
 */
 #}
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
-  {% endif %}
-  {{ title_suffix }}
-
   {% if display_submitted %}
-  <div class="posted">
-    {% if user_picture %}
-      {{ user_picture }}
-    {% endif %}
-    {{ submitted }}
+    <div class="posted">
+      {% if user_picture %}
+        {{ user_picture }}
+      {% endif %}
+      {{ submitted }}
+    </div>
+  {% endif %}
+
+  <div class='sidebar-left'>
+    {{ block_booknavigation }}
+    {{ block_donate }}
+    {{ block_groupoperations }}
   </div>
-  {% endif %}
+  <div class="main-center">
+    {{ title_prefix }}
+    {{ label }}
+    {{ title_suffix }}
 
-  {{ content.field_image }}
-  {{ content.body }}
-  {{ content.book_navigation }}
+    {% if content.field_topics is not empty %}
+      <div class="topics">
+        {{ content.field_topics }}
+      </div>
+    {% endif %}
 
-  {% if content.field_tags|length and not is_front %}
-    {{ content.field_tags }}
-  {% endif %}
+    {{ content.field_image }}
+    {{ content.body }}
+    {{ content.book_navigation }}
 
-  {{ content.field_comments }}
+    {% if content.field_tags|length and not is_front %}
+      {{ content.field_tags }}
+    {% endif %}
 
-  {{ content.links }}
-  {{ content.comment }}
+    {{ content.field_comments }}
 
-
-
-  {#
-  {{ content|without('comment', 'links') }}
-
-  {% if content.field_tags|length and not is_front %}
-    {{ content.field_tags }}
-  {% endif %}
-
-  {{ content.links }}
-  {{ content.comment }} #}
+    {{ content.links }}
+  </div>
 </article>
+

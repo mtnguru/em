@@ -179,13 +179,18 @@ function az_wysiwyg_is_az_wysiwyg_later($format, $caller_filter) {
  * @param \Drupal\Core\Entity\EntityInterface $node
  */
 function az_wysiwyg_node_presave(EntityInterface $node) {
-  if ($node->getType() == 'article') {
+  $type = $node->getType();
+  if ($type == 'article' || $type == 'book') {
     $topics = WysiwygBase::loadTopics();
     $type = $node->getType();
 
     // If this is an article then process field_body.
     if ($type == 'article') {
       WysiwygBase::extractTopics($node->field_body->value, $topics);
+    }
+
+    if ($type == 'book') {
+      WysiwygBase::extractTopics($node->body->value, $topics);
     }
 
     // If this is a page then it has sections with subsections - process separately
