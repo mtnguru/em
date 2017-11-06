@@ -1,9 +1,10 @@
 
 .block-az-book {
   line-height: 1.2;
-  font-size: 90%;
+  margin-bottom: 30px;
 
   div.content-container {
+    font-size: 90%;
     padding: 0 20px;
     #book-pages {
       margin-left: -1em;
@@ -14,10 +15,22 @@
         }
       }
 
-      ul {
+      > ul {
+        padding: 0;
+      }
+
+      ul ul {
         padding: 0 0 0 .8em;
       }
     }
+
+    #group-links {
+      margin-left: -22px;
+    }
+  }
+
+  h1 {
+    font-size: 36px;
   }
 
   #book-show-all {
@@ -37,7 +50,7 @@
     list-style-image: none;
     list-style-type: none;
     position: relative;
-//  padding: .25em 0 .25em .25em;
+    padding: 0;
 
     &::before {
       content: '';
@@ -50,8 +63,9 @@
     }
 
     a {
+      display: block;
       color: $color-green;
-      padding: .25em 0 .25em .25em;
+      padding: .20em 0 .20em .25em;
     }
   }
 

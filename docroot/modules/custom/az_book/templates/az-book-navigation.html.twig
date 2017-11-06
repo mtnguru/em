@@ -38,6 +38,10 @@
 
   {% from _self import buildMenu %}
 
+  <div id="group-links">
+    <div><a href="{{ group_url }}">Recent Content</a></div>
+  </div>
+
   {% if book_pages %}
     <div id="book-pages" class="hide-unpublished">
       {% if hide_unpublished %}

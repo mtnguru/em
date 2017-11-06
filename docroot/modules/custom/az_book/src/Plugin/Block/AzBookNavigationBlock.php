@@ -134,15 +134,17 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         }
       }
 
+      $group_url = null;
       if ($group) {
         $style = \Drupal::entityTypeManager()->getStorage('image_style')->load('thumbnail');
-        $image_url = $style->buildUrl($group->field_logo_image->entity->getFileUri());
+//      $image_url = $style->buildUrl($group->field_logo_image->entity->getFileUri());
+        $group_url = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$group->id());
       }
-      $pages = $this->buildMenuRecursive($results, $bid, 1);
       return [
         '#theme' => 'az_book_navigation',
         '#title' => $results[$bid]->title,
 //      '#image' => $image_url,
+        '#group_url' => $group_url,
         '#attributes' => ['class' => ['item-top']],
         '#book_pages' => $this->buildMenuRecursive($results, $bid, 1),
         '#hide_unpublished' => (\Drupal::currentUser()->hasPermission('show unpublished book pages')),

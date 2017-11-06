@@ -11,6 +11,7 @@ function az_book_theme() {
         'book_pages' => [],
         'title' => NULL,
         'hide_unpublished' => false,
+        'group_url' => '',
       ],
     ],
   ];

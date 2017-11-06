@@ -2,37 +2,37 @@
 .sidebar-left,
 .sidebar {
 
-  .block {
+  .block-sidebar {
     border: 2px solid $header-background;
     border-radius: $base-border-radius;
     margin-bottom: 30px;
+
+    .title-container {
+      margin: -1px -1px 0;
+      padding: 10px 15px;
+      background: $header-background;
+      color: $header-color;
+      border-radius: $base-border-radius $base-border-radius 0 0;
+      @extend %text-shadow;
+
+      h2 {
+        font-size: 110%;
+        margin: 0;
+      } // h2
+    } // .title-container
+
+    .view-group-members {
+      padding: 10px;
+    }
+
+    .content-container {
+      padding: 15px;
+
+      ul {
+        margin-left: 0;
+      } // ul
+    } // .content-container
   } // .block
-
-  .title-container {
-    margin: -1px -1px 0;
-    padding: 10px 15px;
-    background: $header-background;
-    color: $header-color;
-    border-radius: $base-border-radius $base-border-radius 0 0;
-    @extend %text-shadow;
-
-    h2 {
-      font-size: 110%;
-      margin: 0;
-    } // h2
-  } // .title-container
-
-  .view-group-members {
-    padding: 10px;
-  }
-
-  .content-container {
-    padding: 15px;
-
-    ul {
-      margin-left: 0;
-    } // ul
-  } // .content-container
 
   .block-ctools {
     .contextual-region h2 {
