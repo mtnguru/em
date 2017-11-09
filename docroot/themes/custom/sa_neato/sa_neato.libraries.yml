@@ -3,6 +3,7 @@ global-styling:
   css:
     base:
       css/sa_neato.css: {}
+
 global-scripts:
   version: VERSION
   js:
@@ -12,6 +13,7 @@ global-scripts:
     - core/drupal
     - core/jquery
     - core/jquery.once
+    - core/jquery.tooltip
 
 left-nav:
   js:
