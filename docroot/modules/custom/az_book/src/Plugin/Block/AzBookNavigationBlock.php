@@ -133,6 +133,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         }
       }
 
+      $roles = \Drupal::currentUser()->getRoles();
       $build = [
         '#theme' => 'az_book_navigation',
         '#book_title' => $results[$bid]->title,
@@ -140,6 +141,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         '#attributes' => ['class' => ['item-top']],
         '#book_pages' => $this->buildMenuRecursive($results, $bid, 1),
         '#hide_unpublished' => (\Drupal::currentUser()->hasPermission('show unpublished book pages')),
+        '#show_atomizer' => (in_array('ninja', \Drupal::currentUser()->getRoles())),
       ];
 
       if (!empty($group)) {
