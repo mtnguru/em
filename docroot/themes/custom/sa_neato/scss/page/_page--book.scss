@@ -1,7 +1,9 @@
 // body.user-login
 body.page-node-type-book {
-  .block-page-title-block {
-    display: none;
+  #page-view {
+    .block-page-title-block {
+      display: none;
+    }
   }
 
   .sidebar-left {
@@ -28,8 +30,15 @@ body.page-node-type-book {
     }
   }
 
-  .field--name-body {
-    margin-bottom: 20px;
+  article.type-book {
+    .field--name-title {
+      display: block;
+      font-weight: bold;
+      @extend h1;
+    }
+    .field--name-body {
+      margin-bottom: 20px;
+    }
   }
 }
 

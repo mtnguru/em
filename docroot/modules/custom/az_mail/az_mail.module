@@ -10,9 +10,43 @@ use Drupal\az_user\CreateUserList;
 use Drupal\comment\Entity\Comment;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+function _az_mail_e_mail_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Remove site roles from list of roles - Leave group roles.
+  foreach ($form['field_group_role']['widget']['#options'] as $key => $option) {
+    if ($key == 'theories-administrator' ||
+      $key == 'theories-anonymous' ||
+      preg_match('/\\d/', $key) > 0 ) {   // look for keys with digits - they are site roles
+      unset($form['field_group_role']['widget']['#options'][$key]);
+    }
+  }
+
+  // Set send email on save to false.
+  $form['field_send_e_mail']['widget']['value']['#default_value'] = false;
+/*$form['send_email'] = [
+    '#type' => 'checkbox',
+    '#title' => 'Send email on save',
+    '#default_value' => false,
+    '#weight' => 10,
+  ]; */
+
+  $form['actions']['submit']['#submit'][] = '_az_mail_node_submit';
+}
+
+function az_mail_form_node_e_mail_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  _az_mail_e_mail_form_alter($form, $form_state, $form_id);
+}
+
+function az_mail_form_node_e_mail_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  _az_mail_e_mail_form_alter($form, $form_state, $form_id);
+}
+
+function _az_mail_node_submit(&$form, FormStateInterface $form_state) {
+  return;
+}
 /**
  * Implements HOOK_mail().
  */
@@ -120,28 +154,42 @@ function az_mail_node_presave(Node $node) {
   $params['message'] = $node->get('body')->value;
   $params['subject'] = $node->title->value;
 
+  $mailit = $node->field_send_e_mail->value;
+  $mailit = false;
+  if ($mailit) {
+    $fullmessage = "Sending mail to the following:\n";
+  } else {
+    $fullmessage = "No mail will be sent - mailing list:\n";
+  }
+  drupal_set_message($fullmessage);
+  $n = 0;
   foreach ($recipients as $recipient) {
-    $result = $mailManager->mail(
-      'az_mail',
-      'email_presave',
-      $recipient->mail,
-      \Drupal::currentUser()->getPreferredLangcode(),
-      $params,
-      NULL,
-      true);
+    $n++;
+    $message = '';
+    if ($mailit) {
+      $result = $mailManager->mail(
+        'az_mail',
+        'email_presave',
+        $recipient->mail,
+        \Drupal::currentUser()->getPreferredLangcode(),
+        $params,
+        NULL,
+        true);
+      if ($result['result'] !== true) {
+        $message = 'Failed - ';
+      } else {
+        $message = 'Success - ';
+      }
+    }
+    $message .= t('@n @name - @email - @id', ['@n' => $n, '@name' => $recipient->name, '@email' => $recipient->mail, '@id' => $recipient->uid]) . "\n";
+    drupal_set_message($message);
+    $fullmessage .= $message;
+
 
     // Send to current user.
-    if ($result['result'] !== true) {
-      $message = t('There was a problem sending your email notification to @email for creating node @id.', array('@email' => $recipient->mail, '@id' => $node->id()));
-      drupal_set_message($message, 'error');
-      \Drupal::logger('az_mail')->error($message);
-      continue;
-    }
-
-    $message = t('An email has been sent to @email - email node id @id.', array('@email' => $recipient->mail, '@id' => $node->id()));
-    drupal_set_message($message);
-    \Drupal::logger('az_mail')->notice($message);
   }
+
+  \Drupal::logger('az_mail')->notice($fullmessage);
   return;
 }
 

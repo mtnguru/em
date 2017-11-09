@@ -80,8 +80,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
       }
     }
-    // If this is a group page then get bid from field_directory
-    if ($group = $this->requestStack->getCurrentRequest()->get('group')) {
+    else if ($group = $this->requestStack->getCurrentRequest()->get('group')) {
       if ($value = $group->field_directory->getValue()) {
         $bid = $value[0]['target_id'];
       }
@@ -134,21 +133,21 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         }
       }
 
-      $group_url = null;
-      if ($group) {
-        $style = \Drupal::entityTypeManager()->getStorage('image_style')->load('thumbnail');
-//      $image_url = $style->buildUrl($group->field_logo_image->entity->getFileUri());
-        $group_url = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$group->id());
-      }
-      return [
+      $build = [
         '#theme' => 'az_book_navigation',
-        '#title' => $results[$bid]->title,
-//      '#image' => $image_url,
-        '#group_url' => $group_url,
+        '#book_title' => $results[$bid]->title,
+        '#book_url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$bid),
         '#attributes' => ['class' => ['item-top']],
         '#book_pages' => $this->buildMenuRecursive($results, $bid, 1),
         '#hide_unpublished' => (\Drupal::currentUser()->hasPermission('show unpublished book pages')),
       ];
+
+      if (!empty($group)) {
+        $build['#group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$group->id());
+        $build['#group_name'] = $group->label->value;
+        $build['#group_url'] = $group->id();
+      }
+      return $build;
     }
 
     return [];

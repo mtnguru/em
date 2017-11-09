@@ -108,6 +108,7 @@ class WysiwygFilter extends FilterBase {
       else {
         switch ($matches[2][$key][0]) {
           case 'topic':
+          case 'glossary':
             $name = strtolower($matches[4][$key][0]);
             if (!empty($matches[3][$key][0])) {
               if (preg_match('/name=\"*([a-z ]+)\"*/', $matches[3][$key][0], $attributes)) {
@@ -120,9 +121,13 @@ class WysiwygFilter extends FilterBase {
               $ntext .= $matches[4][$key][0];
             }
             else {
-              $topic = $topics[$name];
-              if (!$topic) {
-                $topic = $topics[substr($name, 0, -1)];
+              if (!empty($topics[$name])) {
+                $topic = $topics[$name];
+              }
+              else {
+                if (!empty($topics[substr($name, 0, -1)])) {
+                  $topic = $topics[substr($name, 0, -1)];
+                }
               }
             }
 
@@ -136,6 +141,7 @@ class WysiwygFilter extends FilterBase {
             }
 
             break;
+
           case 'footnote':
             if (!$deleteMarkup) {
               // Create a sanitized version of $text that is suitable for using as HTML

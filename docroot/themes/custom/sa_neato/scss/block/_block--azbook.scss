@@ -5,9 +5,20 @@
 
   div.content-container {
     font-size: 90%;
-    padding: 0 20px;
+
+    #group-links {
+      margin-bottom: 15px;
+
+      > div {
+        margin-bottom: 5px;
+      }
+    }
+
+    #book-title {
+    }
+
     #book-pages {
-      margin-left: -1em;
+      margin-left: 12px;
 
       &.hide-unpublished {
         .menu-item--unpublished {
@@ -16,6 +27,7 @@
       }
 
       > ul {
+        margin-top: 3px;
         padding: 0;
       }
 
@@ -23,14 +35,21 @@
         padding: 0 0 0 .8em;
       }
     }
-
-    #group-links {
-      margin-left: -22px;
+    hr {
+      margin: 0 0 12px;
     }
+
   }
 
   h1 {
     font-size: 36px;
+    margin-bottom: 10px;
+    a {
+      color: $color-gold;
+      &:hover {
+        color: lighten($color-gold, 15%);
+      }
+    }
   }
 
   #book-show-all {
@@ -51,6 +70,7 @@
     list-style-type: none;
     position: relative;
     padding: 0;
+    @include transition-3d;
 
     &::before {
       content: '';

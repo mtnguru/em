@@ -1,21 +1,64 @@
 <?php
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * @file
  * Contains az_groups.module.
  */
 
-function az_groups_preprocess_page(&$variables) {
+function az_groups_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   return;
 }
 
-function az_groups_preprocess_menu_tree(&$variables) {
+function az_groups_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  /**
+   * Attempting to add groups and roles to the node form - on hold for now
+  // Query for all groups.
+  $query = \Drupal::database()->select('groups_field_data', 'gfd');
+  $query->addField('gfd', 'id');
+  $query->addField('gfd', 'label');
+  $query->orderBy('gfd.label', 'ASC');
+  $results = $query->execute()->fetchAllAssoc('id');
+
+  // Set up groups array
+  $groups = ['0' => 'None'];
+  foreach($results as $result) {
+    $groups[$result->id] = $result->label;
+  }
+
+  // Query for roles current user has in this? group.  WTF.  This ain't no fun.
+
+  $form['group'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Community'),
+    'group_id' => [
+      '#type' => 'select',
+      '#title' => 'Community',
+      '#default_value' => '0',
+      '#options' => $groups,
+    ],
+    'group_role' => [
+      '#type' => 'select',
+      '#title' => 'Community Role',
+      '#description' => 'Select the role that can view this post',
+      '#options' => $options,
+    ],
+  ];
+
+  $form['actions']['submit']['#submit'][] = '_az_groups_node_form_submit';
+  **/
   return;
 }
 
-function az_groups_preprocess_block(&$variables) {
+function _az_groups_node_form_submit($form, FormStateInterface $form_state) {
+  $group = $form_state->getValue('group');
+  return;
+}
+
+function az_groups_preprocess_node(&$variables) {
   return;
 }
 

@@ -38,11 +38,22 @@
 
   {% from _self import buildMenu %}
 
+  <div class="title-container">
+    {{ title_prefix }}
+    {% if group_name %}
+      <h1 {{ title_attributes }}><a href="{{ group_url }}">{{ group_name }}</a></h1>
+    {% endif %}
+    {{ title_suffix }}
+  </div>
+
   <div id="group-links">
-    <div><a href="{{ group_url }}">Recent Content</a></div>
+    <div><a href="{{ group_url }}">{{ 'View Recent Content'|t }}</a></div>
+    <div><a href="{{ '/node/add/ticket?group=' ~ group_id }}">{{ 'Submit a Ticket'|t }}</a></div>
   </div>
 
   {% if book_pages %}
+    <hr>
+    <div id="book-title"><a href="{{ book_url }}">{{ book_title }}</a></div>
     <div id="book-pages" class="hide-unpublished">
       {% if hide_unpublished %}
         <div title="Show unpublished pages" id="book-show-all" class="fa fa-bolt"></div>

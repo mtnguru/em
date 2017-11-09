@@ -1,0 +1,11 @@
+form#node-ticket-form {
+  .field--name-field-status,
+  .field--name-field-priority,
+  .field--name-field-type {
+    display: inline-block;
+    width: 30%;
+    margin-right: 3%;
+    vertical-align: top;
+  }
+}
+

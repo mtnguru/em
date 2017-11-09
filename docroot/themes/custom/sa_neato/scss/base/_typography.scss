@@ -22,6 +22,7 @@ h1 {
   color: $color-gold;
   font-size: 250%;
   margin: 0 0 .5em;
+  line-height: 1;
 }
 
 h2 {
@@ -64,7 +65,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 4px solid $base-separator-color;
+  border-top: 2px solid $base-separator-color;
   margin: 1em 0;
   padding: 0;
 }

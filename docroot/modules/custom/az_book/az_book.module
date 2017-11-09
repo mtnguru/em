@@ -8,10 +8,13 @@ function az_book_theme() {
   return [
     'az_book_navigation' => [
       'variables' => [
+        'book_title' => '',
+        'book_url' => '',
         'book_pages' => [],
-        'title' => NULL,
-        'hide_unpublished' => false,
+        'group_id' => '',
+        'group_name' => '',
         'group_url' => '',
+        'hide_unpublished' => false,
       ],
     ],
   ];

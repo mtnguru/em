@@ -3,9 +3,9 @@ $message-border-radius: $base-border-radius;
 
 @mixin flash($color) {
   background-color: $color;
-  color: darken($color, 60%);
+  color: darken($color, 70%);
   display: block;
-  margin-bottom: $base-spacing / 2;
+  margin: 10px 30px;
   padding: $base-spacing / 2 $base-spacing / 2 $base-spacing / 2 50px;
   border-radius: $message-border-radius;
 
