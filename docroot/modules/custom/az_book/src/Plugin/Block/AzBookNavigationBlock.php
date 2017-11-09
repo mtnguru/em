@@ -134,10 +134,12 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       }
 
       $roles = \Drupal::currentUser()->getRoles();
+      $in = (in_array('ninja', \Drupal::currentUser()->getRoles()));
       $build = [
         '#theme' => 'az_book_navigation',
         '#book_title' => $results[$bid]->title,
         '#book_url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$bid),
+        '#book_id' => $bid,
         '#attributes' => ['class' => ['item-top']],
         '#book_pages' => $this->buildMenuRecursive($results, $bid, 1),
         '#hide_unpublished' => (\Drupal::currentUser()->hasPermission('show unpublished book pages')),
@@ -145,9 +147,9 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       ];
 
       if (!empty($group)) {
-        $build['#group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$group->id());
+        $build['#group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/' . $group->id());
         $build['#group_name'] = $group->label->value;
-        $build['#group_url'] = $group->id();
+        $build['#group_id'] = $group->id();
       }
       return $build;
     }

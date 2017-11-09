@@ -11,6 +11,7 @@ function az_book_theme() {
         'book_title' => '',
         'book_url' => '',
         'book_pages' => [],
+        'book_id' => '',
         'group_id' => '',
         'group_name' => '',
         'group_url' => '',

@@ -4,7 +4,6 @@
   margin-bottom: 30px;
 
   div.content-container {
-    position: relative;
     font-size: 90%;
 
     #group-links {
@@ -19,6 +18,7 @@
     }
 
     #book-pages {
+      position: relative;
       margin-left: 12px;
 
       &.hide-unpublished {
@@ -53,16 +53,23 @@
     }
   }
 
-  #book-show-all {
-    padding: 7px;
+  #book-buttons {
     position: absolute;
-    top: 35px;
+    top: -32px;
     right: 0;
-    opacity: .25;
-    @include transition-3d;
 
-    &:hover {
-      opacity: 1;
+    > div {
+      float: left;
+      opacity: .35;
+      @include transition-3d;
+      &#book-show-all,
+      a {
+        padding: 3px;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 

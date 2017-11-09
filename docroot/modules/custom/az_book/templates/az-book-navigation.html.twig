@@ -62,7 +62,12 @@
     <div id="book-title"><a href="{{ book_url }}">{{ book_title }}</a></div>
     <div id="book-pages" class="hide-unpublished">
       {% if hide_unpublished %}
-        <div title="Show unpublished pages" id="book-show-all" class="fa fa-bolt"></div>
+        <div id="book-buttons">
+          <div title="Show unpublished pages" id="book-show-all" class="fa fa-bolt"></div>
+          <div title="Edit book page titles and order" id="book-edit">
+            <a href="{{ '/admin/structure/book/' ~ book_id }}" class="fa fa-book"></a>
+          </div>
+        </div>
       {% endif %}
       <ul>
         {% for page in book_pages %}
