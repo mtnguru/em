@@ -8,6 +8,7 @@
  */
 use Drupal\az_user\CreateUserList;
 use Drupal\comment\Entity\Comment;
+use Drupal\Component\Render\HtmlEscapedText;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -108,8 +109,12 @@ function az_mail_mail_alter(&$message) {
   ];
 
   $signature = '<div>Mail sent from <a href="https://realscience.rocks">RealScience.Rocks</a></div>';
+//$body = $message['params']['message'];
+//$body .= $signature;
+
+  $body = new HtmlEscapedText($signature);
   if (is_array($message['body'])) {
-    $message['body'][] = $signature;
+    $message['body'][] = $body;
   }
   else {
     // Some modules use the body as a string, erroneously.
