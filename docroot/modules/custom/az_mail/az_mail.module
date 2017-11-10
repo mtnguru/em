@@ -155,7 +155,6 @@ function az_mail_node_presave(Node $node) {
   $params['subject'] = $node->title->value;
 
   $mailit = $node->field_send_e_mail->value;
-  $mailit = false;
   if ($mailit) {
     $fullmessage = "Sending mail to the following:\n";
   } else {
@@ -181,12 +180,13 @@ function az_mail_node_presave(Node $node) {
         $message = 'Success - ';
       }
     }
-    $message .= t('@n @name - @email - @id', ['@n' => $n, '@name' => $recipient->name, '@email' => $recipient->mail, '@id' => $recipient->uid]) . "\n";
+    $message .= t('@n @name - @email - @id', [
+        '@n' => $n,
+        '@name' => $recipient->name,
+        '@email' => $recipient->mail,
+        '@id' => $recipient->uid]) . "\n";
     drupal_set_message($message);
     $fullmessage .= $message;
-
-
-    // Send to current user.
   }
 
   \Drupal::logger('az_mail')->notice($fullmessage);
