@@ -102,7 +102,7 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
 
     // James Sorensen - added az data
     if (isset($context['az-data'])) {
-      $build['#attributes']['az-data'][] = $context['az-data'];
+      $build['#attributes']['data-az'][] = $context['az-data'];
     }
 
     // Maintain data-caption if it is there.

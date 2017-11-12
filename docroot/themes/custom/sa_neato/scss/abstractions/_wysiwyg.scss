@@ -57,8 +57,7 @@ body.cke_editable,
 }
 
 .embedded-entity {
-  padding-top: 1em;
-  padding-bottom: 2em;
+  padding-bottom: 1em;
   &.align-left {
     margin-right: 2em;
   }
@@ -76,6 +75,12 @@ body.cke_editable,
   .field--name-name {
     text-align: center;
   }
+
+  .atomizer {
+    h2 {
+      display: none;
+    }
+  }
 }
 
 .text-formatted,
@@ -85,7 +90,7 @@ body.cke_editable,
 //  clear: both;
   }
 
-  h1, h2, h3, h4 {
+  h1, h2, h3 {
     clear: both;
   }
 }

@@ -7,7 +7,7 @@
     font-size: 90%;
 
     #group-links {
-      margin-bottom: 15px;
+      margin: 0 0 15px 15px;
 
       > div {
         margin-bottom: 5px;
@@ -66,6 +66,7 @@
       a {
         padding: 3px;
         color: $color-white;
+        text-decoration: none;
       }
 
       &:hover {
