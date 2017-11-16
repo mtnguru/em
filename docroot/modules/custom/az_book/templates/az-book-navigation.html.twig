@@ -46,20 +46,15 @@
     {{ title_suffix }}
   </div>
 
-  <div id="group-links">
-    <div><a href="{{ group_url }}">{{ 'View Recent Content'|t }}</a></div>
-    <div><a href="{{ '/node/add/ticket?group=' ~ group_id }}">{{ 'Submit a Ticket'|t }}</a></div>
-    {% if group_name == 'Structured Atom Model' %}
-      <div><a href="/atomizer/atom-viewer">Atom Viewer</a></div>
-      {% if show_atomizer %}
-        <div title="Program that builds atoms interactively"><a href="/atomizer/atom-builder">Atom Builder</a></div>
-      {% endif %}
-    {% endif %}
-  </div>
+  {% if group_links %}
+    <div id="group-links">
+      {{ group_links }}
+    </div>
+  {% endif %}
 
   {% if book_pages %}
     <hr>
-    <div id="book-title"><a href="{{ book_url }}">{{ book_title }}</a></div>
+    <div id="book-title"><a class="{{ book_title_classes }}" href="{{ book_url }}">{{ book_title }}</a></div>
     <div id="book-pages" class="hide-unpublished">
       {% if hide_unpublished %}
         <div id="book-buttons">

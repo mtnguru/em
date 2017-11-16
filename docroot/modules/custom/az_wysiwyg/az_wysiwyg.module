@@ -180,31 +180,26 @@ function az_wysiwyg_is_az_wysiwyg_later($format, $caller_filter) {
  */
 function az_wysiwyg_node_presave(EntityInterface $node) {
   $type = $node->getType();
+  $topics = [];
   if ($type == 'article' || $type == 'book') {
     $topics = WysiwygBase::loadTopics();
     $type = $node->getType();
 
-    // If this is an article then process field_body.
-    if ($type == 'article') {
-      WysiwygBase::extractTopics($node->field_body->value, $topics);
-    }
-
-    if ($type == 'book') {
-      WysiwygBase::extractTopics($node->body->value, $topics);
-    }
+    WysiwygBase::extractTopics($node->body->value, $topics);
+  }
 
     // If this is a page then it has sections with subsections - process separately
-    if ($type == 'page') {
-      $sections = $node->field_sections->getValue();
-      foreach($sections as &$section){
-        foreach($section['subform']['field_subsections'] as &$subsection) {
-          if (!empty($subsection['subform'])) {
-            WysiwygBase::extractTopics($subsection['subform']['field_body'][0]['value'], $topics);
-          }
+  if ($type == 'page') {
+    $sections = $node->field_sections->getValue();
+    foreach($sections as &$section){
+      foreach($section['subform']['field_subsections'] as &$subsection) {
+        if (!empty($subsection['subform'])) {
+          WysiwygBase::extractTopics($subsection['subform']['body'][0]['value'], $topics);
         }
       }
     }
-    WysiwygBase::addTopicsToNode($node, $topics);
   }
+
+  WysiwygBase::addTopicsToNode($node, $topics);
 }
 

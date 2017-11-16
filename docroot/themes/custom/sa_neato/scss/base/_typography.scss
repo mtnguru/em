@@ -59,6 +59,10 @@ a {
     color: lighten($base-link-color, 15%);
     text-decoration: underline;
   }
+
+  &.menu-item--active {
+    color: $color-white;
+  }
 }
 
 hr {

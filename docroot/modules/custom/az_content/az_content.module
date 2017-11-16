@@ -83,31 +83,30 @@ function _az_content_embed_submit($form, FormStateInterface &$form_state) {
  * Implements hook_node_presave().
  */
 function az_content_node_presave(Node $node) {
-  if ($node->getType() == 'article') {
-
+  return;
+  if  ($node->getType() == 'article' || $node->getType() == 'book') {
     // Add article reference to media entities on that page.
-    $articleId = $node->id();
-    $mediaRef = $node->get('field_media');
-    if ($mediaRef) {
+    // Add media from the media field
+    if ($node->hasField('field_media')) {
+      $mediaRef = $node->field_media;
       $value = $mediaRef->getValue();
       if (!empty($value[0])) {
-        $mediaId = $value[0]['target_id'];
-        $media = \Drupal::entityManager()->getStorage('media')->load($mediaId);
+        $media = \Drupal::entityManager()->getStorage('media')->load($value[0]['target_id']);
         if ($media != null) {
-          _az_content_add_node_to_media($media, $articleId);
+          _az_content_add_node_to_media($media, $node->id());
         }
       }
     }
 
-    $bodyRef = $node->get('field_body');
-    $bodyValue = $bodyRef->getValue();
+    // Add media embedded in the field body
+    $bodyValue = $node->get('body')->getValue();
     if (!empty($bodyValue[0])) {
       preg_match_all("/data-entity-uuid=\".*?\"/", $bodyValue[0]['value'], $matches);
       foreach($matches[0] as $match) {
         $uuid = explode('"', $match)[1];
         $media = \Drupal::entityManager()->loadEntityByUuid('media', $uuid);
         if ($media != null) {
-          _az_content_add_node_to_media($media, $articleId);
+          _az_content_add_node_to_media($media, $node->id());
         }
       }
     }
@@ -162,30 +161,6 @@ function az_content_file_presave(EntityInterface $entity) {
 }
 
 /**
- * Add a node reference to he media entitu field_articles field.
- *
- *
- * @param $media
- * @param $articleId
- */
-function _az_content_add_node_to_media($media, $articleId) {
-  $articles = $media->get('field_articles');
-  $found = false;
-  if (!empty($articles)) {
-    $values = $articles->getValue();
-    foreach ($values as $value) {
-      if ($value['target_id'] == $articleId) {
-        $found = TRUE;
-      }
-    }
-  }
-  if (!$found) {
-    $media->field_articles->appendItem($articleId);
-    $media->save();
-  }
-}
-
-/**
  * @param $group_content_entity
  * @param $entity
  */
@@ -228,6 +203,30 @@ function az_content_preprocess_page(&$variables) {
 }
 
 /**
+ * Add a node reference to he media entitu field_articles field.
+ *
+ *
+ * @param $media
+ * @param $articleId
+ */
+function _az_content_add_node_to_media($media, $articleId) {
+  $articles = $media->get('field_articles');
+  $found = false;
+  if (!empty($articles)) {
+    $values = $articles->getValue();
+    foreach ($values as $value) {
+      if ($value['target_id'] == $articleId) {
+        $found = TRUE;
+      }
+    }
+  }
+  if (!$found) {
+    $media->field_articles->appendItem($articleId);
+    $media->save();
+  }
+}
+
+/**
  * Implements HOOK_preprocess_node().
  *
  * @param $variables
@@ -237,6 +236,22 @@ function az_content_preprocess_node(&$variables) {
   $node = $variables['node'];
   $view_mode = &drupal_static('az_view_mode');
   $view_mode = $variables['view_mode'];
+
+  // Add marker if content is New, Updated or has already been read.
+  switch (node_mark($variables['node']->id(), $variables['node']->getChangedTime())) {
+    case 0: return;
+
+//  case 0: $mark = 'Read'; break;
+    case 1: $mark = 'New'; break;
+    case 2: $mark = 'Updated'; break;
+  };
+  $variables['has_new_content'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['marker'],
+    ],
+    'label' => ['#markup' => $mark],
+  ];
 
   switch ($node->getType()) {
     case 'article':

@@ -98,9 +98,9 @@ function az_glossify_node_presave(EntityInterface $node) {
   $type = $node->getType();
   $matched = [];
   if ($type == 'article') {
-    $text = $node->field_body->value;
+    $text = $node->body->value;
     $newText = _az_glossify_process_text($text, $matched);
-    $node->field_body->setValue([
+    $node->body->setValue([
       'value' => $newText,
       'format' => 'full_html'
     ]);
@@ -110,9 +110,9 @@ function az_glossify_node_presave(EntityInterface $node) {
     foreach($sections as $section){
       foreach($section['subform']['field_subsections'] as $subsection) {
         if (!empty($subsection['subform'])) {
-          $text = $subsection['subform']['field_body'][0]['value'];
+          $text = $subsection['subform']['body'][0]['value'];
           $newText = _az_glossify_process_text($text, $matched);
-          $subsection['subform']['field_body'][0]['value'] = $newText;
+          $subsection['subform']['body'][0]['value'] = $newText;
         }
       }
     }

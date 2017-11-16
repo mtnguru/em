@@ -12,11 +12,12 @@ function az_book_theme() {
         'book_url' => '',
         'book_pages' => [],
         'book_id' => '',
+        'book_title_classes' => false,
         'group_id' => '',
         'group_name' => '',
         'group_url' => '',
+        'group_links' => false,
         'hide_unpublished' => false,
-        'show_atomizer' => false,
       ],
     ],
   ];
