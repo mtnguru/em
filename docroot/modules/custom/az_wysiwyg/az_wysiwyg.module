@@ -190,14 +190,14 @@ function az_wysiwyg_node_presave(EntityInterface $node) {
 
     // If this is a page then it has sections with subsections - process separately
   if ($type == 'page') {
-    $sections = $node->field_sections->getValue();
+/*  $sections = $node->field_sections->getValue();
     foreach($sections as &$section){
       foreach($section['subform']['field_subsections'] as &$subsection) {
         if (!empty($subsection['subform'])) {
           WysiwygBase::extractTopics($subsection['subform']['body'][0]['value'], $topics);
         }
       }
-    }
+    } */
   }
 
   WysiwygBase::addTopicsToNode($node, $topics);

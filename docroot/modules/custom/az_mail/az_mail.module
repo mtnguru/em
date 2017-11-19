@@ -156,7 +156,6 @@ function az_mail_node_presave(Node $node) {
 
   $recipients = CreateUserList::queryUsers($set);
 
-  $params['message'] = $node->get('body')->value;
   $params['subject'] = $node->title->value;
 
   $mailit = $node->field_send_e_mail->value;
@@ -170,6 +169,14 @@ function az_mail_node_presave(Node $node) {
   foreach ($recipients as $recipient) {
     $n++;
     $message = '';
+    $user = \Drupal\user\Entity\User::load($recipient->uid);
+    $resetlink = '<a href="' . user_pass_reset_url($user) . '">by clicking here</a>';
+    $body = $node->get('body')->value;
+    $body = preg_replace('/\$username/', $recipient->name, $body);
+    $body = preg_replace('/\$firstname/', $user->field_first_name->value, $body);
+    $body = preg_replace('/\$user_reset/', $resetlink, $body);
+    $params['message'] = $body;
+
     if ($mailit) {
       $result = $mailManager->mail(
         'az_mail',
