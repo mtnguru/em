@@ -122,38 +122,81 @@
       display: inline-block;
       margin-left: 10px;
 
-      .account-menu {
+      .user-menu {
         position: absolute;
-        top: 15px;
+        top: 0px;
         right: #{$page-padding-desktop}px;
 
-        &.logged-in {
-          top: 7px;
+        .popup {
+          position: absolute;
+          width: 160px;
+          top: 20px;
+          right: -200px;
+          background-color: $color-dark-green;
+          @extend %text-shadow;
+          border-radius: 8px;
+          padding: .4em .7em .4em;
+          @include transition-3d;
+          border: 1px solid $color-green;
+        }
 
-          img {
-            width: 40px;
-            height: 40px;
-            border-radius: 25%;
-            box-shadow: 0px 0px 2px 2px $color-purple;
+        #accessibility {
+          float: right;
+          position: relative;
+          .button {
+            display: block;
+            padding: 17px 20px 17px 0;
           }
-
-          .menu {
+          .popup {
             position: absolute;
-            width: 160px;
-            top: 20px;
-            right: -200px;
-            background-color: $color-dark-green;
-            @extend %text-shadow;
-            border-radius: 8px;
-            padding: .4em .7em .7em;
-            @include transition-3d;
-            border: 1px solid $color-green;
+            top: 45px;
+            right: -300px;
+            width: 212px;
           }
-
+          .label {
+            font-family: opendyslexic;
+            font-size: 14px;
+          }
           &:hover {
-            .menu {
+            .popup {
               bottom: auto;
-              right: -10px;
+              right: -40px;
+            }
+          }
+        }
+
+        #account-menu {
+          float: right;
+          padding-top: 15px;
+
+          &.logged-in {
+            padding-top: 7px;
+
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 25%;
+              box-shadow: 0px 0px 2px 2px $color-purple;
+            }
+
+            .menu {
+              position: absolute;
+              width: 160px;
+              top: 20px;
+              right: -200px;
+              background-color: $color-dark-green;
+              @extend %text-shadow;
+              border-radius: 8px;
+              padding: .4em .7em .7em;
+              @include transition-3d;
+              border: 1px solid $color-green;
+            }
+
+            &:hover {
+              .menu {
+                bottom: auto;
+                right: -10px;
+              }
             }
           }
         }

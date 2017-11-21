@@ -48,12 +48,29 @@
 
   Drupal.behaviors.menuTop = {
     attach: function (context, settings) {
-      var $fart = $(context).find('#site-header');
       $(context).find('#site-header').once('menuTopAttached').each(function () {
         if (!Drupal.menuTop) {
           Drupal.menuTop = Drupal.menuTopC();
         }
         Drupal.menuTop.init(this);
+      });
+
+      $(context).find('#dyslexia-button').once('dyslexia-attached').each(function () {
+        var dyslexia = localStorage.getItem('dyslexia_font');
+        if (dyslexia && dyslexia != 'undefined' && dyslexia == 'TRUE') {
+          $('body').addClass('dyslexia');
+          $(this).prop('checked', true);
+        }
+
+        $(this).click(function(ev) {
+          if ($(this).is(":checked")) {
+            $('body').addClass('dyslexia');
+            localStorage.setItem('dyslexia_font', 'TRUE');
+          } else {
+            $('body').removeClass('dyslexia');
+            localStorage.setItem('dyslexia_font', 'FALSE');
+          }
+        });
       });
     }
   };

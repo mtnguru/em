@@ -24,23 +24,35 @@
   We call a macro which calls itself to render the full tree.
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
-{% if logged_in %}
-  <div class="account-menu logged-in">
-    <img src="{{ user_picture_url }}" />
-    {{ menus.menu_links(items, attributes, 0) }}
+<div class="user-menu">
+
+  {% if logged_in %}
+    <div id="account-menu" class="logged-in">
+      <img src="{{ user_picture_url }}" />
+      {{ menus.menu_links(items, attributes, 0) }}
+    </div>
+  {% else %}
+    <div id="account-menu" class="do-login">
+      <a href="/user/login" class="login">Login</a>
+    </div>
+  {% endif %}
+
+  <div id="accessibility">
+    <a href="#" class="button">Accessibility</a>
+    <div class="popup">
+      <input id="dyslexia-button" type="checkbox" href="#" class="checkbox">
+      <span class="label">{{ 'OpenDyslexia Font'|t }}</span>
+    </div>
   </div>
-{% else %}
-  <div class="account-menu do-login">
-    <a href="/user/login" class="login">Login</a>
-  </div>
-{% endif %}
+
+</div>
 
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}
   {% if items %}
 
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass('menu') }}>
+      <ul{{ attributes.addClass('menu popup') }}>
     {% else %}
       <ul class="menu">
     {% endif %}

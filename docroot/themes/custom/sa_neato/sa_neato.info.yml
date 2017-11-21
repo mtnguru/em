@@ -6,6 +6,7 @@ core: 8.x
 libraries:
   - sa_neato/global-styling
   - sa_neato/global-scripts
+  - sa_neato/fonts
 regions:
   header: Header
   featured: Featured
