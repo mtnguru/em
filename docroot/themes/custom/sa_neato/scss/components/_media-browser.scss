@@ -1,6 +1,6 @@
 .field--name-field-media {
   details.form-wrapper {
-    background: darken($color-dark-blue, 10);
+    background: darken($base-background-color, 10);
   }
   .details-description {
     display: none;
@@ -26,7 +26,7 @@ form.entity-browser-form {
   nav.eb-tabs {
     ul li.active {
       a {
-        background-color: lighten($color-dark-blue, 10%);
+        background-color: $secondary-background-color;
       }
     }
   }
@@ -34,7 +34,7 @@ form.entity-browser-form {
   .view.eb-media {
 
     .views-exposed-form {
-      background-color: lighten($color-dark-blue, 10%);
+      background-color: $secondary-background-color;
 
       .form--inline {
         .form-actions {
@@ -73,7 +73,7 @@ form.entity-browser-form {
 
     .views-col {
       margin: .3em;
-      border: .3em solid lighten($color-dark-blue, 10%);
+      border: .3em solid $secondary-background-color;
       border-radius: 8px;
       overflow: hidden;
 

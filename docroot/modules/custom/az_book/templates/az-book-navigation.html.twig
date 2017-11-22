@@ -52,10 +52,10 @@
     </div>
   {% endif %}
 
-  {% if book_pages %}
+  {% if book_title %}
     <hr>
-    <div id="book-title"><a class="{{ book_title_classes }}" href="{{ book_url }}">{{ book_title }}</a></div>
-    <div id="book-pages" class="hide-unpublished">
+    <div id="book-title">
+      <a class="{{ book_title_classes }}" href="{{ book_url }}">{{ book_title }}</a>
       {% if hide_unpublished %}
         <div id="book-buttons">
           <div title="Show unpublished pages" id="book-show-all" class="fa fa-bolt"></div>
@@ -64,11 +64,17 @@
           </div>
         </div>
       {% endif %}
-      <ul>
-        {% for page in book_pages %}
-          {{ buildMenu(page) }}
-        {% endfor %}
-      </ul>
     </div>
+
+
+    {% if book_pages %}
+      <div id="book-pages" class="hide-unpublished">
+        <ul>
+          {% for page in book_pages %}
+            {{ buildMenu(page) }}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
   {% endif %}
 </nav>

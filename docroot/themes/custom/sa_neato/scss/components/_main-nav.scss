@@ -143,9 +143,10 @@
         #accessibility {
           float: right;
           position: relative;
-          .button {
-            display: block;
+          .accessibility-hover {
             padding: 17px 20px 17px 0;
+            font-size: 90%;
+            color: $color-green;
           }
           .popup {
             position: absolute;
@@ -181,9 +182,9 @@
 
             .menu {
               position: absolute;
-              width: 160px;
-              top: 20px;
-              right: -200px;
+              width: 175px;
+              top: -300px;
+              right: -10px;
               background-color: $color-dark-green;
               @extend %text-shadow;
               border-radius: 8px;
@@ -195,6 +196,7 @@
             &:hover {
               .menu {
                 bottom: auto;
+                top: 30px;
                 right: -10px;
               }
             }

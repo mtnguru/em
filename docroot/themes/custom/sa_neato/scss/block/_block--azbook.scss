@@ -15,6 +15,14 @@
     }
 
     #book-title {
+      position: relative;
+      a {
+        padding: .2em;
+
+        &.menu-item--active {
+          background-color: $secondary-background-color;
+        }
+      }
     }
 
     #book-pages {
@@ -28,7 +36,7 @@
       }
 
       > ul {
-        margin-top: 3px;
+        margin: 0;
         padding: 0;
       }
 
@@ -39,7 +47,6 @@
     hr {
       margin: 0 0 12px;
     }
-
   }
 
   h1 {
@@ -55,7 +62,7 @@
 
   #book-buttons {
     position: absolute;
-    top: -32px;
+    top: -12px;
     right: 0;
 
     > div {
@@ -137,31 +144,25 @@
 
     &.menu-item--placeholder {
       > a {
-        color: $color-medium-grey;
+        color: $color-grey;
       }
     }
 
     &.menu-item--needs-review {
       > a {
-        color: #ec76ff;
+        color: #dd66ee;
       }
     }
 
     &.menu-item--draft {
       > a {
-        color: #55aaff;
+        color: #66bbff;
       }
     }
 
     &.menu-item--active {
       > a {
-        color: $color-white;
-      }
-
-      &.menu-item--active {
-        > a {
-          color: $color-white;
-        }
+        background-color: $secondary-background-color;
       }
     }
   }

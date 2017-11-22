@@ -41,6 +41,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
    */
   private function buildMenuRecursive($results, $nid, $level) {
     $items = [];
+    if (empty($results[$nid]->children)) return $items;
 
     usort($results[$nid]->children, 'self::comparePages');
     foreach ($results[$nid]->children as $num => $child) {
@@ -90,8 +91,6 @@ class AzBookNavigationBlock extends BookNavigationBlock {
    */
   public function build() {
     // If this is a node page then find which book it is associated with.
-    \Drupal::service('request_stack')->getCurrentRequest()->get('_route');
-    $request = $this->requestStack->getCurrentRequest();
     $route = $this->requestStack->getCurrentRequest()->get('_route');
     $activePage = 'book';
 
@@ -133,7 +132,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       $query->addField('nfd', 'moderation_state');
       $query->addField('nfd', 'title');
       $results = $query->execute()->fetchAllAssoc('nid');
-      if (count($results) <= 1) return [];
+      if (count($results) < 1) return [];
 
       // If this is a book page, set the active trail
       if (!empty($node)) {
