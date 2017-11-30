@@ -37,12 +37,12 @@ class WysiwygBase {
     $query->addField('tfd', 'description__value', 'description');
     $query->condition('tfd.vid', 'topics', 'IN');
 
-    $query->leftjoin('taxonomy_term__field_include_in_glossary', 'tfg', 'tfg.entity_id = tfd.tid');
-    $query->addField('tfg', 'field_include_in_glossary_value', 'in_glossary');
-    $query->condition('tfg.field_include_in_glossary_value', '1');
+//  $query->leftjoin('taxonomy_term__field_include_in_glossary', 'tfg', 'tfg.entity_id = tfd.tid');
+//  $query->addField('tfg', 'field_include_in_glossary_value', 'in_glossary');
+//  $query->condition('tfg.field_include_in_glossary_value', '1');
 
-    $query->leftjoin('taxonomy_term__field_tooltip', 'tft', 'tft.entity_id = tfd.tid');
-    $query->addField('tft', 'field_tooltip_value', 'tooltip');
+//  $query->leftjoin('taxonomy_term__field_tooltip', 'tft', 'tft.entity_id = tfd.tid');
+//  $query->addField('tft', 'field_tooltip_value', 'tooltip');
 
     $results = $query->execute()->fetchAllAssoc('name_norm');
     // Build terms array.

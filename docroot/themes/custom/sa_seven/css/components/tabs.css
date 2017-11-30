@@ -299,14 +299,14 @@ li.tabs__tab a {
   padding-right: 0;
 }
 .tabs.secondary a {
-  background-color: transparent;
-  padding: 7px 13px 5px;
+  background-color: #f0f0ff;
+  padding: 5px 5px 3px;
   text-decoration: none;
 }
 /* This is required to win over specificity of [dir="rtl"] li.tabs__tab a */
 [dir="rtl"] .tabs.secondary a {
-  padding-left: 13px;
-  padding-right: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 /* This is required to win over specificity of [dir="rtl"] .tabs.secondary a */
 [dir="rtl"] .views-displays .tabs.secondary a {
@@ -314,6 +314,7 @@ li.tabs__tab a {
   padding-right: 7px;
 }
 .tabs.secondary .is-active a {
+  background-color: #d0d0ea;
   color: #004f80;
 }
 .tabs.secondary a:focus {
@@ -327,8 +328,8 @@ li.tabs__tab a {
   position: relative;
   top: 0;
   z-index: 15;
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-left: .3em;
+  margin-right: .3em;
   border-bottom: 2px solid transparent;
   border-left: 1px solid transparent; /* LTR */
   border-right-color: transparent; /* LTR */

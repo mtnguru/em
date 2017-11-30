@@ -207,14 +207,14 @@ function az_content_preprocess_page(&$variables) {
 }
 
 /**
- * Add a node reference to he media entitu field_articles field.
+ * Add a node reference to he media entitu field_usage field.
  *
  *
  * @param $media
  * @param $articleId
  */
 function _az_content_add_node_to_media($media, $articleId) {
-  $articles = $media->get('field_articles');
+  $articles = $media->get('field_usage');
   $found = false;
   if (!empty($articles)) {
     $values = $articles->getValue();
@@ -225,7 +225,7 @@ function _az_content_add_node_to_media($media, $articleId) {
     }
   }
   if (!$found) {
-    $media->field_articles->appendItem($articleId);
+    $media->field_usage->appendItem($articleId);
     $media->save();
   }
 }

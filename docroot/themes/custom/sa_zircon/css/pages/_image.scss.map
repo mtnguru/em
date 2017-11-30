@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["pages/_image.scss"],"sourcesContent":[".field--name-image,\n.field--type-geolocation {\n  margin: 1em;\n}\n"],"file":"pages/_image.scss","sourceRoot":"/source/"}

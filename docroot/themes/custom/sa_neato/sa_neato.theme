@@ -6,10 +6,10 @@
  */
 
 use Drupal\az_groups\azGroupConfig;
-use Drupal\Component\Utility\Html;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\media\Entity\Media;
+use Drupal\file\Entity\File;
 use Drupal\image\Entity\ImageStyle;
 
 /**
@@ -195,14 +195,21 @@ function sa_neato_preprocess_node(&$variables) {
  * @param array $variables
  */
 function sa_neato_preprocess_group(&$variables) {
-  if (!empty($variables['elements']['field_hero_image'][0])) {
+/*if (!empty($variables['elements']['field_hero_image'][0])) {
     // Trying to figure out how this works
-    $fid = $variables['elements']['field_hero_image'][0]['#media']->image->target_id;
+    $url = $variables['elements']['field_hero_image'][0]['#url'];
+    $u = Url::toString($url);
     $file =  \Drupal\file\Entity\File::load($fid);
-    $variables['az_hero_image_uri'] = $file->uri;
-//$variables['hero_image_url'] = Url::fromUri($file->uri->value);
-    $variables['az_hero_image_url'] = file_create_url($file->uri->value);
-  }
+    $variables['az_hero_image_uri'] = $uri;
+  $variables['hero_image_url'] = Url::fromUri($file->uri->value);
+    $variables['az_hero_image_url'] = $url->value;$hero_image = $node->get('field_hero_image')->getValue();
+
+    $group = $variables['elements']['#group'];
+    $hero_image = $group->field_hero_image->getValue();
+    $media = Media::load($hero_image[0]['target_id']);
+    $file = $media->image->entity;
+    $variables['az_hero_image_url'] = ImageStyle::load('hero')->buildUrl($file->uri->value);
+  } */
   return;
 }
 

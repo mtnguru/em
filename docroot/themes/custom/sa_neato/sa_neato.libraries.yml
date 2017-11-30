@@ -3,6 +3,9 @@ global-styling:
   css:
     base:
       css/sa_neato.css: {}
+  dependencies:
+    - lightning_media/browser.styling
+    
 
 global-scripts:
   version: VERSION

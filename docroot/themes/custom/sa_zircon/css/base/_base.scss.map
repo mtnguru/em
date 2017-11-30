@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["base/_base.scss"],"sourcesContent":[".container {\n  width: auto;\n  margin: 0 12px;\n}"],"file":"base/_base.scss","sourceRoot":"/source/"}

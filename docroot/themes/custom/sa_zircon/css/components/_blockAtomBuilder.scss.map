@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["components/_blockAtomBuilder.scss"],"sourcesContent":["\nbody#landing_page-workbench,\nbody#project-atom-builder {\n  .col-lg-9 {\n    width: 100%;\n  }\n\n  .container-fluid {\n    padding: 0;\n  }\n}\n"],"file":"components/_blockAtomBuilder.scss","sourceRoot":"/source/"}

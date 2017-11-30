@@ -1,5 +1,5 @@
 // Start content of ckeditor content area and output to screen.
-$cke-bg: #bce;
+$cke-bg: #cdf;
 
 body.cke_editable {
   padding: .25em 1em;
@@ -39,7 +39,7 @@ body.cke_editable,
   }
 
 
-  #cke_26 {
+  #cke_30 {
     clear: both;
   }
 }
@@ -79,6 +79,10 @@ body.cke_editable,
 
   .field--name-name {
     text-align: center;
+    color: tint($color-gold, 50%);
+    line-height: 1.2;
+    margin-top: 5px;
+    font-style: italic;
   }
 
   .atomizer {

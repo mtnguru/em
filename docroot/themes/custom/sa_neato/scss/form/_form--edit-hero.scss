@@ -1,0 +1,64 @@
+form {
+  .field--name-field-hero-image {
+    > div > details { // No image selected
+      .details-description {
+        display: none;
+      }
+
+      > .details-wrapper {
+        margin: 10px 0 20px;
+        details {
+          display: none;
+        }
+      }
+    }
+
+    > details {       // Image is selected
+      > .details-wrapper {
+        padding: 0;
+
+        .details-description {
+          display: none;
+        }
+
+        > details {
+          border: 0;
+          margin: 0;
+
+          .details-wrapper {
+            padding: 0 1.5em 1.5em;
+
+            .item-container {
+              position: relative;
+            }
+
+            article {
+            }
+
+            .field--name-name {
+              color: $color-gold;
+              font-size: 120%;
+              padding: 10px 0 15px;
+            }
+
+            input#edit-field-hero-image-current-items-0-remove-button {
+              position: absolute;
+              bottom: 20px;
+              left: 120px;
+            }
+
+            input#edit-field-hero-image-current-items-0-edit-button {
+              position: absolute;
+              bottom: 20px;
+              left: 240px;
+            }
+          }
+
+          summary {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

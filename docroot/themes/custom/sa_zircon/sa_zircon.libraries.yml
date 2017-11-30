@@ -1,6 +1,0 @@
-global-styling:
-  css:
-    base:
-      css/styles.css: {}
-      css/font-awesome.min.css: {}
-      css/print.css: { media: print }

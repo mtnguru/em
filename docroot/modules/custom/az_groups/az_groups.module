@@ -84,13 +84,15 @@ function az_groups_preprocess_menu(&$variables) {
     $user = \Drupal::entityTypeManager()
       ->getStorage('user')
       ->load(\Drupal::currentUser()->id());
-    $picture = $user->field_picture->getValue();
-    if (empty($picture[0])) {
-      $variables['user_name'] = $user->name;
-    }
-    else {
-      $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
-      $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail_50_x_50')->buildUrl($file->getFileUri());
+    if ($user) {
+      if ($user->field_picture->isEmpty()) {
+        $variables['user_name'] = $user->name;
+      }
+      else {
+        $picture = $user->field_picture->getValue();
+        $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
+        $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')->buildUrl($file->getFileUri());
+      }
     }
   }
 

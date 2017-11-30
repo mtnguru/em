@@ -99,7 +99,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       case 'entity.group.canonical':
         $activePage = 'recent-content';
         $group = $this->requestStack->getCurrentRequest()->get('group');
-        if ($value = $group->field_directory->getValue()) {
+        if ($value = $group->field_directory_book->getValue()) {
           $bid = $value[0]['target_id'];
         }
         break;
@@ -191,7 +191,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             'link' => [
               '#type' => 'link',
               '#title' => t('Submit a Ticket'),
-              '#attributes' => ['title' => t('Submit a ticket for suggestions, questions, or bugs regarding this community.')],
+              '#attributes' => ['title' => t('Submit a ticket for suggestions, questions, complaints or bugs regarding this community.')],
               '#url' => Url::fromRoute('node.add', ['node_type' => 'ticket'], [
                 'absolute' => TRUE,
                 'query' => ['group' => $group->id()],
