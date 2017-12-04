@@ -54,21 +54,185 @@ function az_media_entity_presave(EntityInterface $entity) {
  *
  */
 function az_media_media_presave(EntityInterface $entity) {
-  $image = $entity->getValue('image');
-  $name = $entity->name->value;
-//$entity->setValue(['image', 'alt'], $entity->getValue('name'));
-  foreach ($image as $field_item) {
-    $target_id =
-    $zowser = 5;
+  $fid = $entity->image->getValue()[0]['target_id'];
+  $file = \Drupal\file\Entity\File::load($fid);
+  $user = \Drupal\user\Entity\user::load(\Drupal::currentUser()->id());
+  $srcPath = \Drupal::service('file_system')->realpath($file->getFileUri());
+
+  $author = $entity->field_author->value;
+  if (!$author) {
+//  $entity->field_author->setValue($user);
   }
-$fid = $image->getValue([0, 'target_id']);
+
+  $create_date = $entity->field_create_date->value;
+  if (!$create_date) {
+    $date = _az_media_getExifField($srcPath, "GPSDateStamp");
+    if ($date) {
+      $time = _az_media_getExifField($srcPath, "GPSTimeStamp");
+      $datetime = $date . " " . $time;
+
+    } else {
+      $datetime = _az_media_getExifField($srcPath, 'DateTimeOriginal');
+      if (!$datetime) {
+        $datetime = date('Y-m-d H:i:s');
+      }
+    }
+    $datetime[4] = '-';
+    $datetime[7] = '-';
+    $datetime[10] = 'T';
+    $entity->field_create_date->setValue($datetime);
+
+//  $given = new \Drupal\Core\Datetime\DrupalDateTime($datetime,$user->getTimezone());
+//  $given->setTimezone(new \DateTimeZone("UTC"));
+//  $udate = $given->format('Y-m-d\Th:i:s');
+//  $entity->field_create_date->setValue($udate);
+  }
+
+  $dimensions = $entity->field_dimensions->value;
+  if (!$dimensions) {
+    $dims = getimagesize($srcPath);
+    $entity->field_dimensions->setValue($dim = $dims[0] . 'x' . $dims[1]);
+  }
+
+  $location = $entity->field_location->value;
+  if (!$location) {
+    $val = 4;
+  }
+
+  $geofield = $entity->field_geofield->value;
+  if (!$geofield) {
+    $lat = _az_media_getExifField($srcPath,'GPSLatitude');
+    $lon = _az_media_getExifField($srcPath,'GPSLongitude');
+    $entity->field_geofield->setValue(($lat &&  $lon) ? 'POINT(' . $lon . ' ' . $lat . ')' : null);
+  }
+
   return;
 }
 
 /**
  * Implements HOOK_file_presave().
  *
+ * Preprocess image: Reduce filesize by resizing image and changing 'quality'
+ * using the convert command from the gd graphics library.
+ *
+ * @param $file
  */
-function az_media_file_presave(EntityInterface $entity) {
-  return;
+function az_media_file_presave($file) {
+  // Preprocess images - resize (scale) and reduce 'quality'
+  if (strstr($file->getMimeType(), 'image') && $file->source != 'icon_file') {
+
+    $srcPath = \Drupal::service('file_system')
+      ->realpath($file->getFileUri());  // /home/atom/private
+    $info = pathinfo($srcPath);
+    if ($info['extension'] == 'png') {
+      $uinfo = parse_url($file->getFileUri());
+      $filename = $uinfo['host'] . '.jpg';
+      $file->setFileUri($uinfo['scheme'] . '://' . $filename);
+      $file->setFilename($filename);
+    }
+    else {
+      $filename = $info['basename'];
+    }
+
+    $destPath = $info['dirname'] . '/' . $filename;
+
+    if ($file->getCreatedTime() == $_SERVER['REQUEST_TIME'] && $file->status->value == 0) {
+      $tmpPath = file_directory_temp() . '/tmp_' . $filename;
+
+      $initialSize = $file->getSize();
+      $dims = getimagesize($srcPath);
+
+      // Default settings - Reduces 4M cell phone image file to appx 200-500KB.
+      $quality = 50;
+      $resolution = array(
+        'width' => 10000,
+        'height' => 10000,
+      );
+
+      // If image is greater than max resolution in width or height then resize it.
+      $res = ($dims[0] > $resolution['width'] || $dims[1] > $resolution['height'])
+        ? "-resize " . $resolution['width'] . 'x' . $resolution['height']
+        : '';
+
+      // Create and execute gd library convert command
+      $cmd = "convert $res -quality $quality '$srcPath' '$tmpPath';" .
+        " cp '$tmpPath' '$destPath'; ";
+//      " rm '$tmpPath';";
+
+      if ($srcPath != $destPath) {
+//      $cmd .= " rm '$srcPath'";
+      }
+      `$cmd`;
+
+      $finalSize = filesize($destPath);
+      drupal_set_message('File saved: ' . $srcPath . ' -> ' . $destPath .
+        '   Size: ' . $initialSize . ' -> ' . $finalSize);
+    }
+  }
 }
+
+/**
+  * Get exif field value.
+  *
+  * @param string $uri
+  *   The uri for the file that we are getting the Exif.
+  * @param string $field
+  *   The name of the exif field.
+  *
+  * @return string|bool
+  *   The value for the requested field or FALSE if is not set.
+  */
+function _az_media_getExifField($uri, $field) {
+  static $exifData;
+
+  if (empty($exifData)) {
+    $exifData = _az_media_getExif($uri);
+  }
+  return !empty($exifData[$field]) ? $exifData[$field] : FALSE;
+}
+
+/**
+ * Read the exif data for an image and put into array.
+ *
+ * @param string $uri
+ *   The uri for the file that we are getting the Exif.
+ *
+ * @return array|bool
+ *   An associative array where the array indexes are the header names and
+ *   the array values are the values associated with those headers or FALSE
+ *   if the data can't be read.
+ */
+function _az_media_getExif($uri) {
+  // exiftool
+  //   -S (short output)
+  //   -n (decimal degrees for lat/long)
+  $cmd = 'exiftool -S -n "' . \Drupal::getContainer()->get('file_system')->realpath($uri) . '"';
+  $pipe = popen($cmd, "r");
+  while ($line = fgets($pipe,320)) {
+    $args = explode(': ', $line);
+    switch ($args[0]) {
+      case 'MIMEType':
+      case 'GPSLatitude':
+      case 'GPSLatitudeRef':
+      case 'GPSLongitude':
+      case 'GPSLongitudeRef':
+      case 'GPSDateStamp':
+      case 'GPSTimeStamp':
+      case 'FileSize':
+      case 'ImageWidth':
+      case 'ImageHeight':
+      case 'DateTime':
+      case 'DateTimeOriginal':
+        $d[$args[0]] = chop($args[1]);
+    }
+  }
+  pclose($pipe);
+
+  ksort($d);
+  foreach ($d as $key => $value) {
+    $value = trim(chop($value));
+    print ("Key |$key|   Value |$value|\n");
+  }
+  return $d;
+}
+

@@ -20,6 +20,32 @@ form {
     }
   }
 
+  > div > .form-item,
+  > div > div > .form-item {
+    label {
+      color: $color-turquoise;
+    }
+    &.form-item-field-contribute-0-format,
+    &.form-item-body-0-format {
+      background: orange;
+      label {
+        color: $color-white;
+        font-size: 90%;
+        font-weight: normal;
+      }
+    }
+  }
+
+  > div > .form-item {
+    .form-item-field-contribute-0-format,
+    .form-item-body-0-format {
+      label {
+        color: $color-white;
+        font-size: 90%;
+      }
+    }
+  }
+
   input,
   select {
     background-color: lighten($base-background-color, 10%);
@@ -61,23 +87,24 @@ form {
   }
 
   #{$all-text-inputs},
+  select,
   select[multiple=multiple] {
-    border: $base-border;
+    border: 2px solid $border-color-base;
     box-shadow: $form-box-shadow;
     box-sizing: border-box;
     font-family: $base-font-family;
     font-size: $base-font-size;
-    //margin-bottom: $small-spacing;
     padding: .2em .5em;
     transition: border-color $base-duration $base-timing;
-    width: 100%;
+
+//  width: 100%;
 
     &:hover {
-      border-color: shade($base-border-color, 20%);
+      border-color: $border-color-hover;
     }
 
     &:focus {
-      border-color: $base-link-color;
+      border-color: $border-color-focus;
       box-shadow: $form-box-shadow-focus;
       outline: none;
     }
@@ -126,13 +153,13 @@ form {
 
   input[type="file"] {
     margin-bottom: $small-spacing;
-    width: 100%;
+//  width: 100%;
   }
 
   select {
     max-width: 100%;
     width: auto;
-    height: 35px;
+    height: 30px;
   }
 
   .tabledrag-handle {

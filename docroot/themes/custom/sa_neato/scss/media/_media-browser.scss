@@ -80,6 +80,7 @@ form.entity-browser-form {
 
       @include media($bp960only) {
         width: calc(100% / 8);
+
       } // $bp960only
 
       @include media($bp1280) {

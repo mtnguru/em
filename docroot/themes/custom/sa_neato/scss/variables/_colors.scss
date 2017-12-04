@@ -19,6 +19,7 @@ $color-green: #7fffb0;
 //$color-dark-green: #0f5f20;
 $color-dark-green: #064a10;
 $color-gold: #ffcc00;
+$color-light-gold: lighten($color-gold, 10%);
 $color-light-turquoise: #a5ffd1;
 $color-off-white: #faf0ff;
 
@@ -39,6 +40,11 @@ $topnav-color: $color-turquoise;
 $base-background-color: $color-dark-blue !default;
 $base-font-color: $color-off-white !default;
 $secondary-background-color: lighten($base-background-color, 15%);
+
+$border-color-base: darken($color-green, 40%);
+$border-color-hover: darken($color-green, 20%);
+$border-color-focus: $color-green;
+$border-color-filled: darken($color-turquoise, 10%);
 
 $base-border-color: $color-green !default;
 $base-border: 2px solid $base-border-color;

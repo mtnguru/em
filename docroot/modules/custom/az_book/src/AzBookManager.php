@@ -21,10 +21,13 @@ class AzBookManager extends BookManager {
 
       // @todo This should be actually filtering on the desired node status
       //   field language and just fall back to the default language.
-      $nids = \Drupal::entityQuery('node')
-        ->condition('nid', $nids, 'IN')
-//      ->condition('status', 1)
-        ->execute();
+      $query = \Drupal::entityQuery('node')
+        ->condition('nid', $nids, 'IN');
+
+      if (\Drupal::routeMatch()->getRouteName() != 'book.admin_edit') {
+        $query->condition('status', 1);
+      };
+      $nids = $query->execute();
 
       foreach ($nids as $nid) {
         foreach ($node_links[$nid] as $mlid => $link) {

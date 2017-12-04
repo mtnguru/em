@@ -1,4 +1,4 @@
-name: Atomizer user module
+name: AZ User
 type: module
 description: Hooks for manipulating user content
 core: 8.x

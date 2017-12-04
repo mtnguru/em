@@ -62,7 +62,7 @@ function sa_neato_preprocess(&$variables) {
   $variables['az_route_name'] = \Drupal::routeMatch()->getRouteName();
   $route_match = \Drupal::routeMatch();
   if ($route_match->getParameter('node') && is_object($route_match->getParameter('node'))) {
-    $variables['em_root_content_type'] = $route_match->getParameter('node')->bundle();
+    $variables['az_root_content_type'] = $route_match->getParameter('node')->bundle();
   }
 }
 

@@ -1,5 +1,8 @@
 form {
+
+  .field--name-field-media,
   .field--name-field-hero-image {
+    /*
     > div > details { // No image selected
       .details-description {
         display: none;
@@ -11,11 +14,13 @@ form {
           display: none;
         }
       }
-    }
+    } */
 
-    > details {       // Image is selected
+    details.js-form-wrapper {       // Image is selected
+
       > .details-wrapper {
         padding: 0;
+
 
         .details-description {
           display: none;
@@ -32,26 +37,6 @@ form {
               position: relative;
             }
 
-            article {
-            }
-
-            .field--name-name {
-              color: $color-gold;
-              font-size: 120%;
-              padding: 10px 0 15px;
-            }
-
-            input#edit-field-hero-image-current-items-0-remove-button {
-              position: absolute;
-              bottom: 20px;
-              left: 120px;
-            }
-
-            input#edit-field-hero-image-current-items-0-edit-button {
-              position: absolute;
-              bottom: 20px;
-              left: 240px;
-            }
           }
 
           summary {
@@ -59,6 +44,31 @@ form {
           }
         }
       }
+    }
+
+    article {
+    }
+
+    .field--name-name {
+      color: $color-gold;
+      font-size: 120%;
+      padding: 10px 0 15px;
+    }
+
+    .item-container {
+
+      input:nth-of-type(1) {
+        position: absolute;
+        bottom: 20px;
+        left: 120px;
+      }
+
+      input:nth-of-type(2) {
+        position: absolute;
+        bottom: 20px;
+        left: 240px;
+      }
+
     }
   }
 }

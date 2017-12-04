@@ -1,0 +1,10 @@
+form.node-atom-form,
+form.node-atom-edit-form {
+  @extend %text-input;
+
+  .form-item {
+    .description {
+      display: none;
+    }
+  }
+}

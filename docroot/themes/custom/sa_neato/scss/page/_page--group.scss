@@ -1,10 +1,11 @@
-body.path-group {
+body.entity-group-canonical {
+
   main.outer-container {
     @extend %layout-padding;
   }
 
   .page-title {
-//  display: none;
+    display: none;
   }
 
   #main-content-group {

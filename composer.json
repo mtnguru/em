@@ -43,7 +43,8 @@
         "drupal/social_media": "^1.2",
         "drush/drush": "8.*",
         "phayes/geophp": "^1.2",
-        "drupal/special_menu_items": "1.x-dev"
+        "drupal/special_menu_items": "1.x-dev",
+        "drupal/examples": "1.x-dev"
     },
     "repositories": [
         {
