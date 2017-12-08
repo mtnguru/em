@@ -58,6 +58,11 @@ function az_user_preprocess_user(&$variables) {
 
   // Get the URL of the user
   $variables['url'] = $variables['user']->url();
+
+  // Get Recent Content View
+  $variables['view_user_activity'] = views_embed_view('content_recent', 'user_block');
+  $variables['view_user_comments'] = views_embed_view('az_comments', 'user_block');
+  $variables['view_user_media'] = views_embed_view('az_media', 'view_user_block');
   return;
 }
 

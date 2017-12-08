@@ -26,14 +26,14 @@ h6 {
 
 h1 {
   color: $color-gold;
-  font-size: 250%;
+  font-size: 200%;
   margin: 0 0 .5em;
   line-height: 1;
 }
 
 h2 {
   color : tint($color-gold, 25%);
-  font-size: 200%;
+  font-size: 175%;
 }
 
 h3 {
@@ -43,7 +43,7 @@ h3 {
 
 h4 {
   color : tint($color-gold, 75%);
-  font-size: 115%;
+  font-size: 120%;
 }
 
 p {
@@ -71,7 +71,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 2px solid $base-separator-color;
+  border-top: 3px solid $base-separator-color;
   margin: 1em 0;
   padding: 0;
 }

@@ -1,0 +1,21 @@
+.az-block {
+  border: 2px solid $header-background;
+  border-radius: $base-border-radius;
+  margin-bottom: 30px;
+
+  .block-title {
+    margin: -1px -1px 0;
+    h2 {
+      font-size: 110%;
+      padding: 10px 15px;
+      margin: 0;
+      background: $header-background;
+      color : tint($color-gold, 25%);
+      border-radius: $base-border-radius $base-border-radius 0 0;
+      @extend %text-shadow;
+    }
+  }
+  .block-content {
+    padding: 15px;
+  }
+}

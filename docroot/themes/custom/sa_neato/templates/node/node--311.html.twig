@@ -74,6 +74,9 @@
 * @see template_process()
 */
 #}
+
+{{ attach_library('sa_neato/tabs') }}
+
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
   {{ title_prefix }}
   {% if not page %}
@@ -81,21 +84,68 @@
   {% endif %}
   {{ title_suffix }}
 
-  {% if display_submitted %}
-  <div class="posted">
-    {% if user_picture %}
-      {{ user_picture }}
-    {% endif %}
-    {{ submitted }}
+  {{ content|without('links') }}
+
+  <div class="sidebar-left">
+    <div class="block user-header">
+      <div class="user-picture">
+        <img src="{{ user_picture_url }}" />
+      </div>
+      <div class="user-text">
+        {{ user_name }}
+        <div class="edit-account"><a href="/user/{{ user_id }}/edit">Edit Account</a></div>
+        <div class="view-home-page"><a href="/user/{{ user_id }}">View My Home Page</a></div>
+      </div>
+    </div>
+
+    <div class="az-block my-groups">
+      <div class="block-title"><h2>My Groups</h2></div>
+
+      <div class="block-content">
+        {{ view_my_groups }}
+      </div>
+    </div>
+
+    {{ block_donate }}
   </div>
-  {% endif %}
 
-  {{ content|without('field_contribute', 'field_comments', 'links') }}
+  <div class="main-content">
+    <ul class="az-tabs">
 
-  {% if content.field_tags|length and not is_front %}
-    {{ content.field_tags }}
-  {% endif %}
+      <li class="tab content-recent">
+        <div class="tab-title"><h2>Recent Activity</h2></div>
 
-  {{ content.links }}
-  {{ content.field_comments }}
+        <div class="tab-content">
+          {{ view_content_recent }}
+        </div>
+      </li>
+
+      <li class="tab my-activity">
+        <div class="tab-title"><h2>My Activity</h2></div>
+
+        <div class="tab-content">
+          {{ view_my_activity }}
+        </div>
+      </li>
+
+      <li class="tab my-comments">
+        <div class="tab-title"><h2>My Comments</h2></div>
+
+        <div class="tab-content">
+          {{ view_my_comments }}
+        </div>
+      </li>
+
+      <li class="tab my-media">
+        <div class="tab-title"><h2>My Media</h2></div>
+
+        <div class="tab-content">
+          {{ view_my_media }}
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  {# content.links #}
 </article>

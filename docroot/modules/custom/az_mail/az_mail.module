@@ -15,18 +15,18 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-function _az_mail_e_mail_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function _az_mail_email_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Remove site roles from list of roles - Leave group roles.
-  foreach ($form['field_group_role']['widget']['#options'] as $key => $option) {
+  foreach ($form['field_group_roles']['widget']['#options'] as $key => $option) {
     if ($key == 'theories-administrator' ||
       $key == 'theories-anonymous' ||
       preg_match('/\\d/', $key) > 0 ) {   // look for keys with digits - they are site roles
-      unset($form['field_group_role']['widget']['#options'][$key]);
+      unset($form['field_group_roles']['widget']['#options'][$key]);
     }
   }
 
   // Set send email on save to false.
-  $form['field_send_e_mail']['widget']['value']['#default_value'] = false;
+  $form['field_send_email']['widget']['value']['#default_value'] = false;
 /*$form['send_email'] = [
     '#type' => 'checkbox',
     '#title' => 'Send email on save',
@@ -37,12 +37,12 @@ function _az_mail_e_mail_form_alter(&$form, FormStateInterface $form_state, $for
   $form['actions']['submit']['#submit'][] = '_az_mail_node_submit';
 }
 
-function az_mail_form_node_e_mail_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  _az_mail_e_mail_form_alter($form, $form_state, $form_id);
+function az_mail_form_node_email_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  _az_mail_email_form_alter($form, $form_state, $form_id);
 }
 
-function az_mail_form_node_e_mail_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  _az_mail_e_mail_form_alter($form, $form_state, $form_id);
+function az_mail_form_node_email_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  _az_mail_email_form_alter($form, $form_state, $form_id);
 }
 
 function _az_mail_node_submit(&$form, FormStateInterface $form_state) {
@@ -133,7 +133,7 @@ function az_mail_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
  * Implements HOOK_node_presave().
  **/
 function az_mail_node_presave(Node $node) {
-  if ($node->getEntityTypeId() !== 'node' || $node->bundle() !== 'e_mail') return;
+  if ($node->getEntityTypeId() !== 'node' || $node->bundle() !== 'email') return;
 
   $mailManager = \Drupal::service('plugin.manager.mail');
 
@@ -148,7 +148,7 @@ function az_mail_node_presave(Node $node) {
       $set['group_member'][] = $value['target_id'];
     }
   }
-  if ($values = $node->field_group_role->getValue()) {
+  if ($values = $node->field_group_roles->getValue()) {
     foreach ($values as $value) {
       $set['qroup_role'][] = $value['target_id'];
     }
@@ -158,7 +158,7 @@ function az_mail_node_presave(Node $node) {
 
   $params['subject'] = $node->title->value;
 
-  $mailit = $node->field_send_e_mail->value;
+  $mailit = $node->field_send_email->value;
   if ($mailit) {
     $fullmessage = "Sending mail to the following:\n";
   } else {

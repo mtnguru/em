@@ -1,0 +1,37 @@
+.view.az-comments {
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .parent {
+    line-height: 1.2;
+  }
+
+  .header {
+    padding-bottom: 10px;
+  }
+
+  .views-row {
+    padding: 12px 0;
+    border-bottom: 1px solid $base-separator-color;
+  }
+
+  .changed {
+    color: $color-grey;
+    font-style: italic;
+  }
+
+  .state {
+    color: black;
+    padding: 1px 5px;
+    border-radius: 5px;
+
+    &.Published   { background-color: $color-published; }
+    &.Unpublished { background-color: $color-unpublished; }
+    &.Needs       { background-color: $color-needs-review; }
+    &.Draft       { background-color: $color-draft; }
+    &.Placeholder { background-color: $color-placeholder; }
+  }
+}

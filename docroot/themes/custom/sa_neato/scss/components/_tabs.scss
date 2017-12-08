@@ -13,3 +13,48 @@ nav.tabs {
     }
   }
 }
+
+ul.az-tabs {
+  list-style: none;
+  border-bottom: 2px solid $secondary-background-color;
+  padding: 0;
+  position: relative;
+  @include clearfix;
+
+  li.tab {
+    float: left;
+
+    .tab-title {
+      margin-right: 10px;
+      border: 2px solid $base-separator-color;
+      border-bottom: 0;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+
+      h2 {
+        font-size: 18px;
+        color: $color-green;
+        padding: 5px 10px;
+        margin: 0;
+      }
+    }
+
+    .tab-content {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+    }
+
+    &.active {
+      h2 {
+        background-color: $secondary-background-color;
+      }
+
+      .tab-content {
+        display: block;
+      }
+    }
+  }
+}

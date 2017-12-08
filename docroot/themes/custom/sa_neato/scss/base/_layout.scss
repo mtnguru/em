@@ -76,8 +76,8 @@ body {
 
 $page-padding-mobile: rem(20);
 $page-padding-tablet: rem(20);
-$page-padding-desktop: rem(30);
-$page-padding-widescreen: rem(30);
+$page-padding-desktop: rem(40);
+$page-padding-widescreen: rem(60);
 
 %layout-padding-mobile {
   @include media($bp320only) {

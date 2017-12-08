@@ -16,6 +16,9 @@
  * @see template_preprocess_user()
  */
 #}
+
+{{ attach_library('sa_neato/tabs') }}
+
 <article{{ attributes.addClass(['user--full', 'profile']) }}>
   <div class="author-container">
     <div class="image">
@@ -51,8 +54,40 @@
       </div>
     </div>
   </div>
+
   {% if content.field_biography is not empty %}
     {{ content.field_biography }}
   {% endif %}
+
+  <div class="main-content">
+
+    <ul class="az-tabs">
+
+      <li class="tab user-activity">
+        <div class="tab-title"><h2>Activity</h2></div>
+
+        <div class="tab-content">
+          {{ view_user_activity }}
+        </div>
+      </li>
+
+      <li class="tab user-comments">
+        <div class="tab-title"><h2>Comments</h2></div>
+
+        <div class="tab-content">
+          {{ view_user_comments }}
+        </div>
+      </li>
+
+      <li class="tab user-media">
+        <div class="tab-title"><h2>Media</h2></div>
+
+        <div class="tab-content">
+          {{ view_user_media }}
+        </div>
+      </li>
+
+    </ul>
+  </div>
 
 </article>

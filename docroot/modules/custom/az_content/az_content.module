@@ -9,6 +9,7 @@ use Drupal\az_groups\azGroupQuery;
 use Drupal\comment\Entity\Comment;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -243,10 +244,8 @@ function az_content_preprocess_node(&$variables) {
 
   // Add marker if content is New, Updated or has already been read.
   switch (node_mark($variables['node']->id(), $variables['node']->getChangedTime())) {
-    case 0: return;
-
-//  case 0: $mark = 'Read'; break;
-    case 1: $mark = 'New'; break;
+    case 0: $mark = '';        break;
+    case 1: $mark = 'New';     break;
     case 2: $mark = 'Updated'; break;
   };
   $variables['has_new_content'] = [
@@ -256,6 +255,11 @@ function az_content_preprocess_node(&$variables) {
     ],
     'label' => ['#markup' => $mark],
   ];
+
+  // if CT does not have moderation_state, substitute in the published state.
+
+  if (empty($variables['moderation_state'])) {
+  }
 
   switch ($node->getType()) {
     case 'article':
@@ -280,12 +284,9 @@ function az_content_preprocess_node(&$variables) {
         // if so load group and add to output.
         if ($gid = azGroupQuery::inGroup($node)) {
           $group = \Drupal::entityManager()->getStorage('group')->load($gid);
-          $variables['content']['group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$gid);
-          $variables['content']['group_label'] = $group->label->value;
+          $variables['group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$gid);
+          $variables['group_label'] = $group->label->value;
         }
-
-        $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-        $variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 
         // Add has_new_content - New or Updated
         switch (node_mark($node->id(), $node->getChangedTime())) {
@@ -302,6 +303,27 @@ function az_content_preprocess_node(&$variables) {
           'label' => ['#markup' => $mark],
         ];
       }
+
+      break;
+
+    case 'landing_page':
+
+      $user = User::load(\Drupal::currentUser()->id());
+      $variables['user_id'] = $user->id();
+      $variables['user_name'] = $user->name->value;
+      $picture = $user->field_picture->getValue();
+      $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
+      $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')->buildUrl($file->getFileUri());
+
+
+      $variables['view_my_groups'] = views_embed_view('az_my_groups', 'user_block');
+      $variables['view_my_activity'] = views_embed_view('az_my_activity', 'user_block');
+      $variables['view_my_comments'] = views_embed_view('az_my_comments', 'user_block');
+      $variables['view_my_media'] = views_embed_view('az_media', 'user_block');
+      $variables['view_content_recent'] = views_embed_view('content_recent', 'all_block');
+
+      $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+      $variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 
       break;
   }

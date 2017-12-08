@@ -1,0 +1,16 @@
+.view {
+  .js-pager__items {
+    text-align: center;
+    margin: 10px 0;
+
+    a {
+      margin: 0 auto;
+      display: block;
+      color: white;
+      padding: 5px;
+      width: 160px;
+      background: $color-blue;
+      border-radius: 5px;
+    }
+  }
+}

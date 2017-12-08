@@ -67,7 +67,7 @@
 
     > div {
       float: left;
-      opacity: .35;
+      opacity: .20;
       @include transition-3d;
       &#book-show-all,
       a {
@@ -144,19 +144,19 @@
 
     &.menu-item--placeholder {
       > a {
-        color: $color-grey;
+        color: $color-placeholder
       }
     }
 
     &.menu-item--needs-review {
       > a {
-        color: #dd66ee;
+        color: $color-needs-review;
       }
     }
 
     &.menu-item--draft {
       > a {
-        color: #66bbff;
+        color: $color-draft;
       }
     }
 

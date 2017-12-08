@@ -4,24 +4,29 @@
 $color-black: #000000;
 $color-dark-grey: #333333 !default;
 $color-dim-grey: #666666;
-$color-medium-grey: #888888 !default;
-$color-grey: #aaaaaa !default;
+$color-grey: #BBBBBB !default;
 $color-light-grey: #DDDDDD !default;
-$color-white: #ffffff;
+$color-white: #FFFFFF;
 
 /////////////// Color Scheme /////////////////////
-$color-dark-blue: #102e4a;
-$color-blue: #5887ff;
-$color-turquoise: #44d9e6;
-$color-purple: #53c;
-$color-purple-red: #a682ff;
-$color-green: #7fffb0;
-//$color-dark-green: #0f5f20;
-$color-dark-green: #064a10;
-$color-gold: #ffcc00;
+$color-dark-blue: #102E4A;
+$color-blue: #5887FF;
+$color-turquoise: #44D9E6;
+$color-purple: #53C;
+$color-purple-red: #A682ff;
+$color-green: #7FFFB0;
+//$color-dark-green: #0F5F20;
+$color-dark-green: #064A10;
+$color-gold: #FFCC00;
 $color-light-gold: lighten($color-gold, 10%);
-$color-light-turquoise: #a5ffd1;
-$color-off-white: #faf0ff;
+$color-light-turquoise: #A5FFD1;
+$color-off-white: #FAF0FF;
+
+$color-placeholder: $color-grey;
+$color-draft: #66BBFF;
+$color-needs-review: #DD66EE;
+$color-published: #EEEE00;
+$color-unpublished: #FF9900;
 
 $transparent-captions-color: rgba($color-off-white, 0.56);
 $accent-line-color: $color-purple;
@@ -33,7 +38,6 @@ $header-color: $color-light-turquoise;
 
 // Top Navigation
 $topnav-background: $color-dark-green;
-// $topnav-color: #CCFFDD;
 $topnav-color: $color-turquoise;
 
 // Base colors.
@@ -53,9 +57,9 @@ $base-accent-color: $color-dark-green !default;
 $base-link-color: $color-green !default;
 
 $base-header-bar-color: $color-light-turquoise;
-$base-date-color: $color-medium-grey;
+$base-date-color: $color-grey;
 
-$base-separator-color: lighten($base-background-color, 25%);
+$base-separator-color: lighten($base-background-color, 15%);
 
 $page-title-color: #9cf;
 
@@ -93,7 +97,7 @@ $breadcrumb-border-color: $base-border-color;
 $breadcrumb-arrow-color: $breadcrumb-border-color;
 $breadcrumb-background: $base-background-color;
 $breadcrumb-inactive-hover-color: $breadcrumb-background;
-$breadcrumb-color: $color-medium-grey;
+$breadcrumb-color: $color-grey;
 $breadcrumb-color-hover: $base-link-color;
 $breadcrumb-color-active: $breadcrumb-color;
 

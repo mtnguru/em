@@ -1,4 +1,57 @@
-body.atom-dashboard {
-//background: $color-evening;
-//color: #faf0ff;
+body.az-dashboard {
+
+  #sidebar-left {
+  }
+  #main-content {
+
+  }
+  .block  {
+//  border: 1px solid white;
+  }
+  .block-title {
+  }
+
+  @include clearfix;
+
+  .sidebar-left {
+    float: left;
+
+    @include media(max-width $bp580) {
+      width: 100%;
+    }
+    @include media($bp960) {
+      width: 30%;
+      max-width: 350px;
+      padding-right: 40px;
+    }
+  }
+  .main-content {
+    float: left;
+    position: relative;
+
+    @include media(max-width $bp580) {
+      width: 100%;
+    }
+    @include media($bp960) {
+      width: 70%;
+    }
+  }
+
+  .user-header {
+    margin-bottom: 30px;
+
+    .user-text {
+      display: inline-block;
+      margin-left: 20px;
+      vertical-align: top;
+    }
+    .user-picture {
+      display: inline-block;
+    }
+  }
+
+  .field--name-body {
+    padding-bottom: 20px;
+  }
+
 }

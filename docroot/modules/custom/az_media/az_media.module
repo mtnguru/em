@@ -61,7 +61,7 @@ function az_media_media_presave(EntityInterface $entity) {
 
   $author = $entity->field_author->value;
   if (!$author) {
-//  $entity->field_author->setValue($user);
+    $entity->field_author->setValue($user);
   }
 
   $create_date = $entity->field_create_date->value;
