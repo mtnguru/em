@@ -19,6 +19,7 @@ body.page-node-type-book {
     }
   }
 
+
   .main-center {
     float: left;
 
@@ -34,7 +35,10 @@ body.page-node-type-book {
     .field--name-title {
       display: block;
       font-weight: bold;
-//    @extend h1;
+//    @extend h2;
+      a {
+        color: $color-gold;
+      }
     }
     .field--name-body {
       margin-bottom: 20px;

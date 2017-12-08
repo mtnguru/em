@@ -15,12 +15,16 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+function _az_mail_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  return;
+}
+
 function _az_mail_email_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Remove site roles from list of roles - Leave group roles.
   foreach ($form['field_group_roles']['widget']['#options'] as $key => $option) {
     if ($key == 'theories-administrator' ||
-      $key == 'theories-anonymous' ||
-      preg_match('/\\d/', $key) > 0 ) {   // look for keys with digits - they are site roles
+        $key == 'theories-anonymous' ||
+        preg_match('/\\d/', $key) > 0 ) {   // look for keys with digits - they are site roles
       unset($form['field_group_roles']['widget']['#options'][$key]);
     }
   }
@@ -150,7 +154,7 @@ function az_mail_node_presave(Node $node) {
   }
   if ($values = $node->field_group_roles->getValue()) {
     foreach ($values as $value) {
-      $set['qroup_role'][] = $value['target_id'];
+      $set['group_role'][] = $value['target_id'];
     }
   }
 
