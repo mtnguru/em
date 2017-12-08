@@ -5,7 +5,8 @@
 
 mysqldb:
     type: "mysql:10.0"
-    disk: 2048
+#   disk: 2048
+    disk: 2096
 #
 #rediscache:
 #    type: "redis:3.0"
