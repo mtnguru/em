@@ -87,24 +87,29 @@
   {{ content|without('links') }}
 
   <div class="sidebar-left">
-    <div class="block user-header">
-      <div class="user-picture">
-        <img src="{{ user_picture_url }}" />
-      </div>
-      <div class="user-text">
-        {{ user_name }}
-        <div class="edit-account"><a href="/user/{{ user_id }}/edit">Edit Account</a></div>
-        <div class="view-home-page"><a href="/user/{{ user_id }}">View My Home Page</a></div>
-      </div>
-    </div>
 
-    <div class="az-block my-groups">
-      <div class="block-title"><h2>My Groups</h2></div>
-
-      <div class="block-content">
-        {{ view_my_groups }}
+    {% if logged_in %}
+      <div class="block user-header">
+        <div class="user-picture">
+          <img src="{{ user_picture_url }}" />
+        </div>
+        <div class="user-text">
+          {{ user_name }}
+          <div class="edit-account"><a href="/user/{{ user_id }}/edit">Edit Account</a></div>
+          <div class="view-home-page"><a href="/user/{{ user_id }}">View My Home Page</a></div>
+        </div>
       </div>
-    </div>
+
+      <div class="az-block my-groups">
+        <div class="block-title"><h2>My Groups</h2></div>
+
+        <div class="block-content">
+          {{ view_my_groups }}
+        </div>
+      </div>
+    {% else %}
+      <div>You need to sign up!</div>
+    {% endif %}
 
     {{ block_donate }}
   </div>
@@ -120,29 +125,31 @@
         </div>
       </li>
 
-      <li class="tab my-activity">
-        <div class="tab-title"><h2>My Activity</h2></div>
+      {% if logged_in %}
+        <li class="tab my-activity">
+          <div class="tab-title"><h2>My Activity</h2></div>
 
-        <div class="tab-content">
-          {{ view_my_activity }}
-        </div>
-      </li>
+          <div class="tab-content">
+            {{ view_my_activity }}
+          </div>
+        </li>
 
-      <li class="tab my-comments">
-        <div class="tab-title"><h2>My Comments</h2></div>
+        <li class="tab my-comments">
+          <div class="tab-title"><h2>My Comments</h2></div>
 
-        <div class="tab-content">
-          {{ view_my_comments }}
-        </div>
-      </li>
+          <div class="tab-content">
+            {{ view_my_comments }}
+          </div>
+        </li>
 
-      <li class="tab my-media">
-        <div class="tab-title"><h2>My Media</h2></div>
+        <li class="tab my-media">
+          <div class="tab-title"><h2>My Media</h2></div>
 
-        <div class="tab-content">
-          {{ view_my_media }}
-        </div>
-      </li>
+          <div class="tab-content">
+            {{ view_my_media }}
+          </div>
+        </li>
+      {% endif %}
 
     </ul>
   </div>

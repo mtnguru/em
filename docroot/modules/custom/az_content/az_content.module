@@ -309,17 +309,20 @@ function az_content_preprocess_node(&$variables) {
     case 'landing_page':
 
       $user = User::load(\Drupal::currentUser()->id());
-      $variables['user_id'] = $user->id();
-      $variables['user_name'] = $user->name->value;
-      $picture = $user->field_picture->getValue();
-      $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
-      $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')->buildUrl($file->getFileUri());
+      $id = $user->id();
+      if ($id != 0) {
+        $variables['user_id'] = $user->id();
+        $variables['user_name'] = $user->name->value;
+        $picture = $user->field_picture->getValue();
+        $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
+        $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')->buildUrl($file->getFileUri());
 
+        $variables['view_my_groups'] = views_embed_view('az_my_groups', 'user_block');
+        $variables['view_my_activity'] = views_embed_view('az_my_activity', 'user_block');
+        $variables['view_my_comments'] = views_embed_view('az_my_comments', 'user_block');
+        $variables['view_my_media'] = views_embed_view('az_media', 'user_block');
+      }
 
-      $variables['view_my_groups'] = views_embed_view('az_my_groups', 'user_block');
-      $variables['view_my_activity'] = views_embed_view('az_my_activity', 'user_block');
-      $variables['view_my_comments'] = views_embed_view('az_my_comments', 'user_block');
-      $variables['view_my_media'] = views_embed_view('az_media', 'user_block');
       $variables['view_content_recent'] = views_embed_view('content_recent', 'all_block');
 
       $block_entity = Drupal\block\Entity\Block::load('azdonateblock');

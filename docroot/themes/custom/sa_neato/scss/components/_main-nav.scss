@@ -64,7 +64,7 @@
     }
 
     .name {
-      font-size: 16px;
+      font-size: 100%;
       float: left;
       max-width: 100px;
       margin-left: 12px;
@@ -156,7 +156,7 @@
           }
           .label {
             font-family: opendyslexic;
-            font-size: 14px;
+            font-size: 87.5%;
           }
           &:hover {
             .popup {
@@ -413,6 +413,7 @@
     background-color: $color-purple;
     border-radius: 8px;
     border: 1px solid $color-light-turquoise;
+    z-index: 100;
 
     @include media($horizontal-bar-mode) {
       left: -$centered-navigation-submenu-padding;
