@@ -15,6 +15,7 @@
   font-weight: 400;
 }
 
+.az-fa-accessibility:before     { @extend .az-fa; content: "\f29a"; }
 .az-fa-adjust:before            { @extend .az-fa; content: "\f042"; }
 .az-fa-arrow-down:before        { @extend .az-fa; content: "\f063"; }
 .az-fa-arrow-left:before        { @extend .az-fa; content: "\f060"; }

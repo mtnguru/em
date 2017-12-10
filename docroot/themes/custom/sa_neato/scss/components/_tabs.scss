@@ -1,14 +1,56 @@
-nav.tabs {
-  margin-bottom: 1em;
+#block-sa-neato-local-tasks {
+  .contextual {
+    display: none;
+  }
+  .content-container {
+    height: 0;
+  }
 
-  ul.tabs {
+  nav.tabs {
+    margin-bottom: 1em;
 
-    a {
-      &.is-active {
-        background-color: lighten($base-background-color, 15%);
+    @extend .az-fa-pencil;
+    &:before {
+      position: absolute;
+      right: 0;
+      top: 0;
+      opacity: .2;
+      @include transition-3d($property: opacity);
+    }
+
+    ul.tabs {
+      display: none;
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      z-index: 10;
+      background-color: $color-dark-green;
+      border: 2px solid $color-green;
+      border-radius: 8px;
+
+      li:last-child {
+        margin-right: 0;
       }
-      &:hover {
-        background-color: lighten($base-background-color, 30%);
+
+      a {
+        border-radius: 6px;
+        padding: 1em;
+        &.is-active {
+          background-color: lighten($base-background-color, 15%);
+        }
+        &:hover {
+          background-color: lighten($base-background-color, 30%);
+        }
+      }
+    }
+
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+
+      ul.tabs {
+        display: block;
       }
     }
   }

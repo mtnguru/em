@@ -144,9 +144,10 @@
           float: right;
           position: relative;
           .accessibility-hover {
-            padding: 17px 20px 17px 0;
-            font-size: 90%;
-            color: $color-green;
+            padding: 15px;
+            padding-right: 40px;
+            font-size: 150%;
+            color: $color-white;
           }
           .popup {
             position: absolute;

@@ -22,6 +22,7 @@ function az_user_form_user_form_alter(&$form, FormStateInterface $form_state, $f
   if (!\Drupal::currentUser()->hasPermission('administer account settings')) {
     $form['field_address']['#access'] = false;
     $form['field_phone']['#access'] = false;
+    $form['field_private_notes']['#access'] = false;
   }
   return;
 }
