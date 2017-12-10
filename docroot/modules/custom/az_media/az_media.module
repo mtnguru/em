@@ -227,12 +227,14 @@ function _az_media_getExif($uri) {
     }
   }
   pclose($pipe);
-
-  ksort($d);
-  foreach ($d as $key => $value) {
-    $value = trim(chop($value));
-    print ("Key |$key|   Value |$value|\n");
+  if ($d) {
+    ksort($d);
+    foreach ($d as $key => $value) {
+      $value = trim(chop($value));
+      print ("Key |$key|   Value |$value|\n");
+    }
   }
+
   return $d;
 }
 
