@@ -118,16 +118,32 @@
     <ul class="az-tabs">
 
       <li class="tab content-recent">
-        <div class="tab-title"><h2>Recent Activity</h2></div>
+        <div class="tab-title"><h2>Activity</h2></div>
 
         <div class="tab-content">
           {{ view_content_recent }}
         </div>
       </li>
 
+      <li class="tab newss-recent">
+        <div class="tab-title"><h2>News</h2></div>
+
+        <div class="tab-content">
+          {{ view_news_recent }}
+        </div>
+      </li>
+
+      <li class="tab comments-recent">
+        <div class="tab-title"><h2>Comments</h2></div>
+
+        <div class="tab-content">
+          {{ view_comments_recent }}
+        </div>
+      </li>
+
       {% if logged_in %}
         <li class="tab my-activity">
-          <div class="tab-title"><h2>My Activity</h2></div>
+          <div class="tab-title"><h2>Activity</h2></div>
 
           <div class="tab-content">
             {{ view_my_activity }}
