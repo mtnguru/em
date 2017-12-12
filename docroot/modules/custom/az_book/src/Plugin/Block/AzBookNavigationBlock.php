@@ -139,7 +139,9 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         $result = &$results[$node->id()];
         for ($i = 1; $i <= $result->depth; $i++) {
           $n = 'p' . $i;
-          $results[$result->$n]->activeTrail = true;
+          if (!empty($results[$result->$n])) {
+            $results[$result->$n]->activeTrail = TRUE;
+          }
         }
       }
 

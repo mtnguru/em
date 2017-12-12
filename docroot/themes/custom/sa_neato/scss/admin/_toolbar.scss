@@ -1,5 +1,4 @@
 #toolbar-bar {
-  font-size: 62%;
 
   .toolbar-box {
     a::before {
@@ -13,5 +12,16 @@
 
   a {
     color: #56d;
+  }
+
+  .toolbar-menu-administration {
+
+    > ul > li > ul {
+      font-size: 11px;
+
+      a {
+        padding: .6em 1em;
+      }
+    }
   }
 }
