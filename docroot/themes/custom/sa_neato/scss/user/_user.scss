@@ -1,3 +1,16 @@
+.user-header {
+  .user-text {
+    line-height: 1.2;
+    .name {
+      color: $color-user;
+      margin-bottom: 15px;
+    }
+  }
+}
+.username {
+  color: $color-user;
+}
+
 .author-container {
   vertical-align: top;
   display: inline-block;
@@ -13,6 +26,9 @@
       line-height: 1.2;
       font-size: 130%;
       font-weight: bold;
+      a {
+        color: $color-user;
+      }
     }
 
     .location {
