@@ -6,7 +6,7 @@ $message-border-radius: $base-border-radius;
   color: darken($color, 70%);
   display: block;
   margin: 10px 30px;
-  padding: $base-spacing / 2 $base-spacing / 2 $base-spacing / 2 50px;
+  padding: 10px 30px;
   border-radius: $message-border-radius;
 
   a {

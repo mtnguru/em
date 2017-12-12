@@ -1,9 +1,30 @@
 // body.user-login
 body.user-login {
 
-  main.outer-wrapper {
-    width: 400px;
+  .status-messages {
     margin: 0 auto;
+    width: 500px;
+    margin-bottom: 30px;
+  }
+
+  #block-sa-neato-content {
+    .content-container {
+      width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  .form-item {
+    margin: 1em 0;
+  }
+
+  input {
+    width: 300px;
+  }
+
+  #edit-submit {
+    margin-top: 20px;
+    width: 100px;
   }
 } // body.page-node-type-article
 
