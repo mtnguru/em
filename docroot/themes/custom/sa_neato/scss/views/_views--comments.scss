@@ -28,10 +28,10 @@
     padding: 1px 5px;
     border-radius: 5px;
 
-    &.Published   { background-color: $color-published; }
-    &.Unpublished { background-color: $color-unpublished; }
-    &.Needs       { background-color: $color-needs-review; }
-    &.Draft       { background-color: $color-draft; }
-    &.Placeholder { background-color: $color-placeholder; }
+    &.published   { background-color: $color-published; }
+    &.unpublished { background-color: $color-unpublished; }
+    &.needs       { background-color: $color-needs-review; }
+    &.draft       { background-color: $color-draft; }
+    &.placeholder { background-color: $color-placeholder; }
   }
 }
