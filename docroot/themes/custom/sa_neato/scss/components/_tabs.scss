@@ -1,57 +1,61 @@
-#block-sa-neato-local-tasks {
-  position: relative;
-  .contextual {
-    display: none;
-  }
-  .content-container {
-    height: 0;
-  }
-
-  nav.tabs {
-    margin-bottom: 1em;
-
-    @extend .az-fa-pencil;
-    &:before {
-      position: absolute;
-      right: -20px;
-      top: -30px;
-      opacity: .4;
-      @include transition-3d($property: opacity);
-    }
-
-    ul.tabs {
+body.entity-user-canonical,
+body.entity-group-canonical,
+body.entity-node-canonical {
+  #block-sa-neato-local-tasks {
+    position: relative;
+    .contextual {
       display: none;
-      position: absolute;
-      right: -20px;
-      top: -20px;
-      z-index: 10;
-      background-color: $color-dark-green;
-      border: 2px solid $color-green;
-      border-radius: 8px;
-
-      li:last-child {
-        margin-right: 0;
-      }
-
-      a {
-        border-radius: 6px;
-        padding: 1em;
-        &.is-active {
-          background-color: lighten($base-background-color, 15%);
-        }
-        &:hover {
-          background-color: lighten($base-background-color, 30%);
-        }
-      }
+    }
+    .content-container {
+      height: 0;
     }
 
-    &:hover {
+    nav.tabs {
+      margin-bottom: 1em;
+
+      @extend .az-fa-pencil;
       &:before {
-        opacity: 1;
+        position: absolute;
+        right: -20px;
+        top: -30px;
+        opacity: .4;
+        @include transition-3d($property: opacity);
       }
 
       ul.tabs {
-        display: block;
+        display: none;
+        position: absolute;
+        right: -20px;
+        top: -20px;
+        z-index: 10;
+        background-color: $color-dark-green;
+        border: 2px solid $color-green;
+        border-radius: 8px;
+
+        li:last-child {
+          margin-right: 0;
+        }
+
+        a {
+          border-radius: 6px;
+          padding: 1em;
+          &.is-active {
+            background-color: lighten($base-background-color, 15%);
+          }
+          &:hover {
+            background-color: lighten($base-background-color, 30%);
+          }
+        }
+      }
+
+      &:hover {
+        &:before {
+          opacity: 1;
+        }
+
+        ul.tabs {
+          display: block;
+        }
       }
     }
   }

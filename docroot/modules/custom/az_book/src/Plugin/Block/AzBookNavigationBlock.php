@@ -49,19 +49,35 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       if (!empty($child->activeTrail)) {
         $classes[] = 'menu-item--active';
       }
-      if (!empty($child->moderation_state)) {
-        if ($child->moderation_state == 'placeholder') {
+      if ($child->moderation_state) {
+        $state = $child->moderation_state;
+      } else {
+        if ($child->status) {
+          $state = 'published';
+        } else {
+          $state = 'draft';
+        }
+      }
+      switch ($state) {
+        case 'placeholder':
           $classes[] = 'menu-item--placeholder';
           $classes[] = 'menu-item--unpublished';
-        }
-        if ($child->moderation_state == 'draft') {
+          break;
+        case 'draft':
           $classes[] = 'menu-item--draft';
           $classes[] = 'menu-item--unpublished';
-        }
-        if ($child->moderation_state == 'needs_review') {
+          break;
+        case 'needs_review':
           $classes[] = 'menu-item--needs-review';
           $classes[] = 'menu-item--unpublished';
-        }
+          break;
+        case 'published':
+          $classes[] = 'menu-item--published';
+          break;
+        case 'archived':
+          $classes[] = 'menu-item--archived';
+          $classes[] = 'menu-item--unpublished';
+          break;
       }
       if (empty($child->children)) {
         $build = [
@@ -123,14 +139,17 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         $query->orderBy('p' . $i, 'ASC');
       }
       $query->condition('bid', $bid);
-      if (\Drupal::currentUser()->hasPermission('show unpublished book pages')) {
-        $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid');
-      }
-      else {
-        $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid AND nfd.moderation_state = :published', [':published' => 'published']);
-      }
-      $query->addField('nfd', 'moderation_state');
+
+      $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid');
       $query->addField('nfd', 'title');
+      $query->addField('nfd', 'status');
+      if (!\Drupal::currentUser()->hasPermission('show unpublished book pages')) {
+        $query->condition('nfd.status', 1);
+      }
+
+      $query->leftJoin('content_moderation_state_field_data', 'cmsfd', 'cmsfd.content_entity_id = book.nid');
+      $query->addField('cmsfd', 'moderation_state');
+
       $results = $query->execute()->fetchAllAssoc('nid');
       if (count($results) < 1) return [];
 
