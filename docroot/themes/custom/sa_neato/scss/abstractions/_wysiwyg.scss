@@ -39,8 +39,10 @@ body.cke_editable,
   }
 
 
-  #cke_30 {
-    clear: both;
+  .cke_toolbox {
+    > :nth-child(5) {
+      clear: both;
+    }
   }
 }
 

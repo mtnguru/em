@@ -1,8 +1,23 @@
+#block-sa-neato-local-tasks {
+  nav.tabs {
+    a {
+      border-radius: 6px;
+      padding: .5em 1em;
+      &.is-active {
+        background-color: lighten($base-background-color, 15%);
+      }
+      &:hover {
+        background-color: lighten($base-background-color, 30%);
+      }
+    }
+  }
+}
 body.entity-user-canonical,
 body.entity-group-canonical,
 body.entity-node-canonical {
   #block-sa-neato-local-tasks {
     position: relative;
+
     .contextual {
       display: none;
     }
@@ -37,14 +52,7 @@ body.entity-node-canonical {
         }
 
         a {
-          border-radius: 6px;
           padding: 1em;
-          &.is-active {
-            background-color: lighten($base-background-color, 15%);
-          }
-          &:hover {
-            background-color: lighten($base-background-color, 30%);
-          }
         }
       }
 

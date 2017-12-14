@@ -1,6 +1,6 @@
 .field--name-field-media {
   details.form-wrapper {
-    background: darken($base-background-color, 10);
+    background: darken($base-background-color, 10%);
   }
   .details-description {
     display: none;
@@ -13,12 +13,25 @@
   }
 }
 
-#entity-browser {
+html#entity-browser {
+  background-color: $color-dark-green;
+
+  body {
+    background-color: $color-dark-green;
+  }
+
   h1 {
     display: none;
   }
+
   main {
     padding: 0;
+  }
+
+  #edit-input-file {
+    padding: 10px;
+    background-color: darken($color-dark-green, 5%);
+    border: 1px solid $color-green;
   }
 }
 
