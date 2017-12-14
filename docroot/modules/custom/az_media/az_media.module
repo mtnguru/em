@@ -208,6 +208,7 @@ function _az_media_getExif($uri) {
   //   -n (decimal degrees for lat/long)
   $cmd = 'exiftool -S -n "' . \Drupal::getContainer()->get('file_system')->realpath($uri) . '"';
   $pipe = popen($cmd, "r");
+  $d = [];
   while ($line = fgets($pipe,320)) {
     $args = explode(': ', $line);
     switch ($args[0]) {
@@ -227,7 +228,7 @@ function _az_media_getExif($uri) {
     }
   }
   pclose($pipe);
-  if ($d) {
+  if (count($d)) {
     ksort($d);
     foreach ($d as $key => $value) {
       $value = trim(chop($value));
