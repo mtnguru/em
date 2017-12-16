@@ -39,6 +39,7 @@
   {% from _self import buildMenu %}
 
   <div class="title-container">
+    <div class="group-logo"><a href="{{ group_url }}"><img src="{{ group_logo_url }}"></a></div>
     {{ title_prefix }}
     {% if group_name %}
       <h2 {{ title_attributes }}><a href="{{ group_url }}">{{ group_name }}</a></h2>
@@ -46,35 +47,37 @@
     {{ title_suffix }}
   </div>
 
-  {% if group_links %}
-    <div id="group-links">
-      {{ group_links }}
-    </div>
-  {% endif %}
-
-  {% if book_title %}
-    <hr>
-    <div id="book-title">
-      <a class="{{ book_title_classes }}" href="{{ book_url }}">{{ book_title }}</a>
-      {% if hide_unpublished %}
-        <div id="book-buttons">
-          <div title="Show unpublished pages" id="book-show-all" class="fa fa-bolt"></div>
-          <div title="Edit book page titles and order" id="book-edit">
-            <a href="{{ '/admin/structure/book/' ~ book_id }}" class="fa fa-book"></a>
-          </div>
-        </div>
-      {% endif %}
-    </div>
-
-
-    {% if book_pages %}
-      <div id="book-pages" class="hide-unpublished">
-        <ul>
-          {% for page in book_pages %}
-            {{ buildMenu(page) }}
-          {% endfor %}
-        </ul>
+  <div class="body-container">
+    {% if group_links %}
+      <div id="group-links">
+        {{ group_links }}
       </div>
     {% endif %}
-  {% endif %}
+
+    {% if book_title %}
+      <hr>
+      <div id="book-title">
+        <a class="{{ book_title_classes }}" href="{{ book_url }}">{{ book_title }}</a>
+        {% if hide_unpublished %}
+          <div id="book-buttons">
+            <div title="Show unpublished pages" id="book-show-all" class="fa fa-bolt"></div>
+            <div title="Edit book page titles and order" id="book-edit">
+              <a href="{{ '/admin/structure/book/' ~ book_id }}" class="fa fa-book"></a>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+
+      {% if book_pages %}
+        <div id="book-pages" class="hide-unpublished">
+          <ul>
+            {% for page in book_pages %}
+              {{ buildMenu(page) }}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
 </nav>

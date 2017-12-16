@@ -6,6 +6,7 @@
     border: 2px solid $header-background;
     border-radius: $base-border-radius;
     margin-bottom: 30px;
+    @extend %box-shadow;
 
     .title-container {
       margin: -1px -1px 0;

@@ -25,7 +25,7 @@
 
     .group-label {
       position: absolute;
-      z-index: 10;
+      z-index: 5;
 
       @include media($bp320only) {
         top: 10px;
@@ -49,7 +49,7 @@
         padding: 2px 7px;
         background-color: rgba(0,0,0,.4);
         border-radius: 5px;
-        box-shadow: 0 0 2px 3px rgba(0,0,0,0.4);
+        @extend %box-shadow;
 
         @include media($bp320only) {
           font-size: 100%;
@@ -63,17 +63,6 @@
         @include media($bp1280) {
           font-size: 130%;
         }
-      }
-    }
-
-    .group-image {
-      width: 100%;
-      img {
-        width: 100%;
-        border-radius: 8px;
-        margin: 0 auto;
-        height: auto;
-        display: block;
       }
     }
   }

@@ -80,7 +80,7 @@ ul.az-tabs {
     float: left;
 
     .tab-title {
-      margin-right: 10px;
+      margin-right: 4px;
       border: 2px solid $base-separator-color;
       border-bottom: 0;
       border-top-left-radius: 8px;
@@ -105,6 +105,8 @@ ul.az-tabs {
     &.active {
       h2 {
         background-color: $secondary-background-color;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
       }
 
       .tab-content {

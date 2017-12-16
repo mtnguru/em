@@ -10,8 +10,8 @@
   $centered-navigation-color: $topnav-color;
   $centered-navigation-color-hover: lighten($topnav-color, 25%);
   $centered-navigation-height: 50px;
-  $centered-navigation-item-padding: .75em;
-  $centered-navigation-submenu-padding: .75em;
+  $centered-navigation-item-padding: 1em;
+  $centered-navigation-submenu-padding: 1em;
   $centered-navigation-submenu-width: 18em;
   $centered-navigation-item-nudge: 2.2em;
   $horizontal-bar-mode: $large-screen;
@@ -144,9 +144,9 @@
           float: right;
           position: relative;
           .accessibility-hover {
-            padding: 15px;
+            padding: 18px;
             padding-right: 40px;
-            font-size: 150%;
+            font-size: 120%;
             color: $color-white;
           }
           .popup {
@@ -414,7 +414,7 @@
     background-color: $color-purple;
     border-radius: 8px;
     border: 1px solid $color-light-turquoise;
-    z-index: 100;
+    z-index: 20;
 
     @include media($horizontal-bar-mode) {
       left: -$centered-navigation-submenu-padding;

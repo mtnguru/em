@@ -198,9 +198,11 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       // If this is a group page.
       if (!empty($group)) {
         $build['#group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/' . $group->id());
-        $build['#group_logo'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/' . $group->id());
         $build['#group_name'] = $group->label->value;
         $build['#group_id'] = $group->id();
+        $logo = $group->field_logo_image->getValue();
+        $file = \Drupal\file\Entity\File::load($logo[0]['target_id']);
+        $build['#group_logo_url'] = \Drupal\image\Entity\ImageStyle::load('300x100')->buildUrl($file->getFileUri());
 
         // Add the View Recent Content and Submit Ticket links
         $build['#group_links'] = [

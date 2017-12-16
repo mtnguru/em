@@ -16,6 +16,7 @@ function az_book_theme() {
         'group_id' => '',
         'group_name' => '',
         'group_url' => '',
+        'group_logo_url' => false,
         'group_links' => false,
         'hide_unpublished' => false,
       ],
