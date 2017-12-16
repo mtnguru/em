@@ -23,16 +23,3 @@ function az_book_theme() {
   ];
 }
 
-function az_book_preprocess_node(&$variables) {
-  $node = $variables['node'];
-
-  switch ($node->getType()) {
-     case 'article':
-     case 'user_page':
-     case 'book':
-       $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
-       $variables['block_booknavigation'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
-       break;
-  }
-}
-

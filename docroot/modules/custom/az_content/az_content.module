@@ -242,29 +242,43 @@ function az_content_preprocess_node(&$variables) {
   $view_mode = &drupal_static('az_view_mode');
   $view_mode = $variables['view_mode'];
 
-  // Add marker if content is New, Updated or has already been read.
-  switch (node_mark($variables['node']->id(), $variables['node']->getChangedTime())) {
-    case 0: $mark = '';        break;
-    case 1: $mark = 'New';     break;
-    case 2: $mark = 'Updated'; break;
-  };
-  $variables['has_new_content'] = [
-    '#type' => 'container',
-    '#attributes' => [
-      'class' => ['marker'],
-    ],
-    'label' => ['#markup' => $mark],
-  ];
-
-  // if CT does not have moderation_state, substitute in the published state.
-
-  if (empty($variables['moderation_state'])) {
+  if ($view_mode == 'main_content' || $view_mode == 'full' || $view_mode == 'teaser') {
+    // Add marker if content is New, Updated or has already been read.
+    switch (node_mark($variables['node']->id(), $variables['node']->getChangedTime())) {
+      case 0:
+        $mark = '';
+        break;
+      case 1:
+        $mark = 'New';
+        break;
+      case 2:
+        $mark = 'Updated';
+        break;
+    };
+    $variables['has_new_content'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['marker'],
+      ],
+      'label' => ['#markup' => $mark],
+    ];
   }
 
   switch ($node->getType()) {
     case 'article':
     case 'book':
     case 'page':
+
+      $changed = $node->getChangedTime();
+      $variables['changed'] = \Drupal::service('date.formatter')->format($changed);
+      $variables['ago'] = \Drupal::service('date.formatter')->formatDiff(
+        $changed,
+        REQUEST_TIME,
+        [
+          'granularity' => 3,
+          'return_as_object' => TRUE,
+        ]
+      );
 
       // Add the views map showing locations of images
       if ($view_mode == 'map') {
@@ -287,26 +301,27 @@ function az_content_preprocess_node(&$variables) {
           $variables['group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$gid);
           $variables['group_label'] = $group->label->value;
         }
+      }
 
-        // Add has_new_content - New or Updated
-        switch (node_mark($node->id(), $node->getChangedTime())) {
-//  case 0: $mark = 'Read'; break;
-          case 0: return;
-          case 1: $mark = 'New'; break;
-          case 2: $mark = 'Updated'; break;
-        };
-        $variables['has_new_content'] = [
-          '#type' => 'container',
-          '#attributes' => [
-            'class' => ['marker'],
-          ],
-          'label' => ['#markup' => $mark],
-        ];
+      if ($view_mode == 'full') {
+        $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
+        $variables['sidebar_blocks']['block_booknavigation'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+
+        // Add the views map showing locations of images
+        if (!$node->field_display_image_map->isEmpty()) {
+          $block_entity = Drupal\block\Entity\Block::load('views_block__az_media_block_map_usage');
+          $variables['sidebar_blocks']['block_views_image_map'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+        }
+
+        $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+        $variables['sidebar_blocks']['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
       }
 
       break;
 
     case 'landing_page':
+
+      // Dashboard - Front page
       if (\Drupal::service('path.matcher')->isFrontPage()) {
         $user = User::load(\Drupal::currentUser()->id());
         $id = $user->id();

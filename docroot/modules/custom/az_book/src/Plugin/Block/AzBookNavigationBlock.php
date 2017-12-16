@@ -109,14 +109,17 @@ class AzBookNavigationBlock extends BookNavigationBlock {
     // If this is a node page then find which book it is associated with.
     $route = $this->requestStack->getCurrentRequest()->get('_route');
     $activePage = 'book';
+    $bid = null;
 
     // Based on the route, get the $bid and $gid if available
+    $is_book_page = false;
     switch ($route) {
       case 'entity.group.canonical':
         $activePage = 'recent-content';
         $group = $this->requestStack->getCurrentRequest()->get('group');
         if ($value = $group->field_directory_book->getValue()) {
           $bid = $value[0]['target_id'];
+          $is_book_page = true;
         }
         break;
 
@@ -125,6 +128,9 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         $bid = $node->book['bid'];
         if ($gid = azGroupQuery::inGroup($node)) {
           $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
+          if (!$bid && $value = $group->field_directory_book->getValue()) {
+            $bid = $value[0]['target_id'];
+          }
         }
         break;
     }
@@ -153,8 +159,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       $results = $query->execute()->fetchAllAssoc('nid');
       if (count($results) < 1) return [];
 
-      // If this is a book page, set the active trail
-      if (!empty($node)) {
+      if ($is_book_page && !empty($node)) {
         $result = &$results[$node->id()];
         for ($i = 1; $i <= $result->depth; $i++) {
           $n = 'p' . $i;
@@ -193,6 +198,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       // If this is a group page.
       if (!empty($group)) {
         $build['#group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/' . $group->id());
+        $build['#group_logo'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/' . $group->id());
         $build['#group_name'] = $group->label->value;
         $build['#group_id'] = $group->id();
 
@@ -259,7 +265,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       }
 
       // If this is a book page then mark the book title as active
-      if ($activePage == 'book') {
+      if ($is_book_page) {
         $build['#book_title_classes'] = 'menu-item--active';
       }
       return $build;

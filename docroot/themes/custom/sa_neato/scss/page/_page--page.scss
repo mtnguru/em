@@ -1,11 +1,14 @@
 // body.user-login
-body.page-node-type-book {
+body.page-node-type-book,
+body.page-node-type-article {
   #page-view {
     .block-page-title-block {
       display: none;
     }
   }
+}
 
+article.az-page {
   .sidebar-left {
     float: left;
 
@@ -20,7 +23,7 @@ body.page-node-type-book {
   }
 
 
-  .main-center {
+  .main-container {
     float: left;
 
     @include media(max-width $bp580) {
@@ -31,6 +34,7 @@ body.page-node-type-book {
     }
   }
 
+  article.type-article,
   article.type-book {
     .field--name-title {
       display: block;
