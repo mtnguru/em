@@ -7,10 +7,14 @@ body.user-login {
     margin-bottom: 30px;
   }
 
-  #block-sa-neato-content {
-    .content-container {
+  main.outer-wrapper {
+    #main-wrapper {
       width: 400px;
       margin: 0 auto;
+    }
+  }
+  #block-sa-neato-content {
+    .content-container {
     }
   }
 
@@ -18,14 +22,32 @@ body.user-login {
     margin: 1em 0;
   }
 
+  label {
+    display: inline-block;
+    width: 110px;
+
+  }
   input[type="password"],
   input[type="text"] {
-    width: 300px;
+    display: inline-block;
+    width: 280px;
+  }
+  .description {
+    margin-left: 120px;
   }
 
-  #edit-submit {
-    margin-top: 20px;
-    width: 100px;
+  .form-actions {
+    text-align: center;
+
+    #edit-submit {
+      margin: 20px auto;
+      width: 100px;
+    }
+  }
+
+  hr {
+    width: 400px;
+    margin: 0 auto;
   }
 } // body.page-node-type-article
 

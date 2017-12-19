@@ -136,8 +136,8 @@
           @extend %text-shadow;
           border-radius: 8px;
           padding: .4em .7em .4em;
-          @include transition-3d;
           border: 1px solid $color-green;
+          @include transition-3d($timing: 250ms);
         }
 
         #accessibility {
@@ -150,7 +150,7 @@
             color: $color-white;
           }
           .popup {
-            @include transition-3d(transition-delay  1s);
+            @include transition-3d($timing: 500ms);
             position: absolute;
             top: 45px;
             right: -400px;
