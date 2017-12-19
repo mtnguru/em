@@ -39,9 +39,9 @@ article.az-page {
     .field--name-title {
       display: block;
       font-weight: bold;
-      @extend h2;
+//    @extend h2;
       a {
-        color: $color-gold;
+        color: $color-group;
       }
     }
     .field--name-body {

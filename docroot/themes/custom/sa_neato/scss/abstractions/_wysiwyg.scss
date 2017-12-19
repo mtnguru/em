@@ -64,7 +64,7 @@ body.cke_editable,
 }
 
 .embedded-entity {
-  padding-bottom: 1em;
+  padding-bottom: 0;
   &.align-left {
     margin-right: 1.5em;
   }
@@ -85,6 +85,7 @@ body.cke_editable,
     line-height: 1.2;
     margin-top: 5px;
     font-style: italic;
+    letter-spacing: -.02em;
   }
 
   .atomizer {
@@ -119,14 +120,15 @@ body.cke_editable,
 }
 
 .az-image  {
+  font-size: 95%;
   .field--name-image {
     margin-bottom: 10px;
   }
   .field--name-name {
     color: $color-light-gold;
-    font-size: 110%;
     text-align: center;
     margin-bottom: 10px;
+    letter-spacing: -.02em;
   }
   .field--name-field-description {
     font-style: italic;

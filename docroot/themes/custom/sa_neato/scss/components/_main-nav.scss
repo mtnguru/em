@@ -24,7 +24,7 @@
   border-bottom: 1px solid $color-purple;
   min-height: $centered-navigation-height;
   width: 100%;
-  z-index: 10;
+  z-index: 20;
 
   .site-name,
   .site-slogan {
@@ -150,9 +150,10 @@
             color: $color-white;
           }
           .popup {
+            @include transition-3d(transition-delay  1s);
             position: absolute;
             top: 45px;
-            right: -300px;
+            right: -400px;
             width: 212px;
           }
           .label {
@@ -162,7 +163,7 @@
           &:hover {
             .popup {
               bottom: auto;
-              right: -40px;
+              right: -50px;
             }
           }
         }
@@ -252,7 +253,7 @@
   .centered-navigation-wrapper {
     @include clearfix;
     position: relative;
-    z-index: 10;
+    z-index: 20;
   }
 
   ul.centered-navigation-menu {
@@ -294,7 +295,7 @@
     padding: 0 $centered-navigation-submenu-padding 0 0;
     text-align: right;
     width: 100%;
-    z-index: 10;
+    z-index: 20;
 
     a {
       color: $centered-navigation-color;

@@ -1,3 +1,9 @@
+body.user-login {
+  nav.tabs {
+    display: none;
+  }
+}
+
 #block-sa-neato-local-tasks {
   nav.tabs {
     a {
@@ -12,6 +18,7 @@
     }
   }
 }
+
 body.entity-user-canonical,
 body.entity-group-canonical,
 body.entity-node-canonical {
@@ -25,10 +32,26 @@ body.entity-node-canonical {
       height: 0;
     }
 
+    .edit-button {
+      @extend .az-fa-pencil;
+      &:before {
+        color: $color-white;
+        position: absolute;
+        top: -10px;
+        right: -20px;
+        opacity: .4;
+        @include transition-3d($property: opacity);
+      }
+      &:hover:before {
+        opacity: 1;
+      }
+
+    }
+
     nav.tabs {
       margin-bottom: 1em;
 
-      @extend .az-fa-pencil;
+      @extend .az-fa-tasks;
       &:before {
         position: absolute;
         right: -20px;
@@ -42,17 +65,21 @@ body.entity-node-canonical {
         position: absolute;
         right: -20px;
         top: -20px;
-        z-index: 10;
+        z-index: 20;
         background-color: $color-dark-green;
         border: 2px solid $color-green;
         border-radius: 8px;
 
-        li:last-child {
+        li {
+          display: block;
           margin-right: 0;
+          &:last-child {
+            margin-right: 0;
+          }
         }
 
         a {
-          padding: 1em;
+          padding: .5em;
         }
       }
 

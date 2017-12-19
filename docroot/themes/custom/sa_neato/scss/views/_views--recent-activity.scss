@@ -14,6 +14,34 @@
     border-bottom: 1px solid $base-separator-color;
   }
 
+  .group-container {
+    float: right;
+    position: relative;
+    width: 28%;
+    max-width: 150px;
+    margin-left: 20px;
+
+    .group-label-container {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      font-size: 90%;
+//    background-color: rgba(0,0,0,.1);
+      .group-label {
+        text-align: center;
+        font-weight: bold;
+        color: $color-group;
+        @include vertical-center;
+        padding: 5px;
+      }
+    }
+    article {
+
+    }
+  }
+
   .changed {
     color: $color-grey;
     font-style: italic;

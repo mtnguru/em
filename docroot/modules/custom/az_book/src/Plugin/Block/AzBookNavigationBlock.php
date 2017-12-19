@@ -119,7 +119,6 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         $group = $this->requestStack->getCurrentRequest()->get('group');
         if ($value = $group->field_directory_book->getValue()) {
           $bid = $value[0]['target_id'];
-          $is_book_page = true;
         }
         break;
 
@@ -130,6 +129,9 @@ class AzBookNavigationBlock extends BookNavigationBlock {
           $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
           if (!$bid && $value = $group->field_directory_book->getValue()) {
             $bid = $value[0]['target_id'];
+          }
+          if ($bid) {
+            $is_book_page = true;
           }
         }
         break;
