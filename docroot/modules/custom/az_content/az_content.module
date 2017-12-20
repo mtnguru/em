@@ -339,7 +339,8 @@ function az_content_preprocess_node(&$variables) {
           $variables['view_my_media'] = views_embed_view('az_media', 'user_block');
         }
         else {
-//        node 319 - how do I assign these? id's
+          $snippet = \Drupal::entityManager()->getStorage('node')->load(325);
+          $variables['dashboard_block'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
         }
 
         $variables['view_content_recent'] = views_embed_view('content_recent', 'all_block');

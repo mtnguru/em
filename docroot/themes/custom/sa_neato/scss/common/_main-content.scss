@@ -99,6 +99,7 @@ span.marker {
     clear: both;
     vertical-align: top;
     min-height: 150px;
+    margin-bottom: 20px;
 
     h3 {
       font-size: 1.8em;
@@ -118,5 +119,10 @@ span.marker {
       //      float: left;
     } // .short-description
   } // .body-container
+  .node__links {
+    ul.inline li {
+      padding: 0 20px 0 0;
+    }
+  }
 } // .main-container
 
