@@ -161,7 +161,8 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       $results = $query->execute()->fetchAllAssoc('nid');
       if (count($results) < 1) return [];
 
-      if ($is_book_page && !empty($node)) {
+      if (!empty($node) && $node->getType() == 'book') {
+
         $result = &$results[$node->id()];
         for ($i = 1; $i <= $result->depth; $i++) {
           $n = 'p' . $i;

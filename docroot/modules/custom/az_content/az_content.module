@@ -267,6 +267,7 @@ function az_content_preprocess_node(&$variables) {
   switch ($node->getType()) {
     case 'article':
     case 'book':
+    case 'news':
     case 'page':
 
       $changed = $node->getChangedTime();
@@ -308,7 +309,7 @@ function az_content_preprocess_node(&$variables) {
         $variables['sidebar_blocks']['block_booknavigation'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 
         // Add the views map showing locations of images
-        if (!$node->field_display_image_map->isEmpty()) {
+        if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
           $block_entity = Drupal\block\Entity\Block::load('views_block__az_media_block_map_usage');
           $variables['sidebar_blocks']['block_views_image_map'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
         }
@@ -336,6 +337,9 @@ function az_content_preprocess_node(&$variables) {
           $variables['view_my_activity'] = views_embed_view('az_my_activity', 'user_block');
           $variables['view_my_comments'] = views_embed_view('az_my_comments', 'user_block');
           $variables['view_my_media'] = views_embed_view('az_media', 'user_block');
+        }
+        else {
+//        node 319 - how do I assign these? id's
         }
 
         $variables['view_content_recent'] = views_embed_view('content_recent', 'all_block');
