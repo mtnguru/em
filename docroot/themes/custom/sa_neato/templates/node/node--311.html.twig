@@ -125,6 +125,16 @@
         </div>
       </li>
 
+      {% if view_content_unpublished %}
+        <li class="tab content-unpublished">
+          <div class="tab-title"><h2>Unpublished</h2></div>
+
+          <div class="tab-content">
+            {{ view_content_unpublished }}
+          </div>
+        </li>
+      {% endif %}
+
       <li class="tab comments-recent">
         <div class="tab-title"><h2>Comments</h2></div>
 

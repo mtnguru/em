@@ -93,7 +93,6 @@ span.marker {
     }
   }
 
-
   .body-container {
     @include clearfix;
     clear: both;
@@ -105,6 +104,10 @@ span.marker {
       font-size: 1.8em;
       margin-bottom: rem(10);
     } // h3
+
+    .article-link {
+      margin-bottom: 20px;
+    }
 
     .field--name-field-media {
       clear: both;
@@ -119,9 +122,17 @@ span.marker {
       //      float: left;
     } // .short-description
   } // .body-container
+
   .node__links {
-    ul.inline li {
-      padding: 0 20px 0 0;
+    @include clearfix;
+
+    ul {
+      margin: 0;
+      float: right;
+
+      .inline li {
+        padding: 0 20px 0 0;
+      }
     }
   }
 } // .main-container

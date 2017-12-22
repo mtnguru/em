@@ -133,6 +133,19 @@
     </div>
 
     <div class="body-container">
+
+      {% if content.field_publication is not empty %}
+        <div class="publication">
+          {{ content.field_publication }}
+        </div>
+      {% endif %}
+
+      {% if content.field_article_link is not empty %}
+        <div class="article-link">
+          {{ content.field_article_link }}
+        </div>
+      {% endif %}
+
       {% if content.field_media is not empty %}
         <div class="media">
           {{ content.field_media }}

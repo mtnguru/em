@@ -15,6 +15,7 @@
 
 html#entity-browser {
   background-color: $color-dark-green;
+  color: $color-white;
 
   body {
     background-color: $color-dark-green;
@@ -102,7 +103,7 @@ form.entity-browser-form {
 
       .views-field {
         width: 100%;
-        @include fixed-aspect(5/3 * 100%, '.field-content');
+        @include fixed-aspect(3/3 * 100%, '.field-content');
         background-color: inherit;
       }
     } // .views-row
@@ -156,12 +157,26 @@ form.entity-browser-form {
   } */
 } // form.entity-browser-form
 
-.field--name-field-media {
-  .details-wrapper {
-    padding: .5em 0 0;
-    .item-container {
-      > input {
-        margin: 1em 1em 0 0;
+form.media-form {
+  display: none;
+  .field--name-field-media-video-embed-field {
+    max-width: 500px;
+  }
+
+  #preview {
+    width: 20px;
+    .field--type-video-embed-field   {
+      max-width: 500px;
+    }
+  }
+
+  .field--name-field-media {
+    .details-wrapper {
+      padding: .5em 0 0;
+      .item-container {
+        > input {
+          margin: 1em 1em 0 0;
+        }
       }
     }
   }

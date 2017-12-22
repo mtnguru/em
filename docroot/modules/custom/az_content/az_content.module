@@ -7,6 +7,7 @@
 
 use Drupal\az_groups\azGroupQuery;
 use Drupal\comment\Entity\Comment;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
@@ -337,15 +338,18 @@ function az_content_preprocess_node(&$variables) {
           $variables['view_my_activity'] = views_embed_view('az_my_activity', 'user_block');
           $variables['view_my_comments'] = views_embed_view('az_my_comments', 'user_block');
           $variables['view_my_media'] = views_embed_view('az_media', 'user_block');
+
+          if (AccessResult::allowedIfHasPermission($user, 'view any unpublished content')) {
+            $variables['view_content_unpublished'] = views_embed_view('content_recent', 'block_unpublished');
+          }
         }
         else {
           $snippet = \Drupal::entityManager()->getStorage('node')->load(325);
           $variables['dashboard_block'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
         }
 
-        $variables['view_content_recent'] = views_embed_view('content_recent', 'all_block');
-        $variables['view_news_recent'] = views_embed_view('news_recent', 'all_block');
-        $variables['view_comments_recent'] = views_embed_view('comments_recent', 'all_block');
+        $variables['view_content_recent'] = views_embed_view('content_recent', 'block_all');
+        $variables['view_comments_recent'] = views_embed_view('comments_recent', 'block_all');
 
         $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
         $variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);

@@ -54,58 +54,69 @@ function az_media_entity_presave(EntityInterface $entity) {
  *
  */
 function az_media_media_presave(EntityInterface $entity) {
-  $fid = $entity->image->getValue()[0]['target_id'];
-  $file = \Drupal\file\Entity\File::load($fid);
-  $user = \Drupal\user\Entity\user::load(\Drupal::currentUser()->id());
-  $srcPath = \Drupal::service('file_system')->realpath($file->getFileUri());
+  $type = $entity->getEntityType();
+  $id = $type->id();
+  switch ($entity->getEntityType()->id()) {
+    case 'media':
+      $val = 5;
+      break;
 
-  $author = $entity->field_author->value;
-  if (!$author) {
-    $entity->field_author->setValue($user);
-  }
+    case 'image':
+      $fid = $entity->image->getValue()[0]['target_id'];
+      $file = \Drupal\file\Entity\File::load($fid);
 
-  $create_date = $entity->field_create_date->value;
-  if (!$create_date) {
-    $date = _az_media_getExifField($srcPath, "GPSDateStamp");
-    if ($date) {
-      $time = _az_media_getExifField($srcPath, "GPSTimeStamp");
-      $datetime = $date . " " . $time;
+      $srcPath = \Drupal::service('file_system')->realpath($file->getFileUri());
 
-    } else {
-      $datetime = _az_media_getExifField($srcPath, 'DateTimeOriginal');
-      if (!$datetime) {
-        $datetime = date('Y-m-d H:i:s');
+      $author = $entity->field_author->value;
+      if (!$author) {
+        $user = \Drupal\user\Entity\user::load(\Drupal::currentUser()->id());
+        $entity->field_author->setValue($user);
       }
-    }
-    $datetime[4] = '-';
-    $datetime[7] = '-';
-    $datetime[10] = 'T';
-    $entity->field_create_date->setValue($datetime);
+
+      $create_date = $entity->field_create_date->value;
+      if (!$create_date) {
+        $date = _az_media_getExifField($srcPath, "GPSDateStamp");
+        if ($date) {
+          $time = _az_media_getExifField($srcPath, "GPSTimeStamp");
+          $datetime = $date . " " . $time;
+
+        } else {
+          $datetime = _az_media_getExifField($srcPath, 'DateTimeOriginal');
+          if (!$datetime) {
+            $datetime = date('Y-m-d H:i:s');
+          }
+        }
+        $datetime[4] = '-';
+        $datetime[7] = '-';
+        $datetime[10] = 'T';
+        $entity->field_create_date->setValue($datetime);
 
 //  $given = new \Drupal\Core\Datetime\DrupalDateTime($datetime,$user->getTimezone());
 //  $given->setTimezone(new \DateTimeZone("UTC"));
 //  $udate = $given->format('Y-m-d\Th:i:s');
 //  $entity->field_create_date->setValue($udate);
-  }
+      }
 
-  $dimensions = $entity->field_dimensions->value;
-  if (!$dimensions) {
-    $dims = getimagesize($srcPath);
-    $entity->field_dimensions->setValue($dim = $dims[0] . 'x' . $dims[1]);
-  }
+      $dimensions = $entity->field_dimensions->value;
+      if (!$dimensions) {
+        $dims = getimagesize($srcPath);
+        $entity->field_dimensions->setValue($dim = $dims[0] . 'x' . $dims[1]);
+      }
 
-  $location = $entity->field_location->value;
-  if (!$location) {
-    $val = 4;
-  }
+      $location = $entity->field_location->value;
+      if (!$location) {
+        $val = 4;
+      }
 
-  $geofield = $entity->field_geofield->value;
-  if (!$geofield) {
-    $lat = _az_media_getExifField($srcPath,'GPSLatitude');
-    $lon = _az_media_getExifField($srcPath,'GPSLongitude');
-    $entity->field_geofield->setValue(($lat &&  $lon) ? 'POINT(' . $lon . ' ' . $lat . ')' : null);
-  }
+      $geofield = $entity->field_geofield->value;
+      if (!$geofield) {
+        $lat = _az_media_getExifField($srcPath,'GPSLatitude');
+        $lon = _az_media_getExifField($srcPath,'GPSLongitude');
+        $entity->field_geofield->setValue(($lat &&  $lon) ? 'POINT(' . $lon . ' ' . $lat . ')' : null);
+      }
 
+      break;
+  }
   return;
 }
 
