@@ -1,9 +1,14 @@
 .field--name-field-media {
 
   margin-bottom: 20px;
+  text-align: center;
+
+  > article {
+    margin: 0 auto !important;
+  }
+
 
   >.az-image {
-    margin: 0 auto !important;
     float: none;
   }
 

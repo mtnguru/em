@@ -17,8 +17,6 @@ $color-purple-red: #A682ff;
 $color-green: #7FFFB0;
 //$color-dark-green: #0F5F20;
 $color-dark-green: #064A10;
-$color-gold: #FFCC00;
-$color-light-gold: lighten($color-gold, 10%);
 $color-light-turquoise: #A5FFD1;
 $color-off-white: #FAF0FF;
 
@@ -28,9 +26,16 @@ $color-needs-review: #DD66EE;
 $color-published: #EEEE00;
 $color-unpublished: #FF9900;
 
-$color-user: #d9f;
+$color-user: #cc99ff;
+//$color-group: #ffaaff;
 $color-group: #daf540;
 $color-topic: #aaffff;
+$color-title: #daf540;
+//$color-title: #eeaaff;
+$color-light-title: lighten($color-title, 10%);
+
+$color-overlay: rgba(0,0,0,.4);
+$color-box-shadow: rgba(0,0,0,.3);
 
 $transparent-captions-color: rgba($color-off-white, 0.56);
 $accent-line-color: $color-purple;

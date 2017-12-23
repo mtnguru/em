@@ -27,13 +27,10 @@
         @include transform(translateY(-50%));
 
         a {
-          background-color: rgba(0, 0, 0, .3);
-          padding: 5px;
-          display: block;
-          border-radius: 6px;
           color: $color-group;
-          @extend %box-shadow;
-
+          padding: 0;
+          display: block;
+          @extend %image-overlay;
         }
       }
     }
@@ -91,9 +88,9 @@
     font-size: 225%;
     margin-bottom: 10px;
     a {
-      color: $color-gold;
+      color: $color-title;
       &:hover {
-        color: lighten($color-gold, 25%);
+        color: lighten($color-title, 25%);
       }
     }
   }

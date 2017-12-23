@@ -79,6 +79,10 @@
       h3 {
         font-size: 1.8em;
         margin-bottom: rem(10);
+
+        a {
+          color: $color-green;
+        }
       } // h3
 
       .media {

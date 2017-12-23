@@ -10,7 +10,7 @@
       padding: 10px 15px;
       margin: 0;
       background: $header-background;
-      color : tint($color-gold, 25%);
+      color : tint($color-title, 25%);
       border-radius: $base-border-radius $base-border-radius 0 0;
       @extend %text-shadow;
     }

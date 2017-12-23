@@ -35,21 +35,20 @@
       }
 
       @include media($bp580) {
-        top: 15px;
-        left: 20px;
-        right: 20px;
+        top: 20%;
+        left: 10%;
+        right: 10%;
       }
 
       a {
         line-height: 1.1;
         font-weight: bold;
-        color: White;
+        color: $color-group;
         overflow-wrap: break-word;
         display: block;
         padding: 2px 7px;
-        background-color: rgba(0,0,0,.4);
         border-radius: 5px;
-        @extend %box-shadow;
+        @extend %image-overlay;
 
         @include media($bp320only) {
           font-size: 100%;

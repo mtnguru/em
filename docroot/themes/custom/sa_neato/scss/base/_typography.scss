@@ -25,33 +25,33 @@ h6 {
 }
 
 h1 {
-  color: $color-gold;
+  color: $color-title;
   font-size: 200%;
   margin: 0 0 .5em;
   line-height: 1;
   a {
-    color: $color-gold;
+    color: $color-title;
   }
 }
 
 h2 {
-  color : tint($color-gold, 25%);
+  color : tint($color-title, 25%);
   font-size: 175%;
   a {
-    color : tint($color-gold, 25%);
+    color : tint($color-title, 25%);
   }
 }
 
 h3 {
-  color : tint($color-gold, 50%);
+  color : tint($color-title, 50%);
   font-size: 150%;
   a {
-    color : tint($color-gold, 50%);
+    color : tint($color-title, 50%);
   }
 }
 
 h4 {
-  color : tint($color-gold, 75%);
+  color : tint($color-title, 75%);
   font-size: 120%;
 }
 

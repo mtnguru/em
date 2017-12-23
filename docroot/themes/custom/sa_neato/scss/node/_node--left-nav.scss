@@ -121,7 +121,7 @@ body.page-node-type-page {
         padding-top: rem(10);
         padding-bottom: rem(10);
         font-weight: bold;
-        color: lighten($color-gold, 20%);
+        color: lighten($color-title, 20%);
         @extend %text-shadow;
         @extend %layout-padding;
         @include outline($color-white);
