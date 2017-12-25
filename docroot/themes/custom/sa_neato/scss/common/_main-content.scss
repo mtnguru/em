@@ -29,11 +29,9 @@ span.marker {
 .main-container {
 
   .header-container {
-    margin-bottom: 1em;
     @include clearfix;
 
     .header {
-      margin-bottom: 1em;
 
       .new {
         display: inline-block;
@@ -45,35 +43,42 @@ span.marker {
         font-size: .90em;
         font-style: italic;
       } // .changed
+
+      .title {
+        margin: 0;
+      }
+
+      .information {
+        margin-bottom: 10px;
+      }
     }
 
     .block-right {
       line-height: 1.2em;
       float: right;
       width: 255px;
-    }
 
-    .group,
-    .topics {
-      float: right;
-      margin-bottom: 20px;
+      .topics {
+        float: right;
+        margin-bottom: 20px;
 
-      .field__items {
-        width: 150px;
-        padding-right: 0;
+        .field__items {
+          width: 150px;
+          padding-right: 0;
+        }
+        .field__item {
+          padding: 0 0 .2em;
+          a {
+            color: $color-topic;
+          }
+        }
       }
-      .field__item {
-        padding: 0 0 .2em;
-      }
-    }
-
-    .group {
-      padding-bottom: 10px;
     }
 
     .field--name-field-social-media {
       clear: both;
       float: right;
+      margin-bottom: 20px;
 
       ul {
         margin: 5px 0;
@@ -100,10 +105,10 @@ span.marker {
     min-height: 150px;
     margin-bottom: 20px;
 
-    h3 {
-      font-size: 1.8em;
-      margin-bottom: rem(10);
-    } // h3
+//  h3 {
+//    font-size: 1.8em;
+//    margin-bottom: rem(10);
+//  } // h3
 
     .article-link {
       margin-bottom: 20px;

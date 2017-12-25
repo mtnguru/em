@@ -105,6 +105,10 @@ body.cke_editable,
   h1, h2, h3 {
     clear: both;
   }
+
+  .az-topic {
+    color: $color-topic;
+  }
 }
 
 .cke_panel_listItem {

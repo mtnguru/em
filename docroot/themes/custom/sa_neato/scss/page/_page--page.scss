@@ -9,6 +9,7 @@ body.page-node-type-article {
   }
 }
 
+
 article.az-page {
   .sidebar-left {
     float: left;
@@ -33,10 +34,28 @@ article.az-page {
     @include media($bp960) {
       width: 70%;
     }
+
+    > h2 {
+      font-size: 225%;
+    }
   }
 
-  article.type-article,
-  article.type-book {
+  .field--name-body {
+    margin-bottom: 20px;
+    p > img {
+      @include media(max-width $bp580max) {
+        padding: 15px 5%
+      }
+      @include media($bp960) {
+        padding: 15px 10%
+      }
+    }
+  }
+
+//article.type-article,
+//article.type-book {
+  article {
+
     .field--name-title {
       display: block;
       font-weight: bold;
@@ -45,9 +64,7 @@ article.az-page {
         color: $color-group;
       }
     }
-    .field--name-body {
-      margin-bottom: 20px;
-    }
+
   }
 }
 

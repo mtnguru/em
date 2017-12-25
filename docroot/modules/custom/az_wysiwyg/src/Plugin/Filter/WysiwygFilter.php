@@ -106,7 +106,8 @@ class WysiwygFilter extends FilterBase {
 
       }
       else {
-        switch ($matches[2][$key][0]) {
+        $type = $matches[2][$key][0];
+        switch ($type) {
           case 'topic':
           case 'glossary':
             $name = strtolower($matches[4][$key][0]);
@@ -134,7 +135,7 @@ class WysiwygFilter extends FilterBase {
             if ($topic) {
               $tip = $this->sanitizeTip($topic->tooltip);
               $ntext .= '<a href="' . $topic->url . '" ' .
-                'class="taxonomy-tooltip-link" ' .
+                'class="taxonomy-tooltip-link az-' . $type . '" ' .
                 'title="' . $tip . '">' .
                 $matches[4][$key][0] .
                 '</a>';
@@ -178,6 +179,7 @@ class WysiwygFilter extends FilterBase {
 
     return ($ntext) ? $ntext . substr($text, $c) : $text;
   }
+
   /**
    * {@inheritdoc}
    */

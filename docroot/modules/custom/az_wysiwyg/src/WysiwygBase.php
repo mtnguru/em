@@ -46,7 +46,7 @@ class WysiwygBase {
     foreach ($results as $result) {
       // Make name_norm lowercase, it seems not possible in PDO query?
       $result->name_norm = strtolower($result->name_norm);
-      $result->url = '/taxonomy/term/' . $result->id;
+      $result->url = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/' . $result->id);
       $terms[$result->name_norm] = $result;
     }
     return $terms;
@@ -59,18 +59,19 @@ class WysiwygBase {
    * @param $matched
    */
   static public function addTopicsToNode(&$node, $topics) {
-    return;
-    $tids = $node->field_topics->getValue();
-    foreach ($topics as $name => $topic) {
-      if (isset($topic->in_text)) {
-        $found = false;
-        foreach ($tids as $i => $val) {
-          if ($val['target_id'] == $topic->id) {
-            $found = TRUE;
+    if ($node->hasField('field_topics')) {
+      $tids = $node->field_topics->getValue();
+      foreach ($topics as $name => $topic) {
+        if (isset($topic->in_text)) {
+          $found = false;
+          foreach ($tids as $i => $val) {
+            if ($val['target_id'] == $topic->id) {
+              $found = TRUE;
+            }
           }
-        }
-        if (!$found) {
-          $node->field_topics->appendItem($topic->id);
+          if (!$found) {
+            $node->field_topics->appendItem($topic->id);
+          }
         }
       }
     }

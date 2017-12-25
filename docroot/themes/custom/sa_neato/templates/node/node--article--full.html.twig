@@ -93,38 +93,35 @@
   </div>
 
   <div class="main-container">
-    <h2 class="title">{{ label }}</h2>
     <div class="header-container">
       <div class="header">
         <div class="block-right">
-          {% if content.group_label is not empty %}
-            <div class="group field--label-inline">
-              <div class="field__label">Community</div>
-              <div class="field__items"><a href="{{ content.group_url }}">{{ content.group_label }}</a></div>
-            </div>
-          {% endif %}
+          {{ content.field_social_media }}
+
           {% if content.field_topics is not empty %}
             <div class="topics">
               {{ content.field_topics }}
             </div>
           {% endif %}
 
-          {{ content.field_social_media }}
         </div>
 
-        <span class="type">
-          {{ node.bundle|capitalize }} -
-        </span>
+        <h2 class="title">{{ label }}</h2>
 
-        <span class="changed">
-          {{ ago }} ago - {{ changed }}
-        </span>
+        <div class="information">
 
-        {% if has_new_content %}
-          <span class="new">
-            {{ has_new_content }}
+          <span class="{{ node.bundle }}">
+            {{ node.bundle|capitalize }} -
           </span>
-        {% endif %}
+
+          <span class="changed" title="{{ changed }}">
+            {{ ago }} ago
+          </span>
+
+          {% if has_new_content %}
+            <span class="new">{{ has_new_content }}</span>
+          {% endif %}
+        </div>
       </div>
 
       {% if author_picture %}

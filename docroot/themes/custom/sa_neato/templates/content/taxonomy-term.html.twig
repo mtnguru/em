@@ -27,24 +27,71 @@
   set classes = [
     'taxonomy-term',
     'vocabulary-' ~ term.bundle|clean_class,
+    'az-page',
   ]
 %}
-<div{{ attributes.setAttribute('id', 'taxonomy-term-' ~ term.id).addClass(classes) }}>
-  {{ title_prefix }}
+<article {{ attributes.setAttribute('id', 'taxonomy-term-' ~ term.id).addClass(classes) }}>
+  <div class='sidebar-left'>
+    {% for block in sidebar_blocks  %}
+      {{ block }}
+    {% endfor %}
+    {% if view_recent_content %}
+      <h2>Recent Content</h2>
+      {{ view_recent_content }}
+    {% endif %}
+    {% if block_donate %}
+      {{ block_donate }}
+    {% endif %}
+  </div>
+
+  <div class="main-container">
+    <div class="header-container">
+      <div class="header">
+        <div class="block-right">
+          {{ content.field_social_media }}
+        </div>
+        <h2 class="title">{{ name }}</h2>
+      </div>
+    </div>
+
+    <div class="body-container">
+
+      {% if content.field_media[0] %}
+        {{ content.field_media }}
+      {% endif %}
+
+      {% if content.field_tooltip %}
+        {{ content.field_tooltip }}
+      {% endif %}
+
+      {% if content.description[0] %}
+        {{ content.description }}
+      {% endif %}
+    </div>
+
+    {{ content.links }}
+    {{ content.field_comments }}
+  </div>
+</article>
+
+{#
+{{ title_prefix }}
   {% if not page %}
     <h2><a href="{{ url }}">{{ name }}</a></h2>
   {% endif %}
   {{ title_suffix }}
 
-  <div class="content">
-    {% if content.field_media[0] %}
-      {{ content.field_media }}
-    {% endif %}
+<div class="content">
+  {% if content.field_media[0] %}
+    {{ content.field_media }}
+  {% endif %}
 
-    {% if content.description[0] %}
-      {{ content.description }}
-    {% else %}
-      {{ content.field_tooltip }}
-    {% endif %}
-  </div>
+  {% if content.field_tooltip %}
+    {{ content.field_tooltip }}
+  {% endif %}
+
+  {% if content.description[0] %}
+    {{ content.description }}
+  {% endif %}
 </div>
+#}
