@@ -11,26 +11,26 @@
 
       .group-logo {
         @extend %box-shadow;
-
         img {
           width: 100%;
         }
       }
 
       h2 {
-        z-index: 20;
+        z-index: 10;
         text-align: center;
+        margin: 0;
         position: absolute;
-        top: 50%;
-        right: 10%;
-        left: 10%;
-        @include transform(translateY(-50%));
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba(25,50,0,.1);
 
         a {
           color: $color-group;
-          padding: 0;
           display: block;
-          @extend %image-overlay;
+          @include vertical-center;
         }
       }
     }

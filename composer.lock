@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "61f603abce99fac41cb963225cb7fff8",
-    "content-hash": "87d202591c79cf54f43be3cd94844a0c",
+    "hash": "8af678ff7a4c6672922172d729b3ee9d",
+    "content-hash": "184287ae95e4672f048b06b747b7f271",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -292,7 +292,7 @@
             "version": "v2.3.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fengyuanchen/cropper.git",
+                "url": "git@github.com:fengyuanchen/cropper.git",
                 "reference": "30c58b29ee21010e17e58ebab165fbd84285c685"
             },
             "dist": {
@@ -4378,6 +4378,69 @@
             "time": "2017-03-15 17:04:08"
         },
         {
+            "name": "drupal/mailsystem",
+            "version": "4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/mailsystem",
+                "reference": "8.x-4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/mailsystem-8.x-4.1.zip",
+                "reference": "8.x-4.1",
+                "shasum": "318b87f1fdf96e6db30b04a98108af02a0fc3dcc"
+            },
+            "require": {
+                "drupal/core": "^8.0.5"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-4.x": "4.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-4.1",
+                    "datestamp": "1467993646",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Berdir",
+                    "homepage": "https://www.drupal.org/user/214652"
+                },
+                {
+                    "name": "Les Lim",
+                    "homepage": "https://www.drupal.org/user/84263"
+                },
+                {
+                    "name": "Nafes",
+                    "homepage": "https://www.drupal.org/user/2489926"
+                },
+                {
+                    "name": "miro_dietiker",
+                    "homepage": "https://www.drupal.org/user/227761"
+                },
+                {
+                    "name": "pillarsdotnet",
+                    "homepage": "https://www.drupal.org/user/36148"
+                }
+            ],
+            "description": "Mail System",
+            "homepage": "https://www.drupal.org/project/mailsystem",
+            "support": {
+                "source": "http://cgit.drupalcode.org/mailsystem"
+            }
+        },
+        {
             "name": "drupal/masquerade",
             "version": "dev-2.x",
             "source": {
@@ -4899,96 +4962,6 @@
             "homepage": "https://www.drupal.org/project/module_filter",
             "support": {
                 "source": "http://cgit.drupalcode.org/module_filter"
-            }
-        },
-        {
-            "name": "drupal/mollom",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/mollom",
-                "reference": "8.x-1.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/mollom-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "57e138baeaa7d2f1931be684be85d560ff37a790"
-            },
-            "require": {
-                "drupal/core": "~8.0",
-                "mollom/client": "dev-psr4",
-                "php": ">=5.3.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1483560543",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPLv2"
-            ],
-            "authors": [
-                {
-                    "name": "See contributors",
-                    "homepage": "https://drupal.org/project/mollom"
-                },
-                {
-                    "name": "Dave Reid",
-                    "homepage": "https://www.drupal.org/user/53892"
-                },
-                {
-                    "name": "Dries",
-                    "homepage": "https://www.drupal.org/user/1"
-                },
-                {
-                    "name": "Nick_vh",
-                    "homepage": "https://www.drupal.org/user/122682"
-                },
-                {
-                    "name": "Wim Leers",
-                    "homepage": "https://www.drupal.org/user/99777"
-                },
-                {
-                    "name": "blackskad",
-                    "homepage": "https://www.drupal.org/user/878346"
-                },
-                {
-                    "name": "cbarton281",
-                    "homepage": "https://www.drupal.org/user/3061395"
-                },
-                {
-                    "name": "eshta",
-                    "homepage": "https://www.drupal.org/user/1951462"
-                },
-                {
-                    "name": "scor",
-                    "homepage": "https://www.drupal.org/user/52142"
-                },
-                {
-                    "name": "sun",
-                    "homepage": "https://www.drupal.org/user/54136"
-                }
-            ],
-            "description": "Mollom drupal module",
-            "homepage": "https://drupal.org/project/mollom",
-            "keywords": [
-                "acquia",
-                "mollom",
-                "spam"
-            ],
-            "support": {
-                "source": "http://cgit.drupalcode.org/mollom"
             }
         },
         {
@@ -5945,6 +5918,59 @@
             }
         },
         {
+            "name": "drupal/swiftmailer",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/swiftmailer",
+                "reference": "63869e4c785ce4b0c5ca64ef56ef7d427f6351a5"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "drupal/mailsystem": "*",
+                "html2text/html2text": "~4.0.1",
+                "swiftmailer/swiftmailer": "~5.4.5"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta1+12-dev",
+                    "datestamp": "1514323384",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "B-Prod",
+                    "homepage": "https://www.drupal.org/user/407852"
+                },
+                {
+                    "name": "sbrattla",
+                    "homepage": "https://www.drupal.org/user/53422"
+                },
+                {
+                    "name": "webflo",
+                    "homepage": "https://www.drupal.org/user/254778"
+                }
+            ],
+            "description": "Swiftmailer",
+            "homepage": "https://www.drupal.org/project/swiftmailer",
+            "support": {
+                "source": "http://cgit.drupalcode.org/swiftmailer"
+            },
+            "time": "2017-12-26 21:53:28"
+        },
+        {
             "name": "drupal/token",
             "version": "1.0.0",
             "source": {
@@ -6869,6 +6895,43 @@
             "time": "2017-03-20 17:10:46"
         },
         {
+            "name": "html2text/html2text",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtibben/html2text.git",
+                "reference": "f55104b7c9f99b0937f0e20fe051b19f9c0ecad1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtibben/html2text/zipball/f55104b7c9f99b0937f0e20fe051b19f9c0ecad1",
+                "reference": "f55104b7c9f99b0937f0e20fe051b19f9c0ecad1",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance",
+                "symfony/polyfill-mbstring": "If you can't install ext-mbstring"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Html2Text\\": [
+                        "src/",
+                        "test/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv2"
+            ],
+            "description": "Converts HTML to formatted plain text",
+            "time": "2016-03-16 23:24:34"
+        },
+        {
             "name": "j7mbo/twitter-api-php",
             "version": "1.0.6",
             "source": {
@@ -7282,50 +7345,6 @@
                 "html"
             ],
             "time": "2016-07-25 17:07:32"
-        },
-        {
-            "name": "mollom/client",
-            "version": "dev-psr4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Mollom/MollomPHP.git",
-                "reference": "bfb97d639d8b0a757c47742af5cfc59dd8363e44"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Mollom/MollomPHP/zipball/bfb97d639d8b0a757c47742af5cfc59dd8363e44",
-                "reference": "bfb97d639d8b0a757c47742af5cfc59dd8363e44",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "5.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Mollom\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "See contributors",
-                    "homepage": "https://github.com/mollom/MollomPHP/graphs/contributors"
-                }
-            ],
-            "description": "Generic PHP library for Mollom's REST API.",
-            "keywords": [
-                "acquia",
-                "mollom",
-                "spam"
-            ],
-            "time": "2015-12-03 21:18:35"
         },
         {
             "name": "nikic/php-parser",
@@ -8012,6 +8031,60 @@
                 "parser"
             ],
             "time": "2016-11-22 22:57:47"
+        },
+        {
+            "name": "swiftmailer/swiftmailer",
+            "version": "v5.4.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swiftmailer/swiftmailer.git",
+                "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/9a06dc570a0367850280eefd3f1dc2da45aef517",
+                "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.1",
+                "symfony/phpunit-bridge": "~3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.4-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "lib/swift_required.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Corbyn"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Swiftmailer, free feature-rich PHP mailer",
+            "homepage": "http://swiftmailer.org",
+            "keywords": [
+                "email",
+                "mail",
+                "mailer"
+            ],
+            "time": "2017-05-01 15:54:03"
         },
         {
             "name": "symfony-cmf/routing",
@@ -10943,6 +11016,96 @@
             "time": "2017-09-13 19:54:23"
         },
         {
+            "name": "drupal/mollom",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/mollom",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/mollom-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "57e138baeaa7d2f1931be684be85d560ff37a790"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "mollom/client": "dev-psr4",
+                "php": ">=5.3.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1483560543",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPLv2"
+            ],
+            "authors": [
+                {
+                    "name": "See contributors",
+                    "homepage": "https://drupal.org/project/mollom"
+                },
+                {
+                    "name": "Dave Reid",
+                    "homepage": "https://www.drupal.org/user/53892"
+                },
+                {
+                    "name": "Dries",
+                    "homepage": "https://www.drupal.org/user/1"
+                },
+                {
+                    "name": "Nick_vh",
+                    "homepage": "https://www.drupal.org/user/122682"
+                },
+                {
+                    "name": "Wim Leers",
+                    "homepage": "https://www.drupal.org/user/99777"
+                },
+                {
+                    "name": "blackskad",
+                    "homepage": "https://www.drupal.org/user/878346"
+                },
+                {
+                    "name": "cbarton281",
+                    "homepage": "https://www.drupal.org/user/3061395"
+                },
+                {
+                    "name": "eshta",
+                    "homepage": "https://www.drupal.org/user/1951462"
+                },
+                {
+                    "name": "scor",
+                    "homepage": "https://www.drupal.org/user/52142"
+                },
+                {
+                    "name": "sun",
+                    "homepage": "https://www.drupal.org/user/54136"
+                }
+            ],
+            "description": "Mollom drupal module",
+            "homepage": "https://drupal.org/project/mollom",
+            "keywords": [
+                "acquia",
+                "mollom",
+                "spam"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/mollom"
+            }
+        },
+        {
             "name": "fabpot/goutte",
             "version": "v3.2.2",
             "source": {
@@ -11224,6 +11387,50 @@
             "description": "Virtual file system to mock the real file system in unit tests.",
             "homepage": "http://vfs.bovigo.org/",
             "time": "2017-08-01 08:02:14"
+        },
+        {
+            "name": "mollom/client",
+            "version": "dev-psr4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mollom/MollomPHP.git",
+                "reference": "bfb97d639d8b0a757c47742af5cfc59dd8363e44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mollom/MollomPHP/zipball/bfb97d639d8b0a757c47742af5cfc59dd8363e44",
+                "reference": "bfb97d639d8b0a757c47742af5cfc59dd8363e44",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "5.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mollom\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "See contributors",
+                    "homepage": "https://github.com/mollom/MollomPHP/graphs/contributors"
+                }
+            ],
+            "description": "Generic PHP library for Mollom's REST API.",
+            "keywords": [
+                "acquia",
+                "mollom",
+                "spam"
+            ],
+            "time": "2015-12-03 21:18:35"
         },
         {
             "name": "phpspec/prophecy",
@@ -12411,7 +12618,8 @@
         "drupal/special_menu_items": 20,
         "drupal/examples": 20,
         "drupal/calendar": 20,
-        "drupal/captcha": 20
+        "drupal/captcha": 20,
+        "drupal/swiftmailer": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

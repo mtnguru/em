@@ -46,7 +46,8 @@
         "drupal/examples": "1.x-dev",
         "drupal/calendar": "1.x-dev",
         "drupal/console": "~1.0",
-        "drupal/captcha": "1.x-dev"
+        "drupal/captcha": "1.x-dev",
+        "drupal/swiftmailer": "1.x-dev"
     },
     "repositories": [
         {
