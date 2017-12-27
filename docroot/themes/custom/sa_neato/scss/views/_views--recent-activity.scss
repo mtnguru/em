@@ -1,12 +1,13 @@
 .view.recent-activity {
-  .title {
-    font-size: 160%;
-    font-weight: bold;
-    margin-bottom: 5px;
+  h3.title {
+    margin: 0;
+    a {
+      color: $color-green;
+    }
   }
 
   .header {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 
   .views-row {
@@ -38,9 +39,27 @@
         padding: 5px;
       }
     }
-    article {
+  }
 
+  .type {
+    &:before {
+      color: darken($color-white, 15%);
+      margin-right: 5px;
     }
+    &.article {
+      @extend .az-fa-file-text;
+    }
+    &.news {
+      @extend .az-fa-newspaper;
+    }
+    &.book {
+      @extend .az-fa-book;
+    }
+  }
+
+  .media {
+    margin-right: 20px;
+    float: left;
   }
 
   .changed {

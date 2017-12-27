@@ -1,16 +1,24 @@
+// Top left corner of dashboard
 .user-header {
   .user-text {
     line-height: 1.2;
     .name {
       color: $color-user;
       margin-bottom: 15px;
+      font-size: 130%;
+      font-weight: bold;
+    }
+    .links {
+      font-size: 85%;
     }
   }
 }
+
 .username {
   color: $color-user;
 }
 
+// Teasers?
 .author-container {
   margin-bottom: 1em;
 
@@ -31,6 +39,10 @@
       a {
         color: $color-user;
       }
+    }
+
+    .links {
+      font-size: 90%;
     }
 
     .location {

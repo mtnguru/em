@@ -16,6 +16,27 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
+ * Implements hook_theme().
+ */
+function az_content_theme() {
+  return [
+    'block_donate' => [
+      'variables' => [
+        'title' => NULL,
+        'description' => NULL,
+        'more_url' => NULL,
+      ],
+    ],
+    'block_contribute' => [
+      'variables' => [
+        'title' => NULL,
+        'description' => NULL,
+        'more_url' => NULL,
+      ],
+    ],
+  ];
+}
+/**
  * Implements hook_form_alter().
  */
 function az_content_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -167,23 +188,6 @@ function az_content_file_presave(EntityInterface $entity) {
 }
 
 /**
- * @param $group_content_entity
- * @param $entity
- */
-function az_content_group_content_alter($group_content_entity, $entity) {
-// Get the Group ID
-// Get the Article ID
-// Get the Media
-//   for each media item
-//     Add the article to the media
-//     Add group to the media
-//     Add topics - or should that come from the article
-//$gid = $group_content_entity->gid->value;
-//$media = $entity->get('field_media');
-//return;
-}
-
-/**
  * Implements HOOK_preprocess_page().
  *
  * If this is the structuredatom.com and the user is not logged in then redirect
@@ -209,8 +213,7 @@ function az_content_preprocess_page(&$variables) {
 }
 
 /**
- * Add a node reference to he media entitu field_usage field.
- *
+ * Add a node reference to the media entity field_usage field.
  *
  * @param $media
  * @param $articleId
@@ -271,6 +274,7 @@ function az_content_preprocess_node(&$variables) {
     case 'news':
     case 'page':
 
+      // Use Changed time to format date and ago.
       $changed = $node->getChangedTime();
       $variables['changed'] = \Drupal::service('date.formatter')->format($changed);
       $variables['ago'] = \Drupal::service('date.formatter')->formatDiff(
@@ -282,17 +286,16 @@ function az_content_preprocess_node(&$variables) {
         ]
       );
 
-      // Add the views map showing locations of images
+/*    // Add view - map showing locations of images
       if ($view_mode == 'map') {
-        // Add view block if defined.
         $variables['content']['view_map_images'] = views_embed_view('az_media_block', 'block_media_map_article');
       }
 
-      // Add the views map showing locations of images
+      // Add view - show associated images in a gallery.
       if ($view_mode == 'gallery') {
         // Add view block if defined.
         $variables['content']['view_image_gallery'] = views_embed_view('az_media_block', 'media_block_article');
-      }
+      } */
 
       // Add the New/Updated marker.
       if ($view_mode == 'main_content' || $view_mode == 'full' || $view_mode == 'teaser') {
@@ -306,8 +309,15 @@ function az_content_preprocess_node(&$variables) {
       }
 
       if ($view_mode == 'full') {
+        // Create book navigation block
         $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
         $variables['sidebar_blocks']['block_booknavigation'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+
+        // Add the contribute block if this nodes field_contribute has a value.
+        if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
+          $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
+          $variables['sidebar_blocks']['block_contribute'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+        }
 
         // Add the views map showing locations of images
         if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
@@ -315,6 +325,7 @@ function az_content_preprocess_node(&$variables) {
           $variables['sidebar_blocks']['block_views_image_map'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
         }
 
+        // Add the Donate block.
         $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
         $variables['sidebar_blocks']['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
       }

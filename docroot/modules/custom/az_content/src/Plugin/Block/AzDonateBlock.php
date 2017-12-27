@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\az_money\Plugin\Block;
+namespace Drupal\az_content\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormStateInterface;
  * @Block(
  *   id = "az_donate_block",
  *   admin_label = @Translation("AZ Donate Block"),
- *   category = @Translation("AZ Money")
+ *   category = @Translation("AZ Content")
  * )
  */
 class AzDonateBlock extends BlockBase {
@@ -26,7 +26,7 @@ class AzDonateBlock extends BlockBase {
       '#selection_handler' => 'default',
       '#default_value' => $node,
       '#selection_settings' => [
-        'target_bundles' => ['page'],
+        'target_bundles' => ['snippet'],
       ],
     ];
     return $form;
@@ -49,9 +49,9 @@ class AzDonateBlock extends BlockBase {
 
       if ($node) {
         return [
-          '#theme' => 'az_donate_block',
+          '#theme' => 'block_donate',
           '#attributes' => ['class' => ['donate-block']],
-          '#description' => $node->field_short_description->value,
+          '#description' => $node->body->value,
           '#more_url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$node->id()),
         ];
       }

@@ -1,5 +1,0 @@
-name: AZ Money
-type: module
-description: Create blocks and forms related to donations and subscriptions.
-core: 8.x
-package: AZ
