@@ -127,22 +127,25 @@ ul.az-tabs {
   border-bottom: 2px solid $secondary-background-color;
   padding: 0;
   position: relative;
+  margin-top: 0;
+
   @include clearfix;
 
   li.tab {
     float: left;
 
     .tab-title {
-      margin-right: 4px;
+      margin-right: -1px;
       border: 2px solid $base-separator-color;
       border-bottom: 0;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
 
       h2 {
-        font-size: 112.5%;
+        font-size: 110%;
+        font-weight: normal;
         color: $color-green;
-        padding: 5px 10px;
+        padding: 7px;
         margin: 0;
       }
     }
