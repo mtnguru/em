@@ -43,6 +43,21 @@ function az_content_form_alter(&$form, FormStateInterface $form_state, $form_id)
   return;
 }
 
+function az_content_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $node = $form_state->getFormObject()->getEntity();
+  $type = $node->getType();
+  if ($type == 'article' && $type == 'book' && $type == 'news') {
+
+  }
+
+/*if (!empty($form['panelizer'])) {
+    if (!empty($form['panelizer']['widget']['0']['default']['#title'])) {
+      $form['panelizer']['widget']['0']['default']['#title'] = t('Page Display Format');
+    }
+  } */
+  return;
+}
+
 /**
  * Implements hook_form_alter().
  */
@@ -71,14 +86,6 @@ function az_content_entity_embed_dialog_form_alter(&$form, FormStateInterface $f
   */
 }
 
-function az_content_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if (!empty($form['panelizer'])) {
-    if (!empty($form['panelizer']['widget']['0']['default']['#title'])) {
-      $form['panelizer']['widget']['0']['default']['#title'] = t('Page Display Format');
-    }
-  }
-  return;
-}
 function az_content_form_node_book_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   return;
 }

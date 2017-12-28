@@ -50,18 +50,22 @@
         <div class="block-right">
           {{ content.field_social_media }}
         </div>
-        <h2 class="title">{{ name }}</h2>
+        <h2 class="title">Topic: {{ name }}</h2>
       </div>
     </div>
 
     <div class="body-container">
 
-      {% if content.field_media[0] %}
-        {{ content.field_media }}
-      {% endif %}
-
       {% if content.field_tooltip %}
         {{ content.field_tooltip }}
+      {% endif %}
+
+      {% if content.field_links %}
+        {{ content.field_links }}
+      {% endif %}
+
+      {% if content.field_media[0] %}
+        {{ content.field_media }}
       {% endif %}
 
       {% if content.description[0] %}
