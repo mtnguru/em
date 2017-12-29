@@ -20,12 +20,18 @@
       padding: 8px 15px;
     }
     overflow: hidden;
-    position: relative;
+//  position: relative;
     width: 100%;
 
+    .group-container {
+      position: relative;
+    }
     .group-label {
       position: absolute;
+      text-align: center;
       z-index: 5;
+      background-color: rgba(0,0,0,.2);
+      text-shadow: 1px 1px 3px #104;
 
       @include media($bp320only) {
         top: 10px;
@@ -39,18 +45,17 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0,0,0,.1);
       }
 
       a {
+        display: block;
         line-height: 1.1;
         font-weight: bold;
         color: $color-group;
         overflow-wrap: break-word;
-        display: block;
         padding: 2px 7px;
         border-radius: 5px;
-//      @extend %image-overlay;
+        @include vertical-center;
 
         @include media($bp320only) {
           font-size: 100%;
@@ -59,10 +64,10 @@
           font-size: 110%;
         }
         @include media($bp960only) {
-          font-size: 120%;
+          font-size: 150%;
         }
         @include media($bp1280) {
-          font-size: 130%;
+          font-size: 175%;
         }
       }
     }
