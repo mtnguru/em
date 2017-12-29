@@ -1,4 +1,13 @@
-.contribute-block {
+div#block-azcontributeblock {
+
+  ul {
+    margin: 0;
+    padding-left: 1em;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
   .more-information {
     float: right;
     margin-top: -2em;
