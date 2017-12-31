@@ -9,6 +9,11 @@ body.page-node-type-article {
   }
 }
 
+body.path-frontpage {
+  .block-page-title-block {
+    display: none;
+  }
+}
 
 article.az-page {
   .sidebar-left {

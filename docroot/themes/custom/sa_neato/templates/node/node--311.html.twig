@@ -84,7 +84,15 @@
   {% endif %}
   {{ title_suffix }}
 
-  {{ content|without('links') }}
+  <div class="header-top">
+    <div class="section-title">
+      <h1>{{ label }}</h1>
+      {{ content.body }}
+    </div>
+    <div class="section-announcement">
+      {{ section_announcement }}
+    </div>
+  </div>
 
   <div class="sidebar-left">
 

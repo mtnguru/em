@@ -1,17 +1,35 @@
 body.path-frontpage {
-
-  #sidebar-left {
-  }
-  #main-content {
-
-  }
-  .block  {
-//  border: 1px solid white;
-  }
-  .block-title {
-  }
-
   @include clearfix;
+
+  .header-top {
+    border-bottom: 1px solid $base-separator-color;
+    margin-bottom: 25px;
+
+    .section-title {
+      display: inline-block;
+
+      @include media(max-width $bp580) {
+        width: 100%;
+      }
+      @include media($bp960) {
+        width: 300px;
+      }
+    }
+
+    .section-announcement {
+      display: inline-block;
+      vertical-align: text-bottom;
+      padding-left: 50px;
+
+      @include media(max-width $bp580) {
+        width: 100%;
+      }
+      @include media($bp960) {
+        width: calc(100% - 310px);
+      }
+    }
+  }
+
 
   .sidebar-left {
     float: left;
@@ -20,11 +38,12 @@ body.path-frontpage {
       width: 100%;
     }
     @include media($bp960) {
-      width: 30%;
+      width: 300px;
       max-width: 350px;
       padding-right: 40px;
     }
   }
+
   .main-content {
     float: left;
     position: relative;
@@ -33,7 +52,7 @@ body.path-frontpage {
       width: 100%;
     }
     @include media($bp960) {
-      width: 70%;
+      width: calc(100% - 300px);
     }
   }
 
@@ -53,5 +72,4 @@ body.path-frontpage {
   .field--name-body {
     padding-bottom: 20px;
   }
-
 }
