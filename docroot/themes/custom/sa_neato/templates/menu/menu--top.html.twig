@@ -39,11 +39,21 @@
       <ul class="submenu">
     {% endif %}
     {% for item in items %}
+      {# kint(item) #}
       {% if item.below %}
-        <li{{ item.attributes.addClass(classes | merge(['more'])).setAttribute('id', 'js-navigation-more') }}>
-          {{ link(item.title, item.url) }}
-          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
-        </li>
+        {% if item.no_link %}
+          <li{{ item.attributes.addClass(classes | merge(['more', 'js-navigation-more', 'no-link'])) }}>
+            <div class="title">
+              {{ item.title }}
+            </div>
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          </li>
+        {% else %}
+          <li{{ item.attributes.addClass(classes | merge(['more', 'js-navigation-more'])) }}>
+            {{ link(item.title, item.url) }}
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          </li>
+        {% endif %}
       {% else %}
         <li{{ item.attributes.addClass(classes) }}>
           {{ link(item.title, item.url) }}

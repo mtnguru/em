@@ -9,38 +9,58 @@
   'use strict';
 
   Drupal.menuTopC = function () {
+    var $navMenu = $('#js-navigation-menu');
+    var $menuToggle = $('#js-mobile-menu');
+    var $moreLinks = $('.js-navigation-more');
+
+    function resizeWindow() {
+      if ($moreLinks.length > 0) {
+        var windowWidth = $(window).width();
+        var moreLeftSideToPageLeftSide = $moreLinks.offset().left;
+        var moreLeftSideToPageRightSide = windowWidth - moreLeftSideToPageLeftSide;
+
+        if (moreLeftSideToPageRightSide < 330) {
+          $(".js-navigation-more .submenu .submenu").removeClass("fly-out-right");
+          $(".js-navigation-more .submenu .submenu").addClass("fly-out-left");
+        }
+
+        if (moreLeftSideToPageRightSide > 330) {
+          $(".js-navigation-more .submenu .submenu").removeClass("fly-out-left");
+          $(".js-navigation-more .submenu .submenu").addClass("fly-out-right");
+        }
+      }
+    }
 
     var init = function init() {
+      resizeWindow();
+
       $(window).resize(function () {
+        resizeWindow();
+      });
 
-        var more = document.getElementById("js-navigation-more");
-        if ($(more).length > 0) {
-          var windowWidth = $(window).width();
-          var moreLeftSideToPageLeftSide = $(more).offset().left;
-          var moreLeftSideToPageRightSide = windowWidth - moreLeftSideToPageLeftSide;
+      $navMenu.removeClass("show");
+      $menuToggle.unbind();
 
-          if (moreLeftSideToPageRightSide < 330) {
-            $("#js-navigation-more .submenu .submenu").removeClass("fly-out-right");
-            $("#js-navigation-more .submenu .submenu").addClass("fly-out-left");
-          }
-
-          if (moreLeftSideToPageRightSide > 330) {
-            $("#js-navigation-more .submenu .submenu").removeClass("fly-out-left");
-            $("#js-navigation-more .submenu .submenu").addClass("fly-out-right");
-          }
+      $moreLinks.click(function() {
+        if ($(this).hasClass('menu-open')) {
+          $(this).removeClass('menu-open').find('.submenu').slideUp();
+        } else {
+          $moreLinks.each(function() {
+            if ($(this).hasClass('menu-open')) {
+              $(this).removeClass('menu-open').find('.submenu').slideUp();
+            }
+          });
+          $(this).addClass('menu-open').find('.submenu').slideDown();
         }
       });
 
-      var menuToggle = $("#js-mobile-menu").unbind();
-      $("#js-navigation-menu").removeClass("show");
-
-      menuToggle.on("click", function (e) {
+      $menuToggle.on("click", function (e) {
         e.preventDefault();
-        $("#js-navigation-menu").slideToggle(function () {
-          if ($("#js-navigation-menu").is(":hidden")) {
-            $("#js-navigation-menu").removeAttr("style");
-          }
-        });
+        if ($navMenu.hasClass('nav-open')) {
+          $navMenu.slideUp().removeClass('nav-open');
+        } else {
+          $navMenu.slideDown().addClass('nav-open');
+        }
       });
     };
 
@@ -48,6 +68,7 @@
       init: init
     };
   }; // function Drupal.menuTopC - function wrapper to make variables local.
+
 
   Drupal.behaviors.menuTop = {
     attach: function (context, settings) {

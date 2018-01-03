@@ -25,7 +25,6 @@ body.path-frontpage {
       }
       @include media($bp960) {
         padding-left: 50px;
-        @include vertical-center;
         display: inline-block;
         width: calc(100% - 310px);
       }
