@@ -49,10 +49,9 @@
 
     #book-title {
       position: relative;
-      margin-bottom: 5px;
 
       a {
-        padding: .2em;
+        padding: 3px;
 
         &.menu-item--active {
           background-color: $secondary-background-color;
@@ -71,7 +70,7 @@
       }
 
       > ul {
-        margin: 0;
+        margin: 3px 0 0;
         padding: 0;
       }
 
@@ -137,7 +136,8 @@
     a {
       display: block;
       color: $color-green;
-      padding: .20em 0 .20em .25em;
+      margin-top: 1px;
+      padding: 3px 0 3px 4px;
     }
   }
 

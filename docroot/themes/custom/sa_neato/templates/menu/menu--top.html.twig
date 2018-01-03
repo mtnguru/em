@@ -24,6 +24,7 @@
   We call a macro which calls itself to render the full tree.
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
+<a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu"></a>
 {{ menus.menu_links(items, attributes, 0) }}
 
 {% macro menu_links(items, attributes, menu_level) %}
@@ -32,14 +33,14 @@
 
     {% if menu_level == 0 %}
       {% set classes = ['nav-link'] %}
-      <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
+      <ul id="js-navigation-menu" class="navigation-menu">
     {% else %}
       {% set classes = [] %}
       <ul class="submenu">
     {% endif %}
     {% for item in items %}
       {% if item.below %}
-        <li{{ item.attributes.addClass(classes | merge(['more'])).setAttribute('id', 'js-centered-more') }}>
+        <li{{ item.attributes.addClass(classes | merge(['more'])).setAttribute('id', 'js-navigation-more') }}>
           {{ link(item.title, item.url) }}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         </li>
@@ -52,4 +53,3 @@
     </ul>
   {% endif %}
 {% endmacro %}
-

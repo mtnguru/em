@@ -148,7 +148,7 @@ class WysiwygFilter extends FilterBase {
               // Create a sanitized version of $text that is suitable for using as HTML
               // attribute value. (In particular, as the title attribute to the footnote
               // link).
-              $value = count($footnotes) + 1;
+              $number = count($footnotes) + 1;
               $allowed_tags = array();
               $text_clean = Xss::filter($matches[4][$key][0], $allowed_tags);
               // HTML attribute cannot contain quotes.
@@ -158,11 +158,11 @@ class WysiwygFilter extends FilterBase {
               $randstr = $this->randstr();
 
               $fn = array(
-                'value' => $value,
+                'value' => $number,
                 'text' => $matches[4][$key][0],
                 'text_clean' => $text_clean,
-                'fn_id' => 'footnote_' . $value . '_' . $randstr,
-                'ref_id' => 'footnoteref_' . $value . '_' . $randstr,
+                'fn_id' => 'footnote_' . $number . '_' . $randstr,
+                'ref_id' => 'footnoteref_' . $number . '_' . $randstr,
               );
               $footnotes[] = $fn;
               $build = [

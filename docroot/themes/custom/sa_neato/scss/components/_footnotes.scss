@@ -5,8 +5,9 @@
   vertical-align: top;
   position: relative;
   top: -0.35em;
+  left: -.3em;
   font-size: 65%;
-  margin: 0 .1em;
+//margin: 0 .1em;
   &:target {
     background-color: darken($color-purple, 10%);
     border: solid 1px $color-purple;

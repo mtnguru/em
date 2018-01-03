@@ -50,15 +50,10 @@
       color: darken($color-white, 15%);
       margin-right: 5px;
     }
-    &.article {
-      @extend .az-fa-file-text;
-    }
-    &.news {
-      @extend .az-fa-newspaper;
-    }
-    &.book {
-      @extend .az-fa-book;
-    }
+    &.article { @extend .az-fa-file-text; } 
+    &.news    { @extend .az-fa-newspaper; }
+    &.book    { @extend .az-fa-book; }
+    &.event   { @extend .az-fa-calendar; }
   }
 
   .media {

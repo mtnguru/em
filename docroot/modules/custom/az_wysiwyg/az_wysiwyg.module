@@ -71,9 +71,8 @@ function az_wysiwyg_theme_footnote_link($fn) {
   // maybe latter fix this, but for now it works.
   // @todo: change this ugly array for arguments in the function.
   $fn = $fn['fn']['fn'];
-  return '<a class="see-footnote" id="' . $fn['ref_id'] .
-         '" title="' . $fn['text_clean'] . '" href="#' . $fn['fn_id'] . '">' .
-         $fn['value'] . '</a>';
+  return '<a class="see-footnote" id="' . $fn['ref_id'] .  '" title="' . $fn['text_clean'] . '" href="#' . $fn['fn_id'] . '">&#91;' .
+         $fn['value'] . '&#93;</a>';
 }
 
 /**

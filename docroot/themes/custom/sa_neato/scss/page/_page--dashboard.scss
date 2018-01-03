@@ -3,34 +3,34 @@ body.path-frontpage {
 
   .header-top {
     border-bottom: 1px solid $base-separator-color;
+    padding-bottom: 20px;
     margin-bottom: 25px;
 
     .section-title {
-      display: inline-block;
 
-      @include media(max-width $bp580) {
+      @include media(max-width $bp580max) {
         width: 100%;
+        margin-bottom: 20px;
       }
       @include media($bp960) {
+        display: inline-block;
         width: 300px;
       }
     }
 
     .section-announcement {
-      display: inline-block;
-      vertical-align: text-bottom;
-      padding-left: 50px;
 
-      @include media(max-width $bp580) {
+      @include media(max-width $bp580max) {
         width: 100%;
       }
       @include media($bp960) {
+        padding-left: 50px;
+        @include vertical-center;
+        display: inline-block;
         width: calc(100% - 310px);
       }
     }
   }
-
-
 
 
   .sidebar-left {
@@ -72,6 +72,9 @@ body.path-frontpage {
   }
 
   .field--name-body {
-    padding-bottom: 20px;
+  }
+
+  .dashboard-block {
+    margin-bottom: 30px;
   }
 }

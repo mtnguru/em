@@ -12,12 +12,12 @@ $color-white: #FFFFFF;
 $color-dark-blue: #102E4A;
 $color-blue: #5887FF;
 $color-turquoise: #44D9E6;
+$color-light-turquoise: #A5FFD1;
 $color-purple: #53C;
 $color-purple-red: #A682ff;
 $color-green: #7FFFB0;
 //$color-dark-green: #0F5F20;
 $color-dark-green: #064A10;
-$color-light-turquoise: #A5FFD1;
 $color-off-white: #FAF0FF;
 
 $color-placeholder: $color-grey;
@@ -47,7 +47,7 @@ $header-color: $color-light-turquoise;
 
 // Top Navigation
 $topnav-background: $color-dark-green;
-$topnav-color: $color-turquoise;
+$topnav-color: $color-light-turquoise;
 
 // Base colors.
 $base-background-color: $color-dark-blue !default;

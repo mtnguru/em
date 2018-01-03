@@ -369,9 +369,11 @@ function az_content_preprocess_node(&$variables) {
         $variables['view_content_recent'] = views_embed_view('content_recent', 'block_all');
         $variables['view_comments_recent'] = views_embed_view('comments_recent', 'block_all');
 
-        $nid = $node->field_announcement->getValue()[0]['target_id'];
-        $snippet = \Drupal::entityManager()->getStorage('node')->load($nid);
-        $variables['section_announcement'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
+        if ($node->hasField('field_announcement')) {
+          $nid = $node->field_announcement->getValue()[0]['target_id'];
+          $snippet = \Drupal::entityManager()->getStorage('node')->load($nid);
+          $variables['section_announcement'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
+        }
 
         $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
         $variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
