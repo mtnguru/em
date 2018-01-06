@@ -2,4 +2,15 @@ article.type-snippet {
   .node__links {
     display: none;
   }
+  ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+      &::before {
+        margin-right: 10px;
+      }
+    }
+
+  }
 }
