@@ -74,24 +74,28 @@
 * @see template_process()
 */
 #}
-<article id="node-{{ node.id }}" class="{{ attributes.class }} atomizer"{{ attributes }}>
+<article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
+  {% endif %}
+  {{ title_suffix }}
 
-  {{ content.body }}
-  {# content.field_configuration_file #}
-  {{ content.atomizer_block }}
+  {% if display_submitted %}
+  <div class="posted">
+    {% if user_picture %}
+      {{ user_picture }}
+    {% endif %}
+    {{ submitted }}
+  </div>
+  {% endif %}
+
+  {{ content|without('field_contribute', 'field_comments', 'links') }}
 
   {% if content.field_tags|length and not is_front %}
     {{ content.field_tags }}
   {% endif %}
 
-  <div id="view-select-atom">
-    <div class="header">
-      <button id="atom--select-close" class="close-button fa fa-close"></button>
-      <h2>Select Atom</h2>
-    </div>
-    {{ content.view_select_atom }}
-  </div>
-
   {{ content.links }}
+  {{ content.field_comments }}
 </article>
-

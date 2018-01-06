@@ -57,6 +57,11 @@ body.page-node-type-atomizer {
     }
   }
 
+  article.atomizer {
+    .field--name-body {
+      margin-bottom: 20px;
+    }
+  }
 
   .field--name-field-configuration {
     textarea {

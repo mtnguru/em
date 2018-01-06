@@ -293,17 +293,6 @@ function az_content_preprocess_node(&$variables) {
         ]
       );
 
-/*    // Add view - map showing locations of images
-      if ($view_mode == 'map') {
-        $variables['content']['view_map_images'] = views_embed_view('az_media_block', 'block_media_map_article');
-      }
-
-      // Add view - show associated images in a gallery.
-      if ($view_mode == 'gallery') {
-        // Add view block if defined.
-        $variables['content']['view_image_gallery'] = views_embed_view('az_media_block', 'media_block_article');
-      } */
-
       // Add the New/Updated marker.
       if ($view_mode == 'main_content' || $view_mode == 'full' || $view_mode == 'teaser') {
         // Query to see if this content is in a group

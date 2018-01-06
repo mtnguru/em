@@ -41,6 +41,12 @@
       $navMenu.removeClass("show");
       $menuToggle.unbind();
 
+/*    $moreLinks.hover(function() {
+        $(this).addClass('menu-open').find('.submenu').slideDown();
+      }, function() {
+        $(this).removeClass('menu-open').find('.submenu').slideUp();
+      }); */
+
       $moreLinks.click(function() {
         if ($(this).hasClass('menu-open')) {
           $(this).removeClass('menu-open').find('.submenu').slideUp();
