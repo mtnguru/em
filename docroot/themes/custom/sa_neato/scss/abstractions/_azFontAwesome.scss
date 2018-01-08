@@ -26,6 +26,7 @@
 .az-fa-bars:before              { @extend .az-fa; content: "\f0c9"; }
 .az-fa-book:before              { @extend .az-fa; content: "\f02d"; }
 .az-fa-calculator:before        { @extend .az-fa; content: "\f1ec"; }
+.az-fa-event:before,
 .az-fa-calendar:before          { @extend .az-fa; content: "\f073"; }
 .az-fa-clock-o:before           { @extend .az-fa; content: "\f017"; }
 .az-fa-close:before             { @extend .az-fa; content: "\f00d"; }
@@ -39,6 +40,7 @@
 .az-fa-file:before              { @extend .az-fa; content: "\f15b"; }
 .az-fa-file-o:before            { @extend .az-fa; content: "\f016"; }
 .az-fa-file-image-o:before      { @extend .az-fa; content: "\f1c5"; }
+.az-fa-article:before,
 .az-fa-file-text:before         { @extend .az-fa; content: "\f0f6"; }
 .az-fa-folder:before            { @extend .az-fa; content: "\f07b"; }
 .az-fa-futbol-o:before          { @extend .az-fa; content: "\f1e3"; }
@@ -46,6 +48,7 @@
 .az-fa-heart-o:before           { @extend .az-fa; content: "\f08a"; }
 .az-fa-info-circle:before       { @extend .az-fa; content: "\f05a"; }
 .az-fa-mouse-pointer:before     { @extend .az-fa; content: "\f245"; }
+.az-fa-news:before,
 .az-fa-newspaper:before         { @extend .az-fa; content: "\f1ea"; }
 .az-fa-paintbrush:before        { @extend .az-fa; content: "\f1fc"; }
 .az-fa-pencil:before            { @extend .az-fa; content: "\f040"; }
@@ -67,4 +70,6 @@
 .az-fa-window-maximize:before   { @extend .az-fa; content: "\f2d0"; }
 .az-fa-window-minimize:before   { @extend .az-fa; content: "\f2d1"; }
 
-
+.az-book {
+  @extend .az-fa-book;
+}

@@ -137,7 +137,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         break;
     }
 
-    // If this is a book page
+    // If this is a book page query for all book pages and create book menu
     if (!empty($bid)) {
 
       // Query for all pages in this book
@@ -223,10 +223,13 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             'link' => [
               '#type' => 'link',
               '#title' => t('Submit a Ticket'),
-              '#attributes' => ['title' => t('Submit a ticket for suggestions, questions, complaints or bugs regarding this community.')],
+              '#attributes' => ['title' => t('Submit a ticket for suggestions, questions, complaints or bugs regarding this page or the website.')],
               '#url' => Url::fromRoute('node.add', ['node_type' => 'ticket'], [
                 'absolute' => TRUE,
-                'query' => ['group' => $group->id()],
+                'query' => [
+                  'group' => $group->id(),
+                  'node' => (isset($node)) ? $node->id() : 0
+                ],
               ]),
             ],
           ],

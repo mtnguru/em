@@ -46,67 +46,33 @@ function az_content_form_alter(&$form, FormStateInterface $form_state, $form_id)
 function az_content_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
   $type = $node->getType();
-  if ($type == 'article' && $type == 'book' && $type == 'news') {
+  if ($type == 'article' || $type == 'book' || $type == 'news') {
+    $form['mailit'] = 'shit';
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = '_az_content_node_submit';
+      }
+    }
+  }
+}
 
+function _az_content_node_submit(&$form, FormStateInterface &$form_state) {
+  return;
+}
+
+function az_content_form_node_ticket_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $request = \Drupal::request();
+  if ($request->query->has('group')) {
+    $gid = $request->query->get('group');
+    $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
+    $form['field_group']['widget'][0]['target_id']['#default_value'] = $group;
   }
 
-/*if (!empty($form['panelizer'])) {
-    if (!empty($form['panelizer']['widget']['0']['default']['#title'])) {
-      $form['panelizer']['widget']['0']['default']['#title'] = t('Page Display Format');
-    }
-  } */
-  return;
-}
-
-/**
- * Implements hook_form_alter().
- */
-function az_content_entity_embed_dialog_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  return;
-  /*
-  // Couldn't get this to work - How do I save my new settings?
-  // Decided to move entity_embed from modules/contrib to modules/custom and customize it there.
-  $form['attributes']['azz-class'] = array(
-    '#title' => t('Class Name'),
-    '#type' => 'textfield',
-    '#default_value' => isset($entity_element['azz-class']) ? Html::decodeEntities($entity_element['azz-class']) : '',
-//  '#element_validate' => array('::escapeValue'),
-  );
-
-  // James Sorensen - added azz data attribute
-  $form['attributes']['azz-data'] = array(
-    '#title' => t('Data field'),
-    '#desc' => t('Used to pass Key/Value pairs into JavaScript - Ex: key-value'),
-    '#type' => 'textfield',
-    '#default_value' => isset($entity_element['azz-data']) ? Html::decodeEntities($entity_element['azz-data']) : '',
-//  '#element_validate' => array('::escapeValue'),
-  );
-  $form['#validate'][] = '_az_content_embed_validate';
-  $form['actions']['submit']['#submit'][] = '_az_content_embed_submit';
-  */
-}
-
-function az_content_form_node_book_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  return;
-}
-
-function _az_content_embed_validate($form, FormStateInterface $form_state) {
-  return;
-}
-
-function _az_content_embed_submit($form, FormStateInterface &$form_state) {
-/*  $entity_element = $form_state->get('entity_element');
-
-    $entity_element += [
-      'az-data' => $form_state->get('az-data'_embed_button->getTypeSetting('entity_type'),
-      'data-entity-uuid' => '',
-      'data-entity-embed-display' => 'entity_reference:entity_reference_entity_view',
-      'data-entity-embed-display-settings' => isset($form_state->get('entity_element')['data-entity-embed-settings']) ? $form_state->get('entity_element')['data-entity-embed-settings'] : [],
-    ];
-
-    $form_state->set('entity_element', $entity_element);
-*/
-  return;
+  if ($request->query->has('node')) {
+    $nid = $request->query->get('node');
+    $node = is_numeric($nid) ? Node::load($nid) : NULL;
+    $form['field_page']['widget'][0]['target_id']['#default_value'] = $node;
+  }
 }
 
 /**
@@ -240,6 +206,15 @@ function _az_content_add_node_to_media($media, $articleId) {
     $media->field_usage->appendItem($articleId);
     $media->save();
   }
+}
+
+/**
+ * Implements HOOK_preprocess_block().
+ *
+ * @param $variables
+ */
+function az_content_preprocess_block(&$variables) {
+  return;
 }
 
 /**
