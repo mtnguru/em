@@ -5,6 +5,13 @@ table {
   table-layout: auto;
   width: 100%;
   line-height: 1.2;
+
+  caption {
+    font-size: 120%;
+    padding: 10px 0;
+    color: $color-light-title;
+
+  }
 }
 
 th {

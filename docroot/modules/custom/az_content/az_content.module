@@ -47,7 +47,14 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
   $node = $form_state->getFormObject()->getEntity();
   $type = $node->getType();
   if ($type == 'article' || $type == 'book' || $type == 'news') {
-//  $form['mailit'] = 'shit';
+    $form['mailit'] = [
+      '#type' => 'container',
+      'checkbox' => [
+        '#type' => 'checkbox',
+        '#title' => t('Send email notification'),
+        '#default_value' => false,
+      ],
+    ];
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = '_az_content_node_submit';

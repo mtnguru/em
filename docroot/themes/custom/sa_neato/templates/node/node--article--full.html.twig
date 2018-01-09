@@ -96,7 +96,9 @@
     <div class="header-container">
       <div class="header">
         <div class="block-right">
-          {{ content.field_social_media }}
+          {% if content.field_social_media is not empty %}
+            {{ content.field_social_media }}
+          {% endif %}
 
           {% if content.field_topics is not empty %}
             <div class="topics">
@@ -109,7 +111,6 @@
         <h2 class="title">{{ label }}</h2>
 
         <div class="information">
-
           <span class="az-fa-{{ node.bundle }}">
             {{ node.bundle|capitalize }} -
           </span>
@@ -131,12 +132,14 @@
 
     <div class="body-container">
 
+      {# CT - news #}
       {% if content.field_publication is not empty %}
         <div class="publication">
           {{ content.field_publication }}
         </div>
       {% endif %}
 
+      {# CT - news #}
       {% if content.field_article_link is not empty %}
         <div class="article-link">
           {{ content.field_article_link }}
@@ -149,13 +152,31 @@
         </div>
       {% endif %}
 
-      <div class="body">
-        {{ content.body }}
-      </div>
+      {% if content.body is not empty %}
+        <div class="body">
+          {{ content.body }}
+        </div>
+      {% endif %}
 
+      {# CT - glossary #}
+      {% if content.eu-definition is not empty %}
+        <div class="eu-definition">
+          {{ content.eu-definition }}
+        </div>
+      {% endif %}
+
+      {# CT - glossary #}
+      {% if content.prevailing-definition is not empty %}
+        <div class="prevailing-definition">
+          {{ content.prevailing-definition }}
+        </div>
+      {% endif %}
     </div>
 
-    {{ content.book_navigation }}
+    {% if content.book_navigation is not empty %}
+      {{ content.book_navigation }}
+    {% endif %}
+
     {{ content.links }}
     {{ content.field_comments }}
   </div>
