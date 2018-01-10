@@ -78,6 +78,7 @@ class WysiwygFilter extends FilterBase {
 
   private function processText($text, &$glossary, &$footnotes) {
     $view_mode = &drupal_static('az_view_mode');
+    if (!isset($view_mode)) return $text;
     $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;
 
     // Replace with a space any &nbsp; characters do not have a space before or after them -  for&nbsp;example -> for example
@@ -131,6 +132,9 @@ class WysiwygFilter extends FilterBase {
               else {
                 if (!empty($glossary[substr($name, 0, -1)])) {
                   $topic = $glossary[substr($name, 0, -1)];
+                }
+                else {
+                  $ntext .= $matches[4][$key][0];
                 }
               }
             }

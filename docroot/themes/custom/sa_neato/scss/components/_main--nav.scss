@@ -161,7 +161,7 @@
             border: 2px solid $color-green;
             padding: 12px;
             border-radius: 8px;
-            z-index: 200;
+            z-index: 20;
           }
           .label {
             font-family: opendyslexic;
@@ -195,6 +195,7 @@
             border: 2px solid $color-green;
             border-radius: 8px;
             padding: 10px 15px;
+            z-index: 20;
             @extend %text-shadow;
             @include transition-3d($timing: 250ms);
 
@@ -398,7 +399,7 @@
     display: none;
     border-radius: 8px;
     border: 2px solid $color-light-turquoise;
-//  z-index: 101;
+    z-index: 20;
     padding: 10px 0;
     margin: 0;
 
