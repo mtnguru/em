@@ -42,21 +42,14 @@
 %}
 
 <div{{ attributes.addClass(classes) }}>
-  {#
-  <div class="title-container">
-    <h2 {{ title_attributes }}>RealScience.Rocks</h2>
-  </div>
-  #}
-
   <div class="title-container">
     <h2>
       <span class="ethereal">Ethereal</span>
       <span class="matters">Matters</span>
     </h2>
+    {{ logo_popup }}
   </div>
 
-
-  
   <div class="content-container">
     {% block content %}
       {{ content }}

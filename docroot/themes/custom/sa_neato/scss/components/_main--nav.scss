@@ -62,7 +62,7 @@
 
         .ethereal {
           color: #c6a2ff;
-          text-shadow: 0 0 3px #0ff;
+          text-shadow: 0 0 4px #5ff;
           opacity: .8;
           position: relative;
           display: inline-block;
@@ -85,6 +85,23 @@
           margin: 15px 10px 0 -50px;
           font-size: 28px;
           @extend %text-shadow;
+        }
+
+      }
+
+      .popup {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        background: $color-dark-green;
+        border: 2px solid $color-green;
+        border-radius: 10px;
+      }
+
+      &:hover {
+        .popup {
+          display: block;
         }
       }
     }
