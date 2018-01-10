@@ -47,7 +47,7 @@
 
   .type {
     &:before {
-      color: darken($color-white, 15%);
+      color: darken($color-white, 35%);
       margin-right: 5px;
     }
     &.article { @extend .az-fa-file-text; } 

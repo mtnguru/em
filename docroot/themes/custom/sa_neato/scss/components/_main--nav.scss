@@ -25,12 +25,11 @@
 
   position: relative;
   line-height: 1;
-  font-weight: bold;
 
   background-color: $color-black;
   border-bottom: 2px solid $navigation-background;
   width: 100%;
-  z-index: 20;
+//z-index: 20;
 
   #block-aztopnavblock {
     display: inline-block;
@@ -53,61 +52,64 @@
 
         @include media(max-width $bp580max) {
           padding: 0 20px;
-//        font-size: 140%;
         } // $bp320only
 
         @include media($bp960) {
           padding: 0 30px;
         } // $bp960
+      }
 
-        .ethereal {
-          color: #c6a2ff;
-          text-shadow: 0 0 4px #5ff;
-          opacity: .8;
-          position: relative;
-          display: inline-block;
-          vertical-align:top;
-          font-style: italic;
-          font-family: cursive;
-//        color: #c6a2ff;
-          font-weight: 100;
-          margin-top: 4px;
-          font-size: 24px;
-          z-index: 2;
-          @include transform (rotate(-8deg));
-        }
+      .ethereal {
+        color: #c6a2ff;
+        text-shadow: 0 0 4px #5ff;
+        opacity: .7;
+        position: relative;
+        display: inline-block;
+        vertical-align:top;
+        font-style: italic;
+        font-family: cursive;
+        font-weight: 100;
+        margin-top: 3px;
+        font-size: 24px;
+        z-index: 1;
+        @include transform (rotate(-8deg));
+      }
 
-        .matters {
-          position: relative;
-          display: inline-block;
-          vertical-align:top;
-          color: #efb000;
-          margin: 15px 10px 0 -50px;
-          font-size: 28px;
-          @extend %text-shadow;
-        }
-
+      .matters {
+        position: relative;
+        display: inline-block;
+        vertical-align:top;
+        color: #efb000;
+        margin: 16px 10px 0 -45px;
+        font-size: 28px;
+        @extend %text-shadow;
       }
 
       .popup {
-        display: none;
         position: absolute;
-        top: 50px;
-        left: 50px;
+        top: 20px;
+        left: -500px;
         background: $color-dark-green;
         border: 2px solid $color-green;
         border-radius: 10px;
+        width: 300px;
+        padding: 20px;
+        opacity: 0;
+        @include transition-3d($property: opacity, $timing: 250ms);
+        z-index: 200;
       }
 
       &:hover {
         .popup {
-          display: block;
+          left: 30px;
+          opacity: 1;
         }
       }
     }
 
     .content-container {
       display: inline-block;
+      font-weight: bold;
       @include media(max-width $bp580max) {
         width: 100%;
       }
@@ -120,28 +122,15 @@
         top: 0px;
 
         @include media($bp320only) {
-          right: 70px;
+          right: 60px;
         }
 
         @include media($bp580only) {
-          right: 108px;
+          right: 50px;
         }
 
         @include media($bp960) {
           right: #{$page-padding-desktop}px;
-        }
-
-        .popup {
-          position: absolute;
-          width: 160px;
-          top: 20px;
-          right: -200px;
-          background-color: $color-dark-green;
-          @extend %text-shadow;
-          border-radius: 8px;
-          padding: .4em .7em .4em;
-          border: 2px solid $color-green;
-          @include transition-3d($timing: 250ms);
         }
 
         #accessibility {
@@ -166,7 +155,13 @@
             position: absolute;
             top: 45px;
             right: -400px;
+            bottom: auto;
             width: 212px;
+            background-color: $color-dark-green;
+            border: 2px solid $color-green;
+            padding: 12px;
+            border-radius: 8px;
+            z-index: 200;
           }
           .label {
             font-family: opendyslexic;
@@ -174,7 +169,6 @@
           }
           &:hover {
             .popup {
-              bottom: auto;
               right: -50px;
             }
           }
@@ -188,31 +182,41 @@
             font-size: 14px;
           }
 
+          @include media(max-width $bp580max) {
+            display: none;
+          }
+
+          ul.popup {
+            position: absolute;
+            top: -300px;
+            right: -10px;
+            width: 175px;
+            background-color: $color-dark-green;
+            border: 2px solid $color-green;
+            border-radius: 8px;
+            padding: 10px 15px;
+            @extend %text-shadow;
+            @include transition-3d($timing: 250ms);
+
+            li {
+              padding: 6px 0;
+            }
+          }
+
           &.logged-in {
             padding-top: 7px;
 
             img {
-              //            width: 40px;
               height: 40px;
               border-radius: 25%;
               box-shadow: 0px 0px 2px 2px $navigation-background;
             }
 
             .menu {
-              position: absolute;
-              background-color: $color-dark-green;
-              width: 175px;
-              top: -300px;
-              right: -10px;
-              padding: .4em .7em .7em;
-              @extend %text-shadow;
-              border-radius: 8px;
-              border: 2px solid $color-green;
-              @include transition-3d;
             }
 
             &:hover {
-              .menu {
+              ul.popup {
                 bottom: auto;
                 top: 30px;
                 right: -10px;
@@ -227,7 +231,7 @@
   .navigation-wrapper {
     @include clearfix;
     position: relative;
-    z-index: 9999;
+//  z-index: 101;
   }
 
   // Mobile view
@@ -253,17 +257,18 @@
   }
 
 
+  /*
   // Nav menu
 
   nav {
     float: none;
     min-height: $navigation-height;
-    z-index: 9999999;
+//  z-index: 101;
 
     @include media ($bp960) {
       float: left;
     }
-  }
+  } */
 
   ul.navigation-menu {
     clear: both;
@@ -272,7 +277,7 @@
     overflow: visible;
     padding: 0;
     width: 100%;
-    z-index: 9999;
+//  z-index: 101;
 
     &.show {
       display: block;
@@ -299,7 +304,7 @@
       display: block;
       overflow: hidden;
       width: 100%;
-      z-index: 9999;
+//    z-index: 101;
 
       @include media(max-width $bp580max) {
         padding: 0 20px;
@@ -393,8 +398,8 @@
     display: none;
     border-radius: 8px;
     border: 2px solid $color-light-turquoise;
-    z-index: 20;
-    padding: 0;
+//  z-index: 101;
+    padding: 10px 0;
     margin: 0;
 
     @include media(max-width $bp580max) {

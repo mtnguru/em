@@ -26,28 +26,27 @@ class WysiwygBase {
     return $tip;
   }
 
-  static public function loadTopics() {
+  static public function loadGlossary() {
+    $terms = &drupal_static(__FUNCTION__);
+    if (isset($terms)) {
+      return $terms;
+    }
     $terms = [];
+    // DB Query for all glossary terms.
+    $query = \Drupal::database()->select('node_field_data', 'nfd');
+    $query->addfield('nfd', 'nid');
+    $query->addfield('nfd', 'title');
+    $query->condition('nfd.type', 'glossary');
 
-    // Query for topics taxonomy term data.
-    $query = \Drupal::database()->select('taxonomy_term_field_data', 'tfd');
-    $query->addfield('tfd', 'tid', 'id');
-    $query->addfield('tfd', 'name');
-    $query->addfield('tfd', 'name', 'name_norm');
-    $query->addField('tfd', 'description__value', 'description');
-    $query->condition('tfd.vid', 'topics', 'IN');
+    // Join in the tooltip text field.
+    $query->join('node__field_tooltip', 'nft', 'nft.entity_id = nfd.nid');
+    $query->addfield('nft', 'field_tooltip_value', 'tooltip');
 
-    // Join in the tooltip text.
-    $query->join('taxonomy_term__field_tooltip', 'ttft', 'ttft.entity_id = tfd.tid');
-    $query->addfield('ttft', 'field_tooltip_value', 'tooltip');
-
-    $results = $query->execute()->fetchAllAssoc('name_norm');
+    $results = $query->execute()->fetchAllAssoc('title');
     // Build terms array.
     foreach ($results as $result) {
-      // Make name_norm lowercase, it seems not possible in PDO query?
-      $result->name_norm = strtolower($result->name_norm);
-      $result->url = \Drupal::service('path.alias_manager')->getAliasByPath('/taxonomy/term/' . $result->id);
-      $terms[$result->name_norm] = $result;
+      $result->url = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $result->nid);
+      $terms[strtolower($result->title)] = $result;
     }
     return $terms;
   }
@@ -60,24 +59,24 @@ class WysiwygBase {
    */
   static public function addTopicsToNode(&$node, $topics) {
     if ($node->hasField('field_topics')) {
-      $tids = $node->field_topics->getValue();
+      $nids = $node->field_topics->getValue();
       foreach ($topics as $name => $topic) {
         if (isset($topic->in_text)) {
           $found = false;
-          foreach ($tids as $i => $val) {
-            if ($val['target_id'] == $topic->id) {
+          foreach ($nids as $i => $val) {
+            if ($val['target_id'] == $topic->nid) {
               $found = TRUE;
             }
           }
           if (!$found) {
-            $node->field_topics->appendItem($topic->id);
+            $node->field_topics->appendItem($topic->nid);
           }
         }
       }
     }
   }
 
-  static public function extractTopics($text, &$topics) {
+  static public function extractTerms($text, &$terms) {
     $topicReg = '/&lt;topic(.*?)&gt;(.*?)&lt;\/topic&gt;/';
 //  $topicReg = '/&lt;([a-z]+) *(.*?)&gt;(.*?)&lt;\/([a-z]+?)&gt;/';
     // Remove &nbsp; characters that do not have a space before or after them.
@@ -92,8 +91,8 @@ class WysiwygBase {
           $name = strtolower($attributes[1]);
         }
       }
-      if (!empty($topics[$name])) {
-        $topics[$name]->in_text = true;
+      if (!empty($terms[$name])) {
+        $terms[$name]->in_text = true;
       }
     }
   }

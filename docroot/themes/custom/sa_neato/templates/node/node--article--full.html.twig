@@ -112,7 +112,7 @@
 
         <div class="information">
           <span class="az-fa-{{ node.bundle }}">
-            {{ node.bundle|capitalize }} -
+            {{ bundle_name }} -
           </span>
 
           <span class="changed" title="{{ changed }}">
@@ -131,6 +131,13 @@
     </div>
 
     <div class="body-container">
+
+      {# CT - glossary #}
+      {% if content.field_tooltip is not empty %}
+        <div class="field-tooltip">
+          {{ content.field_tooltip }}
+        </div>
+      {% endif %}
 
       {# CT - news #}
       {% if content.field_publication is not empty %}
@@ -161,14 +168,14 @@
       {# CT - glossary #}
       {% if content.eu-definition is not empty %}
         <div class="eu-definition">
-          {{ content.eu-definition }}
+          {{ content.eu_definition }}
         </div>
       {% endif %}
 
       {# CT - glossary #}
-      {% if content.prevailing-definition is not empty %}
+      {% if content.prevailing_definition is not empty %}
         <div class="prevailing-definition">
-          {{ content.prevailing-definition }}
+          {{ content.prevailing_definition }}
         </div>
       {% endif %}
     </div>

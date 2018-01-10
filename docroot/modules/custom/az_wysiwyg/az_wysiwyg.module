@@ -173,32 +173,17 @@ function az_wysiwyg_is_az_wysiwyg_later($format, $caller_filter) {
 /**
  * Implements HOOK_node_presave().
  *
- * - Extract topics from text and add to node.
+ * - Extract glossary terms from text and add to node.
  *
  * @param \Drupal\Core\Entity\EntityInterface $node
  */
 function az_wysiwyg_node_presave(EntityInterface $node) {
   $type = $node->getType();
-  $topics = [];
-  if ($type == 'article' || $type == 'book') {
-    $topics = WysiwygBase::loadTopics();
-    $type = $node->getType();
-
-    WysiwygBase::extractTopics($node->body->value, $topics);
+  $glossary = [];
+  if ($type == 'article' || $type == 'book' || $type == 'glossary') {
+    $glossary = WysiwygBase::loadGlossary();
+    WysiwygBase::extractTerms($node->body->value, $glossary);
   }
-
-    // If this is a page then it has sections with subsections - process separately
-  if ($type == 'page') {
-/*  $sections = $node->field_sections->getValue();
-    foreach($sections as &$section){
-      foreach($section['subform']['field_subsections'] as &$subsection) {
-        if (!empty($subsection['subform'])) {
-          WysiwygBase::extractTopics($subsection['subform']['body'][0]['value'], $topics);
-        }
-      }
-    } */
-  }
-
-  WysiwygBase::addTopicsToNode($node, $topics);
+  WysiwygBase::addTopicsToNode($node, $glossary);
 }
 

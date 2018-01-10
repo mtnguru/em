@@ -246,7 +246,9 @@ function az_content_preprocess_node(&$variables) {
   $view_mode = &drupal_static('az_view_mode');
   $view_mode = $variables['view_mode'];
 
-  if ($view_mode == 'main_content' || $view_mode == 'full' || $view_mode == 'teaser') {
+  $variables['bundle_name'] = $node->type->entity->label();
+
+  if ($view_mode == 'full' || $view_mode == 'teaser') {
     // Add marker if content is New, Updated or has already been read.
     switch (node_mark($variables['node']->id(), $variables['node']->getChangedTime())) {
       case 0:

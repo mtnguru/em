@@ -76,13 +76,16 @@ class WysiwygFilter extends FilterBase {
     }
   }
 
-  private function processText($text, &$topics, &$footnotes) {
+  private function processText($text, &$glossary, &$footnotes) {
     $view_mode = &drupal_static('az_view_mode');
     $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;
 
-    // Remove &nbsp; characters that do not have a space before or after them.
+    // Replace with a space any &nbsp; characters do not have a space before or after them -  for&nbsp;example -> for example
+    // ckeditor likes to leave these everywhere.
+    // @TODO - there are other anomolies with &nbsp; this code could also address.
     $text = preg_replace('/([^ ])\&nbsp;([^ ])/', '$1 $2', $text);
 
+    // Regex finds occurences of <.*>.*<.*>
     $reg = '&lt;([a-z]+) *(.*?)&gt;(.*?)&lt;\/([a-z]+?)&gt;';
     $pagebreakReg = '&lt;(pb)&gt;';
     $pattern = '/' . $pagebreakReg . '|' . $reg . '/';
@@ -103,7 +106,7 @@ class WysiwygFilter extends FilterBase {
       $c = $match[1] + strlen($match[0]);
 
       if (!empty($matches[1][$key][0]) && $matches[1][$key][0] == 'pb') {
-
+        // This was put here to implement page breaks, leave for now.
       }
       else {
         $type = $matches[2][$key][0];
@@ -122,12 +125,12 @@ class WysiwygFilter extends FilterBase {
               $ntext .= $matches[4][$key][0];
             }
             else {
-              if (!empty($topics[$name])) {
-                $topic = $topics[$name];
+              if (!empty($glossary[$name])) {
+                $topic = $glossary[$name];
               }
               else {
-                if (!empty($topics[substr($name, 0, -1)])) {
-                  $topic = $topics[substr($name, 0, -1)];
+                if (!empty($glossary[substr($name, 0, -1)])) {
+                  $topic = $glossary[substr($name, 0, -1)];
                 }
               }
             }
@@ -184,9 +187,9 @@ class WysiwygFilter extends FilterBase {
    * {@inheritdoc}
    */
   public function process($text, $langcode) {
-    $topics = WysiwygBase::loadTopics();
+    $glossary = WysiwygBase::loadGlossary();
     $footnotes = [];
-    $text = $this->processText($text, $topics, $footnotes);
+    $text = $this->processText($text, $glossary, $footnotes);
 
     // Create the footnote footer, render it and append it to the text.
     if (count($footnotes)) {
