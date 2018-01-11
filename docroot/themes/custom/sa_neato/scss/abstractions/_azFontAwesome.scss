@@ -24,6 +24,7 @@
 .az-fa-arrow-up:before          { @extend .az-fa; content: "\f062"; }
 .az-fa-arrows-alt:before        { @extend .az-fa; content: "\f0b2"; }
 .az-fa-bars:before              { @extend .az-fa; content: "\f0c9"; }
+.az-fa-book-page:before         { @extend .az-fa; content: "\f02d"; }
 .az-fa-book:before              { @extend .az-fa; content: "\f02d"; }
 .az-fa-calculator:before        { @extend .az-fa; content: "\f1ec"; }
 .az-fa-event:before,
@@ -36,6 +37,7 @@
 .az-fa-comments-o:before        { @extend .az-fa; content: "\f0e6"; }
 .az-fa-commenting-o:before      { @extend .az-fa; content: "\f27b"; }
 .az-fa-cube:before              { @extend .az-fa; content: "\f1b2"; }
+.az-fa-atom:before,
 .az-fa-dot-circle-o:before      { @extend .az-fa; content: "\f192"; }
 .az-fa-file:before              { @extend .az-fa; content: "\f15b"; }
 .az-fa-file-o:before            { @extend .az-fa; content: "\f016"; }
@@ -54,14 +56,19 @@
 .az-fa-pencil:before            { @extend .az-fa; content: "\f040"; }
 .az-fa-picture-o:before         { @extend .az-fa; content: "\f03e"; }
 .az-fa-play:before              { @extend .az-fa; content: "\f04b"; }
+.az-fa-glossary:before,
+.az-fa-glossary-term:before,
+.az-fa-puzzle-piece:before      { @extend .az-fa; content: "\f12e"; }
 .az-fa-question:before          { @extend .az-fa; content: "\f128"; }
 .az-fa-refresh:before           { @extend .az-fa; content: "\f021"; }
 .az-fa-repeat:before            { @extend .az-fa; content: "\f01e"; }
 .az-fa-reply:before             { @extend .az-fa; content: "\f112"; }
+.az-fa-snippet:before,
 .az-fa-scissors:before          { @extend .az-fa; content: "\f0c4"; }
 .az-fa-share:before             { @extend .az-fa; content: "\f064"; }
 .az-fa-sitemap:before           { @extend .az-fa; content: "\f0e8"; }
 .az-fa-tasks:before             { @extend .az-fa; content: "\f0ae"; }
+.az-fa-ticket:before            { @extend .az-fa; content: "\f145"; }
 .az-fa-times:before             { @extend .az-fa; content: "\f00d"; }
 .az-fa-times-circle-o:before    { @extend .az-fa; content: "\f05c"; }
 .az-fa-undo:before              { @extend .az-fa; content: "\f0e2"; }

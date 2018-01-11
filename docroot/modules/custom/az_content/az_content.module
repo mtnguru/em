@@ -46,7 +46,7 @@ function az_content_form_alter(&$form, FormStateInterface $form_state, $form_id)
 function az_content_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
   $type = $node->getType();
-  if ($type == 'article' || $type == 'book' || $type == 'news') {
+  if (in_array($type, ['article', 'book', 'news'])) {
     $form['mailit'] = [
       '#type' => 'container',
       'checkbox' => [
@@ -243,6 +243,7 @@ function az_content_preprocess_block(&$variables) {
 function az_content_preprocess_node(&$variables) {
   // Add marker if content is New, Updated or has already been read.
   $node = $variables['node'];
+  $type = $node->getType();
   $view_mode = &drupal_static('az_view_mode');
   $view_mode = $variables['view_mode'];
 
@@ -270,11 +271,12 @@ function az_content_preprocess_node(&$variables) {
     ];
   }
 
-  switch ($node->getType()) {
+  switch ($type) {
     case 'article':
     case 'book':
     case 'news':
     case 'page':
+    case 'glossary':
 
       // Use Changed time to format date and ago.
       $changed = $node->getChangedTime();
@@ -283,7 +285,7 @@ function az_content_preprocess_node(&$variables) {
         $changed,
         REQUEST_TIME,
         [
-          'granularity' => 3,
+          'granularity' => 2,
           'return_as_object' => TRUE,
         ]
       );
@@ -300,20 +302,45 @@ function az_content_preprocess_node(&$variables) {
       }
 
       if ($view_mode == 'full') {
-        // Create book navigation block
-        $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
-        $variables['sidebar_blocks']['block_booknavigation'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+        if (in_array($type, ['article', 'news', 'book'])) {
+          // Create book navigation block
+          $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
+          $variables['sidebar_blocks']['block_booknavigation'] = \Drupal::entityTypeManager()
+            ->getViewBuilder('block')
+            ->view($block_entity);
 
-        // Add the contribute block if this nodes field_contribute has a value.
-        if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
-          $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
-          $variables['sidebar_blocks']['block_contribute'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+          // Add the contribute block if this nodes field_contribute has a value.
+          if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
+            $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
+            $variables['sidebar_blocks']['block_contribute'] = \Drupal::entityTypeManager()
+              ->getViewBuilder('block')
+              ->view($block_entity);
+          }
+
+          // Add the views map showing locations of images
+          if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
+            $block_entity = Drupal\block\Entity\Block::load('views_block__az_media_block_map_usage');
+            $variables['sidebar_blocks']['block_views_image_map'] = \Drupal::entityTypeManager()
+              ->getViewBuilder('block')
+              ->view($block_entity);
+          }
         }
 
-        // Add the views map showing locations of images
-        if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
-          $block_entity = Drupal\block\Entity\Block::load('views_block__az_media_block_map_usage');
-          $variables['sidebar_blocks']['block_views_image_map'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+        if ($type == 'glossary') {
+          $variables['sidebar_blocks']['view_recent_content'] = [
+            '#type' => 'container',
+            '#attributes' => ['class' => ['block-sidebar']],
+            'title' => [
+              '#type' => 'container',
+              '#attributes' => ['class' => ['title-container']],
+              'markup' => ['#markup' => '<h2>Recent Activity</h2>'],
+            ],
+            'content' => [
+              '#type' => 'container',
+              '#attributes' => ['class' => ['content-container']],
+              'markup' => views_embed_view('content_recent', 'block_topic'),
+            ],
+          ];
         }
 
         // Add the Donate block.

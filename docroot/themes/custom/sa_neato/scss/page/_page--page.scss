@@ -1,18 +1,19 @@
 // body.user-login
+body.path-group,
 body.page-node-type-news,
 body.page-node-type-book,
 body.page-node-type-glossary,
-body.page-node-type-article {
-  #page-view {
-    .block-page-title-block {
-      display: none;
-    }
-  }
-}
-
+body.page-node-type-article,
 body.path-frontpage {
   .block-page-title-block {
-    display: none;
+      display: none;
+  }
+
+  #block-sa-neato-content {
+    > div.content-container {
+      max-width: $max-width;
+      margin: 0 auto;
+    }
   }
 }
 
@@ -58,8 +59,6 @@ article.az-page {
     }
   }
 
-//article.type-article,
-//article.type-book {
   article {
 
     .field--name-title {
