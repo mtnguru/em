@@ -10,7 +10,7 @@
  */
 
 namespace Drupal\az_groups\Plugin\Block;
-use Drupal\az_groups\azGroupConfig;
+use Drupal\az_groups\AzGroupConfig;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
 use Drupal\Core\Path;
@@ -25,11 +25,11 @@ use Drupal\Core\Menu;
  *   category = @Translation("Atomizer")
  * )
  */
-class azGroupLogoBlock extends BlockBase {
+class AzGroupLogoBlock extends BlockBase {
 
   public function build() {
     $host = \Drupal::request()->getHttpHost();
-    $site = azGroupConfig::getConfig($host);
+    $site = AzGroupConfig::getConfig($host);
 
     $variables = array(
       'style_name' => 'thumbnail',

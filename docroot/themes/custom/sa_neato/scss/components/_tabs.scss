@@ -131,7 +131,7 @@ ul.az-tabs {
 
   @include clearfix;
 
-  li.tab {
+  > li.tab {
     float: left;
 
     .tab-title {
@@ -141,7 +141,7 @@ ul.az-tabs {
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
 
-      h2 {
+      > h2 {
         font-size: 110%;
         font-weight: normal;
         color: $color-green;
@@ -160,10 +160,12 @@ ul.az-tabs {
     }
 
     &.active {
-      h2 {
-        background-color: $secondary-background-color;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
+      .tab-title {
+        > h2 {
+          background-color: $secondary-background-color;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+        }
       }
 
       .tab-content {

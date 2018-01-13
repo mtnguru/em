@@ -74,109 +74,28 @@
 * @see template_process()
 */
 #}
+<article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
+  {% endif %}
+  {{ title_suffix }}
 
-<article id="node-{{ node.id }}" class="{{ attributes.class }} {{ display_mode }} {{ view_mode }} az-page {{ 'type-' ~ node.bundle }}"{{ attributes }}>
-
-  <div class='sidebar-left'>
-    {% for block in sidebar_blocks  %}
-      {{ block }}
-    {% endfor %}
-  </div>
-
-  <div class="main-container">
-    <div class="header-container">
-      <div class="header">
-        <div class="block-right">
-          {% if content.field_social_media is not empty %}
-            {{ content.field_social_media }}
-          {% endif %}
-
-          {% if content.field_topics is not empty %}
-            <div class="topics">
-              {{ content.field_topics }}
-            </div>
-          {% endif %}
-
-        </div>
-
-        <h2 class="title">{{ label }}</h2>
-
-        <div class="information">
-          <span class="az-fa-{{ node.bundle }}">
-            {{ bundle_name }} -
-          </span>
-
-          <span class="changed" title="{{ changed }}">
-            {{ ago }} ago
-          </span>
-
-          {% if has_new_content %}
-            <span class="new">{{ has_new_content }}</span>
-          {% endif %}
-        </div>
-      </div>
-
-      {% if author_picture %}
-        {{ author_picture }}
-      {% endif %}
-    </div>
-
-    <div class="body-container">
-
-      {# CT - glossary #}
-      {% if content.field_tooltip is not empty %}
-        <div class="field-tooltip">
-          {{ content.field_tooltip }}
-        </div>
-      {% endif %}
-
-      {# CT - news #}
-      {% if content.field_publication is not empty %}
-        <div class="publication">
-          {{ content.field_publication }}
-        </div>
-      {% endif %}
-
-      {# CT - news #}
-      {% if content.field_article_link is not empty %}
-        <div class="article-link">
-          {{ content.field_article_link }}
-        </div>
-      {% endif %}
-
-      {% if content.field_media is not empty %}
-        <div class="media">
-          {{ content.field_media }}
-        </div>
-      {% endif %}
-
-      {% if content.body is not empty %}
-        <div class="body">
-          {{ content.body }}
-        </div>
-      {% endif %}
-
-      {# CT - glossary #}
-      {% if content.eu-definition is not empty %}
-        <div class="eu-definition">
-          {{ content.eu_definition }}
-        </div>
-      {% endif %}
-
-      {# CT - glossary #}
-      {% if content.prevailing_definition is not empty %}
-        <div class="prevailing-definition">
-          {{ content.prevailing_definition }}
-        </div>
-      {% endif %}
-    </div>
-
-    {% if content.book_navigation is not empty %}
-      {{ content.book_navigation }}
+  {% if display_submitted %}
+  <div class="posted">
+    {% if user_picture %}
+      {{ user_picture }}
     {% endif %}
-
-    {{ content.links }}
-    {{ content.field_comments }}
+    {{ submitted }}
   </div>
-</article>
+  {% endif %}
 
+  {{ content|without('field_contribute', 'field_comments', 'links') }}
+
+  {% if content.field_tags|length and not is_front %}
+    {{ content.field_tags }}
+  {% endif %}
+
+  {{ content.links }}
+  {{ content.field_comments }}
+</article>

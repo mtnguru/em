@@ -20,7 +20,7 @@ namespace Drupal\az_groups;
  *   category = @Translation("Atomizer")
  * )
  */
-class azGroupQuery {
+class AzGroupQuery {
 
   static public function inGroup($node) {
     $query = \Drupal::database()->select('group_content_field_data', 'gcfd');

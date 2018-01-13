@@ -1,0 +1,8 @@
+maestro.getStream:
+  path: 'maestro/getStream'
+  defaults:
+    _title: "Get a Stream of Content"
+    _controller: '\Drupal\az_content\Controller\MaestroController::getStream'
+  requirements:
+    _permission: 'access content'
+

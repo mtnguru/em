@@ -22,7 +22,7 @@ use Drupal\Core\Menu;
  *   category = @Translation("Atomizer")
  * )
  */
-class azGroupConfig {
+class AzGroupConfig {
 
   // @TODO move this into database with config form
   protected static $sites = [

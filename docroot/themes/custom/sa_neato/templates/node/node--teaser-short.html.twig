@@ -74,113 +74,12 @@
 * @see template_process()
 */
 #}
-
-{{ attach_library('sa_neato/tabs') }}
-
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
-  {% endif %}
-  {{ title_suffix }}
-
-  <div class="header-top">
-    <div class="section-title">
-      <h1>{{ label }}</h1>
-      {{ content.body }}
-    </div>
-    <div class="section-announcement">
-      {{ section_announcement }}
-    </div>
+  <h3{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h3>
+  <div class="information">
+    <span class="type az-fa-{{ node.bundle }}"> {{ bundle_name }} - </span>
+    <span class="changed" title="{{ changed }}">{{ changed_ago }} ago</span>
   </div>
 
-  <div class="sidebar-left">
-
-    {% if logged_in %}
-      <div class="block user-header">
-        <div class="user-picture">
-          <img src="{{ user_picture_url }}" />
-        </div>
-        <div class="user-text">
-          <div class="name">{{ user_name }}</div>
-          <div class="links">
-            <div class="edit-account"><a href="/user/{{ user_id }}/edit">Edit Account</a></div>
-            <div class="view-home-page"><a href="/user/{{ user_id }}">View My Public Page</a></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="az-block my-groups">
-        <div class="block-title"><h2>My Communities</h2></div>
-
-        <div class="block-content">
-          {{ view_my_groups }}
-        </div>
-      </div>
-    {% else %}
-      <div class="dashboard-block">{{ dashboard_block }}</div>
-    {% endif %}
-
-    {{ block_donate }}
-  </div>
-
-  <div class="main-content">
-    <ul class="az-tabs">
-
-      <li class="tab content-recent">
-        <div class="tab-title"><h2>Activity</h2></div>
-
-        <div class="tab-content">
-          {{ az_recent_activity }}
-        </div>
-      </li>
-
-      {% if view_content_unpublished %}
-        <li class="tab content-unpublished">
-          <div class="tab-title"><h2>Unpublished</h2></div>
-
-          <div class="tab-content">
-            {{ view_content_unpublished }}
-          </div>
-        </li>
-      {% endif %}
-
-      <li class="tab comments-recent">
-        <div class="tab-title"><h2>Comments</h2></div>
-
-        <div class="tab-content">
-          {{ view_comments_recent }}
-        </div>
-      </li>
-
-      {% if logged_in %}
-        <li class="tab my-activity">
-          <div class="tab-title"><h2>My Activity</h2></div>
-
-          <div class="tab-content">
-            {{ view_my_activity }}
-          </div>
-        </li>
-
-        <li class="tab my-comments">
-          <div class="tab-title"><h2>My Comments</h2></div>
-
-          <div class="tab-content">
-            {{ view_my_comments }}
-          </div>
-        </li>
-
-        <li class="tab my-media">
-          <div class="tab-title"><h2>My Media</h2></div>
-
-          <div class="tab-content">
-            {{ view_my_media }}
-          </div>
-        </li>
-      {% endif %}
-
-    </ul>
-  </div>
-
-  {# content.links #}
+  {{ content.links }}
 </article>

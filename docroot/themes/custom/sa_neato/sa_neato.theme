@@ -5,7 +5,7 @@
  * Functions to support theming in the sa_neato theme.
  */
 
-use Drupal\az_groups\azGroupConfig;
+use Drupal\az_groups\AzGroupConfig;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\media\Entity\Media;
@@ -42,7 +42,7 @@ function sa_neato_preprocess_html(&$variables) {
   }
 
   $host = \Drupal::request()->getHttpHost();
-  $site = azGroupConfig::getConfig($host);
+  $site = AzGroupConfig::getConfig($host);
   $variables['attributes']['class'][] = $site['class'];
 }
 

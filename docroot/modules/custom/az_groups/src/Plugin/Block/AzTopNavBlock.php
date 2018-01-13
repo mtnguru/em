@@ -14,7 +14,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
 use Drupal\Core\Path;
 use Drupal\Core\Menu;
-use Drupal\az_groups\azGroupConfig;
+use Drupal\az_groups\AzGroupConfig;
 
 /**
  * Provides a 'Next Previous' block.
@@ -25,7 +25,7 @@ use Drupal\az_groups\azGroupConfig;
  *   category = @Translation("Atomizer")
  * )
  */
-class azTopNavBlock extends BlockBase {
+class AzTopNavBlock extends BlockBase {
 
   // @TODO move this into database with config form
 
