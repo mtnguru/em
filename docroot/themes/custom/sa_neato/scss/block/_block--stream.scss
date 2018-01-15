@@ -1,0 +1,56 @@
+.maestro-stream {
+
+  ////////////////////// teaser
+  &.teaser {
+
+    > .title-container {
+      border-bottom: 2px solid $base-separator-color;
+      h2 {
+        padding: 10px 0;
+        margin: 0;
+      }
+    }
+
+    .az-row {
+      padding: 15px 0;
+
+      border-bottom: 1px solid $base-separator-color;
+      &:not(:last-child) {
+        //      border-bottom: 1px solid $base-separator-color;
+      }
+    }
+  }
+
+  ////////////////////// teaser-short
+  &.teaser-short {
+
+    .az-row {
+      padding: 10px 0;
+
+      border-bottom: 1px solid $base-separator-color;
+      &:not(:last-child) {
+        //      border-bottom: 1px solid $base-separator-color;
+      }
+    }
+  }
+
+  .more-container {
+    text-align: center;
+    position: relative;
+    min-height: 5px;
+
+    input {
+      margin: 20px auto;
+    }
+
+    .status-container {
+      font-size: 75%;
+      padding-left: 8px;
+      background-color: $base-background-color;
+      color: $color-turquoise;
+      position: absolute;
+      right: 0;
+      top: -8px;
+    }
+  }
+}

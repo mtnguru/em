@@ -168,6 +168,15 @@ function az_content_file_presave(EntityInterface $entity) {
 }
 
 /**
+ * Implements HOOK_preprocess_comment().
+ * @param $variables
+ */
+function az_content_preprocess_comment(&$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  return;
+}
+
+/**
  * Implements HOOK_preprocess_page().
  *
  * If this is the structuredatom.com and the user is not logged in then redirect
@@ -316,7 +325,7 @@ function _az_content_init_set($set) {
     'getTotalRows' => TRUE,
     'entityType' => 'node',
     'pageNum' => 0,
-    'pageNumItems' => 2,
+    'pageNumItems' => 10,
     'empty' => 'No content found',
   ];
   $set = _az_content_add_query_args($set);

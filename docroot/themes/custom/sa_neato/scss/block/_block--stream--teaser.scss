@@ -10,14 +10,6 @@
         margin: 0;
       }
     }
-    .az-row {
-      padding: 15px 0;
-
-      border-bottom: 1px solid $base-separator-color;
-      &:not(:last-child) {
-        //      border-bottom: 1px solid $base-separator-color;
-      }
-    }
 
     h3 {
       margin: 0 0 3px;
@@ -107,15 +99,6 @@
   ////////////////////// teaser-short
   &.teaser-short {
 
-    .az-row {
-      padding: 10px 0;
-
-      border-bottom: 1px solid $base-separator-color;
-      &:not(:last-child) {
-        //      border-bottom: 1px solid $base-separator-color;
-      }
-    }
-
     h3 {
       margin: 0 0 3px;
       font-weight: normal;
@@ -137,26 +120,6 @@
       .changed {
         color: $base-date-color;
       }
-    }
-  }
-
-  .more-container {
-    text-align: center;
-    position: relative;
-    min-height: 5px;
-
-    input {
-      margin: 20px auto;
-    }
-
-    .status-container {
-      font-size: 75%;
-      padding-left: 8px;
-      background-color: $base-background-color;
-      color: $color-turquoise;
-      position: absolute;
-      right: 0;
-      top: -8px;
     }
   }
 }

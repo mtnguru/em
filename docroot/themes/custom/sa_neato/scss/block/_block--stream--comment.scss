@@ -1,4 +1,29 @@
 .maestro-stream.entity-comment {
-  background: purple;
+  footer.comment__meta {
+    a {
+      display: none;
+    }
+  }
 
+  .content {
+    h3 {
+      margin: 0;
+    }
+
+    ul.inline {
+      li {
+        font-size: 80%;
+        padding: 0 1em 0 0;
+      }
+    }
+
+    .comment__submitted {
+      font-size: 80%;
+      color: $base-date-color;
+    }
+
+    .field--name-comment-body {
+      margin-bottom: 10px;
+    }
+  }
 }
