@@ -39,7 +39,6 @@
       <ul class="submenu">
     {% endif %}
     {% for item in items %}
-      {# kint(item) #}
       {% if item.below %}
         {% if item.no_link %}
           <li{{ item.attributes.addClass(classes | merge(['more', 'js-navigation-more', 'no-link'])) }}>

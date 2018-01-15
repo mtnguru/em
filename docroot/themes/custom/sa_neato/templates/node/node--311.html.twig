@@ -75,8 +75,6 @@
 */
 #}
 
-{{ attach_library('sa_neato/tabs') }}
-
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
   {{ title_prefix }}
   {% if not page %}
@@ -126,59 +124,9 @@
 
   <div class="main-content">
     <ul class="az-tabs">
-
-      <li class="tab content-recent">
-        <div class="tab-title"><h2>Activity</h2></div>
-
-        <div class="tab-content">
-          {{ az_recent_activity }}
-        </div>
-      </li>
-
-      {% if view_content_unpublished %}
-        <li class="tab content-unpublished">
-          <div class="tab-title"><h2>Unpublished</h2></div>
-
-          <div class="tab-content">
-            {{ view_content_unpublished }}
-          </div>
-        </li>
-      {% endif %}
-
-      <li class="tab comments-recent">
-        <div class="tab-title"><h2>Comments</h2></div>
-
-        <div class="tab-content">
-          {{ view_comments_recent }}
-        </div>
-      </li>
-
-      {% if logged_in %}
-        <li class="tab my-activity">
-          <div class="tab-title"><h2>My Activity</h2></div>
-
-          <div class="tab-content">
-            {{ view_my_activity }}
-          </div>
-        </li>
-
-        <li class="tab my-comments">
-          <div class="tab-title"><h2>My Comments</h2></div>
-
-          <div class="tab-content">
-            {{ view_my_comments }}
-          </div>
-        </li>
-
-        <li class="tab my-media">
-          <div class="tab-title"><h2>My Media</h2></div>
-
-          <div class="tab-content">
-            {{ view_my_media }}
-          </div>
-        </li>
-      {% endif %}
-
+      {% for tab in tabs %}
+        {{ tab }}
+      {% endfor %}
     </ul>
   </div>
 

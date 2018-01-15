@@ -8,10 +8,6 @@ use Drupal\Core\Form\FormStateInterface;
  * Contains az_groups.module.
  */
 
-function az_groups_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  return;
-}
-
 function az_groups_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   /**
@@ -55,10 +51,6 @@ function az_groups_form_node_form_alter(&$form, FormStateInterface $form_state, 
 
 function _az_groups_node_form_submit($form, FormStateInterface $form_state) {
   $group = $form_state->getValue('group');
-  return;
-}
-
-function az_groups_preprocess_node(&$variables) {
   return;
 }
 

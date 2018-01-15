@@ -5,9 +5,23 @@
 (function ($) {
   'use strict';
 
-  var init = function(maestroStream, context) {
+  var initTabs = function(tabContainer, context) {
+    var $tabs = $(tabContainer).find('.tab');
+    $($tabs[0]).addClass('active');
+
+    $tabs.each(function() {
+      $(this).click(function (ev) {
+        $tabs.removeClass('active');
+        $(this).addClass('active');
+      });
+    });
+  };
+
+
+  var initStream = function(maestroStream, context) {
     var $streamContainer = $(maestroStream).find('.content-container');
     var $moreButton;
+    var $oldMoreButton;
     var streamId = maestroStream.id;
     var set = drupalSettings.azmaestro[streamId];
 
@@ -39,6 +53,7 @@
     var streamLoaded = function (response) {
       for (var i = 0; i < response.length; i++) {
         if (response[i].command == 'GetStreamCommand') {
+          if ($moreButton) $moreButton.remove();
           $streamContainer.append(response[i].stream);
           $moreButton = $(maestroStream).find('.more-button');
           set = response[i].set;
@@ -46,10 +61,9 @@
             $moreButton.remove();
           } else {
             $moreButton.click(function () {
-              var $oldButton = $moreButton;
+              $oldMoreButton = $moreButton;
               set.pageNum++;
               getStream(set);
-              $oldButton.remove();
             });
           }
         }
@@ -57,11 +71,7 @@
     };
 
     var getStream = function (set) {
-      doAjax(
-        '/maestro/getStream',
-        set,
-        streamLoaded
-      );
+      doAjax('/maestro/getStream', set, streamLoaded);
     };
 
     getStream(set);
@@ -69,8 +79,12 @@
 
   Drupal.behaviors.azMaestro = {
     attach: function(context, set) {
-      $('.maestro-stream', context).once('azActivated').each(function() {
-        init(this, context)
+      $('.maestro-stream', context).once('az-attached').each(function() {
+        initStream(this, context)
+      });
+
+      $('.az-tabs', context).once('az-attached').each(function () {
+        initTabs(this, context);
       });
     }
   };

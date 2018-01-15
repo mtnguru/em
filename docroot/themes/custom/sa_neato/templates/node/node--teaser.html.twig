@@ -74,28 +74,60 @@
 * @see template_process()
 */
 #}
+
+{% if moderation_state|length == 0 %}
+  {% if status %}
+    {% set state = 'published' %}
+  {% else %}
+    {% set state = 'draft' %}
+  {% endif %}
+{% else %}
+  {% set state = moderation_state %}
+{% endif %}
+
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
-  {% endif %}
-  {{ title_suffix }}
 
-  {% if display_submitted %}
-  <div class="posted">
-    {% if user_picture %}
-      {{ user_picture }}
+  {% if group_label %}
+    <div class="group-container">
+      <div class="group-label-container">
+        <div class="group-label">
+          {{ group_label }}
+        </div>
+      </div>
+      <img src="{{ group_logo_url }}" />
+    </div>
+  {% endif %}
+
+  <h3{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h3>
+
+  <div class="information">
+    {% if state != 'published' %}
+      <span class="state {{ state|replace('_', '-') }}">{{ state|capitalize|replace('_', ' ') }}</span> -
     {% endif %}
-    {{ submitted }}
+    <span class="type az-fa-{{ node.bundle|lower|replace(' ', '-') }}">{{ bundle_name }}</span> -
+    <span class="changed" title="{{ changed_ago }}">{{ changed }}</span> -
+    <span class="author">{{ author_name }}</span>
+    {% if has_new_content %}
+      <span class="new">{{ has_new_content }}</span>
+    {% endif %}
   </div>
-  {% endif %}
 
-  {{ content|without('field_contribute', 'field_comments', 'links') }}
+  {{ content|without('links', 'field_tags') }}
 
   {% if content.field_tags|length and not is_front %}
     {{ content.field_tags }}
   {% endif %}
 
   {{ content.links }}
-  {{ content.field_comments }}
+</article>
+
+<article class="teaser-container">
+  <h3 class="title">{{ title }}</h3>
+
+  <div class="content">
+    {% if field_media %}
+      <div class="media">{{ field_media }}</div>
+    {% endif %}
+    <div class="body">{{ body }}</b></i></em></div>
+  </div>
 </article>

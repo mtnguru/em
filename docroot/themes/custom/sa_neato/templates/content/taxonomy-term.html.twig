@@ -32,7 +32,7 @@
 %}
 <article {{ attributes.setAttribute('id', 'taxonomy-term-' ~ term.id).addClass(classes) }}>
   <div class='sidebar-left'>
-    {% for block in sidebar_blocks  %}
+    {% for block in sidebar  %}
       {{ block }}
     {% endfor %}
     {% if view_recent_content %}

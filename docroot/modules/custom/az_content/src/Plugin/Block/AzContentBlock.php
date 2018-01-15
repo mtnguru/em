@@ -45,11 +45,11 @@ class AzContentBlock extends BlockBase {
     $set = $this->configuration['set'];
 
     // Initialize settings that haven't been set.
-    $set['pageNum'] = (isset($set['pageNum'])) ? $set['pageNum'] : 0;
+    $set['pageNum'] =      (isset($set['pageNum']))      ? $set['pageNum'] : 0;
     $set['pageNumItems'] = (isset($set['pageNumItems'])) ? $set['pageNumItems'] : 10;
-    $set['entityType'] = (isset($set['entityType'])) ? $set['entityType'] : 'node';
-    $set['viewMode'] = (isset($set['viewMode'])) ? $set['viewMode'] : 'teaser';
-    $set['more'] = (isset($set['more'])) ? $set['more'] : 'none';
+    $set['entityType'] =   (isset($set['entityType']))   ? $set['entityType'] : 'node';
+    $set['viewMode'] =     (isset($set['viewMode']))     ? $set['viewMode'] : 'teaser';
+    $set['more'] =         (isset($set['more']))         ? $set['more'] : 'none';
 
     // If using a pager set the pager id
     if ($set['more'] == 'pager' && !isset($set['pagerId'])) {
@@ -57,33 +57,69 @@ class AzContentBlock extends BlockBase {
       $set['pagerId'] = $pagerId++;
     }
 
-    // Wrap it in a block
-    $classes = ['maestro-stream', str_replace('_', '-', $set['viewMode'])];
-    if (isset($set['block'])) {
-      $classes[] = $set['block'];
+    // Set up the container classes
+    $classes = [
+      'maestro-stream',
+      'entity-' . $set['entityType'],
+      str_replace('_', '-', $set['viewMode'])
+    ];
+    if (isset($set['class'])) {
+      $classes[] = $set['class'];
     }
 
-    $build = [
-      '#type' => 'container',
-      '#attributes' => [
-        'id' => $set['id'],
-        'class' => $classes,
-      ],
-    ];
-
-    if (isset($set['title'])) {
-      $build['title'] = [
+    // Wrap it in a tab
+    if (isset($set['tab'])) {
+      $classes[] = 'tab-content';
+      $build = [
         '#type' => 'container',
-        '#attributes' => ['class' => ['title-container']],
-        'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
+        '#prefix' => '<li class="tab">',
+        '#suffix' => '</li>',
+        '#attributes' => ['class' => ['tab-container']],
+        'title' => [
+          '#type' => 'container',
+          '#attributes' => ['class' => ['tab-title']],
+          'markup' => ['#markup' => '<h2>' . $set['tab'] . '</h2>'],
+        ],
+        'stream' => [
+          '#type' => 'container',
+          '#attributes' => [
+            'id' => $set['id'],
+            'class' => $classes,
+          ],
+          'content' => [
+            '#type' => 'container',
+            '#attributes' => ['class' => ['content-container']],
+//          'stream' => AzStream::create($set), //   Load the first page.
+          ],
+        ],
+      ];
+    } else {
+      // Create the stream container
+      $build = [
+        '#type' => 'container',
+        '#attributes' => [
+          'id' => $set['id'],
+          'class' => $classes,
+        ],
+      ];
+
+      // Add the title if specified
+      if (isset($set['title'])) {
+        $build['title'] = [
+          '#type' => 'container',
+          '#attributes' => ['class' => ['title-container']],
+          'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
+        ];
+      }
+
+      // Build empty container for the stream content - JavaScript fills it.
+      $build['content'] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['content-container']],
+//      'stream' => AzStream::create($set),      // Load the first page.
       ];
     }
 
-    $build['content'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['content-container']],
-//    'stream' => AzStream::create($set),   Load the first page.
-    ];
 
     AzMaestroInit::start($set, $build);
     return $build;

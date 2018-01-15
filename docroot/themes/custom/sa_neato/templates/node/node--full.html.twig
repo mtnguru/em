@@ -78,7 +78,7 @@
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ display_mode }} {{ view_mode }} az-page {{ 'type-' ~ node.bundle }}"{{ attributes }}>
 
   <div class='sidebar-left'>
-    {% for block in sidebar_blocks  %}
+    {% for block in sidebar  %}
       {{ block }}
     {% endfor %}
   </div>

@@ -252,6 +252,56 @@ function az_content_wrap_block($title, $block) {
   ];
 }
 
+function _az_content_build_content_block($set) {
+  $blockManager = \Drupal::service('plugin.manager.block');
+  return $blockManager->createInstance('az_content_block', ['set' => _az_content_init_set($set)])->build();
+}
+
+function _az_content_add_group($node, &$variables) {
+  if ($gid = AzGroupQuery::inGroup($node)) {
+    $group = \Drupal::entityManager()->getStorage('group')->load($gid);
+    $variables['group_url'] = \Drupal::service('path.alias_manager')
+      ->getAliasByPath('/group/' . $gid);
+    $variables['group_label'] = $group->label->value;
+    $file = \Drupal\file\Entity\File::load($group->field_logo_image->getValue()[0]['target_id']);
+    $variables['group_logo_url'] = \Drupal\image\Entity\ImageStyle::load('300x100')
+      ->buildUrl($file->getFileUri());
+  }
+}
+
+function _az_content_has_new_content($variables) {
+  // Add marker if content is New, Updated or has already been read.
+  switch (node_mark($variables['node']->id(), $variables['node']->getChangedTime())) {
+    case 0:
+      $mark = '';
+      break;
+    case 1:
+      $mark = 'New';
+      break;
+    case 2:
+      $mark = 'Updated';
+      break;
+  };
+  $variables['has_new_content'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['marker']],
+    'label' => ['#markup' => $mark],
+  ];
+}
+
+function _az_content_add_query_args($set) {
+  $query = \Drupal::request()->query->all();
+  foreach ($query as $key => $arg) {
+    if (\Drupal::currentUser()->hasPermission('az content query args') ||
+        in_array($key, ['pageNumItems', 'pageNum', 'view_mode']) ||
+        in_array($key, (isset($set['args'])) ? $set['args'] : [])) {
+      $parts = explode(',', $arg);
+      $set[$key] = (count($parts) == 1) ? $parts[0] : $parts;
+    }
+  }
+  return $set;
+}
+
 /**
  * Create the set array - merge $set with default settings.
  *
@@ -259,16 +309,26 @@ function az_content_wrap_block($title, $block) {
  * @return array
  */
 function _az_content_init_set($set) {
-  return $set += [
+  $set += [
     'id' => 'init-stream',
-    'status' => NODE_PUBLISHED,
     'types' => ['article', 'event', 'book', 'news'],
     'more' => 'ajax',
     'getTotalRows' => TRUE,
+    'entityType' => 'node',
     'pageNum' => 0,
-    'pageNumItems' => 10,
+    'pageNumItems' => 2,
     'empty' => 'No content found',
   ];
+  $set = _az_content_add_query_args($set);
+
+  // Unset any settings that == 'UNSET'
+  foreach ($set as $key => $setting) {
+    if ($setting === 'UNSET') {
+      unset($set[$key]);
+    }
+  }
+
+  return $set;
 }
 
 /**
@@ -280,43 +340,26 @@ function az_content_preprocess_node(&$variables) {
   // Add marker if content is New, Updated or has already been read.
   $node = $variables['node'];
   $type = $node->getType();
-
-  $view_mode = &drupal_static('az_view_mode');  // Save statically - used by WysiwygFilter
-  $view_mode = $variables['view_mode'];
+  $view_mode = &drupal_static('az_view_mode', $variables['view_mode']);  // Save statically - used by WysiwygFilter
 
   $variables['bundle_name'] = $node->type->entity->label();
 
   if ($view_mode == 'full' || $view_mode == 'teaser') {
-    // Add marker if content is New, Updated or has already been read.
-    switch (node_mark($variables['node']->id(), $variables['node']->getChangedTime())) {
-      case 0:
-        $mark = '';
-        break;
-      case 1:
-        $mark = 'New';
-        break;
-      case 2:
-        $mark = 'Updated';
-        break;
-    };
-    $variables['has_new_content'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['marker']],
-      'label' => ['#markup' => $mark],
-    ];
+    $variables['has_new_content'] = _az_content_has_new_content($variables);
   }
 
   // Use Changed time to format date and ago.
   $changed = $node->getChangedTime();
   $variables['changed'] = \Drupal::service('date.formatter')->format($changed);
   $variables['changed_ago'] = \Drupal::service('date.formatter')->formatDiff(
-    $changed,
-    REQUEST_TIME,
-    [
-      'granularity' => 2,
-      'return_as_object' => TRUE,
-    ]
+    $changed, REQUEST_TIME, ['granularity' => 2, 'return_as_object' => TRUE]
   );
+
+  // Get the status and moderation_state
+  $variables['status'] = $node->status->value;
+  if ($node->hasField('moderation_state')) {
+    $variables['moderation_state'] = $node->moderation_state->value;
+  }
 
   switch ($type) {
     case 'article':
@@ -324,16 +367,14 @@ function az_content_preprocess_node(&$variables) {
     case 'news':
     case 'page':
     case 'event':
+    case 'ticket':
     case 'glossary':
 
       if ($view_mode == 'full' || $view_mode == 'teaser') {
-        // Query to see if this content is in a group
-        // if so load group and add to output.
-        if ($gid = AzGroupQuery::inGroup($node)) {
-          $group = \Drupal::entityManager()->getStorage('group')->load($gid);
-          $variables['group_url'] = \Drupal::service('path.alias_manager')->getAliasByPath('/group/'.$gid);
-          $variables['group_label'] = $group->label->value;
-        }
+        _az_content_add_group($node, $variables);
+      }
+
+      if ($view_mode == 'teaser') {
       }
 
       if ($view_mode == 'full') {
@@ -341,58 +382,83 @@ function az_content_preprocess_node(&$variables) {
 
           // Create book navigation block
           $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
-          $variables['sidebar_blocks']['block_booknavigation'] = \Drupal::entityTypeManager()
+          $variables['sidebar']['block_booknavigation'] = \Drupal::entityTypeManager()
             ->getViewBuilder('block')
             ->view($block_entity);
 
-          // Add the contribute block if this nodes field_contribute has a value.
+          // If field_contribute has content - add contribute block
           if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
             $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
-            $variables['sidebar_blocks']['block_contribute'] = \Drupal::entityTypeManager()
+            $variables['sidebar']['block_contribute'] = \Drupal::entityTypeManager()
               ->getViewBuilder('block')
               ->view($block_entity);
           }
 
-          // Add the views map showing locations of images
+          // If field_display_image_map has a value then add the map views map block.
           if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
             $block_entity = Drupal\block\Entity\Block::load('views_block__az_media_block_map_usage');
-            $variables['sidebar_blocks']['block_views_image_map'] = \Drupal::entityTypeManager()
+            $variables['sidebar']['block_views_image_map'] = \Drupal::entityTypeManager()
               ->getViewBuilder('block')
               ->view($block_entity);
           }
         }
 
         if ($type == 'glossary') {
-          // Create block using new query method.  Where does block_config come from?
-          $set = _az_content_init_set([
+          // Create sidebar of recent activity for this glossary term
+          $variables['sidebar']['related_content'] = _az_content_build_content_block([
             'id' => 'related-content',
-            'title' => 'Recent Activity',
+            'status' => NODE_PUBLISHED,
+            'title' => 'Related Content',
             'viewMode' => 'teaser_short',
             'topics' => $node->id(),
-            'block' => 'block-sidebar',
-            'empty' => 'No content for this Term'
+            'class' => 'block-sidebar',
+            'empty' => 'No content has been added for this Term'
           ]);
-
-          // Build the block contents and wrap in a block container
-          $blockManager = \Drupal::service('plugin.manager.block');
-          $variables['sidebar_blocks']['related_content'] =
-            $blockManager->createInstance('az_content_block', ['set' => $set])->build();
         }
 
         // Add the Donate block.
         $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-        $variables['sidebar_blocks']['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+        $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
       }
-
       break;
 
     case 'landing_page':
 
       // Dashboard - Front page
       if (\Drupal::service('path.matcher')->isFrontPage()) {
-        $user = User::load(\Drupal::currentUser()->id());
-        $id = $user->id();
-        if ($id != 0) {
+        $uid = \Drupal::currentUser()->id();
+        $user = User::load($uid);
+
+        // Create Announcement block at top of page
+        if ($node->hasField('field_announcement')) {
+          $nid = $node->field_announcement->getValue()[0]['target_id'];
+          $snippet = \Drupal::entityManager()->getStorage('node')->load($nid);
+          $variables['section_announcement'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
+        }
+
+        // Create Recent Activity tab
+        $activity = _az_content_build_content_block([
+          'id' => 'recent-activity',
+          'tab' => 'Activity',
+          'title' => 'Recent Activity',
+          'status' => NODE_PUBLISHED,
+          'empty' => 'No activity for this site',
+        ]);
+
+        // Create Recent Comments tab
+        $comments = _az_content_build_content_block([
+          'id' => 'recent-comments',
+          'tab' => 'Comments',
+          'title' => 'Recent Comments',
+          'entityType' => 'comment',
+          'types' => 'UNSET',
+          'empty' => 'You currently have no comments',
+        ]);
+
+        // If the user is logged in then create the My Activity, My Comments and My Media tabs
+        if ($uid != 0) {
+
+          // Create the user block in the upper left corner.
           $variables['user_id'] = $user->id();
           $variables['user_name'] = $user->name->value;
           $picture = $user->field_picture->getValue();
@@ -400,42 +466,60 @@ function az_content_preprocess_node(&$variables) {
           $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')->buildUrl($file->getFileUri());
 
           $variables['view_my_groups'] = views_embed_view('az_my_groups', 'user_block');
-//        $variables['view_my_activity'] = views_embed_view('az_my_activity', 'user_block');
-//        $variables['view_my_comments'] = views_embed_view('az_my_comments', 'user_block');
-//        $variables['view_my_media'] = views_embed_view('az_media', 'user_block');
 
           if (AccessResult::allowedIfHasPermission($user, 'view any unpublished content')) {
-            $variables['view_content_unpublished'] = views_embed_view('content_recent', 'block_unpublished');
+            // Create Unpublished Activity tab
+            $unpublished = _az_content_build_content_block([
+              'id' => 'unpublished-activity',
+              'tab' => 'Unpublished',
+              'title' => 'Unpublished Activity',
+              'status' => NODE_NOT_PUBLISHED,
+              'empty' => 'No unpublished activity for this site',
+            ]);
           }
+
+          // Create My Comments tab
+          $my_comments = _az_content_build_content_block([
+            'id' => 'my-comments',
+            'tab' => 'My Comments',
+            'title' => 'My Comments',
+            'entityType' => 'comment',
+            'author_comment' => $user->id(),
+            'types' => 'UNSET',
+            'empty' => 'You currently have no comments',
+          ]);
+
+          // Create My Activity tab
+          $my_activity = _az_content_build_content_block([
+            'id' => 'my-activity',
+            'tab' => 'My Activity',
+            'title' => 'My Activity',
+            'author' => $user->id(),
+            'types' => 'UNSET',
+            'empty' => 'You currently have no activity',
+          ]);
         }
         else {
           $snippet = \Drupal::entityManager()->getStorage('node')->load(325);
-          $variables['dashboard_block'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
+          $dashboard_block = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
         }
 
-        // Create block using new query method.  Where does block_config come from?
-        $set = _az_content_init_set([
-          'id' => 'recent-activity',
-          'pageNumItems' => 5,
-          'title' => 'Recent Activity',
-          'empty' => 'No activity for this site',
-        ]);
+        $variables['tabs'] = [
+          'activity'    => (isset($activity))    ? $activity    : null,
+          'unpublished' => (isset($unpublished)) ? $unpublished : null,
+          'comments'    => (isset($comments))    ? $comments    : null,
+          'my_activity' => (isset($my_activity)) ? $my_activity : null,
+          'my_comments' => (isset($my_comments)) ? $my_comments : null,
+          'my_media'    => (isset($my_media))    ? $my_media    : null,
+        ];
 
-        // Build the block contents and wrap in a block container
-        $blockManager = \Drupal::service('plugin.manager.block');
-        $variables['az_recent_activity'] =
-          $blockManager->createInstance('az_content_block', ['set' => $set])->build();
+        $variables['sidebar'] = [
+          'dashboard_block' => (isset($dashboard_block)) ? $dashboard_block : null,
+        ];
 
-        $variables['view_comments_recent'] = views_embed_view('comments_recent', 'block_all');
-
-        if ($node->hasField('field_announcement')) {
-          $nid = $node->field_announcement->getValue()[0]['target_id'];
-          $snippet = \Drupal::entityManager()->getStorage('node')->load($nid);
-          $variables['section_announcement'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
-        }
-
-//      $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-//      $variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+        // Create sidebar donate block.
+        $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+        $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
       }
       break;
   }

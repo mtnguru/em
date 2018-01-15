@@ -61,6 +61,3 @@ form:
   js:
     js/js-src/form.js: {}
 
-tabs:
-  js:
-    js/js-src/tabs.js: {}

@@ -39,7 +39,7 @@ class AzStream {
         $stream['row_' . $entity->id()] = [
           '#type' => 'container',
           '#attributes' => ['class' => ['az-row']],
-          'stream' => ['#markup' => render($build)],
+          'stream' => $build,
         ];
       }
     } else {
@@ -51,11 +51,6 @@ class AzStream {
       '#type' => 'container',
       '#attributes' => ['class' => $classes],
       'stream' => $stream,
-//    [
-//      '#type' => 'container',
-//      '#attributes' => ['class' => ['content-wrapper']],
-//      'content' => $content,
-//    ],
     ];
 
     // Create either a pager or a more button.
@@ -75,9 +70,9 @@ class AzStream {
 
       if ($set['more'] == 'ajax') {
         if ($set['pageNum'] * $set['pageNumItems'] + $set['numRows'] >= $set['totalRows']) {
-          $status = ($set['pageNum']) ? 'Last of ' . $result['totalRows'] : '';
+          $status = ($set['pageNum']) ? 'All of ' . $result['totalRows'] : '';
         } else {
-          $status = ($set['pageNum'] + 1) * $set['pageNumItems'] . ' of ' . $result['totalRows'];
+          $status = $set['tab'] . ' - ' . ($set['pageNum'] + 1) * $set['pageNumItems'] . ' of ' . $result['totalRows'];
         }
         if ($status == '') {
           $more = null;

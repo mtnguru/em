@@ -25,8 +25,8 @@ class AzContentQuery {
 //  $query->distinct();
 
     ////////// Set the output fields
-    if (isset($ecset['fields'])) {
-      foreach ($ecset['fields'] as $name => $fields) {
+    if (isset($set['fields'])) {
+      foreach ($set['fields'] as $name => $fields) {
         $query->fields(($name == 'null') ? null : $name, $fields);
       }
     } else {
@@ -38,8 +38,8 @@ class AzContentQuery {
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     ////////// Filter on core Drupal published value
-    if (isset($ecset['status'])) {
-      $query->condition('nft.status', $set['status'], '=');
+    if (isset($set['status'])) {
+      $query->condition('nfd.status', $set['status'], '=');
     }
 
     ////////// Content Types
@@ -113,6 +113,129 @@ class AzContentQuery {
           ->element((isset($set['pagerId'])) ? $set['pagerId'] : 0)
           ->execute();
         $results = $result->fetchAllAssoc('nid');
+        break;
+    }
+    return [
+      'results' => $results,
+      'numRows' => count($results),
+      'totalRows' => (int)$totalRows,
+    ];
+  }
+
+  static public function commentQuery(Array $set) {
+    $sorted = false; // Prevent duplicate sorts.
+
+    ////////// Connect to database - root table comment_field_data
+    $query = \Drupal::database()->select('comment_field_data', 'cfd');
+
+    ////////// Set the output fields
+    if (isset($set['fields'])) {
+      foreach ($set['fields'] as $name => $fields) {
+        $query->fields(($name == 'null') ? null : $name, $fields);
+      }
+    } else {
+      $query->fields('cfd', ['cid']);
+//    $query->fields('nfd', ['nid', 'title', 'status']);
+    }
+
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    // COMMENT FILTERS
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    ////////// Filter on core Drupal published value
+    if (isset($set['status_comment'])) {
+      $query->condition('cfd.status', $set['status_comment'], (is_array($set['status_comment'])) ? 'IN' : '=');
+    }
+
+    ////////// Author
+    if (isset($set['author_comment'])) {
+      $query->condition('cfd.uid', $set['author_comment'], (is_array($set['author_comment'])) ? 'IN' : '=');
+    }
+
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    // PARENT NODE FILTERS
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    ////////// Join in the parent node table.
+    $query->join('node_field_data', 'nfd', 'nfd.nid = cfd.entity_id');
+
+    ////////// Filter on core Drupal published value
+    if (isset($set['status'])) {
+      $query->condition('nfd.status', $set['status'], '=');
+    }
+
+    ////////// Content Types
+    if (isset($set['types'])) {
+      $query->condition('nfd.type', $set['types'], (is_array($set['types'])) ? 'IN' : '=');
+    }
+
+    ////////// Author
+    if (isset($set['author'])) {
+      $query->condition('nfd.uid', $set['author'], (is_array($set['author'])) ? 'IN' : '=');
+    }
+
+    ////////// Topics
+    if (isset($set['topics'])) {
+      $query->join('node__field_topics', 'nft', 'nfd.nid = nft.entity_id');
+      $query->condition('nft.field_topics_target_id', $set['topics'], (is_array($set['topics'])) ? 'IN' : '=');
+    }
+
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    // EXECUTE COUNT QUERY
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    if ((isset($set['getTotalRows']) && $set['getTotalRows']) || (isset($set['countOnly']))) {
+      $totalRows = $query->countQuery()->execute()->fetchField();
+      if (isset($set['countOnly'])) {
+        return $totalRows;
+      }
+    } else {
+      $totalRows = -1;
+    }
+
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    // SORTS
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    if (!$sorted) {
+      $sort = (isset($set['sort'])) ? $set['sort'] : 'changed';
+      $order = (isset($set['sortOrder'])) ? $set['sortOrder'] : 'DESC';
+      switch ($sort) {
+        case 'none':
+          $sorted = true;
+          break;
+        case 'changed':
+          $query->orderBy('cfd.changed', $order);
+          $sorted = true;
+          break;
+        case 'created':
+          $query->orderBy('cfd.created', $order);
+          $sorted = true;
+          break;
+      }
+    }
+
+    // Execute the query depending on 'more' setting.
+    switch ((isset($set['more'])) ? $set['more'] : 'none') {
+      case 'none':
+        $results = $query->execute()->fetchAllAssoc('nid');
+        break;
+
+      case 'ajax':
+        // If using AJAX then we keep track of page number and items per page.
+        if (isset($set['pageNum'])) {
+          $query->range($set['pageNum'] * $set['pageNumItems'], $set['pageNumItems']);
+        }
+        $result = $query->execute();
+        $results = $result->fetchAllAssoc('cid');
+
+        break;
+
+      case 'pager':
+        $result = $query->extend('Drupal\Core\Database\Query\PagerSelectExtender')
+          ->limit((isset($set['pageNumItems'])) ? $set['pageNumItems'] : 20)
+          ->element((isset($set['pagerId'])) ? $set['pagerId'] : 0)
+          ->execute();
+        $results = $result->fetchAllAssoc('cid');
         break;
     }
     return [
