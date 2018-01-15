@@ -69,29 +69,27 @@ class AzStream {
 
 
       if ($set['more'] == 'ajax') {
+        $classes = ['more-container', 'ajax'];
         if ($set['pageNum'] * $set['pageNumItems'] + $set['numRows'] >= $set['totalRows']) {
-          $status = ($set['pageNum']) ? 'All of ' . $result['totalRows'] : '';
+          $status = $set['title'] . ' - All of ' . $result['totalRows'];
+          $classes[] = 'all';
         } else {
-          $status = $set['tab'] . ' - ' . ($set['pageNum'] + 1) * $set['pageNumItems'] . ' of ' . $result['totalRows'];
+          $status = $set['title'] . ' - ' . ($set['pageNum'] + 1) * $set['pageNumItems'] . ' of ' . $result['totalRows'];
         }
-        if ($status == '') {
-          $more = null;
-        } else {
-          $more = [
+        $more = [
+          '#type' => 'container',
+          '#attributes' => ['class' => $classes],
+          'status' => [
             '#type' => 'container',
-            '#attributes' => ['class' => ['more-container', 'ajax']],
-            'status' => [
-              '#type' => 'container',
-              '#attributes' => ['class' => ['status-container']],
-              'markup' => ['#markup' => $status],
-            ],
-            'more_button' => [
-              '#type' => 'button',
-              '#value' => 'More',
-              '#attributes' => ['class' => ['more-button']],
-            ],
-          ];
-        }
+            '#attributes' => ['class' => ['status-container']],
+            'markup' => ['#markup' => $status],
+          ],
+          'more_button' => [
+            '#type' => 'button',
+            '#value' => 'More',
+            '#attributes' => ['class' => ['more-button']],
+          ],
+        ];
       }
       return [
         'stream' => $stream,

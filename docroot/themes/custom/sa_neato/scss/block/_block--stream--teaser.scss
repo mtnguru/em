@@ -18,6 +18,7 @@
 
     .information {
       font-size: 80%;
+      margin-bottom: 15px;
 
       .type {
         &:before {
@@ -73,8 +74,12 @@
       }
     }
 
+    .field--name-field-tooltip {
+      margin: 5px 0;
+    }
+
     .field--name-body {
-      margin: 20px 0 10px;
+      margin: 10px 0;
     }
 
     .node__links {

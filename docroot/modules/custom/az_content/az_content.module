@@ -320,7 +320,7 @@ function _az_content_add_query_args($set) {
 function _az_content_init_set($set) {
   $set += [
     'id' => 'init-stream',
-    'types' => ['article', 'event', 'book', 'news'],
+    'types' => ['article', 'event', 'book', 'news', 'glossary'],
     'more' => 'ajax',
     'getTotalRows' => TRUE,
     'entityType' => 'node',
@@ -487,6 +487,17 @@ function az_content_preprocess_node(&$variables) {
             ]);
           }
 
+          if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
+            $tickets = _az_content_build_content_block([
+              'id' => 'tickets',
+              'tab' => 'Tickets',
+              'title' => 'Tickets',
+              'types' => 'ticket',
+              'empty' => 'No unpublished activity for this site',
+            ]);
+          }
+
+
           // Create My Comments tab
           $my_comments = _az_content_build_content_block([
             'id' => 'my-comments',
@@ -516,6 +527,7 @@ function az_content_preprocess_node(&$variables) {
         $variables['tabs'] = [
           'activity'    => (isset($activity))    ? $activity    : null,
           'unpublished' => (isset($unpublished)) ? $unpublished : null,
+          'tickets'     => (isset($tickets))     ? $tickets     : null,
           'comments'    => (isset($comments))    ? $comments    : null,
           'my_activity' => (isset($my_activity)) ? $my_activity : null,
           'my_comments' => (isset($my_comments)) ? $my_comments : null,

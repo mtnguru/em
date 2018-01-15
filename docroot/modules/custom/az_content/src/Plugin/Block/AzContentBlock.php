@@ -45,11 +45,11 @@ class AzContentBlock extends BlockBase {
     $set = $this->configuration['set'];
 
     // Initialize settings that haven't been set.
-    $set['pageNum'] =      (isset($set['pageNum']))      ? $set['pageNum'] : 0;
+    $set['pageNum'] = (isset($set['pageNum'])) ? $set['pageNum'] : 0;
     $set['pageNumItems'] = (isset($set['pageNumItems'])) ? $set['pageNumItems'] : 10;
-    $set['entityType'] =   (isset($set['entityType']))   ? $set['entityType'] : 'node';
-    $set['viewMode'] =     (isset($set['viewMode']))     ? $set['viewMode'] : 'teaser';
-    $set['more'] =         (isset($set['more']))         ? $set['more'] : 'none';
+    $set['entityType'] = (isset($set['entityType'])) ? $set['entityType'] : 'node';
+    $set['viewMode'] = (isset($set['viewMode'])) ? $set['viewMode'] : 'teaser';
+    $set['more'] = (isset($set['more'])) ? $set['more'] : 'none';
 
     // If using a pager set the pager id
     if ($set['more'] == 'pager' && !isset($set['pagerId'])) {
@@ -66,10 +66,37 @@ class AzContentBlock extends BlockBase {
     if (isset($set['class'])) {
       $classes[] = $set['class'];
     }
-
-    // Wrap it in a tab
     if (isset($set['tab'])) {
       $classes[] = 'tab-content';
+    }
+
+    // Create the stream container
+    $stream = [
+      '#type' => 'container',
+      '#attributes' => [
+        'id' => $set['id'],
+        'class' => $classes,
+      ],
+    ];
+
+    // Add the title if specified
+    if (isset($set['title'])) {
+      $stream['title'] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['title-container']],
+        'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
+      ];
+    }
+
+    // Build empty container for the stream content - AJAX fills it.
+    $stream['content'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['content-container']],
+//      'stream' => AzStream::create($set),      // Load the first page.
+    ];
+
+    if (isset($set['tab'])) {
+      // Wrap it in a tab
       $build = [
         '#type' => 'container',
         '#prefix' => '<li class="tab">',
@@ -80,46 +107,11 @@ class AzContentBlock extends BlockBase {
           '#attributes' => ['class' => ['tab-title']],
           'markup' => ['#markup' => '<h2>' . $set['tab'] . '</h2>'],
         ],
-        'stream' => [
-          '#type' => 'container',
-          '#attributes' => [
-            'id' => $set['id'],
-            'class' => $classes,
-          ],
-          'content' => [
-            '#type' => 'container',
-            '#attributes' => ['class' => ['content-container']],
-//          'stream' => AzStream::create($set), //   Load the first page.
-          ],
-        ],
+        'stream' => $stream,
       ];
     } else {
-      // Create the stream container
-      $build = [
-        '#type' => 'container',
-        '#attributes' => [
-          'id' => $set['id'],
-          'class' => $classes,
-        ],
-      ];
-
-      // Add the title if specified
-      if (isset($set['title'])) {
-        $build['title'] = [
-          '#type' => 'container',
-          '#attributes' => ['class' => ['title-container']],
-          'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
-        ];
-      }
-
-      // Build empty container for the stream content - JavaScript fills it.
-      $build['content'] = [
-        '#type' => 'container',
-        '#attributes' => ['class' => ['content-container']],
-//      'stream' => AzStream::create($set),      // Load the first page.
-      ];
+      $build = $stream;
     }
-
 
     AzMaestroInit::start($set, $build);
     return $build;
