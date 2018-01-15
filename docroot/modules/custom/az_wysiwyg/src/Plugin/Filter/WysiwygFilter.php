@@ -77,7 +77,7 @@ class WysiwygFilter extends FilterBase {
   }
 
   private function processText($text, &$glossary, &$footnotes) {
-    $view_mode = &drupal_static('az_view_mode');
+    $view_mode = &drupal_static('az_view_mode', null);
     if (!isset($view_mode)) return $text;
     $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;
 

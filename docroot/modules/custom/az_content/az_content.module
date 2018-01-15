@@ -349,7 +349,8 @@ function az_content_preprocess_node(&$variables) {
   // Add marker if content is New, Updated or has already been read.
   $node = $variables['node'];
   $type = $node->getType();
-  $view_mode = &drupal_static('az_view_mode', $variables['view_mode']);  // Save statically - used by WysiwygFilter
+  $view_mode = &drupal_static('az_view_mode', null);  // Save statically - used by WysiwygFilter
+  $view_mode = $variables['view_mode'];
 
   $variables['bundle_name'] = $node->type->entity->label();
 
