@@ -205,7 +205,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         $build['#group_id'] = $group->id();
         $logo = $group->field_logo_image->getValue();
         $file = \Drupal\file\Entity\File::load($logo[0]['target_id']);
-        $build['#group_logo_url'] = \Drupal\image\Entity\ImageStyle::load('300x100')->buildUrl($file->getFileUri());
+        $build['#group_logo_url'] = \Drupal\image\Entity\ImageStyle::load('900x300')->buildUrl($file->getFileUri());
 
         // Add the View Recent Content and Submit Ticket links
         $build['#group_links'] = [

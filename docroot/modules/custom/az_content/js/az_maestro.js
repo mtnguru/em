@@ -5,7 +5,24 @@
 (function ($) {
   'use strict';
 
-  function init (context) {
+  if (!Drupal.az) {
+    Drupal.az = {};
+  }
+
+  Drupal.az.maestroC = function () {
+
+    function init (context) {
+      // Initialize tabs
+      $('.az-tabs', context).once('az-attached').each(function () {
+        initTabs(this, context);
+      });
+
+      // Initialize stream
+      $('.maestro-stream', context).once('az-attached').each(function() {
+//      init(this, context)
+      });
+
+    }
 
     var initTabs = function (tabContainer, context) {
       var $tabs = $(tabContainer).find('.tab');
@@ -15,83 +32,85 @@
         $(this).click(function (ev) {
           $tabs.removeClass('active');
           $(this).addClass('active');
+          var set = drupalSettings.azmaestro[this.id.replace('tab-', '')];
+          if (!set['loaded']) {
+            getStream(set);
+          }
         });
       });
-    };
 
-    var initStream = function (maestroStream, context) {
-      var $streamContainer = $(maestroStream).find('.content-container');
-      var $moreButton;
-      var streamId = maestroStream.id;
-      var set = drupalSettings.azmaestro[streamId];
-
-      var doAjax = function doAjax(url, data, successCallback, errorCallback) {
-        $.ajax({
-          url: url,
-          type: 'POST',
-          data: JSON.stringify(data),
-          contentType: "application/json; charset=utf-8",
-          processData: false,
-          success: function (response) {
-            if (Array.isArray(response) && response.length > 0) {
-              if (response[0].data && response[0].data.message) {
-                alert(response[0].data.message);
-              }
-              if (successCallback) successCallback(response);
-            } else {
-              (errorCallback) ? errorCallback(response) : successCallback(response);
-            }
-            return false;
-          },
-          error: function (response) {
-            alert('az_content::doAjax: ' + response.responseText);
-            (errorCallback) ? errorCallback(response) : successCallback(response);
-          }
-        });
-      };
-
-      var streamLoaded = function (response) {
-        for (var i = 0; i < response.length; i++) {
-          if (response[i].command == 'GetStreamCommand') {
-            if ($moreButton) $moreButton.remove();
-            $streamContainer.append(response[i].stream);
-            $moreButton = $(maestroStream).find('.more-button');
-            set = response[i].set;
-            if (set.pageNum * set.pageNumItems + set.numRows >= set.totalRows) {
-              $moreButton.remove();
-            } else {
-              $moreButton.click(function () {
-                set.pageNum++;
-                getStream(set);
-              });
-            }
-          }
-        }
-      };
-
-      var getStream = function (set) {
-        doAjax('/maestro/getStream', set, streamLoaded);
-      };
-
+      var set = drupalSettings.azmaestro[$tabs[0].id.replace('tab-', '')];
       getStream(set);
     };
 
-    // Initialize tabs
-    $('.az-tabs', context).once('az-attached').each(function () {
-      initTabs(this, context);
-    });
+    var doAjax = function doAjax(url, data, successCallback, errorCallback) {
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        processData: false,
+        success: function (response) {
+          if (Array.isArray(response) && response.length > 0) {
+            if (response[0].data && response[0].data.message) {
+              alert(response[0].data.message);
+            }
+            if (successCallback) successCallback(response);
+          } else {
+            (errorCallback) ? errorCallback(response) : successCallback(response);
+          }
+          return false;
+        },
+        error: function (response) {
+          alert('az_content::doAjax: ' + response.responseText);
+          (errorCallback) ? errorCallback(response) : successCallback(response);
+        }
+      });
+    };
 
-    // Initialize
-    $('.maestro-stream', context).once('az-attached').each(function() {
-      initStream(this, context)
-    });
+    var streamLoaded = function (response) {
+      for (var i = 0; i < response.length; i++) {
+        if (response[i].command == 'GetStreamCommand') {
+          var set = response[i].set;
+          var $streamContainer = $('#' + set['id']);
 
-  }
+          var $moreButton = $streamContainer.find('.more-button');
+          if ($moreButton) $moreButton.remove();
+          $streamContainer.append(response[i].stream);
+          $moreButton = $streamContainer.find('.more-button');
 
-  Drupal.behaviors.azMaestro = {
-    attach: function(context, settings) {
-      init(context);
+          if (set.pageNum * set.pageNumItems + set.numRows >= set.totalRows) {
+            $moreButton.remove();
+          } else {
+            $moreButton.click(function () {
+              set.pageNum++;
+              getStream(set);
+            });
+          }
+        }
+      }
+    };
+
+    var getStream = function (set) {
+      set['loaded'] = true;
+      doAjax('/maestro/getStream', set, streamLoaded);
+    };
+
+    return {
+      init: init,
+    };
+  };
+
+  Drupal.behaviors.az_maestro = {
+    // Attach functions are executed by Drupal upon page load or ajax loads.
+    attach: function (context, settings) {
+      if (!Drupal.az.maestro) {  // Ensures we only run this once
+        Drupal.az.maestro = Drupal.az.maestroC();
+      }
+      Drupal.az.maestro.init(context);
     }
   };
+
+
 }(jQuery));
 

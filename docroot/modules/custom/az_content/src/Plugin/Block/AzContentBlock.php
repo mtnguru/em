@@ -97,9 +97,10 @@ class AzContentBlock extends BlockBase {
 
     if (isset($set['tab'])) {
       // Wrap it in a tab
+      $id = 'tab-' . $set['id'];
       $build = [
         '#type' => 'container',
-        '#prefix' => '<li class="tab">',
+        '#prefix' => '<li id="' . $id . '" class="tab">',
         '#suffix' => '</li>',
         '#attributes' => ['class' => ['tab-container']],
         'title' => [
