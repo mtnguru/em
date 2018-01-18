@@ -115,23 +115,12 @@ function az_user_preprocess_user(&$variables) {
     'empty' => 'No unpublished activity for this user',
   ]);
 
-  // Create Users Tickets tab
-  $tickets = _az_content_build_content_block([
-    'id' => 'tickets',
-    'tab' => 'Tickets',
-    'author' => $user->id(),
-    'title' => 'Tickets',
-    'types' => 'ticket',
-    'status' => NODE_PUBLISHED,
-    'empty' => 'No tickets have been posted by this user.',
-  ]);
-
   // Create Users Comments tab
   $comments = _az_content_build_content_block([
-    'entity_type' => 'comment',
+    'entityType' => 'comment',
     'id' => 'comments',
     'tab' => 'Comments',
-    'author_comments' => $user->id(),
+    'authorComment' => $user->id(),
     'title' => 'Recent Comments',
     'status' => NODE_PUBLISHED,
     'empty' => 'No comments for this user',

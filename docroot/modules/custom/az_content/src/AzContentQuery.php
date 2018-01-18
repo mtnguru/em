@@ -52,6 +52,12 @@ class AzContentQuery {
       $query->condition('nfd.uid', $set['author'], (is_array($set['author'])) ? 'IN' : '=');
     }
 
+    ////////// Ticket - Assigned To
+    if (isset($set['assigned'])) {
+      $query->join('node__field_assigned_to', 'nfat', 'nfd.nid = nfat.entity_id');
+      $query->condition('nfat.field_assigned_to_target_id', $set['assigned'], (is_array($set['assigned'])) ? 'IN' : '=');
+    }
+
     ////////// Topics
     if (isset($set['topics'])) {
       $query->join('node__field_topics', 'nft', 'nfd.nid = nft.entity_id');
@@ -147,13 +153,13 @@ class AzContentQuery {
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     ////////// Filter on core Drupal published value
-    if (isset($set['status_comment'])) {
-      $query->condition('cfd.status', $set['status_comment'], (is_array($set['status_comment'])) ? 'IN' : '=');
+    if (isset($set['statusComment'])) {
+      $query->condition('cfd.status', $set['statusComment'], (is_array($set['statusComment'])) ? 'IN' : '=');
     }
 
     ////////// Author
-    if (isset($set['author_comment'])) {
-      $query->condition('cfd.uid', $set['author_comment'], (is_array($set['author_comment'])) ? 'IN' : '=');
+    if (isset($set['authorComment'])) {
+      $query->condition('cfd.uid', $set['authorComment'], (is_array($set['authorComment'])) ? 'IN' : '=');
     }
 
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

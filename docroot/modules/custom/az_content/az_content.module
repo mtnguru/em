@@ -517,25 +517,12 @@ function az_content_preprocess_node(&$variables) {
           if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
             $tickets = _az_content_build_content_block([
               'id' => 'tickets',
-              'tab' => 'Tickets',
+              'tab' => 'My Tickets',
               'title' => 'Tickets',
               'types' => 'ticket',
-              'empty' => 'No unpublished activity for this site',
+              'empty' => 'NO DISPLAY',
             ]);
           }
-
-
-          // Create My Comments tab
-          $my_comments = _az_content_build_content_block([
-            'id' => 'my-comments',
-            'tab' => 'My Comments',
-            'title' => 'My Comments',
-            'entityType' => 'comment',
-            'author_comment' => $user->id(),
-            'types' => 'UNSET',
-//          'empty' => 'You currently have no comments',
-            'empty' => 'NO DISPLAY',
-          ]);
 
           // Create My Activity tab
           $my_activity = _az_content_build_content_block([
@@ -546,6 +533,38 @@ function az_content_preprocess_node(&$variables) {
             'types' => 'UNSET',
             'empty' => 'You currently have no activity',
           ]);
+
+          // Create Users Tickets tab
+          $my_tickets = _az_content_build_content_block([
+            'id' => 'tickets',
+            'tab' => 'Tickets',
+            'author' => $user->id(),
+            'title' => 'Tickets',
+            'types' => 'ticket',
+            'empty' => 'NO DISPLAY',
+          ]);
+
+          // Create Users Tickets tab
+          $my_assigned = _az_content_build_content_block([
+            'id' => 'assigned',
+            'tab' => 'My Assigned',
+            'assigned' => $user->id(),
+            'title' => 'Assigned',
+            'types' => 'ticket',
+            'empty' => 'NO DISPLAY',
+          ]);
+
+          // Create My Comments tab
+          $my_comments = _az_content_build_content_block([
+            'id' => 'my-comments',
+            'tab' => 'My Comments',
+            'title' => 'My Comments',
+            'entityType' => 'comment',
+            'authorComment' => $user->id(),
+            'types' => 'UNSET',
+            'empty' => 'NO DISPLAY',
+          ]);
+
         }
         else {
           $snippet = \Drupal::entityManager()->getStorage('node')->load(325);
@@ -559,6 +578,8 @@ function az_content_preprocess_node(&$variables) {
           'comments'    => (isset($comments))    ? $comments    : null,
           'my_activity' => (isset($my_activity)) ? $my_activity : null,
           'my_comments' => (isset($my_comments)) ? $my_comments : null,
+          'my_tickets'  => (isset($my_tickets))  ? $my_tickets  : null,
+          'my_assigned' => (isset($my_assigned)) ? $my_assigned : null,
           'my_media'    => (isset($my_media))    ? $my_media    : null,
         ];
 
