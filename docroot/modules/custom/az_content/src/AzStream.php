@@ -74,10 +74,10 @@ class AzStream {
       if ($set['more'] == 'ajax') {
         $classes = ['more-container', 'ajax'];
         if ($set['pageNum'] * $set['pageNumItems'] + $set['numRows'] >= $set['totalRows']) {
-          $status = $set['title'] . ' - All of ' . $result['totalRows'];
+          $status = $set['title'] . ' - All of ' . $set['totalRows'];
           $classes[] = 'all';
         } else {
-          $status = $set['title'] . ' - ' . ($set['pageNum'] + 1) * $set['pageNumItems'] . ' of ' . $result['totalRows'];
+          $status = $set['title'] . ' - ' . ($set['pageNum'] + 1) * $set['pageNumItems'] . ' of ' . $set['totalRows'];
         }
         $more = [
           '#type' => 'container',
