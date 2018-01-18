@@ -19,7 +19,10 @@
 
       // Initialize stream
       $('.maestro-stream', context).once('az-attached').each(function() {
-//      init(this, context)
+        var set = drupalSettings.azmaestro[this.id.replace('tab-', '')];
+        if ($(this).hasClass('block-content')) {
+          getStream(set);
+        }
       });
 
     }
@@ -74,16 +77,21 @@
           var set = response[i].set;
           var $streamContainer = $('#' + set['id']);
 
+          // Remove the old more button
+          $streamContainer.find('.more-button').remove();
+          // Append the new stream html
+          $streamContainer.find('.content-container').append(response[i].stream);
+          // Find the new more button
           var $moreButton = $streamContainer.find('.more-button');
-          if ($moreButton) $moreButton.remove();
-          $streamContainer.append(response[i].stream);
-          $moreButton = $streamContainer.find('.more-button');
 
+          // If we're at the end then remove the more button
           if (set.pageNum * set.pageNumItems + set.numRows >= set.totalRows) {
             $moreButton.remove();
-          } else {
+          }
+          else {
+            // Set click event handler on more button.
             $moreButton.click(function () {
-              set.pageNum++;
+              set.pageNum++;   // Increment the page number.
               getStream(set);
             });
           }

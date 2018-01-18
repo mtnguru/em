@@ -58,12 +58,16 @@ class AzContentQuery {
       $query->condition('nft.field_topics_target_id', $set['topics'], (is_array($set['topics'])) ? 'IN' : '=');
     }
 
-    /////////// If query is count_only, execute countQuery and return number items
-    if (isset($set['countOnly'])) {
-      return $query->countQuery()->execute()->fetchField();
+    ////////// Page - Tickets record which page they relate to.
+    if (isset($set['pages'])) {
+      $query->join('node__field_page', 'nfp', 'nfd.nid = nfp.entity_id');
+      $query->condition('nfp.field_page_target_id', $set['pages'], (is_array($set['pages'])) ? 'IN' : '=');
     }
 
     // If requested query for total rows matching all filters.
+    if (isset($set['count']) && $set['count']) {
+      return $query->countQuery()->execute()->fetchField();
+    }
     if (isset($set['getTotalRows']) && $set['getTotalRows']) {
       $totalRows = $query->countQuery()->execute()->fetchField();
     } else {
@@ -184,9 +188,10 @@ class AzContentQuery {
     // EXECUTE COUNT QUERY
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    if ((isset($set['getTotalRows']) && $set['getTotalRows']) || (isset($set['countOnly']))) {
+    if ((isset($set['getTotalRows']) && $set['getTotalRows']) ||
+        (isset($set['count']) && $set['count'])) {
       $totalRows = $query->countQuery()->execute()->fetchField();
-      if (isset($set['countOnly'])) {
+      if (isset($set['count'])) {
         return $totalRows;
       }
     } else {

@@ -2,6 +2,7 @@
 
 namespace Drupal\az_content\Plugin\Block;
 
+use Drupal\az_content\AzContentQuery;
 use Drupal\az_content\AzMaestroInit;
 use Drupal\az_content\AzStream;
 use Drupal\Core\Block\BlockBase;
@@ -68,6 +69,8 @@ class AzContentBlock extends BlockBase {
     }
     if (isset($set['tab'])) {
       $classes[] = 'tab-content';
+    } else {
+      $classes[] = 'block-content';
     }
 
     // Create the stream container
@@ -88,11 +91,30 @@ class AzContentBlock extends BlockBase {
       ];
     }
 
+    // Query for total number matches
+    $set['count'] = true;
+    switch ($set['entityType']) {
+      case 'node':
+        $set['totalRows'] = AzContentQuery::nodeQuery($set);
+        break;
+      case 'comment':
+        $set['totalRows'] = AzContentQuery::commentQuery($set);
+        break;
+      case 'user':
+        $set['totalRows'] = AzContentQuery::userQuery($set);
+        break;
+    }
+    $set['count'] = false;
+
+    if ($set['totalRows'] == 0  && $set['empty'] == 'NO DISPLAY') {
+      return null;
+    }
+
     // Build empty container for the stream content - AJAX fills it.
     $stream['content'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['content-container']],
-//      'stream' => AzStream::create($set),      // Load the first page.
+//    'stream' => AzStream::create($set),      // Load the first page.
     ];
 
     if (isset($set['tab'])) {
@@ -106,7 +128,7 @@ class AzContentBlock extends BlockBase {
         'title' => [
           '#type' => 'container',
           '#attributes' => ['class' => ['tab-title']],
-          'markup' => ['#markup' => '<h2>' . $set['tab'] . '</h2>'],
+          'markup' => ['#markup' => '<h2>' . $set['tab'] . ' - ' . $set['totalRows'] . '</h2>'],
         ],
         'stream' => $stream,
       ];

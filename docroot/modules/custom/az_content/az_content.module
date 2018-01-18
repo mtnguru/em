@@ -322,7 +322,7 @@ function _az_content_init_set($set) {
     'id' => 'init-stream',
     'types' => ['article', 'event', 'book', 'news', 'glossary'],
     'more' => 'ajax',
-    'getTotalRows' => TRUE,
+//  'getTotalRows' => TRUE,
     'entityType' => 'node',
     'pageNum' => 0,
     'pageNumItems' => 10,
@@ -396,6 +396,18 @@ function az_content_preprocess_node(&$variables) {
             ->getViewBuilder('block')
             ->view($block_entity);
 
+          if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
+            $variables['sidebar']['tickets'] = _az_content_build_content_block([
+              'id' => 'related-tickets',
+              'title' => 'Related Content',
+              'viewMode' => 'teaser_short',
+              'types' => 'ticket',
+              'pages' => $node->id(),
+              'class' => 'block-sidebar',
+              'empty' => 'No content has been added for this Term'
+            ]);
+          }
+
           // If field_contribute has content - add contribute block
           if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
             $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
@@ -414,6 +426,7 @@ function az_content_preprocess_node(&$variables) {
         }
 
         if ($type == 'glossary') {
+
           // Create sidebar of recent activity for this glossary term
           $variables['sidebar']['related_content'] = _az_content_build_content_block([
             'id' => 'related-content',
@@ -422,12 +435,25 @@ function az_content_preprocess_node(&$variables) {
             'viewMode' => 'teaser_short',
             'topics' => $node->id(),
             'class' => 'block-sidebar',
-            'empty' => 'No content has been added for this Term'
+            'empty' => 'No content has been added for this topic'
           ]);
+
+          if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
+            $variables['sidebar']['tickets'] = _az_content_build_content_block([
+              'id' => 'related-tickets',
+              'title' => 'Tickets',
+              'viewMode' => 'teaser_short',
+              'types' => 'ticket',
+              'pages' => $node->id(),
+              'class' => 'block-sidebar',
+              'empty' => 'No tickets related to this topic'
+            ]);
+          }
         }
 
         // Add the Donate block.
         $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+
         $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
       }
       break;
@@ -507,7 +533,8 @@ function az_content_preprocess_node(&$variables) {
             'entityType' => 'comment',
             'author_comment' => $user->id(),
             'types' => 'UNSET',
-            'empty' => 'You currently have no comments',
+//          'empty' => 'You currently have no comments',
+            'empty' => 'NO DISPLAY',
           ]);
 
           // Create My Activity tab

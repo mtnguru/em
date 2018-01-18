@@ -95,10 +95,54 @@ function az_user_preprocess_user(&$variables) {
   // Get the URL of the user
   $variables['url'] = $variables['user']->url();
 
-  // Get Recent Content View
-  $variables['view_user_activity'] = views_embed_view('content_recent', 'user_block');
-  $variables['view_user_comments'] = views_embed_view('az_comments', 'user_block');
-  $variables['view_user_media']    = views_embed_view('az_media', 'view_user_block');
+  // Create Users Recent Activity tab
+  $activity = _az_content_build_content_block([
+    'id' => 'recent-activity',
+    'tab' => 'Activity',
+    'title' => 'Recent Activity',
+    'author' => $user->id(),
+    'status' => NODE_PUBLISHED,
+    'empty' => 'No activity for this user',
+  ]);
+
+  // Create Users Unpublished tab
+  $unpublished = _az_content_build_content_block([
+    'id' => 'unpublished-activity',
+    'tab' => 'Unpublished',
+    'title' => 'Recent Unpublished Activity',
+    'author' => $user->id(),
+    'status' => NODE_NOT_PUBLISHED,
+    'empty' => 'No unpublished activity for this user',
+  ]);
+
+  // Create Users Tickets tab
+  $tickets = _az_content_build_content_block([
+    'id' => 'tickets',
+    'tab' => 'Tickets',
+    'author' => $user->id(),
+    'title' => 'Tickets',
+    'types' => 'ticket',
+    'status' => NODE_PUBLISHED,
+    'empty' => 'No tickets have been posted by this user.',
+  ]);
+
+  // Create Users Comments tab
+  $comments = _az_content_build_content_block([
+    'entity_type' => 'comment',
+    'id' => 'comments',
+    'tab' => 'Comments',
+    'author_comments' => $user->id(),
+    'title' => 'Recent Comments',
+    'status' => NODE_PUBLISHED,
+    'empty' => 'No comments for this user',
+  ]);
+
+  $variables['tabs'] = [
+    'activity'    => (isset($activity))    ? $activity    : null,
+    'unpublished' => (isset($unpublished)) ? $unpublished : null,
+    'tickets'     => (isset($tickets))     ? $tickets     : null,
+    'comments'    => (isset($comments))    ? $comments    : null,
+  ];
 }
 
 function az_user_preprocess_menu(&$variables) {

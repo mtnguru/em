@@ -13,7 +13,7 @@
 
     input,
     select {
-      background-color: lighten($color-dark-green, 10%);
+      background-color: lighten($color-dark-green, 15%);
     }
   }
   .ui-dialog-buttonpane {
@@ -22,7 +22,15 @@
       padding: .5em 1em;
     }
   }
+
   a {
-    color: $color-title;
+    color: $color-white;
+  }
+
+  ul.ui-autocomplete {
+    background-color: lighten($color-dark-green, 15%);
+    li {
+
+    }
   }
 }

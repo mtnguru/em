@@ -114,8 +114,10 @@
         </div>
       </div>
 
-      {% if author_picture %}
-        {{ author_picture }}
+      {% if node.bundle != 'glossary' %}
+        {% if author_picture %}
+          {{ author_picture }}
+        {% endif %}
       {% endif %}
     </div>
 
@@ -151,20 +153,6 @@
       {% if content.body is not empty %}
         <div class="body">
           {{ content.body }}
-        </div>
-      {% endif %}
-
-      {# CT - glossary #}
-      {% if content.eu-definition is not empty %}
-        <div class="eu-definition">
-          {{ content.eu_definition }}
-        </div>
-      {% endif %}
-
-      {# CT - glossary #}
-      {% if content.prevailing_definition is not empty %}
-        <div class="prevailing-definition">
-          {{ content.prevailing_definition }}
         </div>
       {% endif %}
     </div>

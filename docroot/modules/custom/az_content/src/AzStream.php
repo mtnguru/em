@@ -26,7 +26,9 @@ class AzStream {
         break;
     }
     $set['numRows'] = $result['numRows'];
-    $set['totalRows'] = $result['totalRows'];
+    if ($result['totalRows'] != -1) {
+      $set['totalRows'] = $result['totalRows'];
+    }
 
     $classes = ['stream-container', str_replace('_', '-', $set['viewMode'])];
     if ($result['numRows']) {
@@ -43,6 +45,7 @@ class AzStream {
         ];
       }
     } else {
+      $empty = (isset($set['empty'])) ? $set['empty'] : 'No content found';
       $classes[] = 'empty';
       $stream = ['#markup' => (isset($set['empty'])) ? $set['empty'] : 'No content found'];
     }
