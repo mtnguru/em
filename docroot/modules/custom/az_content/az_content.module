@@ -266,7 +266,7 @@ function _az_content_build_content_block($set) {
   return $blockManager->createInstance('az_content_block', ['set' => _az_content_init_set($set)])->build();
 }
 
-function _az_content_add_group($node, &$variables) {
+function _az_content_add_group_logo($node, &$variables) {
   if ($gid = AzGroupQuery::inGroup($node)) {
     $group = \Drupal::entityManager()->getStorage('group')->load($gid);
     $variables['group_url'] = \Drupal::service('path.alias_manager')
@@ -381,7 +381,7 @@ function az_content_preprocess_node(&$variables) {
     case 'glossary':
 
       if ($view_mode == 'full' || $view_mode == 'teaser') {
-        _az_content_add_group($node, $variables);
+        _az_content_add_group_logo($node, $variables);
       }
 
       if ($view_mode == 'teaser') {
@@ -399,12 +399,12 @@ function az_content_preprocess_node(&$variables) {
           if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
             $variables['sidebar']['tickets'] = _az_content_build_content_block([
               'id' => 'related-tickets',
-              'title' => 'Related Content',
+              'title' => 'Tickets',
               'viewMode' => 'teaser_short',
               'types' => 'ticket',
               'pages' => $node->id(),
               'class' => 'block-sidebar',
-              'empty' => 'No content has been added for this Term'
+              'empty' => 'NO DISPLAY',
             ]);
           }
 
@@ -435,7 +435,7 @@ function az_content_preprocess_node(&$variables) {
             'viewMode' => 'teaser_short',
             'topics' => $node->id(),
             'class' => 'block-sidebar',
-            'empty' => 'No content has been added for this topic'
+            'empty' => 'NO DISPLAY'
           ]);
 
           if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
@@ -446,7 +446,7 @@ function az_content_preprocess_node(&$variables) {
               'types' => 'ticket',
               'pages' => $node->id(),
               'class' => 'block-sidebar',
-              'empty' => 'No tickets related to this topic'
+              'empty' => 'NO DISPLAY'
             ]);
           }
         }
@@ -517,7 +517,7 @@ function az_content_preprocess_node(&$variables) {
           if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
             $tickets = _az_content_build_content_block([
               'id' => 'tickets',
-              'tab' => 'My Tickets',
+              'tab' => 'Tickets',
               'title' => 'Tickets',
               'types' => 'ticket',
               'empty' => 'NO DISPLAY',
@@ -537,9 +537,9 @@ function az_content_preprocess_node(&$variables) {
           // Create Users Tickets tab
           $my_tickets = _az_content_build_content_block([
             'id' => 'tickets',
-            'tab' => 'Tickets',
+            'tab' => 'My Tickets',
             'author' => $user->id(),
-            'title' => 'Tickets',
+            'title' => 'My Tickets',
             'types' => 'ticket',
             'empty' => 'NO DISPLAY',
           ]);
@@ -549,7 +549,7 @@ function az_content_preprocess_node(&$variables) {
             'id' => 'assigned',
             'tab' => 'My Assigned',
             'assigned' => $user->id(),
-            'title' => 'Assigned',
+            'title' => 'My Assigned Tickets',
             'types' => 'ticket',
             'empty' => 'NO DISPLAY',
           ]);
