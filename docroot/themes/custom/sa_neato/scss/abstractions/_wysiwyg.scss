@@ -142,6 +142,36 @@ body.cke_editable,
 
 .embedded-entity {
 
+  &.az-view-mode-media-tiny {
+    @include media($bp320only) {
+      width: 20%;
+    }
+    // $bp320only
+
+    @include media($bp580only) {
+      width: 15%;
+    }
+    // $bp580only
+
+    @include media($bp960only) {
+//    margin: 0 auto !important;
+      width: 15%;
+    }
+    // $bp960only
+
+    @include media($bp1280only) {
+//    margin: 0 auto !important;
+      width: 10%;
+    }
+    // $bp1280only
+
+    @include media($bp1920) {
+      width: 10%;
+//    margin: 0 auto !important;
+    }
+    // $bp1920
+  }
+
   &.az-view-mode-media-small,
   &.az-view-mode-media-small-w-desc {
     @include media($bp320only) {

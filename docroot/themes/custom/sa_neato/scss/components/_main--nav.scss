@@ -118,7 +118,7 @@
         border-radius: 10px;
         line-height: 1.4;
         opacity: 0;
-        @include transition-3d($timing: 1000ms);
+        @include transition-3d($timing: 500ms);
         z-index: -1;
         border: 2px solid $color-green;
 
@@ -131,7 +131,7 @@
         @include media($bp960) {
           left: 50%;
           right: 50%;
-          width: 0px;
+          width: 0;
         }
       }
 
@@ -141,6 +141,8 @@
           z-index: 20;
 
           @include media(max-width $bp580max) {
+            position: fixed;
+            top: 50px;
             left: 20px;
             right: 20px;
             width: calc(100% - 40px);
