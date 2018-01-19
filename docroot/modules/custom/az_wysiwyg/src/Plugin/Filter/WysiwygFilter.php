@@ -123,6 +123,7 @@ class WysiwygFilter extends FilterBase {
             }
 
             $topic = null;
+            $name = $matches[4][$key][0];
             if ($deleteMarkup ) {
               $ntext .= $matches[4][$key][0];
             }
@@ -136,6 +137,8 @@ class WysiwygFilter extends FilterBase {
                 }
                 else {
                   $ntext .= $matches[4][$key][0];
+                  \Drupal::logger('my_module')->notice(
+                    'Topic not found: ' . $name . '  Page: ' . \Drupal::service('path.current')->getPath());
                 }
               }
             }

@@ -27,11 +27,11 @@ class WysiwygBase {
   }
 
   static public function loadGlossary() {
-    $terms = &drupal_static(__FUNCTION__);
-    if (isset($terms)) {
-      return $terms;
+    $glossary = &drupal_static(__FUNCTION__);
+    if (isset($glossary)) {
+      return $glossary;
     }
-    $terms = [];
+    $glossary = [];
     // DB Query for all glossary terms.
     $query = \Drupal::database()->select('node_field_data', 'nfd');
     $query->addfield('nfd', 'nid');
@@ -46,9 +46,9 @@ class WysiwygBase {
     // Build terms array.
     foreach ($results as $result) {
       $result->url = \Drupal::service('path.alias_manager')->getAliasByPath('/node/' . $result->nid);
-      $terms[strtolower($result->title)] = $result;
+      $glossary[strtolower($result->title)] = $result;
     }
-    return $terms;
+    return $glossary;
   }
 
   /**
@@ -76,7 +76,7 @@ class WysiwygBase {
     }
   }
 
-  static public function extractTerms($text, &$terms) {
+  static public function extractTerms($text, &$glossary) {
     $topicReg = '/&lt;topic(.*?)&gt;(.*?)&lt;\/topic&gt;/';
 //  $topicReg = '/&lt;([a-z]+) *(.*?)&gt;(.*?)&lt;\/([a-z]+?)&gt;/';
     // Remove &nbsp; characters that do not have a space before or after them.
@@ -91,9 +91,26 @@ class WysiwygBase {
           $name = strtolower($attributes[1]);
         }
       }
-      if (!empty($terms[$name])) {
-        $terms[$name]->in_text = true;
+      $found = false;
+      if (empty($glossary[$name])) {
+        $len = strlen($name);
+        if ($name[$len - 1] == 's') {
+          $sname = substr($name, 0, $len - 1);
+          if (!empty($glossary[$sname])) {
+            $glossary[$sname]->in_text = true;
+            $found = true;
+          }
+        }
+      } else {
+        $glossary[$name]->in_text = true;
+        $found = true;
       }
+
+      if (!$found) {
+        \Drupal::logger('my_module')->notice(
+          'Topic not found: ' . $name . '  Page: ' . \Drupal::service('path.current')->getPath());
+      }
+
     }
   }
 }
