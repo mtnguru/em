@@ -65,6 +65,12 @@ article.az-page {
     }
   }
 
+  .field--name-field-tooltip {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid $base-separator-color;
+  }
+
   article {
 
     .field--name-title {
