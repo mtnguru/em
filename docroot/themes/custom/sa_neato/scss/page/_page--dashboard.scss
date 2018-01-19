@@ -64,9 +64,14 @@ body.path-frontpage {
       display: inline-block;
       margin-left: 20px;
       vertical-align: top;
+
+      .name {
+        @extend %text-shadow;
+      }
     }
     .user-picture {
       display: inline-block;
+      @extend %box-shadow;
     }
   }
 

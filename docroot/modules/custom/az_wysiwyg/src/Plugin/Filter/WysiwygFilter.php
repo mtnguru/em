@@ -80,6 +80,7 @@ class WysiwygFilter extends FilterBase {
     $view_mode = &drupal_static('az_view_mode', null);
     if (!isset($view_mode)) return $text;
     $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;
+    $view_mode = null;
 
     // Replace with a space any &nbsp; characters do not have a space before or after them -  for&nbsp;example -> for example
     // ckeditor likes to leave these everywhere.

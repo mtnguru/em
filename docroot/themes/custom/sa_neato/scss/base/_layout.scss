@@ -1,8 +1,5 @@
 @function page-margin () {
-//@include media($bp320only) {
-    @return $color-white;
-//  @return calc(30 / 320 * 100%);
-//} // $bp320only
+  @return $color-white;
 }
 
 
@@ -74,10 +71,10 @@ body {
   }
 }
 
-$page-padding-mobile: rem(20);
-$page-padding-tablet: rem(20);
-$page-padding-desktop: rem(40);
-$page-padding-widescreen: rem(60);
+$page-padding-mobile: 20px;
+$page-padding-tablet: 20px;
+$page-padding-desktop: 40px;
+$page-padding-widescreen: 60px;
 
 %layout-padding-mobile {
   @include media($bp320only) {

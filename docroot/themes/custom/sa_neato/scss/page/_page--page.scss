@@ -8,6 +8,9 @@ body.page-node-type-glossary,
 body.page-node-type-ticket,
 body.page-node-type-article,
 body.path-frontpage {
+}
+
+body.entity-node-canonical {
   .block-page-title-block {
       display: none;
   }
@@ -21,6 +24,7 @@ body.path-frontpage {
 }
 
 article.az-page {
+
   .sidebar-left {
     float: left;
 
@@ -33,7 +37,6 @@ article.az-page {
       padding-right: 40px;
     }
   }
-
 
   .main-container {
     float: left;

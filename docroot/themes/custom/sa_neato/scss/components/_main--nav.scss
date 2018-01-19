@@ -23,19 +23,27 @@
   $navigation-submenu-padding: 20px;
   $navigation-submenu-width: 20em;
 
+  background-image: url('/sites/default/files/topnav.jpg');
+  background-size: cover;
+  background-position-y: 15%;
+
   position: relative;
   line-height: 1;
 
-  background-color: $color-black;
+//background-color: $color-black;
   border-bottom: 1px solid $navigation-background;
-  width: 100%;
+
+  text-align: center;
+  > div {
+    max-width: $max-width;
+    margin: 0 auto;
+    text-align: left;
+  }
+
 //z-index: 20;
 
   #block-aztopnavblock {
     display: inline-block;
-    background-image: url('/sites/default/files/topnav.jpg');
-    background-size: cover;
-    background-position-y: 15%;
     width: 100%;
 
     .nav-block-wrapper {
@@ -51,6 +59,17 @@
       height: 47px;
       background-color: #218;
       border-radius: 47%;
+      width: 230px;
+
+      @include media($bp320only) {
+        margin-left: 20px;
+      }
+      @include media($bp580only) {
+        margin-left: 30px;
+      }
+      @include media($bp960) {
+        margin-left: 30px;
+      }
 
       h2 {
         margin: 0;
@@ -94,35 +113,56 @@
       .popup {
         position: absolute;
         top: 20px;
-        left: -500px;
+        padding: 20px;
         background: $color-dark-green;
-        border: 2px solid $color-green;
         border-radius: 10px;
         line-height: 1.4;
-        width: 300px;
-        padding: 20px;
         opacity: 0;
-        @include transition-3d($property: opacity, $timing: 750ms);
-        z-index: 200;
+        @include transition-3d($timing: 1000ms);
+        z-index: -1;
+        border: 2px solid $color-green;
+
+        @include media(max-width $bp580max) {
+          width: 0;
+          left: 50%;
+          right: 50%;
+        }
+
+        @include media($bp960) {
+          left: 50%;
+          right: 50%;
+          width: 0px;
+        }
       }
 
       &:hover {
         .popup {
-          left: 30px;
           opacity: 1;
+          z-index: 20;
+
+          @include media(max-width $bp580max) {
+            left: 20px;
+            right: 20px;
+            width: calc(100% - 40px);
+          }
+          @include media($bp960) {
+            left: 30px;
+            right: 30px;
+            width: 400px;
+          }
         }
       }
     }
 
     .content-container {
-      display: inline-block;
+      float: left;
       font-weight: bold;
 
       @include media(max-width $bp580max) {
         width: 100%;
       }
       @include media($bp960) {
-        margin-left: 10px;
+        margin-left: 30px;
       }
 
       .user-menu {
@@ -138,7 +178,7 @@
         }
 
         @include media($bp960) {
-          right: #{$page-padding-desktop}px;
+          right: $page-padding-desktop;
         }
 
         #accessibility {
@@ -276,28 +316,12 @@
     }
   }
 
-
-  /*
-  // Nav menu
-
-  nav {
-    float: none;
-    min-height: $navigation-height;
-//  z-index: 101;
-
-    @include media ($bp960) {
-      float: left;
-    }
-  } */
-
   ul.navigation-menu {
     clear: both;
     display: none;
-    margin: 0 auto;
     overflow: visible;
     padding: 0;
     width: 100%;
-//  z-index: 101;
 
     &.show {
       display: block;
@@ -305,12 +329,12 @@
 
     @include media(max-width $bp580max) {
       padding-bottom: 10px;
+      margin: 0 auto;
     }
 
     @include media ($bp960) {
       display: block;
-      margin: 0;
-      padding: 0 0 0 280px;
+      margin: 0 0 0 280px;
     }
   }
 

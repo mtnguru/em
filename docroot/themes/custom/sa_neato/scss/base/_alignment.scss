@@ -19,12 +19,27 @@
 %az-width-95 { width: 95%; }
 %az-width-100 { width: 100%; }
 
-.az-small {
+.az-tiny {
   @include media($bp320only) {
-    width: 50%;
+    width: 20%;
   }
   @include media($bp580only) {
-    width: 33%;
+    width: 15%;
+  }
+  @include media($bp960only) {
+    width: 10%;
+  }
+  @include media($bp1280) {
+    width: 7%;
+  }
+}
+
+.az-small {
+  @include media($bp320only) {
+    width: 40%;
+  }
+  @include media($bp580only) {
+    width: 30%;
   }
   @include media($bp960only) {
     width: 25%;
@@ -36,7 +51,7 @@
 
 .az-medium {
   @include media($bp320only) {
-    width: 100%;
+    width: 80%;
   }
   @include media($bp580only) {
     width: 50%;
@@ -61,6 +76,21 @@
   }
   @include media($bp1280) {
     width: 50%;
+  }
+}
+
+.az-huge {
+  @include media($bp320only) {
+    width: 100%;
+  }
+  @include media($bp580only) {
+    width: 100%;
+  }
+  @include media($bp960only) {
+    width: 80%;
+  }
+  @include media($bp1280) {
+    width: 70%;
   }
 }
 

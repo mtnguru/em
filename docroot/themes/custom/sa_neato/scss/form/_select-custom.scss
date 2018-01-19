@@ -9,7 +9,7 @@ $button-height-tablet: 40px;
   padding-right: rem(48);
   appearance: none;
   -webkit-appearance: none;
-  background: url($images-path + 'icon-arrow-black.svg') calc(100% - 20px) no-repeat $color-white;
+  background: url($images-path + 'icon-arrow-black.svg') calc(100% - 20px) no-repeat $base-font-color;
   background-size: rem(17) rem(10);
   line-height: rem(20);
   letter-spacing: -0.01em;

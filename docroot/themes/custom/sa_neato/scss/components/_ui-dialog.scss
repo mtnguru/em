@@ -1,11 +1,11 @@
 .ui-dialog.ui-widget-content {
   .ui-dialog-titlebar {
     background-color: darken($color-dark-green, 10%);
-    color: $color-white;
+    color: $base-font-color;
   }
   .ui-dialog-content {
     background-color: $color-dark-green;
-    color: $color-white;
+    color: $base-font-color;
 
     fieldset {
       background-color: $color-dark-green;
@@ -24,7 +24,7 @@
   }
 
   a {
-    color: $color-white;
+    color: $base-font-color;
   }
 
   ul.ui-autocomplete {

@@ -1,4 +1,4 @@
 .outer-wrapper {
-  max-width: 2400px;
+  max-width: $max-width;
   @extend %layout-padding;
 }

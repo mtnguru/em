@@ -29,7 +29,7 @@ form {
     &.form-item-body-0-format {
       background: orange;
       label {
-        color: $color-white;
+        color: $base-font-color;
         font-size: 90%;
         font-weight: normal;
       }
@@ -40,7 +40,7 @@ form {
     .form-item-field-contribute-0-format,
     .form-item-body-0-format {
       label {
-        color: $color-white;
+        color: $base-font-color;
         font-size: 90%;
       }
     }

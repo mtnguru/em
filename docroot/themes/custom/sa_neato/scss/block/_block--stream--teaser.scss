@@ -13,7 +13,12 @@
 
     h3 {
       margin: 0 0 3px;
-      font-size: 130%;
+      font-size: 140%;
+      a {
+        span {
+          color: $color-green;
+        }
+      }
     }
 
     .information {
@@ -52,7 +57,9 @@
       margin-left: 20px;
 
       img {
-        border-radius: 4px;
+        border-radius: 8px;
+        display: block;
+        @extend %box-shadow;
       }
 
       .group-label-container {
@@ -62,14 +69,17 @@
         left: 0;
         bottom: 0;
         font-size: 90%;
-        background-color: rgba(0,0,0,.4);
+        background-color: rgba(0,0,0,.3);
+        border-radius: 8px;
+
         .group-label {
+          color: $color-group;
           text-align: center;
           font-weight: bold;
           line-height: 1.1;
-          color: $color-group;
-          @include vertical-center;
           padding: 5px;
+          @include vertical-center;
+          @extend %text-shadow;
         }
       }
     }
@@ -118,7 +128,7 @@
 
       .type {
         &:before {
-          color: darken($color-white, 15%);
+          color: darken($base-font-color, 15%);
         }
       }
 

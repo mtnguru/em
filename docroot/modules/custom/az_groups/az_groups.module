@@ -56,6 +56,9 @@ function _az_groups_node_form_submit($form, FormStateInterface $form_state) {
 
 function az_groups_preprocess_group(&$variables) {
 
+  $view_mode = &drupal_static('az_view_mode', null);  // Save statically - used by WysiwygFilter
+  $view_mode = $variables['view_mode'];
+
   $block_entity = Drupal\block\Entity\Block::load('groupoperations');
   $variables['block_groupoperations'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 

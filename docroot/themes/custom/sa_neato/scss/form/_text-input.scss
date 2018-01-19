@@ -57,7 +57,7 @@
       background-color: lighten($base-background-color, 15%);
       border-radius: 0;
       appearance: none;
-      color: $color-white;
+      color: $base-font-color;
       outline: none;
       font-size: 110%;
       @include transition-3d;
@@ -78,7 +78,7 @@
       } // &:valid
 
       &:hover {
-        color: $color-white;
+        color: $base-font-color;
         cursor: default;
 
         + label::before {

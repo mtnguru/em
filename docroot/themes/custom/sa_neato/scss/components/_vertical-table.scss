@@ -3,7 +3,7 @@ li.vertical-tabs__menu-item {
   &.is-selected  {
      background-color: lighten($base-background-color, 30%);
      .vertical-tabs__menu-item-title {
-       color: $color-white;
+       color: $base-font-color;
      }
   }
 }
