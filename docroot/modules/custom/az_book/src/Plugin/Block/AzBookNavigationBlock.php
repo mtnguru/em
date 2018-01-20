@@ -2,7 +2,7 @@
 
 namespace Drupal\az_book\Plugin\Block;
 
-use Drupal\az_groups\azGroupQuery;
+use Drupal\az_groups\AzGroupQuery;
 use Drupal\book\Plugin\Block\BookNavigationBlock;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Url;
@@ -125,7 +125,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       case 'entity.node.canonical':
         $node = $this->requestStack->getCurrentRequest()->get('node');
         $bid = $node->book['bid'];
-        if ($gid = azGroupQuery::inGroup($node)) {
+        if ($gid = AzGroupQuery::inGroup($node)) {
           $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
           if (!$bid && $value = $group->field_directory_book->getValue()) {
             $bid = $value[0]['target_id'];

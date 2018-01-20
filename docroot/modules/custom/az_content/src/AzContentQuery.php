@@ -47,6 +47,11 @@ class AzContentQuery {
       $query->condition('nfd.type', $set['types'], (is_array($set['types'])) ? 'IN' : '=');
     }
 
+    ////////// Exclude NID's
+    if (isset($set['exclude'])) {
+      $query->condition('nfd.nid', $set['exclude'], (is_array($set['exclude'])) ? 'NOT IN' : '!=');
+    }
+
     ////////// Author
     if (isset($set['author'])) {
       $query->condition('nfd.uid', $set['author'], (is_array($set['author'])) ? 'IN' : '=');
@@ -64,7 +69,7 @@ class AzContentQuery {
       $query->condition('nft.field_topics_target_id', $set['topics'], (is_array($set['topics'])) ? 'IN' : '=');
     }
 
-    ////////// Page - Tickets record which page they relate to.
+    ////////// Page - Ticket CT only - Tickets record which page they relate to.
     if (isset($set['pages'])) {
       $query->join('node__field_page', 'nfp', 'nfd.nid = nfp.entity_id');
       $query->condition('nfp.field_page_target_id', $set['pages'], (is_array($set['pages'])) ? 'IN' : '=');

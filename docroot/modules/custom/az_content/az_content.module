@@ -380,14 +380,33 @@ function az_content_preprocess_node(&$variables) {
     case 'ticket':
     case 'glossary':
 
-      if ($view_mode == 'full' || $view_mode == 'teaser') {
+      if ($view_mode == 'teaser') {
         _az_content_add_group_logo($node, $variables);
       }
 
-      if ($view_mode == 'teaser') {
-      }
-
       if ($view_mode == 'full') {
+
+        // Add block showing any tickets submitted for this page.
+        if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
+          $variables['sidebar']['tickets'] = _az_content_build_content_block([
+            'id' => 'related-tickets',
+            'title' => 'Tickets',
+            'viewMode' => 'teaser_short',
+            'types' => 'ticket',
+            'pages' => $node->id(),
+            'class' => 'block-sidebar',
+            'empty' => 'NO DISPLAY',
+          ]);
+        }
+
+        // If field_contribute has content - add contribute block
+        if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
+          $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
+          $variables['sidebar']['block_contribute'] = \Drupal::entityTypeManager()
+            ->getViewBuilder('block')
+            ->view($block_entity);
+        }
+
         if (in_array($type, ['article', 'news', 'book'])) {
 
           // Create book navigation block
@@ -396,25 +415,6 @@ function az_content_preprocess_node(&$variables) {
             ->getViewBuilder('block')
             ->view($block_entity);
 
-          if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
-            $variables['sidebar']['tickets'] = _az_content_build_content_block([
-              'id' => 'related-tickets',
-              'title' => 'Tickets',
-              'viewMode' => 'teaser_short',
-              'types' => 'ticket',
-              'pages' => $node->id(),
-              'class' => 'block-sidebar',
-              'empty' => 'NO DISPLAY',
-            ]);
-          }
-
-          // If field_contribute has content - add contribute block
-          if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
-            $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
-            $variables['sidebar']['block_contribute'] = \Drupal::entityTypeManager()
-              ->getViewBuilder('block')
-              ->view($block_entity);
-          }
 
           // If field_display_image_map has a value then add the map views map block.
           if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
@@ -425,36 +425,32 @@ function az_content_preprocess_node(&$variables) {
           }
         }
 
+        // Create sidebar block of recent activity for the same topic.
+        $tids = null;
         if ($type == 'glossary') {
-
-          // Create sidebar of recent activity for this glossary term
+          $tids = $node->id();
+        } else {
+          foreach ($node->field_topics->getValue() as $topic) {
+            $tids[] = $topic['target_id'];
+          };
+        }
+        if (!empty($tids)) {
           $variables['sidebar']['related_content'] = _az_content_build_content_block([
             'id' => 'related-content',
             'status' => NODE_PUBLISHED,
             'title' => 'Related Content',
             'viewMode' => 'teaser_short',
-            'topics' => $node->id(),
+            'exclude' => $node->id(),
+            'topics' => $tids,
             'class' => 'block-sidebar',
             'empty' => 'NO DISPLAY'
           ]);
-
-          if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
-            $variables['sidebar']['tickets'] = _az_content_build_content_block([
-              'id' => 'related-tickets',
-              'title' => 'Tickets',
-              'viewMode' => 'teaser_short',
-              'types' => 'ticket',
-              'pages' => $node->id(),
-              'class' => 'block-sidebar',
-              'empty' => 'NO DISPLAY'
-            ]);
-          }
         }
 
         // Add the Donate block.
         $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-
-        $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+        $variables['sidebar']['block_donate'] =
+          \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
       }
       break;
 
