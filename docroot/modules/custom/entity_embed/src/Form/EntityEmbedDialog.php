@@ -449,7 +449,7 @@ class EntityEmbedDialog extends FormBase {
     );
 
     // James Sorensen - added az data attribute
-    if (!\Drupal::currentUser()->hasPermission('atomizer embed atoms')) {
+    if (\Drupal::currentUser()->hasPermission('atomizer embed atoms')) {
       $form['attributes']['az-data'] = array(
         '#title' => $this->t('Data fields'),
         '#description' => $this->t('Advanced formatting for atomizer only - Ex: zoom=.5'),
