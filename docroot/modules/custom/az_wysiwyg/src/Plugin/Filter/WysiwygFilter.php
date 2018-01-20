@@ -137,8 +137,17 @@ class WysiwygFilter extends FilterBase {
                 }
                 else {
                   $ntext .= $matches[4][$key][0];
-                  \Drupal::logger('my_module')->notice(
-                    'Topic not found: ' . $name . '  Page: ' . \Drupal::service('path.current')->getPath());
+
+                  $request = \Drupal::request();
+                  if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+                    $title = \Drupal::service('title_resolver')->getTitle($request, $route);
+                  } else {
+                    $title = 'Wassup doc';
+                  }
+
+                  $path =  \Drupal::service('path.current')->getPath();
+                  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($path);
+                  \Drupal::logger('my_module')->notice('Topic not found: ' . $name . '  Title: ' . $title . '  Path: ' .  $alias);
                 }
               }
             }
