@@ -443,22 +443,20 @@ class EntityEmbedDialog extends FormBase {
     // James Sorensen - added class name to embedded entity
     $form['attributes']['az-class'] = array(
       '#title' => $this->t('Class(es)'),
-      '#description' => $this->t('Ex: az-clear az-width-medium'),
+      '#description' => $this->t('Ex: az-tiny az-small az-medium az-large az-clear'),
       '#type' => 'textfield',
       '#default_value' => isset($entity_element['az-class']) ? $entity_element['az-class'] : '',
-//    '#default_value' => isset($entity_element['az-class']) ? Html::decodeEntities($entity_element['az-class'] : '',
-//    '#element_validate' => array('::escapeValue'),
     );
 
     // James Sorensen - added az data attribute
-    $form['attributes']['az-data'] = array(
-      '#title' => $this->t('Data fields'),
-      '#description' => $this->t('Advanced formatting for atomizer - can generally be left blank.'),
-      '#type' => 'textfield',
-      '#default_value' => isset($entity_element['az-data']) ? $entity_element['az-data'] : '',
-//    '#default_value' => isset($entity_element['az-data']) ? Html::decodeEntities($entity_element['az-data']) : '',
-//    '#element_validate' => array('::escapeValue'),
-    );
+    if (!\Drupal::currentUser()->hasPermission('atomizer embed atoms')) {
+      $form['attributes']['az-data'] = array(
+        '#title' => $this->t('Data fields'),
+        '#description' => $this->t('Advanced formatting for atomizer only - Ex: zoom=.5'),
+        '#type' => 'textfield',
+        '#default_value' => isset($entity_element['az-data']) ? $entity_element['az-data'] : '',
+      );
+    }
 
     // When Drupal core's filter_align is being used, the text editor may
     // offer the ability to change the alignment.

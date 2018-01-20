@@ -115,6 +115,7 @@ class WysiwygFilter extends FilterBase {
         switch ($type) {
           case 'topic':
           case 'glossary':
+            $topic = null;
             $name = strtolower($matches[4][$key][0]);
             if (!empty($matches[3][$key][0])) {
               if (preg_match('/name=\"*([a-z ]+)\"*/', $matches[3][$key][0], $attributes)) {
@@ -122,8 +123,6 @@ class WysiwygFilter extends FilterBase {
               }
             }
 
-            $topic = null;
-            $name = $matches[4][$key][0];
             if ($deleteMarkup ) {
               $ntext .= $matches[4][$key][0];
             }

@@ -79,7 +79,10 @@ class WysiwygBase {
   static public function extractTerms($text, &$glossary) {
     $topicReg = '/&lt;topic(.*?)&gt;(.*?)&lt;\/topic&gt;/';
 //  $topicReg = '/&lt;([a-z]+) *(.*?)&gt;(.*?)&lt;\/([a-z]+?)&gt;/';
-    // Remove &nbsp; characters that do not have a space before or after them.
+
+    // Replace &nbsp; characters that do not have a space before or after them with a space.
+    // ckeditor likes to leave a lot of these in the text.
+    // This makes matching topics terms more difficult.
     $text = preg_replace('/([^ ])\&nbsp;([^ ])/', '$1 $2', $text);
 
     $hitcount = preg_match_all($topicReg, $text, $matches, PREG_OFFSET_CAPTURE);
