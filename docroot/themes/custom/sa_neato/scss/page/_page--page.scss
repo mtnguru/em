@@ -1,14 +1,4 @@
 // body.user-login
-body.path-group,
-body.page-node-type-element,
-body.page-node-type-news,
-body.page-node-type-atom,
-body.page-node-type-book,
-body.page-node-type-glossary,
-body.page-node-type-ticket,
-body.page-node-type-article,
-body.path-frontpage {
-}
 
 body.entity-node-canonical {
   .block-page-title-block {
@@ -19,6 +9,14 @@ body.entity-node-canonical {
     > div.content-container {
       max-width: $max-width;
       margin: 0 auto;
+    }
+  }
+
+  &.page-node-type-atomizer {
+    #block-sa-neato-content {
+      > div.content-container {
+        max-width: none;
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 body.entity-group-canonical {
 
   main.outer-container {
+    max-width: $max-width;
     @extend %layout-padding;
   }
 
@@ -34,5 +35,11 @@ body.entity-group-canonical {
         width: 70%;
       }
     }
+  }
+}
+
+body.page-node-type-atomizer {
+  main.outer-wrapper {
+    max-width: none;
   }
 }
