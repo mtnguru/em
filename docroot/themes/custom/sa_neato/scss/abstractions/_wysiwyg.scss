@@ -276,6 +276,47 @@ body.cke_editable,
   }
 }
 
+.cke_reset_all * {
+  color: $color-white;
+  background-color: $color-dark-green;
+}
+
+.cke_dialog_body {
+  .cke_dialog_footer,
+  .cke_dialog_title {
+    background-color: darken($color-dark-green, 5%);
+    color: $color-white;
+  }
+  .cke_dialog_contents {
+    background-color: $color-dark-green;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-dark-green;
+      color: $color-white;
+
+    }
+
+    table tbody tr:first-child td {
+      border: 0;
+    }
+
+    label {
+      color: $color-white;
+    }
+  }
+
+  input.cke_dialog_ui_input_text,
+  select.cke_dialog_ui_input_select {
+    color: $color-white;
+    background: lighten($color-dark-green, 15%);
+  }
+
+
+
+
+}
+
 .hljs {
   background-color: #111;
   border-radius: 8px;
