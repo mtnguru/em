@@ -26,7 +26,7 @@ h6 {
 
 h1 {
   color: $color-title;
-  font-size: 220%;
+  font-size: 250%;
   margin: 0 0 .5em;
   line-height: 1;
   a {
@@ -35,24 +35,35 @@ h1 {
 }
 
 h2 {
-  color : tint($color-title, 25%);
-  font-size: 180%;
+  color : $color-title;
+  font-size: 220%;
   a {
-    color : tint($color-title, 25%);
+    color: $color-title;
   }
 }
 
 h3 {
-  color : tint($color-title, 50%);
-  font-size: 140%;
+  color : darken($color-title, 10%);
+  font-size: 190%;
   a {
-    color : tint($color-title, 50%);
+    color: darken($color-title, 10%);
   }
 }
 
 h4 {
-  color : tint($color-title, 75%);
-  font-size: 120%;
+  color: tint($color-title, 20%);
+  font-size: 160%;
+}
+
+h5 {
+  color: tint($color-title, 20%);
+  display: inline-block;
+  font-size: 160%;
+}
+
+h6 {
+  color: tint($color-title, 30%);
+  font-size: 130%;
 }
 
 p {

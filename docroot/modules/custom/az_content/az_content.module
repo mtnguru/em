@@ -430,9 +430,11 @@ function az_content_preprocess_node(&$variables) {
         if ($type == 'glossary') {
           $tids = $node->id();
         } else {
-          foreach ($node->field_topics->getValue() as $topic) {
-            $tids[] = $topic['target_id'];
-          };
+          if ($node->hasField('field_topics')) {
+            foreach ($node->field_topics->getValue() as $topic) {
+              $tids[] = $topic['target_id'];
+            };
+          }
         }
         if (!empty($tids)) {
           $variables['sidebar']['related_content'] = _az_content_build_content_block([
