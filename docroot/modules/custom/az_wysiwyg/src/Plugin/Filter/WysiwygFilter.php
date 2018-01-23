@@ -77,10 +77,12 @@ class WysiwygFilter extends FilterBase {
   }
 
   private function processText($text, &$glossary, &$footnotes) {
-    $view_mode = &drupal_static('az_view_mode', null);
-    if (!isset($view_mode)) return $text;
+    $az_wysiwyg = &drupal_static('az_wysiwyg', null);
+    if (!isset($az_wysiwyg)) return $text;
+    $view_mode = $az_wysiwyg['view_mode'];
+    $node = $az_wysiwyg['node'];
     $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;
-    $view_mode = null;
+    $az_wysiwyg = null;
 
     // Replace with a space any &nbsp; characters do not have a space before or after them -  for&nbsp;example -> for example
     // ckeditor likes to leave these everywhere.
@@ -131,27 +133,28 @@ class WysiwygFilter extends FilterBase {
                 $topic = $glossary[$name];
               }
               else {
-                if (!empty($glossary[substr($name, 0, -1)])) {
-                  $topic = $glossary[substr($name, 0, -1)];
+                $name =substr($name, 0, -1);   // Strup off the last character - 's'?
+                if (!empty($glossary[$name])) {
+                  $topic = $glossary[$name];
                 }
                 else {
                   $ntext .= $matches[4][$key][0];
 
+                  // Log that we didn't find this term.
                   $request = \Drupal::request();
                   if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
                     $title = \Drupal::service('title_resolver')->getTitle($request, $route);
                   } else {
                     $title = 'Wassup doc';
                   }
-
-                  $path =  \Drupal::service('path.current')->getPath();
-                  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($path);
+                  $alias = \Drupal::service('path.alias_manager')->getAliasByPath(\Drupal::service('path.current')->getPath());
                   \Drupal::logger('my_module')->notice('Topic not found: ' . $name . '  Title: ' . $title . '  Path: ' .  $alias);
                 }
               }
             }
 
             if ($topic) {
+              $glossary[$name]->in_text = true;
               $tip = $this->sanitizeTip($topic->tooltip);
               $ntext .= '<a href="' . $topic->url . '" ' .
                 'class="taxonomy-tooltip-link az-' . $type . '" ' .
@@ -195,6 +198,8 @@ class WysiwygFilter extends FilterBase {
         }
       }
     }
+
+    WysiwygBase::addTopicsToNode($node, $glossary, true);
 
     return ($ntext) ? $ntext . substr($text, $c) : $text;
   }

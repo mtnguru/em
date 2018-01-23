@@ -57,9 +57,10 @@ class WysiwygBase {
    * @param $node
    * @param $matched
    */
-  static public function addTopicsToNode(&$node, $topics) {
+  static public function addTopicsToNode(&$node, $topics, $saveNode = false) {
     if ($node->hasField('field_topics')) {
       $nids = $node->field_topics->getValue();
+      $nfound = 0;
       foreach ($topics as $name => $topic) {
         if (isset($topic->in_text)) {
           $found = false;
@@ -69,13 +70,24 @@ class WysiwygBase {
             }
           }
           if (!$found) {
+            $nfound++;
             $node->field_topics->appendItem($topic->nid);
           }
         }
       }
+
+      if ($saveNode && $nfound) {
+        $node->save();
+      }
     }
   }
 
+  /**
+   * Find the topics in a block of text and mark ones that are found.
+   *
+   * @param $text
+   * @param $glossary
+   */
   static public function extractTerms($text, &$glossary) {
     $topicReg = '/&lt;topic(.*?)&gt;(.*?)&lt;\/topic&gt;/';
 //  $topicReg = '/&lt;([a-z]+) *(.*?)&gt;(.*?)&lt;\/([a-z]+?)&gt;/';
@@ -113,7 +125,6 @@ class WysiwygBase {
         \Drupal::logger('my_module')->notice(
           'Topic not found: ' . $name . '  Page: ' . \Drupal::service('path.current')->getPath());
       }
-
     }
   }
 }

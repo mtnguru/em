@@ -349,8 +349,13 @@ function az_content_preprocess_node(&$variables) {
   // Add marker if content is New, Updated or has already been read.
   $node = $variables['node'];
   $type = $node->getType();
-  $view_mode = &drupal_static('az_view_mode', null);  // Save statically - used by WysiwygFilter
   $view_mode = $variables['view_mode'];
+  
+  $az_wysiwyg = &drupal_static('az_wysiwyg', []);
+  $az_wysiwyg = [  // The wysiwyug filter needs this information.
+    'node' => $node,
+    'view_mode' => $view_mode
+  ];
 
   $variables['bundle_name'] = $node->type->entity->label();
 
@@ -474,6 +479,7 @@ function az_content_preprocess_node(&$variables) {
         $activity = _az_content_build_content_block([
           'id' => 'recent-activity',
           'tab' => 'Activity',
+          'types' => ['article', 'event', 'book', 'news'],
           'title' => 'Recent Activity',
           'status' => NODE_PUBLISHED,
           'empty' => 'No activity for this site',

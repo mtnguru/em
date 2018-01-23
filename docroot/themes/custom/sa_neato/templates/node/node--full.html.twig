@@ -123,26 +123,35 @@
 
     <div class="body-container">
 
-      {# CT - glossary #}
-      {% if content.field_tooltip is not empty %}
-        <div class="field-tooltip">
-          {{ content.field_tooltip }}
-        </div>
-      {% endif %}
+      <div class="body-header">
+        {# CT - glossary #}
+        {% if content.field_tooltip is not empty %}
+          <div class="field-tooltip">
+            {{ content.field_tooltip }}
+          </div>
+        {% endif %}
 
-      {# CT - news #}
-      {% if content.field_publication is not empty %}
-        <div class="publication">
-          {{ content.field_publication }}
-        </div>
-      {% endif %}
+        {# CT - glossary #}
+        {% if content.field_links is not empty %}
+          <div class="field-links">
+            {{ content.field_links }}
+          </div>
+        {% endif %}
 
-      {# CT - news #}
-      {% if content.field_article_link is not empty %}
-        <div class="article-link">
-          {{ content.field_article_link }}
-        </div>
-      {% endif %}
+        {# CT - news #}
+        {% if content.field_publication is not empty %}
+          <div class="publication">
+            {{ content.field_publication }}
+          </div>
+        {% endif %}
+
+        {# CT - news #}
+        {% if content.field_article_link is not empty %}
+          <div class="article-link">
+            {{ content.field_article_link }}
+          </div>
+        {% endif %}
+      </div>
 
       {% if content.field_media is not empty %}
         <div class="media">
