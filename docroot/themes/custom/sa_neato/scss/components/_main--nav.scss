@@ -204,6 +204,7 @@
             @include transition-3d($timing: 500ms);
             position: absolute;
             top: 45px;
+            right: -50px;
             bottom: auto;
             width: 212px;
             background-color: $color-dark-green;
@@ -213,15 +214,15 @@
             z-index: 20;
 
             @include media(max-width $bp580max) {
-              right: -400px;
+              top: -100px;
             }
 
             @include media($bp960-1280) {
-              right: -800px;
+              top: -100px;
             }
 
             @include media($bp1920) {
-              right: -1500px;
+              top: -100px;
             }
           }
           .label {
@@ -230,7 +231,7 @@
           }
           &:hover {
             .popup {
-              right: -50px;
+              top: 45px;
             }
           }
         }

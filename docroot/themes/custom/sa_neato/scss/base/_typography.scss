@@ -27,7 +27,7 @@ h6 {
 h1 {
   color: $color-title;
   font-size: 250%;
-  margin: 0 0 .5em;
+  margin: .25em 0 .5em;
   line-height: 1;
   a {
     color: $color-title;
@@ -56,14 +56,14 @@ h4 {
 }
 
 h5 {
-  color: tint($color-title, 20%);
-  display: inline-block;
-  font-size: 160%;
+  color: $color-orange;
+  clear: both;
+  font-size: 130%;
 }
 
 h6 {
-  color: tint($color-title, 30%);
-  font-size: 130%;
+  color: tint($color-orange, 30%);
+  font-size: 100%;
 }
 
 p {

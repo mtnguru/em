@@ -99,10 +99,14 @@ body.cke_editable,
 .cke_editable {
 
   .cke_widget_drupalentity {
+    article {
+      background-color: darken($color-dark-blue, 10%);
+      margin-bottom: 15px;
+    }
 //  clear: both;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h5 {
     clear: both;
   }
 

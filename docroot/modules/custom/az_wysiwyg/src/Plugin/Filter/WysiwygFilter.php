@@ -133,8 +133,9 @@ class WysiwygFilter extends FilterBase {
                 $topic = $glossary[$name];
               }
               else {
-                $name =substr($name, 0, -1);   // Strup off the last character - 's'?
-                if (!empty($glossary[$name])) {
+                $sname =substr($name, 0, -1);   // Strip off the last character - 's'?
+                if (!empty($glossary[$sname])) {
+                  $name = $sname;
                   $topic = $glossary[$name];
                 }
                 else {
