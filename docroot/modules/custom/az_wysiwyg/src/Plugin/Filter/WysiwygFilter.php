@@ -77,16 +77,19 @@ class WysiwygFilter extends FilterBase {
   }
 
   private function processText($text, &$glossary, &$footnotes) {
+
+    // If az_wysiwyg is null then leave text unchanged.  az_wysiwyg is set in the group and node preprocess functions.
     $az_wysiwyg = &drupal_static('az_wysiwyg', null);
     if (!isset($az_wysiwyg)) return $text;
-    $view_mode = $az_wysiwyg['view_mode'];
-    $node = $az_wysiwyg['node'];
-    $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;
     $az_wysiwyg = null;
 
-    // Replace with a space any &nbsp; characters do not have a space before or after them -  for&nbsp;example -> for example
-    // ckeditor likes to leave these everywhere.
-    // @TODO - there are other anomolies with &nbsp; this code could also address.
+    $view_mode = $az_wysiwyg['view_mode'];
+    $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;
+
+    // Replace with a space any &nbsp; characters do not have a space before or after them.
+    // 'For&nbsp;example' => 'for example'
+    // Ckeditor likes to leave these everywhere.
+    // @TODO - there are other anomolies with &nbsp; this code should also address.
     $text = preg_replace('/([^ ])\&nbsp;([^ ])/', '$1 $2', $text);
 
     // Regex finds occurences of <.*>.*<.*>
@@ -200,7 +203,9 @@ class WysiwygFilter extends FilterBase {
       }
     }
 
-    WysiwygBase::addTopicsToNode($node, $glossary, true);
+    if (isset($az_wysiwyg['node'])) {
+      WysiwygBase::addTopicsToNode($az_wysiwyg['node'], $glossary, true);
+    }
 
     return ($ntext) ? $ntext . substr($text, $c) : $text;
   }

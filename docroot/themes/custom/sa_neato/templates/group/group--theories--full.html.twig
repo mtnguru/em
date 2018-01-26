@@ -43,6 +43,11 @@
 
     <div class='sidebar-left'>
       {{ block_booknavigation }}
+      {% if community_status is not empty %}
+        <div class="community-status">
+          {{ community_status }}
+        </div>
+      {% endif %}
       {{ block_donate }}
       {{ block_groupoperations }}
       {% if view_group_members %}

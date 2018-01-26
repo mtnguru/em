@@ -9,6 +9,10 @@ body.entity-group-canonical {
     display: none;
   }
 
+  .community-status {
+    margin-bottom: 20px;
+  }
+
   #main-content-group {
     @include clearfix;
 

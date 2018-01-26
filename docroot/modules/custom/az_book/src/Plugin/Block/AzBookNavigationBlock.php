@@ -269,6 +269,18 @@ class AzBookNavigationBlock extends BookNavigationBlock {
               ],
             ];
           }
+
+/*        $build['#group_links']['sam_status'] = [
+            '#type' => 'container',
+            'link' => [
+              '#type' => 'link',
+              '#title' => t('Documentation Status'),
+              '#attributes' => ['title' => t('Current state of the documentation on SAM.')],
+              '#url' => Url::fromUri('base:atomizer/atom-builder', [
+                'absolute' => TRUE,
+              ]),
+            ],
+          ]; */
         }
       }
 
