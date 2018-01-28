@@ -33,11 +33,11 @@ body.page-node-type-page {
 
       @include media($bp960) {
         position: fixed;
-        top: rem(125);
+        top: 125px;
         @include span-columns(9);
         max-height: calc(100% - 125px);
-        padding-right: rem(14);
-        padding-bottom: rem(45);
+        padding-right: 14px;
+        padding-bottom: 45px;
         overflow: auto;
       } // $bp960
     } // .content-sidebar-fixed
@@ -63,13 +63,13 @@ body.page-node-type-page {
 
         @include media(max-width $bp580max) {
           display: inherit;
-          @include icon(rem(18), rem(11), 'icon-arrow-white.svg');
+          @include icon(18px, 11px, 'icon-arrow-white.svg');
           width: 100%;
           border: 0;
-          padding: rem(16) rem(58) rem(15) rem($content-padding-mobile);
+          padding: 16px 58px 15px rem($content-padding-mobile);
           background-color: $color-blue;
-          font-size: rem(16);
-          line-height: rem(22);
+          font-size: 16px;
+          line-height: 22px;
           font-weight: 400;
           text-align: left;
           @include outline($color-white);
@@ -113,13 +113,13 @@ body.page-node-type-page {
       } // &.leftnav-is-open
 
       li {
-        line-height: rem(22);
+        line-height: 22px;
       } // li
 
       a {
         display: block;
-        padding-top: rem(10);
-        padding-bottom: rem(10);
+        padding-top: 10px;
+        padding-bottom: 10px;
         font-weight: bold;
         color: lighten($color-title, 20%);
         @extend %text-shadow;
@@ -150,7 +150,7 @@ body.page-node-type-page {
       } // $bp580max
 
       @include media($bp960) {
-        padding-top: rem(56);
+        padding-top: 56px;
       } // $bp960
 ;    } // .paragraph--type--additional-links
   } // #content-sidebar-container
@@ -161,7 +161,7 @@ body.page-node-type-page {
 //    @extend %layout-padding-desktop;
 
       @include media($bp960) {
-//      padding-top: rem(60);
+//      padding-top: 60px;
       } // $bp960
     } // .content-container
   }
@@ -170,27 +170,27 @@ body.page-node-type-page {
 //  @extend %layout-padding-mobile-tablet;
 
     @include media($bp320only) {
-      padding-top: rem(34);
-      padding-bottom: rem(60);
+      padding-top: 34px;
+      padding-bottom: 60px;
     } // $bp320only
 
     @include media($bp580only) {
-      padding-top: rem(54);
-      padding-bottom: rem(58);
+      padding-top: 54px;
+      padding-bottom: 58px;
     } // $bp580only
 
     @include media($bp960) {
       @include span-columns(26);
       @include shift(1);
-      margin-top: rem(-9);
+      margin-top: -9px;
     } // $bp960
 
     @include media($bp960only) {
-      padding-bottom: rem(70);
+      padding-bottom: 70px;
     } // $bp960only
 
     @include media($bp1280) {
-      padding-bottom: rem(80);
+      padding-bottom: 80px;
     } // $bp1280
 
     h3.field--name-field-section {
@@ -210,9 +210,9 @@ body.page-node-type-page {
         display: inline-block;
         width: auto;
         height: auto;
-        margin-bottom: rem(30);
-        padding: rem(16) rem(20);
-        line-height: rem(28);
+        margin-bottom: 30px;
+        padding: 16px 20px;
+        line-height: 28px;
         white-space: normal;
       } // $bp960
 
@@ -230,41 +230,41 @@ body.page-node-type-page {
         letter-spacing: -0.01em;
 
         @include media($bp320only) {
-          margin-bottom: rem(22);
-          font-size: rem(30);
-          line-height: rem(34);
+          margin-bottom: 22px;
+          font-size: 30px;
+          line-height: 34px;
         } // $bp320only
 
         @include media($bp580only) {
-          margin-bottom: rem(52);
-          font-size: rem(36);
-          line-height: rem(40);
+          margin-bottom: 52px;
+          font-size: 36px;
+          line-height: 40px;
         } // $bp580only
 
         @include media($bp960) {
-          margin-bottom: rem(74);
-          font-size: rem(48);
-          line-height: rem(52);
+          margin-bottom: 74px;
+          font-size: 48px;
+          line-height: 52px;
         } // $bp960
       } // h2.field--name-field-title, h2.field__label
     } // .field--long-form-section, .paragraph--type--long-form-section,
 
     .field--long-form-section {
       @include media($bp580) {
-        min-height: rem(75);
+        min-height: 75px;
       } // $bp580
 
       &:not(:first-child) {
         @include media($bp320only) {
-          margin-top: rem(16);
+          margin-top: 16px;
         } // $bp320only
 
         @include media($bp580only) {
-          margin-top: rem(46);
+          margin-top: 46px;
         } // $bp580only
 
         @include media($bp960) {
-          margin-top: rem(68);
+          margin-top: 68px;
         } // $bp960
       } // &:not(:first-child)
     } // .field--long-form-section
@@ -273,20 +273,20 @@ body.page-node-type-page {
 
       > .field__item {
         @include media($bp580) {
-          min-height: rem(70);
+          min-height: 70px;
         } // $bp580
 
         &:not(:first-child) {
           @include media($bp320only) {
-            margin-top: rem(12);
+            margin-top: 12px;
           } // $bp320only
 
           @include media($bp580-1280) {
-            margin-top: rem(18);
+            margin-top: 18px;
           } // $bp580-1280
 
           @include media($bp1280) {
-            margin-top: rem(24);
+            margin-top: 24px;
           } // $bp1280
         } // &:not(:first-child)
       } // > .field__item
@@ -309,26 +309,26 @@ body.page-node-type-page {
 //                           $desktop-margin-top: rem(5));
 
         @include media(max-width $bp580max) {
-          margin-left: rem(16);
-          font-size: rem(16);
-          line-height: rem(20);
+          margin-left: 16px;
+          font-size: 16px;
+          line-height: 20px;
         } // $bp580max
 
         @include media($bp320only) {
-          min-height: rem(50);
+          min-height: 50px;
         } // $bp320only
 
         @include media($bp580only) {
           @include span-columns(7);
-          margin-right: rem(14);
+          margin-right: 14px;
         } // $bp580only
 
         @include media($bp960) {
           @include span-columns(5 of 25);
           margin-right: 0;
-          padding-left: rem(19);
-          font-size: rem(18);
-          line-height: rem(24);
+          padding-left: 19px;
+          font-size: 18px;
+          line-height: 24px;
         } // $bp960
       } // h3.field--name-field-title
 
@@ -336,15 +336,15 @@ body.page-node-type-page {
         letter-spacing: -0.01em;
 
         @include media($bp320only) {
-          margin-top: rem(22);
-          font-size: rem(14);
-          line-height: rem(24);
+          margin-top: 22px;
+          font-size: 14px;
+          line-height: 24px;
         } // $bp320only
 
         @include media($bp580) {
-          margin-top: rem(-5);
-          font-size: rem(16);
-          line-height: rem(28);
+          margin-top: -5px;
+          font-size: 16px;
+          line-height: 28px;
         } // $bp580
 
         @include media($bp960) {
@@ -366,7 +366,7 @@ body.page-node-type-page {
           margin-bottom: 0;
 
           &:not(:first-child) {
-            margin-top: rem(16);
+            margin-top: 16px;
           } // &:not(:first-child)
 
           em {
@@ -377,29 +377,29 @@ body.page-node-type-page {
         h2,
         h3,
         h4 {
-          font-size: rem(24);
+          font-size: 24px;
         } // h2, h3, h4
 
         h5 {
-          font-size: rem(18);
+          font-size: 18px;
         } // h5
 
         p {
           margin-bottom: 0;
 
           &:not(:first-child) {
-            margin-top: rem(8);
+            margin-top: 8px;
           } // &:not(:first-child)
         } // p
 
         table {
 
           &:not(:first-child) {
-            margin-top: rem(20);
+            margin-top: 20px;
           } // &:not(:first-child)
 
           + * {
-            margin-top: rem(30) !important;
+            margin-top: 30px !important;
           } // + *
         } // table
       } // .field--name-field-body
@@ -423,32 +423,32 @@ body.page-node-type-page {
 
       &:not(:first-child) {
         @include media($bp320only) {
-          margin-top: rem(16);
+          margin-top: 16px;
         } // $bp320only
 
         @include media($bp580only) {
-          margin-top: rem(26);
+          margin-top: 26px;
         } // $bp580only
 
         @include media($bp960) {
-          margin-top: rem(32);
+          margin-top: 32px;
         } // $bp960
       } // &:not(:first-child)
     } // .leftnav-section:not(#additional-links)
 
     blockquote {
       @include media($bp320only) {
-        @include margin(rem(20) 0);
+        @include margin(20px 0);
       } // $bp320only
 
       @include media($bp580) {
-        @include margin(rem(40) 0);
+        @include margin(40px 0);
       } // $bp580
 
       @include media($bp960) {
         position: relative;
-        margin-left: rem(-30);
-        padding-left: rem(30);
+        margin-left: -30px;
+        padding-left: 30px;
       } // $bp960
 
       p {

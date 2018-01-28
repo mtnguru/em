@@ -141,11 +141,11 @@ function az_user_preprocess_menu(&$variables) {
       ->load(\Drupal::currentUser()->id());
     if ($user) {
       if ($user->field_picture->isEmpty()) {
-        $variables['user_name'] = $user->name;
+        $variables['user_name'] = $user->name[0]->value;
       }
       else {
-        $picture = $user->field_picture->getValue();
-        $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
+        $fid = $user->field_picture[0]->target_id;
+        $file = \Drupal\file\Entity\File::load($fid);
         $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')->buildUrl($file->getFileUri());
       }
     }

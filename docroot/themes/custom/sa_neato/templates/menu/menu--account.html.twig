@@ -30,9 +30,12 @@
     <div id="account-menu" class="logged-in">
       {% if (user_picture_url) %}
         <img src="{{ user_picture_url }}" />
-        {{ menus.menu_links(items, attributes, 0) }}
       {% else %}
+        <span class="user-name">
+          {{ user_name }}
+        </span>
       {% endif %}
+      {{ menus.menu_links(items, attributes, 0) }}
     </div>
   {% else %}
     <div id="account-menu" class="do-login">

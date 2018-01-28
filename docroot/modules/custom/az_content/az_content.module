@@ -502,7 +502,15 @@ function az_content_preprocess_node(&$variables) {
           $variables['user_id'] = $user->id();
           $variables['user_name'] = $user->name->value;
           $picture = $user->field_picture->getValue();
-          $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
+          if ($user->field_picture->isEmpty()) {
+            $field = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_picture');
+            $default_image = $field->getSetting('default_image');
+            $file = \Drupal::entityManager()->loadEntityByUuid('file', $default_image['uuid']);
+          } else {
+            $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
+          }
+
+
           $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')->buildUrl($file->getFileUri());
 
           $variables['view_my_groups'] = views_embed_view('az_my_groups', 'user_block');

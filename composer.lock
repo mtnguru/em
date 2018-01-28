@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ae8a60c56b6eb230db3c454bb184a419",
-    "content-hash": "88775fdfe77f96dee6f1ab6ffd5bb1b8",
+    "hash": "9d4560c5d9000385f9a364d16c5bccc7",
+    "content-hash": "28afebfd0222e93b15116de2d312bf0a",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -293,7 +293,7 @@
             "version": "v2.3.4",
             "source": {
                 "type": "git",
-                "url": "git@github.com:fengyuanchen/cropper.git",
+                "url": "https://github.com/fengyuanchen/cropper.git",
                 "reference": "30c58b29ee21010e17e58ebab165fbd84285c685"
             },
             "dist": {
@@ -312,7 +312,7 @@
             "version": "v5.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/enyo/dropzone.git",
+                "url": "git@github.com:enyo/dropzone.git",
                 "reference": "7d0792d1346d83a8b0c0d2919121bdd2b8e7fee4"
             },
             "dist": {
@@ -1769,6 +1769,48 @@
                 "source": "http://cgit.drupalcode.org/admin_toolbar",
                 "issues": "https://www.drupal.org/project/issues/admin_toolbar"
             }
+        },
+        {
+            "name": "drupal/autosave_form",
+            "version": "dev-1.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/autosave_form",
+                "reference": "f5fc7583a8ddf7034fed9a30e9e3b6a85e1b8ae6"
+            },
+            "require": {
+                "drupal/core": "^8.3"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.x-dev",
+                    "datestamp": "1508235245",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "hchonov",
+                    "homepage": "https://www.drupal.org/user/2901211"
+                }
+            ],
+            "description": "Adds autosave feature on forms.",
+            "homepage": "https://www.drupal.org/project/autosave_form",
+            "support": {
+                "source": "http://cgit.drupalcode.org/autosave_form"
+            },
+            "time": "2017-10-24 13:58:54"
         },
         {
             "name": "drupal/better_exposed_filters",
@@ -4381,76 +4423,6 @@
             "time": "2017-03-15 17:04:08"
         },
         {
-            "name": "drupal/lightning",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupal.org/project/lightning",
-                "reference": "8.x-3.000"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/lightning-8.x-3.000-core.zip",
-                "reference": "8.x-3.000",
-                "shasum": "ccd934604c97249171d27d5a4cce725766b10751"
-            },
-            "require": {
-                "drupal/core": "~8.0"
-            },
-            "type": "drupal-profile",
-            "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev"
-                },
-                "drupal": {
-                    "version": "8.x-3.000",
-                    "datestamp": "1514401384",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Bcwald",
-                    "homepage": "https://www.drupal.org/user/215794"
-                },
-                {
-                    "name": "Devin Carlson",
-                    "homepage": "https://www.drupal.org/user/290182"
-                },
-                {
-                    "name": "balsama",
-                    "homepage": "https://www.drupal.org/user/223087"
-                },
-                {
-                    "name": "brantwynn",
-                    "homepage": "https://www.drupal.org/user/252788"
-                },
-                {
-                    "name": "phenaproxima",
-                    "homepage": "https://www.drupal.org/user/205645"
-                },
-                {
-                    "name": "samuel.mortenson",
-                    "homepage": "https://www.drupal.org/user/2582268"
-                },
-                {
-                    "name": "tim.plunkett",
-                    "homepage": "https://www.drupal.org/user/241634"
-                }
-            ],
-            "homepage": "https://www.drupal.org/project/lightning",
-            "support": {
-                "source": "http://cgit.drupalcode.org/lightning"
-            }
-        },
-        {
             "name": "drupal/mailsystem",
             "version": "4.1.0",
             "source": {
@@ -5995,7 +5967,8 @@
             "homepage": "https://www.drupal.org/project/special_menu_items",
             "support": {
                 "source": "http://cgit.drupalcode.org/special_menu_items"
-            }
+            },
+            "time": "2016-02-14 20:21:10"
         },
         {
             "name": "drupal/swiftmailer",
@@ -6371,7 +6344,8 @@
             "homepage": "https://www.drupal.org/project/wbm2cm",
             "support": {
                 "source": "http://cgit.drupalcode.org/wbm2cm"
-            }
+            },
+            "time": "2017-12-04 17:05:27"
         },
         {
             "name": "drupal/workbench_moderation",
@@ -11096,6 +11070,76 @@
             "time": "2017-09-13 19:54:23"
         },
         {
+            "name": "drupal/lightning",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/lightning",
+                "reference": "8.x-3.000"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/lightning-8.x-3.000-core.zip",
+                "reference": "8.x-3.000",
+                "shasum": "ccd934604c97249171d27d5a4cce725766b10751"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-profile",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.x": "3.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-3.000",
+                    "datestamp": "1514401384",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Bcwald",
+                    "homepage": "https://www.drupal.org/user/215794"
+                },
+                {
+                    "name": "Devin Carlson",
+                    "homepage": "https://www.drupal.org/user/290182"
+                },
+                {
+                    "name": "balsama",
+                    "homepage": "https://www.drupal.org/user/223087"
+                },
+                {
+                    "name": "brantwynn",
+                    "homepage": "https://www.drupal.org/user/252788"
+                },
+                {
+                    "name": "phenaproxima",
+                    "homepage": "https://www.drupal.org/user/205645"
+                },
+                {
+                    "name": "samuel.mortenson",
+                    "homepage": "https://www.drupal.org/user/2582268"
+                },
+                {
+                    "name": "tim.plunkett",
+                    "homepage": "https://www.drupal.org/user/241634"
+                }
+            ],
+            "homepage": "https://www.drupal.org/project/lightning",
+            "support": {
+                "source": "http://cgit.drupalcode.org/lightning"
+            }
+        },
+        {
             "name": "fabpot/goutte",
             "version": "v3.2.2",
             "source": {
@@ -12565,7 +12609,8 @@
         "drupal/examples": 20,
         "drupal/calendar": 20,
         "drupal/captcha": 20,
-        "drupal/swiftmailer": 20
+        "drupal/swiftmailer": 20,
+        "drupal/autosave_form": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

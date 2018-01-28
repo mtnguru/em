@@ -29,8 +29,6 @@
 
   position: relative;
   line-height: 1;
-
-//background-color: $color-black;
   border-bottom: 1px solid $navigation-background;
 
   text-align: center;
@@ -62,10 +60,10 @@
       width: 230px;
 
       @include media($bp320only) {
-        margin-left: 20px;
+//      margin-left: 20px;
       }
       @include media($bp580only) {
-        margin-left: 30px;
+//      margin-left: 30px;
       }
       @include media($bp960) {
         margin-left: 30px;
@@ -273,6 +271,12 @@
               height: 40px;
               border-radius: 25%;
               box-shadow: 0px 0px 2px 2px $navigation-background;
+            }
+
+            .user-name {
+              line-height: 2.3;
+              color: $color-user;
+              @extend %text-shadow;
             }
 
             .menu {

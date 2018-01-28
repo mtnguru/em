@@ -22,7 +22,15 @@
 .author-container {
   margin-bottom: 1em;
 
-  .image,
+  > .image {
+    display: inline-block;
+    width: 100px;
+
+    img {
+      width: 100%;
+    }
+  }
+
   .author-picture {
     display: inline-block;
   }
