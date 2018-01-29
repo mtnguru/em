@@ -69,6 +69,18 @@ article.az-page {
     border-bottom: 1px solid $base-separator-color;
   }
 
+  .state {
+    color: black;
+    padding: 2px 6px;
+    border-radius: 5px;
+
+    &.published    { background-color: $color-published; }
+    &.unpublished  { background-color: $color-unpublished; }
+    &.needs-review { background-color: $color-needs-review; }
+    &.draft        { background-color: $color-draft; }
+    &.placeholder  { background-color: $color-placeholder; }
+  }
+
   article {
 
     .field--name-title {

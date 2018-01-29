@@ -75,6 +75,16 @@
 */
 #}
 
+{% if moderation_state|length == 0 %}
+  {% if status %}
+    {% set state = 'published' %}
+  {% else %}
+    {% set state = 'draft' %}
+  {% endif %}
+{% else %}
+  {% set state = moderation_state %}
+{% endif %}
+
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ display_mode }} {{ view_mode }} az-page {{ 'type-' ~ node.bundle }}"{{ attributes }}>
 
   <div class='sidebar-left'>
@@ -102,6 +112,9 @@
         <h2 class="title">{{ label }}</h2>
 
         <div class="information">
+          {% if state != 'published' %}
+            <span class="state {{ state|replace('_', '-') }}">{{ state|capitalize|replace('_', ' ') }}</span> -
+          {% endif %}
           <span class="az-fa-{{ node.bundle }}">
             {{ bundle_name }} -
           </span>
