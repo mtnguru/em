@@ -81,7 +81,6 @@ class WysiwygFilter extends FilterBase {
     // If az_wysiwyg is null then leave text unchanged.  az_wysiwyg is set in the group and node preprocess functions.
     $az_wysiwyg = &drupal_static('az_wysiwyg', null);
     if (!isset($az_wysiwyg)) return $text;
-    $az_wysiwyg = null;
 
     $view_mode = $az_wysiwyg['view_mode'];
     $deleteMarkup = (!isset($view_mode) || ($view_mode != 'main_content' && $view_mode != 'full')) ? true : false;

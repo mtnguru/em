@@ -242,6 +242,22 @@ class AzBookNavigationBlock extends BookNavigationBlock {
 
         // If this is the Structured Atom model add in the atomizer links
         if ($group->label() == 'Structured Atom Model') {
+
+          // Add link to the Dynamic Periodic Table
+          $build['#group_links']['periodic_table'] = [
+            '#type' => 'container',
+            'link' => [
+              '#type' => 'link',
+              '#title' => t('Dynamic Periodic Table'),
+              '#attributes' => [
+                'title' => t('Dynamic periodic table that let\'s you explore properties of the elements.'),
+                'target' => '_blank',
+              ],
+              '#url' => Url::fromUri('https://ptable.com/'),
+            ],
+          ];
+
+          // Add link to the Atom Viewer
           if (\Drupal::currentUser()->hasPermission('atomizer display atom viewer')) {
             $build['#group_links']['atom_viewer'] = [
               '#type' => 'container',
@@ -256,31 +272,22 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             ];
           }
 
+          // Add link to the Atom Builder
           if (\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
             $build['#group_links']['atom_builder'] = [
               '#type' => 'container',
               'link' => [
                 '#type' => 'link',
                 '#title' => t('Atom Builder'),
-                '#attributes' => ['title' => t('Interactive program to build atoms according to SAM.')],
+                '#attributes' => [
+                  'title' => t('Interactive program to build atoms according to SAM.'),
+                ],
                 '#url' => Url::fromUri('base:atomizer/atom-builder', [
                   'absolute' => TRUE,
                 ]),
               ],
             ];
           }
-
-/*        $build['#group_links']['sam_status'] = [
-            '#type' => 'container',
-            'link' => [
-              '#type' => 'link',
-              '#title' => t('Documentation Status'),
-              '#attributes' => ['title' => t('Current state of the documentation on SAM.')],
-              '#url' => Url::fromUri('base:atomizer/atom-builder', [
-                'absolute' => TRUE,
-              ]),
-            ],
-          ]; */
         }
       }
 

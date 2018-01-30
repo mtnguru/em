@@ -40,6 +40,16 @@ function az_content_theme() {
  * Implements hook_form_alter().
  */
 function az_content_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+/*if ($form['#form_id'] == 'entity_embed_dialog') {
+    $form['shitty'] = [
+      '#type' => 'container',
+      'checkbox' => [
+        '#type' => 'checkbox',
+        '#title' => t('hey james dude'),
+        '#default_value' => false,
+      ],
+    ];
+  } */
   return;
 }
 
