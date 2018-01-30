@@ -414,14 +414,6 @@ function az_content_preprocess_node(&$variables) {
           ]);
         }
 
-        // If field_contribute has content - add contribute block
-        if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
-          $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
-          $variables['sidebar']['block_contribute'] = \Drupal::entityTypeManager()
-            ->getViewBuilder('block')
-            ->view($block_entity);
-        }
-
         if (in_array($type, ['article', 'news', 'book'])) {
 
           // Create book navigation block
@@ -430,14 +422,22 @@ function az_content_preprocess_node(&$variables) {
             ->getViewBuilder('block')
             ->view($block_entity);
 
+        }
 
-          // If field_display_image_map has a value then add the map views map block.
-          if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
-            $block_entity = Drupal\block\Entity\Block::load('views_block__az_media_block_map_usage');
-            $variables['sidebar']['block_views_image_map'] = \Drupal::entityTypeManager()
-              ->getViewBuilder('block')
-              ->view($block_entity);
-          }
+        // If field_contribute has content - add contribute block
+        if ($node->hasField('field_contribute') && !$node->field_contribute->isEmpty()) {
+          $block_entity = Drupal\block\Entity\Block::load('azcontributeblock');
+          $variables['sidebar']['block_contribute'] = \Drupal::entityTypeManager()
+            ->getViewBuilder('block')
+            ->view($block_entity);
+        }
+
+        // If field_display_image_map has a value then add the map views map block.
+        if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
+          $block_entity = Drupal\block\Entity\Block::load('views_block__az_media_block_map_usage');
+          $variables['sidebar']['block_views_image_map'] = \Drupal::entityTypeManager()
+            ->getViewBuilder('block')
+            ->view($block_entity);
         }
 
         // Create sidebar block of recent activity for the same topic.
