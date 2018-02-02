@@ -1,0 +1,35 @@
+body.az-sam {
+
+  .field--name-field-short-description {
+    table {
+      border-color: $base-separator-color;
+      border-bottom-width: 3px;
+      th {
+        background-color: $table-header-background;
+      }
+
+      td:nth-child(2),
+      td:nth-child(3) {
+        vertical-align: top;
+
+      }
+
+      th {
+        padding: 15px 10px;
+        border-top: 1px solid $base-separator-color;
+        border-bottom: 0;
+      }
+
+      td {
+        padding: 15px;
+
+        ul {
+          margin: 0 0 0 20px;
+          padding: 0;
+        }
+      }
+
+
+    }
+  }
+}

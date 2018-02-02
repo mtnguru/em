@@ -75,16 +75,6 @@
 */
 #}
 
-{% if moderation_state|length == 0 %}
-  {% if status %}
-    {% set state = 'published' %}
-  {% else %}
-    {% set state = 'draft' %}
-  {% endif %}
-{% else %}
-  {% set state = moderation_state %}
-{% endif %}
-
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
 
   {% if group_label %}
@@ -105,8 +95,10 @@
       <span class="state {{ state|replace('_', '-') }}">{{ state|capitalize|replace('_', ' ') }}</span> -
     {% endif %}
     <span class="type az-fa-{{ node.bundle|lower|replace(' ', '-') }}">{{ bundle_name }}</span> -
-    <span class="changed" title="{{ changed_ago }}">{{ changed }}</span> -
-    <span class="author">{{ author_name }}</span>
+    <span class="changed" title="{{ changed_ago }}">{{ changed }}</span>
+    {% if (show_author) %}
+      - <span class="author">{{ author_name }}</span>
+    {% endif %}
     {% if has_new_content %}
       <span class="new">{{ has_new_content }}</span>
     {% endif %}

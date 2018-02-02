@@ -75,16 +75,6 @@
 */
 #}
 
-{% if moderation_state|length == 0 %}
-  {% if status %}
-    {% set state = 'published' %}
-  {% else %}
-    {% set state = 'draft' %}
-  {% endif %}
-{% else %}
-  {% set state = moderation_state %}
-{% endif %}
-
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ display_mode }} {{ view_mode }} az-page {{ 'type-' ~ node.bundle }}"{{ attributes }}>
 
   <div class='sidebar-left'>
@@ -101,11 +91,11 @@
             {{ content.field_social_media }}
           {% endif %}
 
-          {% if content.field_topics is not empty %}
+          {# if content.field_topics is not empty %}
             <div class="topics">
               {{ content.field_topics }}
             </div>
-          {% endif %}
+          {% endif #}
 
         </div>
 
@@ -127,10 +117,8 @@
         </div>
       </div>
 
-      {% if node.bundle != 'glossary' %}
-        {% if author_picture %}
-          {{ author_picture }}
-        {% endif %}
+      {% if show_author and author_picture %}
+        {{ author_picture }}
       {% endif %}
     </div>
 

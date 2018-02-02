@@ -59,6 +59,7 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
   if (in_array($type, ['article', 'book', 'news'])) {
     $form['mailit'] = [
       '#type' => 'container',
+      '#weight' => 5,
       'checkbox' => [
         '#type' => 'checkbox',
         '#title' => t('Send email notification'),
@@ -381,10 +382,13 @@ function az_content_preprocess_node(&$variables) {
   );
 
   // Get the status and moderation_state
-  $variables['status'] = $node->status->value;
   if ($node->hasField('moderation_state')) {
-    $variables['moderation_state'] = $node->moderation_state->value;
+    $variables['state'] = $node->moderation_state->value;
+  } else {
+    $variables['state'] = ($node->status->value) ? 'published' : 'draft';
   }
+
+  $variables['show_author'] = ($node->hasField('field_show_author') && $node->field_show_author->value) ? true : false;
 
   switch ($type) {
     case 'article':
@@ -433,7 +437,7 @@ function az_content_preprocess_node(&$variables) {
         }
 
         // If field_display_image_map has a value then add the map views map block.
-        if ($node->hasField('field_display_image_map') && !$node->field_display_image_map->isEmpty()) {
+        if ($node->hasField('field_display_image_map') && $node->field_display_image_map->value == true) {
           $block_entity = Drupal\block\Entity\Block::load('views_block__az_media_block_map_usage');
           $variables['sidebar']['block_views_image_map'] = \Drupal::entityTypeManager()
             ->getViewBuilder('block')
