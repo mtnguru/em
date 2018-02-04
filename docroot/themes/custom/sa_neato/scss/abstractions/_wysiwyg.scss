@@ -145,136 +145,50 @@ body.cke_editable,
   }
 }
 
-
 article.embedded-entity {
 
   &.az-view-mode-media-tiny {
-    @include media($bp320only) {
-      width: 20%;
-    }
-    // $bp320only
-
-    @include media($bp580only) {
-      width: 15%;
-    }
-    // $bp580only
-
-    @include media($bp960only) {
-//    margin: 0 auto !important;
-      width: 15%;
-    }
-    // $bp960only
-
-    @include media($bp1280only) {
-//    margin: 0 auto !important;
-      width: 10%;
-    }
-    // $bp1280only
-
-    @include media($bp1920) {
-      width: 10%;
-//    margin: 0 auto !important;
-    }
-    // $bp1920
+    @include media($bp320only)  { width: 20%; }
+    @include media($bp580only)  { width: 15%; }
+    @include media($bp960only)  { width: 12%; }
+    @include media($bp1280only) { width: 8%; }
+    @include media($bp1920)     { width: 6%; }
   }
 
   &.az-view-mode-media-small,
   &.az-view-mode-media-small-w-desc {
-    @include media($bp320only) {
-      width: 50%;
-    }
-    // $bp320only
-
-    @include media($bp580only) {
-      width: 50%;
-    }
-    // $bp580only
-
-    @include media($bp960only) {
-//    margin: 0 auto !important;
-      width: 33%;
-    }
-    // $bp960only
-
-    @include media($bp1280only) {
-//    margin: 0 auto !important;
-      width: 25%;
-    }
-    // $bp1280only
-
-    @include media($bp1920) {
-      width: 20%;
-//    margin: 0 auto !important;
-    }
-    // $bp1920
+    @include media($bp320only)  { width: 40%; }
+    @include media($bp580only)  { width: 35%; }
+    @include media($bp960only)  { width: 30%; }
+    @include media($bp1280only) { width: 25%; }
+    @include media($bp1920)     { width: 20%; }
   }
 
   &.az-view-mode-media-medium,
   &.az-view-mode-media-medium-w-desc {
-    @include media($bp320only) {
-      width: 90%;
-      margin: 0 auto !important;
-      float: none;
-    }
-    // $bp320only
+    @include media($bp320only)  { width: 90%; margin: 0 auto !important; float: none; }
+    @include media($bp580only)  { width: 70%; margin: 0 auto !important; float: none; }
+    @include media($bp960only)  { width: 50%; }
+    @include media($bp1280only) { width: 40%; }
+    @include media($bp1920)     { width: 30%; } 
+  }
 
-    @include media($bp580only) {
-      width: 70%;
-      margin: 0 auto !important;
-      float: none;
-    }
-    // $bp580only
-
-    @include media($bp960only) {
-      width: 50%;
-    }
-    // $bp960only
-
-    @include media($bp1280only) {
-      width: 33%;
-    }
-    // $bp1280only
-
-    @include media($bp1920) {
-      width: 25%;
-    }
-    // $bp1920
+  &.az-view-mode-media-med-large,
+  &.az-view-mode-media-med-large-w-desc {
+    @include media($bp320only)  { width: 90%; margin: 0 auto !important; float: none; }
+    @include media($bp580only)  { width: 80%; margin: 0 auto !important; float: none; }
+    @include media($bp960only)  { width: 70%; }
+    @include media($bp1280only) { width: 60%; }
+    @include media($bp1920)     { width: 50%; }
   }
 
   &.az-view-mode-media-large,
   &.az-view-mode-media-large-w-desc {
-    @include media($bp320only) {
-      width: 100%;
-      float: none;
-    }
-    // $bp320only
-
-    @include media($bp580only) {
-      width: 100%;
-      float: none;
-    }
-    // $bp580only
-
-    @include media($bp960only) {
-      float: none;
-      margin: 0 auto !important;
-      width: 90%;
-    }
-    // $bp960only
-
-    @include media($bp1280only) {
-      float: none;
-      margin: 0 auto !important;
-      width: 80%;
-    }
-    // $bp1280only
-
-    @include media($bp1920) {
-      float: none;
-      width: 70%;
-      margin: 0 auto !important;
-    }
-    // $bp1920
+    @include media($bp320only)  { width: 100%; margin: 0 auto !important; float: none; }
+    @include media($bp580only)  { width: 100%; margin: 0 auto !important; float: none; }
+    @include media($bp960only)  { width: 90%;  margin: 0 auto !important; float: none; }
+    @include media($bp1280only) { width: 80%;  margin: 0 auto !important; float: none; }
+    @include media($bp1920)     { width: 70%;  margin: 0 auto !important; float: none; }
   }
 
   img {
@@ -323,10 +237,6 @@ article.embedded-entity {
     color: $color-white;
     background: lighten($color-dark-green, 15%);
   }
-
-
-
-
 }
 
 .hljs {

@@ -4,20 +4,15 @@ body.path-group {
     table {
       border-color: $base-separator-color;
       border-bottom-width: 3px;
-      th {
-        background-color: $table-header-background;
-      }
+      width: 100%;
+      table-layout: fixed;
 
       td:nth-child(2),
       td:nth-child(3) {
         vertical-align: top;
       }
 
-      th {
-        padding: 15px 10px;
-        border-top: 1px solid $base-separator-color;
-        border-bottom: 0;
-
+      th, td {
         &:nth-child(1) {
           width: 6em;
         }
@@ -28,6 +23,15 @@ body.path-group {
         }
 
       }
+
+      th {
+        text-align: center;
+        background-color: $table-header-background;
+        padding: 15px 10px;
+        border-top: 1px solid $base-separator-color;
+        border-bottom: 0;
+      }
+
 
       td {
         padding: 15px;
