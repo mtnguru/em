@@ -96,7 +96,7 @@ function az_user_preprocess_user(&$variables) {
   $variables['url'] = $variables['user']->url();
 
   // Create Users Recent Activity tab
-  $activity = _az_content_build_content_block([
+  $activity = _az_content_build_content_tab([
     'type' => 'entity-stream',
     'id' => 'recent-activity',
     'tab' => 'Activity',
@@ -107,7 +107,7 @@ function az_user_preprocess_user(&$variables) {
   ]);
 
   // Create Users Unpublished tab
-  $unpublished = _az_content_build_content_block([
+  $unpublished = _az_content_build_content_tab([
     'type' => 'entity-stream',
     'id' => 'unpublished-activity',
     'tab' => 'Unpublished',
@@ -118,7 +118,7 @@ function az_user_preprocess_user(&$variables) {
   ]);
 
   // Create Users Comments tab
-  $comments = _az_content_build_content_block([
+  $comments = _az_content_build_content_tab([
     'type' => 'entity-stream',
     'entityType' => 'comment',
     'id' => 'comments',
