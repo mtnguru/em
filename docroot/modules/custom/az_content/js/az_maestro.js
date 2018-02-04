@@ -1,6 +1,6 @@
 /**
  * @file az_maestro.js
- * Controller that loads streams into blocks.
+ * Controller that loads content into blocks.
  */
 (function ($) {
   'use strict';
@@ -17,11 +17,11 @@
         initTabs(this, context);
       });
 
-      // Initialize stream
-      $('.maestro-stream', context).once('az-attached').each(function() {
+      // Initialize content
+      $('.maestro-content', context).once('az-attached').each(function() {
         var set = drupalSettings.azmaestro[this.id.replace('tab-', '')];
         if ($(this).hasClass('block-content')) {
-          getStream(set);
+          getContent(set);
         }
       });
 
@@ -37,13 +37,13 @@
           $(this).addClass('active');
           var set = drupalSettings.azmaestro[this.id.replace('tab-', '')];
           if (!set['loaded']) {
-            getStream(set);
+            getContent(set);
           }
         });
       });
 
       var set = drupalSettings.azmaestro[$tabs[0].id.replace('tab-', '')];
-      getStream(set);
+      getContent(set);
     };
 
     var doAjax = function doAjax(url, data, successCallback, errorCallback) {
@@ -71,37 +71,48 @@
       });
     };
 
-    var streamLoaded = function (response) {
+    var contentLoaded = function (response) {
       for (var i = 0; i < response.length; i++) {
-        if (response[i].command == 'GetStreamCommand') {
+        if (response[i].command == 'GetContentCommand') {
           var set = response[i].set;
-          var $streamContainer = $('#' + set['id']);
+          var $contentContainer = $('#' + set['id']); // destination container
 
-          // Remove the old more button
-          $streamContainer.find('.more-button').remove();
-          // Append the new stream html
-          $streamContainer.find('.content-container').append(response[i].stream);
-          // Find the new more button
-          var $moreButton = $streamContainer.find('.more-button');
+          switch (set.type) {
+            case 'entity-stream':
 
-          // If we're at the end then remove the more button
-          if (set.pageNum * set.pageNumItems + set.numRows >= set.totalRows) {
-            $moreButton.remove();
-          }
-          else {
-            // Set click event handler on more button.
-            $moreButton.click(function () {
-              set.pageNum++;   // Increment the page number.
-              getStream(set);
-            });
+              // Remove the old more button
+              $contentContainer.find('.more-button').remove();
+              // Append the new stream html
+              $contentContainer.find('.content-container').append(response[i].content);
+              // Find the new more button
+              var $moreButton = $contentContainer.find('.more-button');
+
+              // If we're at the end then remove the more button
+              if (set.pageNum * set.pageNumItems + set.numRows >= set.totalRows) {
+                $moreButton.remove();
+              }
+              else {
+                // Set click event handler on more button.
+                $moreButton.click(function () {
+                  if (set.type == 'entity-stream') {
+                    set.pageNum++;   // Increment the page number.
+                  }
+                  getContent(set);
+                });
+              }
+              break;
+            case 'entity-render':
+              // Append the new stream html
+              $contentContainer.find('.content-container').append(response[i].content);
+              break;
           }
         }
       }
     };
 
-    var getStream = function (set) {
+    var getContent = function (set) {
       set['loaded'] = true;
-      doAjax('/maestro/getStream', set, streamLoaded);
+      doAjax('/maestro/getContent', set, contentLoaded);
     };
 
     return {

@@ -57,13 +57,15 @@ function _az_groups_node_form_submit($form, FormStateInterface $form_state) {
 
 function az_groups_preprocess_group(&$variables) {
 
+  $group = &$variables['group'];
   $az_wysiwyg = &drupal_static('az_wysiwyg', null);  // Save statically - used by WysiwygFilter
   $az_wysiwyg = [
-    'group' => $variables['group']->id(),
+    'group' => $group->id(),
     'view_mode' => $variables['view_mode'],
   ];
 
-  if ($variables['group']->label() == 'Structured Atom Model') {
+  // Show SAM status block - shown in sidebar.
+  if ($group->label() == 'Structured Atom Model') {
     $build = \Drupal::entityTypeManager()->getViewBuilder('node')->view(Node::load(425), 'full');
     $variables['community_status'] = $build;
   }
@@ -71,15 +73,50 @@ function az_groups_preprocess_group(&$variables) {
   $block_entity = Drupal\block\Entity\Block::load('groupoperations');
   $variables['block_groupoperations'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 
-//$block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-//$variables['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
-
   $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
   $variables['block_booknavigation'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 
   $variables['view_group_members'] = views_embed_view('group_members', 'group_members');
 
-  $variables['view_group_content'] = views_embed_view('az_group_activity', 'teaser_block');
+  $home = _az_content_build_content_tab([
+    'type' => 'entity-render',
+    'id' => 'home',
+    'tab' => 'Home',
+//  'title' => '<h2>Home</h2>',
+    'viewMode' => 'home_tab',
+    'entityType' => 'group',
+    'eid' => $group->id(),
+  ]);
+
+  // Create Recent Activity tab
+  $activity = _az_content_build_content_tab([
+    'type' => 'entity-stream',
+    'id' => 'recent-activity',
+    'tab' => 'Activity',
+    'types' => ['article', 'event', 'book', 'news'],
+    'groups' => $group->id(),
+    'title' => 'Recent Activity',
+    'status' => NODE_PUBLISHED,
+    'empty' => 'No activity for this site',
+  ]);
+
+  // Create Recent Comments tab
+  $comments = _az_content_build_content_tab([
+    'type' => 'entity-stream',
+    'id' => 'recent-comments',
+    'tab' => 'Comments',
+    'title' => 'Recent Comments',
+    'entityType' => 'comment',
+    'types' => 'UNSET',
+    'empty' => 'No comments posted for this community',
+  ]);
+
+  $variables['tabs'] = [
+    'home'     => (isset($home))     ? $home     : null,
+    'activity' => (isset($activity)) ? $activity : null,
+    'comments' => (isset($comments)) ? $comments : null,
+  ];
+
   return;
 }
 

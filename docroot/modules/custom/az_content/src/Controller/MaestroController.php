@@ -2,9 +2,9 @@
 
 namespace Drupal\az_content\Controller;
 use Drupal\az_content\AzStream;
+use Drupal\az_content\Command\GetContentCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\az_content\Command\GetStreamCommand;
 
 /**
  * Class MaestroController.
@@ -16,13 +16,22 @@ class MaestroController extends ControllerBase {
   /**
    * Create a stream of content.
    */
-  public function getStream() {
+  public function getContent() {
     $set = json_decode(file_get_contents("php://input"), true);
 
-    $stream = AzStream::create($set);
+    switch ($set['type']) {
+      case 'entity-stream':
+        $build = AzStream::create($set);
+        break;
+
+      case 'entity-render':
+        $entity = \Drupal::entityTypeManager()->getStorage($set['entityType'])->load($set['eid']);
+        $build = \Drupal::entityTypeManager()->getViewBuilder($set['entityType'])->view($entity, $set['viewMode']);
+        break;
+    }
 
     $response = new AjaxResponse();
-    $response->addCommand(new GetStreamCommand($set, render($stream)));
+    $response->addCommand(new GetContentCommand($set, render($build)));
     return $response;
   }
 }

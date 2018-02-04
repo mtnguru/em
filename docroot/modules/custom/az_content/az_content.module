@@ -5,6 +5,8 @@
  * Contains az_content.module.
  */
 
+use Drupal\az_content\AzContentQuery;
+use Drupal\az_content\AzMaestroInit;
 use Drupal\az_groups\AzGroupQuery;
 use Drupal\comment\Entity\Comment;
 use Drupal\Core\Access\AccessResult;
@@ -272,9 +274,135 @@ function az_content_wrap_block($title, $block) {
   ];
 }
 
-function _az_content_build_content_block($set) {
-  $blockManager = \Drupal::service('plugin.manager.block');
-  return $blockManager->createInstance('az_content_block', ['set' => _az_content_init_set($set)])->build();
+/**
+ * Create the set array - merge $set with default settings.
+ *
+ * @param $set
+ * @return array
+ */
+function _az_content_init_stream_set($set) {
+  $set += [
+    'id' => 'init-stream',
+    'types' => ['article', 'event', 'book', 'news', 'glossary'],
+    'more' => 'ajax',
+//  'getTotalRows' => TRUE,
+    'viewMode' => 'teaser',
+    'entityType' => 'node',
+    'pageNum' => 0,
+    'pageNumItems' => 10,
+    'empty' => 'No content found',
+  ];
+  $set = _az_content_add_query_args($set);
+
+  // Unset any settings that == 'UNSET'
+  foreach ($set as $key => $setting) {
+    if ($setting === 'UNSET') {
+      unset($set[$key]);
+    }
+  }
+
+  return $set;
+}
+
+function _az_content_build_content_tab($set) {
+
+  $tab = (isset($set['tab'])) ? $set['tab'] : '';
+  // Do 'type' specific mods
+  switch ($set['type']) {
+
+    // If this is stream then add the #items to the tab.
+    case 'entity-stream':
+      $set = _az_content_init_stream_set($set);
+
+      // If using a pager set the pager id
+      if (isset($set['more']) && $set['more'] == 'pager' && !isset($set['pagerId'])) {
+        $pagerId = &drupal_static('azPagerId', 0);
+        $set['pagerId'] = $pagerId++;
+      }
+
+      // Query for total number matches
+      $set['count'] = true;
+      switch ($set['entityType']) {
+        case 'node':
+          $set['totalRows'] = AzContentQuery::nodeQuery($set);
+          break;
+        case 'comment':
+          $set['totalRows'] = AzContentQuery::commentQuery($set);
+          break;
+        case 'user':
+          $set['totalRows'] = AzContentQuery::userQuery($set);
+          break;
+      }
+      $set['count'] = false;
+
+      // If there are no items and empty == NO DISPLAY then return null - tab doesn't display
+      if ($set['totalRows'] == 0  && $set['empty'] == 'NO DISPLAY') {
+        return null;
+      }
+
+      $tab .= ' - ' . $set['totalRows'];
+      break;
+
+    case 'entity-render':
+      break;
+  }
+
+  // Set up the container classes
+  $classes = [
+    'maestro-stream',
+    'entity-' . $set['entityType'],
+    str_replace('_', '-', $set['viewMode'])
+  ];
+  if (isset($set['class'])) {
+    $classes[] = $set['class'];
+  }
+  if (isset($set['tab'])) {
+    $classes[] = 'tab-content';
+  } else {
+    $classes[] = 'block-content';
+  }
+
+  // Create the output container
+  $page = [
+    '#type' => 'container',
+    '#attributes' => [
+      'id' => $set['id'],
+      'class' => $classes,
+    ],
+  ];
+
+  // Add the title if specified
+  if (isset($set['title'])) {
+    $page['title'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['title-container']],
+      'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
+    ];
+  }
+
+  // Build empty container for the stream content - AJAX fills it.
+  $page['content'] = [
+    '#type' => 'container',
+    '#attributes' => ['class' => ['content-container']],
+//  'stream' => AzStream::create($set),      // Load the first page.
+  ];
+
+  AzMaestroInit::start($set, $page);
+
+  $id = 'tab-' . $set['id'];
+  $tab = [
+    '#type' => 'container',
+    '#prefix' => '<li id="' . $id . '" class="tab">',
+    '#suffix' => '</li>',
+    '#attributes' => ['class' => ['tab-container']],
+    'title' => [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['tab-title']],
+      'markup' => ['#markup' => '<h2>' . $tab . '</h2>'],
+    ],
+    'page' => $page,
+  ];
+  return $tab;
 }
 
 function _az_content_add_group_logo($node, &$variables) {
@@ -319,35 +447,6 @@ function _az_content_add_query_args($set) {
       $set[$key] = (count($parts) == 1) ? $parts[0] : $parts;
     }
   }
-  return $set;
-}
-
-/**
- * Create the set array - merge $set with default settings.
- *
- * @param $set
- * @return array
- */
-function _az_content_init_set($set) {
-  $set += [
-    'id' => 'init-stream',
-    'types' => ['article', 'event', 'book', 'news', 'glossary'],
-    'more' => 'ajax',
-//  'getTotalRows' => TRUE,
-    'entityType' => 'node',
-    'pageNum' => 0,
-    'pageNumItems' => 10,
-    'empty' => 'No content found',
-  ];
-  $set = _az_content_add_query_args($set);
-
-  // Unset any settings that == 'UNSET'
-  foreach ($set as $key => $setting) {
-    if ($setting === 'UNSET') {
-      unset($set[$key]);
-    }
-  }
-
   return $set;
 }
 
@@ -407,7 +506,8 @@ function az_content_preprocess_node(&$variables) {
 
         // Add block showing any tickets submitted for this page.
         if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
-          $variables['sidebar']['tickets'] = _az_content_build_content_block([
+          $variables['sidebar']['tickets'] = _az_content_build_content_tab([
+            'type' => 'entity-stream',
             'id' => 'related-tickets',
             'title' => 'Tickets',
             'viewMode' => 'teaser_short',
@@ -456,7 +556,8 @@ function az_content_preprocess_node(&$variables) {
           }
         }
         if (!empty($tids)) {
-          $variables['sidebar']['related_content'] = _az_content_build_content_block([
+          $variables['sidebar']['related_content'] = _az_content_build_content_tab([
+            'type' => 'entity-stream',
             'id' => 'related-content',
             'status' => NODE_PUBLISHED,
             'title' => 'Related Content',
@@ -490,7 +591,8 @@ function az_content_preprocess_node(&$variables) {
         }
 
         // Create Recent Activity tab
-        $activity = _az_content_build_content_block([
+        $activity = _az_content_build_content_tab([
+          'type' => 'entity-stream',
           'id' => 'recent-activity',
           'tab' => 'Activity',
           'types' => ['article', 'event', 'book', 'news'],
@@ -500,7 +602,8 @@ function az_content_preprocess_node(&$variables) {
         ]);
 
         // Create Recent Comments tab
-        $comments = _az_content_build_content_block([
+        $comments = _az_content_build_content_tab([
+          'type' => 'entity-stream',
           'id' => 'recent-comments',
           'tab' => 'Comments',
           'title' => 'Recent Comments',
@@ -531,7 +634,8 @@ function az_content_preprocess_node(&$variables) {
 
           if (AccessResult::allowedIfHasPermission($user, 'view any unpublished content')) {
             // Create Unpublished Activity tab
-            $unpublished = _az_content_build_content_block([
+            $unpublished = _az_content_build_content_tab([
+              'type' => 'entity-stream',
               'id' => 'unpublished-activity',
               'tab' => 'Unpublished',
               'title' => 'Unpublished Activity',
@@ -541,7 +645,8 @@ function az_content_preprocess_node(&$variables) {
           }
 
           if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
-            $tickets = _az_content_build_content_block([
+            $tickets = _az_content_build_content_tab([
+              'type' => 'entity-stream',
               'id' => 'tickets',
               'tab' => 'Tickets',
               'title' => 'Tickets',
@@ -551,7 +656,8 @@ function az_content_preprocess_node(&$variables) {
           }
 
           // Create My Activity tab
-          $my_activity = _az_content_build_content_block([
+          $my_activity = _az_content_build_content_tab([
+            'type' => 'entity-stream',
             'id' => 'my-activity',
             'tab' => 'My Activity',
             'title' => 'My Activity',
@@ -561,7 +667,8 @@ function az_content_preprocess_node(&$variables) {
           ]);
 
           // Create Users Tickets tab
-          $my_tickets = _az_content_build_content_block([
+          $my_tickets = _az_content_build_content_tab([
+            'type' => 'entity-stream',
             'id' => 'tickets',
             'tab' => 'My Tickets',
             'author' => $user->id(),
@@ -571,7 +678,8 @@ function az_content_preprocess_node(&$variables) {
           ]);
 
           // Create Users Tickets tab
-          $my_assigned = _az_content_build_content_block([
+          $my_assigned = _az_content_build_content_tab([
+            'type' => 'entity-stream',
             'id' => 'assigned',
             'tab' => 'My Assigned',
             'assigned' => $user->id(),
@@ -581,7 +689,8 @@ function az_content_preprocess_node(&$variables) {
           ]);
 
           // Create My Comments tab
-          $my_comments = _az_content_build_content_block([
+          $my_comments = _az_content_build_content_tab([
+            'type' => 'entity-stream',
             'id' => 'my-comments',
             'tab' => 'My Comments',
             'title' => 'My Comments',

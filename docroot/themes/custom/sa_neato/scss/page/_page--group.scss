@@ -13,30 +13,39 @@ body.entity-group-canonical {
     margin-bottom: 20px;
   }
 
+  #home {
+    .content-container {
+      > div > h2 {
+        display: none;
+      }
+    }
+  }
   #main-content-group {
     @include clearfix;
 
     .sidebar-left {
-      float: left;
 
       @include media(max-width $bp580) {
         width: 100%;
       }
+
       @include media($bp960) {
-        width: 30%;
+        float: left;
+        width: 300px;
         max-width: 350px;
         padding-right: 40px;
       }
     }
-    .main-center {
-      float: left;
+
+    .main-content {
+      position: relative;
 
       @include media(max-width $bp580) {
         width: 100%;
-
       }
       @include media($bp960) {
-        width: 70%;
+        float: left;
+        width: calc(100% - 300px);
       }
     }
   }

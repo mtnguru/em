@@ -58,15 +58,12 @@
         </div>
       {% endif %}
     </div>
-    <div class="main-center">
-      <div class="hero-wrapper">
-        {{ content }}
-      </div>
 
-      <hr>
-
-      <h2>Recent Content</h2>
-        {{ view_group_content }}
-      </div>
+    <div class="main-content">
+      <ul class="az-tabs">
+        {% for tab in tabs %}
+          {{ tab }}
+        {% endfor %}
+      </ul>
     </div>
 </div>

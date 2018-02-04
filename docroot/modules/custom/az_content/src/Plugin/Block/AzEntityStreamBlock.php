@@ -13,12 +13,12 @@ use Drupal\Core\Url;
 /**
  *
  * @Block(
- *   id = "az_content_block",
- *   admin_label = @Translation("AZ Content Block"),
+ *   id = "az_entity_stream_block",
+ *   admin_label = @Translation("AZ Entity Stream Block"),
  *   category = @Translation("AZ")
  * )
  */
-class AzContentBlock extends BlockBase {
+class AzEntityStreamBlock extends BlockBase {
 
   public function blockForm($form, FormStateInterface $form_state) {
 
@@ -46,11 +46,11 @@ class AzContentBlock extends BlockBase {
     $set = $this->configuration['set'];
 
     // Initialize settings that haven't been set.
-    $set['pageNum'] = (isset($set['pageNum'])) ? $set['pageNum'] : 0;
-    $set['pageNumItems'] = (isset($set['pageNumItems'])) ? $set['pageNumItems'] : 10;
-    $set['entityType'] = (isset($set['entityType'])) ? $set['entityType'] : 'node';
-    $set['viewMode'] = (isset($set['viewMode'])) ? $set['viewMode'] : 'teaser';
-    $set['more'] = (isset($set['more'])) ? $set['more'] : 'none';
+//  $set['pageNum'] = (isset($set['pageNum'])) ? $set['pageNum'] : 0;
+//  $set['pageNumItems'] = (isset($set['pageNumItems'])) ? $set['pageNumItems'] : 10;
+//  $set['entityType'] = (isset($set['entityType'])) ? $set['entityType'] : 'node';
+//  $set['viewMode'] = (isset($set['viewMode'])) ? $set['viewMode'] : 'teaser';
+//  $set['more'] = (isset($set['more'])) ? $set['more'] : 'none';
 
     // If using a pager set the pager id
     if ($set['more'] == 'pager' && !isset($set['pagerId'])) {
@@ -117,27 +117,8 @@ class AzContentBlock extends BlockBase {
 //    'stream' => AzStream::create($set),      // Load the first page.
     ];
 
-    if (isset($set['tab'])) {
-      // Wrap it in a tab
-      $id = 'tab-' . $set['id'];
-      $build = [
-        '#type' => 'container',
-        '#prefix' => '<li id="' . $id . '" class="tab">',
-        '#suffix' => '</li>',
-        '#attributes' => ['class' => ['tab-container']],
-        'title' => [
-          '#type' => 'container',
-          '#attributes' => ['class' => ['tab-title']],
-          'markup' => ['#markup' => '<h2>' . $set['tab'] . ' - ' . $set['totalRows'] . '</h2>'],
-        ],
-        'stream' => $stream,
-      ];
-    } else {
-      $build = $stream;
-    }
-
-    AzMaestroInit::start($set, $build);
-    return $build;
+    AzMaestroInit::start($set, $stream);
+    return $stream;
   }
 }
 
