@@ -164,16 +164,20 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       if (!empty($node) && $node->getType() == 'book') {
 
         $result = &$results[$node->id()];
-        for ($i = 1; $i <= $result->depth; $i++) {
-          $n = 'p' . $i;
-          if (!empty($results[$result->$n])) {
-            $results[$result->$n]->activeTrail = TRUE;
+        if (count($result)) {
+          for ($i = 1; $i <= $result->depth; $i++) {
+            $n = 'p' . $i;
+            if (!empty($results[$result->$n])) {
+              $results[$result->$n]->activeTrail = TRUE;
+            }
           }
         }
       }
 
       // Append children to their parent.
       foreach ($results as &$result) {
+        if (empty($result)) continue;
+
         $pid = $result->pid;
         $nid = $result->nid;
 
