@@ -96,7 +96,7 @@ function az_user_preprocess_user(&$variables) {
   $variables['url'] = $variables['user']->url();
 
   // Create Users Recent Activity tab
-  $activity = _az_content_build_content_tab([
+  $activity = [
     'type' => 'entity-stream',
     'id' => 'recent-activity',
     'tab' => 'Activity',
@@ -104,10 +104,10 @@ function az_user_preprocess_user(&$variables) {
     'author' => $user->id(),
     'status' => NODE_PUBLISHED,
     'empty' => 'No activity for this user',
-  ]);
+  ];
 
   // Create Users Unpublished tab
-  $unpublished = _az_content_build_content_tab([
+  $unpublished = [
     'type' => 'entity-stream',
     'id' => 'unpublished-activity',
     'tab' => 'Unpublished',
@@ -115,10 +115,10 @@ function az_user_preprocess_user(&$variables) {
     'author' => $user->id(),
     'status' => NODE_NOT_PUBLISHED,
     'empty' => 'No unpublished activity for this user',
-  ]);
+  ];
 
   // Create Users Comments tab
-  $comments = _az_content_build_content_tab([
+  $comments = [
     'type' => 'entity-stream',
     'entityType' => 'comment',
     'id' => 'comments',
@@ -127,14 +127,14 @@ function az_user_preprocess_user(&$variables) {
     'title' => 'Recent Comments',
     'status' => NODE_PUBLISHED,
     'empty' => 'No comments for this user',
-  ]);
-
-  $variables['tabs'] = [
-    'activity'    => (isset($activity))    ? $activity    : null,
-    'unpublished' => (isset($unpublished)) ? $unpublished : null,
-    'tickets'     => (isset($tickets))     ? $tickets     : null,
-    'comments'    => (isset($comments))    ? $comments    : null,
   ];
+
+  $sets = [];
+  if (isset($activity))    $sets[$activity['id']]    = $activity;
+  if (isset($unpublished)) $sets[$unpublished['id']] = $unpublished;
+  if (isset($tickets))     $sets[$tickets['id']]     = $tickets;
+  if (isset($comments))    $sets[$comments['id']]    = $comments;
+  $variables['tabs'] = _az_content_build_tabs('main', $sets);
 }
 
 function az_user_preprocess_menu(&$variables) {

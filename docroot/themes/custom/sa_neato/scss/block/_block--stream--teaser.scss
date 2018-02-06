@@ -1,7 +1,7 @@
-.maestro-stream.entity-node {
+.az-page.entity-type-node {
 
   ////////////////////// teaser
-  &.teaser {
+  &.view-mode-teaser {
 
     > .title-container {
       border-bottom: 2px solid $base-separator-color;
@@ -112,7 +112,7 @@
   }
 
   ////////////////////// teaser-short
-  &.teaser-short {
+  &.view-mode-teaser-short {
 
     h3 {
       margin: 0 0 3px;

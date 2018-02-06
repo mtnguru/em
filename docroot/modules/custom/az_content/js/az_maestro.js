@@ -11,40 +11,59 @@
 
   Drupal.az.maestroC = function () {
 
-    function init (context) {
-      // Initialize tabs
-      $('.az-tabs', context).once('az-attached').each(function () {
-        initTabs(this, context);
-      });
+    var $container;
+    var $tabs;
+    var $pages;
 
-      // Initialize content
-      $('.maestro-content', context).once('az-attached').each(function() {
-        var set = drupalSettings.azmaestro[this.id.replace('tab-', '')];
-        if ($(this).hasClass('block-content')) {
+    function getSet(id) {
+      return drupalSettings.azmaestro[id];
+
+    }
+
+    function initBlocks ($cont, context) {
+      var id = $cont[0].id.replace('az-page-', '');
+      getContent(getSet(id));
+    }
+
+    function initTabs ($cont, context) {
+      $container = $cont;
+      $tabs = $container.find('.az-tab');
+      $pages = $container.find('.az-page');
+
+      var id = $tabs[0].id;
+      $('#az-tab-' + id).addClass('active');  // Set the first tab active.
+      $('#az-page-' + id).addClass('active');  // Set the first tab active.
+      var set = getSet(id);
+      getContent(set);
+
+      $tabs.click(function () {        // Set event handlers on tabs
+        var id = this.id.replace('az-tab-', '');
+        var set = getSet(id);
+
+        $tabs.removeClass('active');
+        $(this).addClass('active');
+        $pages.removeClass('active');
+        $container.find('#az-page-' + id).addClass('active');
+
+        if (!set['loaded']) {
           getContent(set);
         }
       });
 
-    }
+//    var set = getSet(this.id.replace('tab-', ''));
+//    getContent(set);
 
-    var initTabs = function (tabContainer, context) {
-      var $tabs = $(tabContainer).find('.tab');
-      $($tabs[0]).addClass('active');
+      // Initialize content
+      $('.maestro-content', context).once('az-attached').each(function() {
+        var set = drupalSettings.azmaestro[this.id.replace('az-tab-', '')];
 
-      $tabs.each(function () {
-        $(this).click(function (ev) {
-          $tabs.removeClass('active');
-          $(this).addClass('active');
-          var set = drupalSettings.azmaestro[this.id.replace('tab-', '')];
-          if (!set['loaded']) {
-            getContent(set);
-          }
-        });
+        // Load the block-content - no tab to trigger it.
+//      if ($(this).hasClass('block-content')) {
+//        getContent(set);
+//      }
       });
 
-      var set = drupalSettings.azmaestro[$tabs[0].id.replace('tab-', '')];
-      getContent(set);
-    };
+    }
 
     var doAjax = function doAjax(url, data, successCallback, errorCallback) {
       $.ajax({
@@ -75,7 +94,7 @@
       for (var i = 0; i < response.length; i++) {
         if (response[i].command == 'GetContentCommand') {
           var set = response[i].set;
-          var $contentContainer = $('#' + set['id']); // destination container
+          var $contentContainer = $('#az-page-' + set['id'] + ' .page-content'); // destination container
 
           switch (set.type) {
             case 'entity-stream':
@@ -83,7 +102,7 @@
               // Remove the old more button
               $contentContainer.find('.more-button').remove();
               // Append the new stream html
-              $contentContainer.find('.content-container').append(response[i].content);
+              $contentContainer.append(response[i].content);
               // Find the new more button
               var $moreButton = $contentContainer.find('.more-button');
 
@@ -103,7 +122,7 @@
               break;
             case 'entity-render':
               // Append the new stream html
-              $contentContainer.find('.content-container').append(response[i].content);
+              $contentContainer.append(response[i].content);
               break;
           }
         }
@@ -116,7 +135,8 @@
     };
 
     return {
-      init: init,
+      initBlocks: initBlocks,
+      initTabs: initTabs
     };
   };
 
@@ -126,7 +146,12 @@
       if (!Drupal.az.maestro) {  // Ensures we only run this once
         Drupal.az.maestro = Drupal.az.maestroC();
       }
-      Drupal.az.maestro.init(context);
+      $('.az-tabs').once('az-attached').each(function () {
+        Drupal.az.maestro.initTabs($(this), context);
+      });
+      $('.maestro-block').once('az-attached').each(function () {
+        Drupal.az.maestro.initBlocks($(this), context);
+      });
     }
   };
 

@@ -78,7 +78,7 @@ function az_groups_preprocess_group(&$variables) {
 
   $variables['view_group_members'] = views_embed_view('group_members', 'group_members');
 
-  $home = _az_content_build_content_tab([
+  $home = [
     'type' => 'entity-render',
     'id' => 'home',
     'tab' => 'Home',
@@ -86,10 +86,10 @@ function az_groups_preprocess_group(&$variables) {
     'viewMode' => 'home_tab',
     'entityType' => 'group',
     'eid' => $group->id(),
-  ]);
+  ];
 
   // Create Recent Activity tab
-  $activity = _az_content_build_content_tab([
+  $activity = [
     'type' => 'entity-stream',
     'id' => 'recent-activity',
     'tab' => 'Activity',
@@ -98,10 +98,10 @@ function az_groups_preprocess_group(&$variables) {
     'title' => 'Recent Activity',
     'status' => NODE_PUBLISHED,
     'empty' => 'No activity for this site',
-  ]);
+  ];
 
   // Create Recent Comments tab
-  $comments = _az_content_build_content_tab([
+  $comments = [
     'type' => 'entity-stream',
     'id' => 'recent-comments',
     'tab' => 'Comments',
@@ -109,13 +109,13 @@ function az_groups_preprocess_group(&$variables) {
     'entityType' => 'comment',
     'types' => 'UNSET',
     'empty' => 'No comments posted for this community',
-  ]);
-
-  $variables['tabs'] = [
-    'home'     => (isset($home))     ? $home     : null,
-    'activity' => (isset($activity)) ? $activity : null,
-    'comments' => (isset($comments)) ? $comments : null,
   ];
+
+  $variables['tabs'] = _az_content_build_tabs('main', [
+    $home['id']     => $home,
+    $activity['id'] => $activity,
+    $comments['id'] => $comments,
+  ]);
 
   return;
 }

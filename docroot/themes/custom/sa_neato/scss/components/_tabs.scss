@@ -114,6 +114,7 @@ body.entity-node-canonical {
 
         ul.tabs {
           right: -20px;
+
           opacity: 1;
         }
       }
@@ -121,53 +122,55 @@ body.entity-node-canonical {
   }
 }
 
-ul.az-tabs {
-  list-style: none;
-  border-bottom: 2px solid $base-separator-color;
-  padding: 0;
-  position: relative;
-  margin-top: 0;
-  @include clearfix;
+nav.az-tabs {
 
-  > li.tab {
+  > ul.az-tabs-list {
+    list-style: none;
+    border-bottom: 2px solid $base-separator-color;
     padding: 0;
-    float: left;
+    position: relative;
+    margin: 0 0 10px;
+    @include clearfix;
 
-    .tab-title {
-      margin-right: -1px;
+    > li.az-tab {
+      float: left;
+      padding: 7px;
+      margin: 0 -1px 0 0;
+
       border: 2px solid $base-separator-color;
       border-bottom: 0;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
 
-      > h2 {
-        font-size: 110%;
-        font-weight: normal;
-        color: $color-green;
-        padding: 7px;
-        margin: 0;
-        letter-spacing: -0.02em;
+      font-size: 110%;
+      font-weight: normal;
+      color: $color-green;
+      letter-spacing: -0.02em;
+
+      &.active {
+        background-color: $secondary-background-color;
+      }
+
+      &:hover {
+        background-color: lighten($base-background-color, 8%);
       }
     }
+  }
 
-    .tab-content {
-      display: none;
-      position: absolute;
-      top: 40px;
-      left: 0;
-      width: 100%;
-    }
-
-    &.active {
-      .tab-title {
-        > h2 {
-          background-color: $secondary-background-color;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
+  .az-pages {
+    .az-page {
+      .page-title {
+        border-bottom: 1px solid $base-separator-color;
+        h2 {
+          margin-bottom: 10px;
         }
       }
+      display: none;
+      width: 100%;
 
-      .tab-content {
+      @include clearfix;
+
+      &.active {
         display: block;
       }
     }

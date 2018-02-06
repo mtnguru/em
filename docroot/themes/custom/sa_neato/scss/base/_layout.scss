@@ -10,6 +10,7 @@ body {
   main {
     @include outer-container;
     padding: 1.5em 0;
+    @include clearfix;
   }
 
   &.no-sidebars {

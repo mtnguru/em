@@ -1,4 +1,4 @@
-body.path-frontpage {
+body.node-311 {
   @include clearfix;
 
   .header-top {
@@ -47,6 +47,7 @@ body.path-frontpage {
 
   .main-content {
     position: relative;
+    @include clearfix;
 
     @include media(max-width $bp580) {
       width: 100%;

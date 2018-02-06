@@ -31,6 +31,7 @@
     </section>
   {% endif %}
 
+  <div class="main-wrapper">
   <main role="main" class="outer-container">
     <a id="main-content" tabindex="-1"></a>
 
@@ -46,20 +47,7 @@
       {{ page.sidebar_second }}
     </aside>
   </main>
+  </div>
 
-  {% if page.footer_top or page.footer_bottom %}
-    <footer id="site-footer" role="contentinfo">
-      {% if page.footer_top %}
-        <section class="footer-top">
-          {{ page.footer_top }}
-        </section>
-      {% endif %}
-
-      {% if page.footer_bottom %}
-        <section class="footer-bottom">
-          {{ page.footer_bottom }}
-        </section>
-      {% endif %}
-    </footer>
-  {% endif %}
+  {% include('@sa_neato/include/footer.html.twig') %} {{ kint() }}
 </div>

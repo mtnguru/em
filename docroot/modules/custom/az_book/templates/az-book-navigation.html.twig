@@ -42,7 +42,11 @@
     <div class="group-logo"><a href="{{ group_url }}"><img src="{{ group_logo_url }}"></a></div>
     {{ title_prefix }}
     {% if group_name %}
-      <h2 {{ title_attributes }}><a href="{{ group_url }}">{{ group_name }}</a></h2>
+      {% if group_name == 'Structured Atom Model' %}
+        <h2 {{ title_attributes }}><a href="{{ group_url }}">{{ group_name }}<span class="trademark az-fa-trademark"></span></a></h2>
+      {% else %}
+        <h2 {{ title_attributes }}><a href="{{ group_url }}">{{ group_name }}</a></h2>
+      {% endif %}
     {% endif %}
     {{ title_suffix }}
   </div>

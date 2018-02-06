@@ -26,13 +26,20 @@
         left: 0;
         bottom: 0;
         background-color: rgba(25,50,0,.2);
-        font-size: 160%;
+        font-size: 150%;
 
         a {
           display: block;
           margin: 0 .5em;
           color: $color-group;
           @include vertical-center;
+
+          .trademark {
+            font-size: 50%;
+            margin-left: 5px;
+            margin-top: -10px;
+            vertical-align: super;
+          }
         }
       }
     }

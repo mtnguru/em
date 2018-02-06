@@ -22,6 +22,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 function az_content_theme() {
   return [
+    'az_tabs' => [
+      'variables' => [
+        'tabs' => NULL,
+        'id' => NULL,
+      ],
+    ],
     'block_donate' => [
       'variables' => [
         'title' => NULL,
@@ -243,6 +249,7 @@ function _az_content_add_node_to_media($media, $articleId) {
  * @param $variables
  */
 function az_content_preprocess_block(&$variables) {
+/*
   switch ($variables['plugin_id']) {
     case 'az_top_nav_block':
       $snippet = \Drupal::entityManager()->getStorage('node')->load(377);
@@ -254,7 +261,7 @@ function az_content_preprocess_block(&$variables) {
       ];
       break;
   }
-  return;
+*/
 }
 
 function az_content_wrap_block($title, $block) {
@@ -304,10 +311,8 @@ function _az_content_init_stream_set($set) {
   return $set;
 }
 
-function _az_content_build_content_tab($set) {
+function _az_content_build_block($id, $set) {
 
-  $tab = (isset($set['tab'])) ? $set['tab'] : '';
-  // Do 'type' specific mods
   switch ($set['type']) {
 
     // If this is stream then add the #items to the tab.
@@ -340,69 +345,132 @@ function _az_content_build_content_tab($set) {
         return null;
       }
 
-      $tab .= ' - ' . $set['totalRows'];
+//    $tab .= ' - ' . $set['totalRows'];  // Add number of items found by query.
       break;
 
     case 'entity-render':
       break;
   }
 
-  // Set up the container classes
   $classes = [
-    'maestro-stream',
-    'entity-' . $set['entityType'],
-    str_replace('_', '-', $set['viewMode'])
+    'entity-type-' . str_replace('_', '-', $set['entityType']),
+    'view-mode-' . str_replace('_', '-', $set['viewMode']),
   ];
   if (isset($set['class'])) {
     $classes[] = $set['class'];
   }
-  if (isset($set['tab'])) {
-    $classes[] = 'tab-content';
-  } else {
-    $classes[] = 'block-content';
-  }
 
-  // Create the output container
-  $page = [
+  $block = [
     '#type' => 'container',
     '#attributes' => [
-      'id' => $set['id'],
-      'class' => $classes,
+      'id' => 'az-page-' . $id,
+      'class' => ['block-sidebar maestro-block'],
     ],
-  ];
-
-  // Add the title if specified
-  if (isset($set['title'])) {
-    $page['title'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['title-container']],
-      'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
-    ];
-  }
-
-  // Build empty container for the stream content - AJAX fills it.
-  $page['content'] = [
-    '#type' => 'container',
-    '#attributes' => ['class' => ['content-container']],
-//  'stream' => AzStream::create($set),      // Load the first page.
-  ];
-
-  AzMaestroInit::start($set, $page);
-
-  $id = 'tab-' . $set['id'];
-  $tab = [
-    '#type' => 'container',
-    '#prefix' => '<li id="' . $id . '" class="tab">',
-    '#suffix' => '</li>',
-    '#attributes' => ['class' => ['tab-container']],
+    '#attached' => [
+      'library' => 'az_content/az-maestro',
+      'drupalSettings' => [
+        'azmaestro' => [$id => $set],
+      ],
+    ],
     'title' => [
       '#type' => 'container',
-      '#attributes' => ['class' => ['tab-title']],
-      'markup' => ['#markup' => '<h2>' . $tab . '</h2>'],
+      '#attributes' => [
+        'class' => ['title-container'],
+      ],
+      'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
     ],
-    'page' => $page,
+    'page' => [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['page-content'],
+      ],
+    ],
+  ];
+  return $block;
+}
+
+function _az_content_build_tab(&$set) {
+
+  $tab = (isset($set['tab'])) ? $set['tab'] : '';
+  switch ($set['type']) {
+
+    // If this is stream then add the #items to the tab.
+    case 'entity-stream':
+      $set = _az_content_init_stream_set($set);
+
+      // If using a pager set the pager id
+      if (isset($set['more']) && $set['more'] == 'pager' && !isset($set['pagerId'])) {
+        $pagerId = &drupal_static('azPagerId', 0);
+        $set['pagerId'] = $pagerId++;
+      }
+
+      // Query for total number matches
+      $set['count'] = true;
+      switch ($set['entityType']) {
+        case 'node':
+          $set['totalRows'] = AzContentQuery::nodeQuery($set);
+          break;
+        case 'comment':
+          $set['totalRows'] = AzContentQuery::commentQuery($set);
+          break;
+        case 'user':
+          $set['totalRows'] = AzContentQuery::userQuery($set);
+          break;
+      }
+      $set['count'] = false;
+
+      // If there are no items and empty == NO DISPLAY then return null - tab doesn't display
+      if ($set['totalRows'] == 0  && $set['empty'] == 'NO DISPLAY') {
+        return null;
+      }
+
+      $tab .= ' - ' . $set['totalRows'];  // Add number of items found by query.
+      break;
+
+    case 'entity-render':
+      break;
+  }
+
+  $classes = [
+    'entity-type-' . str_replace('_', '-', $set['entityType']),
+    'view-mode-' . str_replace('_', '-', $set['viewMode']),
+  ];
+  if (isset($set['class'])) {
+    $classes[] = $set['class'];
+  }
+
+  $tab = [
+    'id' => $set['id'],
+    'label' => $tab,
+    'classes' => $classes,
+    'title' => (isset($set['title'])) ? $set['title'] : null,
   ];
   return $tab;
+}
+
+function _az_content_build_tabs($id, $sets) {
+
+  $tabs = [];
+  foreach ($sets as $key => &$set) {
+    if (!empty($set)) {
+      $tab = _az_content_build_tab($set);
+      if (!empty($tab)) {
+        $tabs[] = _az_content_build_tab($set);
+      }
+    }
+  }
+
+  return [
+    '#theme' => 'az_tabs',
+    '#id' => $id,
+    '#tabs' => $tabs,
+    '#attached' => [
+      'library' => 'az_content/az-maestro',
+      'drupalSettings' => [
+        'azmaestro' => $sets,
+      ],
+    ],
+  ];
 }
 
 function _az_content_add_group_logo($node, &$variables) {
@@ -506,7 +574,7 @@ function az_content_preprocess_node(&$variables) {
 
         // Add block showing any tickets submitted for this page.
         if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
-          $variables['sidebar']['tickets'] = _az_content_build_content_tab([
+          $tickets = [
             'type' => 'entity-stream',
             'id' => 'related-tickets',
             'title' => 'Tickets',
@@ -515,7 +583,7 @@ function az_content_preprocess_node(&$variables) {
             'pages' => $node->id(),
             'class' => 'block-sidebar',
             'empty' => 'NO DISPLAY',
-          ]);
+          ];
         }
 
         if (in_array($type, ['article', 'news', 'book'])) {
@@ -556,7 +624,7 @@ function az_content_preprocess_node(&$variables) {
           }
         }
         if (!empty($tids)) {
-          $variables['sidebar']['related_content'] = _az_content_build_content_tab([
+          $variables['sidebar']['related'] = _az_content_build_block('related-content', [
             'type' => 'entity-stream',
             'id' => 'related-content',
             'status' => NODE_PUBLISHED,
@@ -580,29 +648,33 @@ function az_content_preprocess_node(&$variables) {
 
       // Dashboard - Front page
       if (\Drupal::service('path.matcher')->isFrontPage()) {
+      }
+
+      if ($node->id() == 311) {   // User Dashboard
         $uid = \Drupal::currentUser()->id();
         $user = User::load($uid);
 
         // Create Announcement block at top of page
-        if ($node->hasField('field_announcement')) {
+        if (!$node->field_announcement->isEmpty()) {
           $nid = $node->field_announcement->getValue()[0]['target_id'];
           $snippet = \Drupal::entityManager()->getStorage('node')->load($nid);
           $variables['section_announcement'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
         }
 
         // Create Recent Activity tab
-        $activity = _az_content_build_content_tab([
+        $activity = [
           'type' => 'entity-stream',
           'id' => 'recent-activity',
           'tab' => 'Activity',
           'types' => ['article', 'event', 'book', 'news'],
           'title' => 'Recent Activity',
+//        'viewMode' => 'teaser_short',
           'status' => NODE_PUBLISHED,
           'empty' => 'No activity for this site',
-        ]);
+        ];
 
         // Create Recent Comments tab
-        $comments = _az_content_build_content_tab([
+        $comments = [
           'type' => 'entity-stream',
           'id' => 'recent-comments',
           'tab' => 'Comments',
@@ -610,7 +682,7 @@ function az_content_preprocess_node(&$variables) {
           'entityType' => 'comment',
           'types' => 'UNSET',
           'empty' => 'You currently have no comments',
-        ]);
+        ];
 
         // If the user is logged in then create the My Activity, My Comments and My Media tabs
         if ($uid != 0) {
@@ -634,29 +706,29 @@ function az_content_preprocess_node(&$variables) {
 
           if (AccessResult::allowedIfHasPermission($user, 'view any unpublished content')) {
             // Create Unpublished Activity tab
-            $unpublished = _az_content_build_content_tab([
+            $unpublished = [
               'type' => 'entity-stream',
               'id' => 'unpublished-activity',
               'tab' => 'Unpublished',
               'title' => 'Unpublished Activity',
               'status' => NODE_NOT_PUBLISHED,
               'empty' => 'No unpublished activity for this site',
-            ]);
+            ];
           }
 
           if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
-            $tickets = _az_content_build_content_tab([
+            $tickets = [
               'type' => 'entity-stream',
               'id' => 'tickets',
               'tab' => 'Tickets',
               'title' => 'Tickets',
               'types' => 'ticket',
               'empty' => 'NO DISPLAY',
-            ]);
+            ];
           }
 
           // Create My Activity tab
-          $my_activity = _az_content_build_content_tab([
+          $my_activity = [
             'type' => 'entity-stream',
             'id' => 'my-activity',
             'tab' => 'My Activity',
@@ -664,21 +736,22 @@ function az_content_preprocess_node(&$variables) {
             'author' => $user->id(),
             'types' => 'UNSET',
             'empty' => 'You currently have no activity',
-          ]);
+          ];
 
           // Create Users Tickets tab
-          $my_tickets = _az_content_build_content_tab([
+          $my_tickets = [
             'type' => 'entity-stream',
             'id' => 'tickets',
             'tab' => 'My Tickets',
             'author' => $user->id(),
+            'status' => 'UNSET',
             'title' => 'My Tickets',
             'types' => 'ticket',
             'empty' => 'NO DISPLAY',
-          ]);
+          ];
 
           // Create Users Tickets tab
-          $my_assigned = _az_content_build_content_tab([
+          $my_assigned = [
             'type' => 'entity-stream',
             'id' => 'assigned',
             'tab' => 'My Assigned',
@@ -686,10 +759,10 @@ function az_content_preprocess_node(&$variables) {
             'title' => 'My Assigned Tickets',
             'types' => 'ticket',
             'empty' => 'NO DISPLAY',
-          ]);
+          ];
 
           // Create My Comments tab
-          $my_comments = _az_content_build_content_tab([
+          $my_comments = [
             'type' => 'entity-stream',
             'id' => 'my-comments',
             'tab' => 'My Comments',
@@ -698,7 +771,7 @@ function az_content_preprocess_node(&$variables) {
             'authorComment' => $user->id(),
             'types' => 'UNSET',
             'empty' => 'NO DISPLAY',
-          ]);
+          ];
 
         }
         else {
@@ -706,17 +779,17 @@ function az_content_preprocess_node(&$variables) {
           $dashboard_block = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
         }
 
-        $variables['tabs'] = [
-          'activity'    => (isset($activity))    ? $activity    : null,
-          'unpublished' => (isset($unpublished)) ? $unpublished : null,
-          'tickets'     => (isset($tickets))     ? $tickets     : null,
-          'comments'    => (isset($comments))    ? $comments    : null,
-          'my_activity' => (isset($my_activity)) ? $my_activity : null,
-          'my_comments' => (isset($my_comments)) ? $my_comments : null,
-          'my_tickets'  => (isset($my_tickets))  ? $my_tickets  : null,
-          'my_assigned' => (isset($my_assigned)) ? $my_assigned : null,
-          'my_media'    => (isset($my_media))    ? $my_media    : null,
-        ];
+        $sets = [];
+        if (isset($activity))    $sets[$activity['id']]    = $activity;
+        if (isset($unpublished)) $sets[$unpublished['id']] = $unpublished;
+        if (isset($tickets))     $sets[$tickets['id']]     = $tickets;
+        if (isset($comments))    $sets[$comments['id']]    = $comments;
+        if (isset($my_activity)) $sets[$my_activity['id']] = $my_activity;
+        if (isset($my_comments)) $sets[$my_comments['id']] = $my_comments;
+        if (isset($my_tickets))  $sets[$my_tickets['id']]  = $my_tickets;
+        if (isset($my_assigned)) $sets[$my_assigned['id']] = $my_assigned;
+        if (isset($my_media))    $sets[$my_media['id']]    = $my_media;
+        $variables['tabs'] = _az_content_build_tabs('main', $sets);
 
         $variables['sidebar'] = [
           'dashboard_block' => (isset($dashboard_block)) ? $dashboard_block : null,

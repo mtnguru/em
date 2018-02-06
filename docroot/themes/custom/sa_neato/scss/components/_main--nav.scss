@@ -59,6 +59,10 @@
       border-radius: 47%;
       width: 230px;
 
+      > a {
+        text-decoration: none;
+      }
+
       @include media($bp320only) {
 //      margin-left: 20px;
       }

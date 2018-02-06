@@ -58,11 +58,7 @@
   {% endif %}
 
   <div class="main-content">
-    <ul class="az-tabs">
-      {% for tab in tabs %}
-        {{ tab }}
-      {% endfor %}
-    </ul>
+    {% include('@sa_neato/include/tabs.html.twig') %}
   </div>
 
 </article>

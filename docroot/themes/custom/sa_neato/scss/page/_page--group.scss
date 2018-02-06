@@ -1,11 +1,6 @@
 body.entity-group-canonical {
 
-  main.outer-container {
-    max-width: $max-width;
-    @extend %layout-padding;
-  }
-
-  .page-title {
+  .content-container h1.page-title {
     display: none;
   }
 
