@@ -1,54 +1,53 @@
 
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
-  {{ title_prefix }}
   {% if not page %}
     <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
   {% endif %}
-  {{ title_suffix }}
 
-  <div class="header-top">
+
+  <div id="ethereal-matters-logo" class="ethereal-matters-logo">
+    <h2>
+      <a href="/home">
+        <span class="ethereal">Ethereal</span>
+        <span class="matters">Matters</span>
+      </a>
+    </h2>
+  </div>
+
+  <div class="header">
     <div class="section-title">
       <h1>{{ label }}</h1>
       {{ content.body }}
     </div>
+
+    {% if logged_in %}
+      <div class="block-welcome">{{ block_welcome_home }}</div>
+    {% else %}
+      <div class="block-login">{{ block_login_home }}</div>
+    {% endif %}
+
+    <div class="open-source-science">
+      {{ section_open_source_science }}
+    </div>
     <div class="section-announcement">
       {{ section_announcement }}
     </div>
+
   </div>
 
-  <div class="sidebar-left">
+  <div class="communities">
+    <div class="block-communities">{{ block_community }}</div>
 
-    {% if logged_in %}
-      <div class="block user-header">
-        <div class="user-picture">
-          <img src="{{ user_picture_url }}" />
-        </div>
-        <div class="user-text">
-          <div class="name">{{ user_name }}</div>
-          <div class="links">
-            <div class="edit-account"><a href="/user/{{ user_id }}/edit">Edit Account</a></div>
-            <div class="view-home-page"><a href="/user/{{ user_id }}">View My Public Page</a></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="az-block my-groups">
-        <div class="block-title"><h2>My Communities</h2></div>
-
-        <div class="block-content">
-          {{ view_my_groups }}
-        </div>
-      </div>
-    {% else %}
-      <div class="dashboard-block">{{ dashboard_block }}</div>
-    {% endif %}
-
-    {{ block_donate }}
+    {% for community in communities %}
+      <div class="block-community">{{ community }}</div>
+    {% endfor %}
   </div>
 
-  <div class="main-content">
-    {{ tabs }}
+  <div class="sidebar-right">
+
+    <div class="block-recent-content">{{ block_recent_content }}</div>
+    <div class="block-donate-home">{{ block_donate_home }}</div>
   </div>
 
-  {# content.links #}
+  {{ content.links }}
 </article>

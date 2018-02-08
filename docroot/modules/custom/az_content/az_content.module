@@ -453,10 +453,9 @@ function _az_content_build_tabs($id, $sets) {
   $tabs = [];
   foreach ($sets as $key => &$set) {
     if (!empty($set)) {
-      $tab = _az_content_build_tab($set);
-      if (!empty($tab)) {
-        $tabs[] = _az_content_build_tab($set);
-      }
+      if ($tab = _az_content_build_tab($set)) {
+        $tabs[] = $tab;
+      };
     }
   }
 
@@ -651,156 +650,173 @@ function az_content_preprocess_node(&$variables) {
       }
 
       if ($node->id() == 311) {   // User Dashboard
-        $uid = \Drupal::currentUser()->id();
-        $user = User::load($uid);
-
-        // Create Announcement block at top of page
-        if (!$node->field_announcement->isEmpty()) {
-          $nid = $node->field_announcement->getValue()[0]['target_id'];
-          $snippet = \Drupal::entityManager()->getStorage('node')->load($nid);
-          $variables['section_announcement'] = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
-        }
-
-        // Create Recent Activity tab
-        $activity = [
-          'type' => 'entity-stream',
-          'id' => 'recent-activity',
-          'tab' => 'Activity',
-          'types' => ['article', 'event', 'book', 'news'],
-          'title' => 'Recent Activity',
-//        'viewMode' => 'teaser_short',
-          'status' => NODE_PUBLISHED,
-          'empty' => 'No activity for this site',
-        ];
-
-        // Create Recent Comments tab
-        $comments = [
-          'type' => 'entity-stream',
-          'id' => 'recent-comments',
-          'tab' => 'Comments',
-          'title' => 'Recent Comments',
-          'entityType' => 'comment',
-          'types' => 'UNSET',
-          'empty' => 'You currently have no comments',
-        ];
-
-        // If the user is logged in then create the My Activity, My Comments and My Media tabs
-        if ($uid != 0) {
-
-          // Create the user block in the upper left corner.
-          $variables['user_id'] = $user->id();
-          $variables['user_name'] = $user->name->value;
-          $picture = $user->field_picture->getValue();
-          if ($user->field_picture->isEmpty()) {
-            $field = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_picture');
-            $default_image = $field->getSetting('default_image');
-            $file = \Drupal::entityManager()->loadEntityByUuid('file', $default_image['uuid']);
-          } else {
-            $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
-          }
-
-
-          $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')->buildUrl($file->getFileUri());
-
-          $variables['view_my_groups'] = views_embed_view('az_my_groups', 'user_block');
-
-          if (AccessResult::allowedIfHasPermission($user, 'view any unpublished content')) {
-            // Create Unpublished Activity tab
-            $unpublished = [
-              'type' => 'entity-stream',
-              'id' => 'unpublished-activity',
-              'tab' => 'Unpublished',
-              'title' => 'Unpublished Activity',
-              'status' => NODE_NOT_PUBLISHED,
-              'empty' => 'No unpublished activity for this site',
-            ];
-          }
-
-          if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
-            $tickets = [
-              'type' => 'entity-stream',
-              'id' => 'tickets',
-              'tab' => 'Tickets',
-              'title' => 'Tickets',
-              'types' => 'ticket',
-              'empty' => 'NO DISPLAY',
-            ];
-          }
-
-          // Create My Activity tab
-          $my_activity = [
-            'type' => 'entity-stream',
-            'id' => 'my-activity',
-            'tab' => 'My Activity',
-            'title' => 'My Activity',
-            'author' => $user->id(),
-            'types' => 'UNSET',
-            'empty' => 'You currently have no activity',
-          ];
-
-          // Create Users Tickets tab
-          $my_tickets = [
-            'type' => 'entity-stream',
-            'id' => 'tickets',
-            'tab' => 'My Tickets',
-            'author' => $user->id(),
-            'status' => 'UNSET',
-            'title' => 'My Tickets',
-            'types' => 'ticket',
-            'empty' => 'NO DISPLAY',
-          ];
-
-          // Create Users Tickets tab
-          $my_assigned = [
-            'type' => 'entity-stream',
-            'id' => 'assigned',
-            'tab' => 'My Assigned',
-            'assigned' => $user->id(),
-            'title' => 'My Assigned Tickets',
-            'types' => 'ticket',
-            'empty' => 'NO DISPLAY',
-          ];
-
-          // Create My Comments tab
-          $my_comments = [
-            'type' => 'entity-stream',
-            'id' => 'my-comments',
-            'tab' => 'My Comments',
-            'title' => 'My Comments',
-            'entityType' => 'comment',
-            'authorComment' => $user->id(),
-            'types' => 'UNSET',
-            'empty' => 'NO DISPLAY',
-          ];
-
-        }
-        else {
-          $snippet = \Drupal::entityManager()->getStorage('node')->load(325);
-          $dashboard_block = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
-        }
-
-        $sets = [];
-        if (isset($activity))    $sets[$activity['id']]    = $activity;
-        if (isset($unpublished)) $sets[$unpublished['id']] = $unpublished;
-        if (isset($tickets))     $sets[$tickets['id']]     = $tickets;
-        if (isset($comments))    $sets[$comments['id']]    = $comments;
-        if (isset($my_activity)) $sets[$my_activity['id']] = $my_activity;
-        if (isset($my_comments)) $sets[$my_comments['id']] = $my_comments;
-        if (isset($my_tickets))  $sets[$my_tickets['id']]  = $my_tickets;
-        if (isset($my_assigned)) $sets[$my_assigned['id']] = $my_assigned;
-        if (isset($my_media))    $sets[$my_media['id']]    = $my_media;
-        $variables['tabs'] = _az_content_build_tabs('main', $sets);
-
-        $variables['sidebar'] = [
-          'dashboard_block' => (isset($dashboard_block)) ? $dashboard_block : null,
-        ];
-
-        // Create sidebar donate block.
-        $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-        $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+        _az_content_create_dashboard($node, $variables);
       }
       break;
   }
+}
+
+function _az_content_create_home($node, &$variables) {
+
+}
+
+function _az_content_create_dashboard($node, &$variables) {
+  $uid = \Drupal::currentUser()->id();
+  $user = User::load($uid);
+
+  // Create Announcement block at top of page
+  if (!$node->field_announcement->isEmpty()) {
+    $nid = $node->field_announcement->getValue()[0]['target_id'];
+    $snippet = \Drupal::entityManager()->getStorage('node')->load($nid);
+    $variables['section_announcement'] = \Drupal::entityTypeManager()
+      ->getViewBuilder('node')
+      ->view($snippet, 'full');
+  }
+
+  // Create Recent Activity tab
+  $activity = [
+    'type' => 'entity-stream',
+    'id' => 'recent-activity',
+    'tab' => 'Activity',
+    'types' => ['article', 'event', 'book', 'news'],
+    'title' => 'Recent Activity',
+  //        'viewMode' => 'teaser_short',
+    'status' => NODE_PUBLISHED,
+    'empty' => 'No activity for this site',
+  ];
+
+  // Create Recent Comments tab
+  $comments = [
+    'type' => 'entity-stream',
+    'id' => 'recent-comments',
+    'tab' => 'Comments',
+    'title' => 'Recent Comments',
+    'entityType' => 'comment',
+    'types' => 'UNSET',
+    'empty' => 'You currently have no comments',
+  ];
+
+  // If the user is logged in then create the My Activity, My Comments and My Media tabs
+  if ($uid != 0) {
+
+    // Create the user block in the upper left corner.
+    $variables['user_id'] = $user->id();
+    $variables['user_name'] = $user->name->value;
+    $picture = $user->field_picture->getValue();
+    if ($user->field_picture->isEmpty()) {
+      $field = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_picture');
+      $default_image = $field->getSetting('default_image');
+      $file = \Drupal::entityManager()
+        ->loadEntityByUuid('file', $default_image['uuid']);
+    }
+    else {
+      $file = \Drupal\file\Entity\File::load($picture[0]['target_id']);
+    }
+
+
+    $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')
+      ->buildUrl($file->getFileUri());
+
+    $variables['view_my_groups'] = views_embed_view('az_my_groups', 'user_block');
+
+    if (AccessResult::allowedIfHasPermission($user, 'view any unpublished content')) {
+      // Create Unpublished Activity tab
+      $unpublished = [
+        'type' => 'entity-stream',
+        'id' => 'unpublished-activity',
+        'tab' => 'Unpublished',
+        'title' => 'Unpublished Activity',
+        'status' => NODE_NOT_PUBLISHED,
+        'empty' => 'NO DISPLAY',
+      ];
+    }
+
+    if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
+      $tickets = [
+        'type' => 'entity-stream',
+        'id' => 'tickets',
+        'tab' => 'Tickets',
+        'title' => 'Tickets',
+        'types' => 'ticket',
+        'empty' => 'NO DISPLAY',
+      ];
+    }
+
+    // Create My Activity tab
+    $my_activity = [
+      'type' => 'entity-stream',
+      'id' => 'my-activity',
+      'tab' => 'My Activity',
+      'title' => 'My Activity',
+      'author' => $user->id(),
+      'types' => 'UNSET',
+      'empty' => 'You have no activity',
+    ];
+
+    // Create Users Tickets tab
+    $my_tickets = [
+      'type' => 'entity-stream',
+      'id' => 'my-tickets',
+      'tab' => 'My Tickets',
+      'author' => $user->id(),
+      'status' => 'UNSET',
+      'title' => 'My Tickets',
+      'types' => 'ticket',
+      'empty' => 'NO DISPLAY',
+    ];
+
+    // Create Users Assigned Tickets tab
+    $my_assigned = [
+      'type' => 'entity-stream',
+      'id' => 'assigned',
+      'tab' => 'My Assigned',
+      'assigned' => $user->id(),
+      'title' => 'My Assigned Tickets',
+      'types' => 'ticket',
+      'empty' => 'NO DISPLAY',
+    ];
+
+    // Create My Comments tab
+    $my_comments = [
+      'type' => 'entity-stream',
+      'id' => 'my-comments',
+      'tab' => 'My Comments',
+      'title' => 'My Comments',
+      'entityType' => 'comment',
+      'authorComment' => $user->id(),
+      'types' => 'UNSET',
+      'empty' => 'NO DISPLAY',
+    ];
+
+  }
+  else {
+    $snippet = \Drupal::entityManager()->getStorage('node')->load(325);
+    $dashboard_block = \Drupal::entityTypeManager()
+      ->getViewBuilder('node')
+      ->view($snippet, 'full');
+  }
+
+  $sets = [];
+  if (isset($activity))    { $sets[$activity['id']]    = $activity; }
+  if (isset($unpublished)) { $sets[$unpublished['id']] = $unpublished; }
+  if (isset($tickets))     { $sets[$tickets['id']]     = $tickets; }
+  if (isset($comments))    { $sets[$comments['id']]    = $comments; }
+  if (isset($my_activity)) { $sets[$my_activity['id']] = $my_activity; }
+  if (isset($my_comments)) { $sets[$my_comments['id']] = $my_comments; }
+  if (isset($my_tickets))  { $sets[$my_tickets['id']]  = $my_tickets; }
+  if (isset($my_assigned)) { $sets[$my_assigned['id']] = $my_assigned; }
+  if (isset($my_media))    { $sets[$my_media['id']]    = $my_media; }
+  $variables['tabs'] = _az_content_build_tabs('main', $sets);
+
+  $variables['sidebar'] = [
+    'dashboard_block' => (isset($dashboard_block)) ? $dashboard_block : NULL,
+  ];
+
+  // Create sidebar donate block.
+  $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+  $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()
+    ->getViewBuilder('block')
+    ->view($block_entity);
 }
 
 /**

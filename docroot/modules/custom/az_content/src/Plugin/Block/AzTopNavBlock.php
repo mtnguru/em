@@ -9,12 +9,10 @@
  * Displays children pages as a block
  */
 
-namespace Drupal\az_groups\Plugin\Block;
+namespace Drupal\az_content\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Url;
 use Drupal\Core\Path;
 use Drupal\Core\Menu;
-use Drupal\az_groups\AzGroupConfig;
 
 /**
  * Provides a 'Next Previous' block.

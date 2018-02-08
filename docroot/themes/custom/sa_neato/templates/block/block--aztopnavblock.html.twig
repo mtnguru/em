@@ -42,14 +42,16 @@
 %}
 
 <div{{ attributes.addClass(classes) }}>
-  <div class="title-container">
-    <h2>
-      <a href="/home">
-        <span class="ethereal">Ethereal</span>
-        <span class="matters">Matters</span>
-      </a>
-    </h2>
-  </div>
+  {% if not is_front %}
+    <div id="ethereal-matters-nav" class="ethereal-matters-logo">
+      <h2>
+        <a href="/home">
+          <span class="ethereal">Ethereal</span>
+          <span class="matters">Matters</span>
+        </a>
+      </h2>
+    </div>
+  {% endif %}
 
   <div class="content-container">
     {% block content %}
