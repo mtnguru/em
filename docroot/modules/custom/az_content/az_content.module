@@ -701,6 +701,7 @@ function _az_content_create_home($node, &$variables) {
   // Get view with active communities
   $variables['view_home_communities'] = views_embed_view('az_groups', 'block_communities');
 
+  /*
   $variables['block_recent_activity'] = _az_content_build_block('recent-activity', [
     'type' => 'entity-stream',
     'id' => 'recent-activity',
@@ -711,6 +712,7 @@ function _az_content_create_home($node, &$variables) {
     'more' => 'none',
     'empty' => 'NO DISPLAY',
   ]);
+  */
 }
 
 function _az_content_create_dashboard($node, &$variables) {
