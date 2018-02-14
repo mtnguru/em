@@ -54,7 +54,36 @@
 
   <div class="content-container">
     {% block content %}
-      {{ content }}
+      {{ content.top_menu }}
+
+      <div class="user-menu">
+
+        {% if logged_in %}
+          <div id="account-menu" class="logged-in">
+            {% if (user_picture_url) %}
+              <img src="{{ user_picture_url }}" />
+            {% else %}
+              <span class="user-name">
+                {{ user_name }}
+              </span>
+            {% endif %}
+            {{ content.account_menu.menu }}
+          </div>
+        {% else %}
+          <div id="account-menu" class="do-login">
+            <a href="/user/login" class="login">Login/Join</a>
+          </div>
+        {% endif %}
+
+        <div id="accessibility">
+          <div class="accessibility-hover fa fa-universal-access"></div>
+          <div class="popup">
+            <input id="dyslexia-button" type="checkbox" href="#" class="checkbox">
+            <span class="label">&nbsp;{{ 'OpenDyslexia Font'|t }}</span>
+          </div>
+        </div>
+
+      </div>
     {% endblock %}
   </div>
 </div>

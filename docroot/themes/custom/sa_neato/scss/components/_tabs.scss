@@ -87,7 +87,7 @@ body.entity-node-canonical {
         opacity: 0;
         position: absolute;
         right: -20px;
-        top: -20px;
+        top: -500px;
         z-index: 20;
         background-color: $color-dark-green;
         border: 2px solid $color-green;
@@ -114,6 +114,7 @@ body.entity-node-canonical {
 
         ul.tabs {
           right: -20px;
+          top: -20px;
 
           opacity: 1;
         }

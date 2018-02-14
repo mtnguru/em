@@ -249,19 +249,31 @@ function _az_content_add_node_to_media($media, $articleId) {
  * @param $variables
  */
 function az_content_preprocess_block(&$variables) {
-/*
   switch ($variables['plugin_id']) {
     case 'az_top_nav_block':
-      $snippet = \Drupal::entityManager()->getStorage('node')->load(377);
-      $build = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
-      $variables['logo_popup'] = [
-        '#type' => 'container',
-        '#attributes' => ['class' => ['popup']],
-        'contents' => $build,
-      ];
+      $uid = \Drupal::currentUser()->id();
+      if ($uid > 0) {
+        $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
+        if ($user->field_picture->isEmpty()) {
+          $variables['user_name'] = $user->name[0]->value;
+        }
+        else {
+          $fid = $user->field_picture[0]->target_id;
+          $file = \Drupal\file\Entity\File::load($fid);
+          $variables['user_picture_url'] = \Drupal\image\Entity\ImageStyle::load('thumbnail')
+            ->buildUrl($file->getFileUri());
+        }
+      }
+
+//    $snippet = \Drupal::entityManager()->getStorage('node')->load(377);
+//    $build = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
+//    $variables['logo_popup'] = [
+//      '#type' => 'container',
+//      '#attributes' => ['class' => ['popup']],
+//      'contents' => $build,
+//    ];
       break;
   }
-*/
 }
 
 function az_content_wrap_block($title, $block) {

@@ -55,7 +55,7 @@ class AzTopNavBlock extends BlockBase {
     if ($uid > 0) {
       $items[] = ['#markup' => '<a href="/dashboard">View My Dashboard</a>'];
       $items[] = ['#markup' => '<a href="/user">View My Profile Page</a>'];
-      $items[] = ['#markup' => '<a href="/user/' . \Drupal::currentUser()->id() . '/edit">Edit My Account Settings</a>'];
+      $items[] = ['#markup' => '<a href="/user/' . \Drupal::currentUser()->id() . '/edit">Edit Account Settings</a>'];
       $items[] = ['#markup' => '<a href="/user/logout">Logout</a>'];
       // Create the top menu
       $build['account_menu'] = [
@@ -63,6 +63,7 @@ class AzTopNavBlock extends BlockBase {
         '#attributes' => ['class' => ['user-menu']],
         'menu' => [
           '#theme' => 'item_list',
+          '#attributes' => ['class' => ['menu', 'popup']],
           '#items' => $items,
         ],
       ];
