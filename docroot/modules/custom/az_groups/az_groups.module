@@ -81,7 +81,7 @@ function az_groups_preprocess_group(&$variables) {
   $home = [
     'type' => 'entity-render',
     'id' => 'home',
-    'tab' => 'Home',
+    'label' => 'Home',
 //  'title' => '<h2>Home</h2>',
     'viewMode' => 'home_tab',
     'entityType' => 'group',
@@ -92,7 +92,7 @@ function az_groups_preprocess_group(&$variables) {
   $activity = [
     'type' => 'entity-stream',
     'id' => 'recent-activity',
-    'tab' => 'Activity',
+    'label' => 'Activity',
     'types' => ['article', 'event', 'book', 'news'],
     'groups' => $group->id(),
     'title' => 'Recent Activity',
@@ -104,7 +104,7 @@ function az_groups_preprocess_group(&$variables) {
   $comments = [
     'type' => 'entity-stream',
     'id' => 'recent-comments',
-    'tab' => 'Comments',
+    'label' => 'Comments',
     'title' => 'Recent Comments',
     'entityType' => 'comment',
     'types' => 'UNSET',

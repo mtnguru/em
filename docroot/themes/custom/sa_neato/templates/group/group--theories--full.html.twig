@@ -41,7 +41,7 @@
 #}
 <div{{ attributes.setAttribute('id', 'main-content-group') }}>
 
-    <div class='sidebar-left'>
+    <div class='sidebar sidebar-left'>
       {{ block_booknavigation }}
       {% if community_status is not empty %}
         <div class="community-status">
@@ -50,7 +50,7 @@
       {% endif %}
       {{ block_groupoperations }}
       {% if view_group_members %}
-        <div class="block-members block block-sidebar">
+        <div class="block-members block-border">
           <div class="title-container">
             <h2>Members</h2>
           </div>

@@ -1,53 +1,31 @@
 
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
-  {% if not page %}
-    <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
-  {% endif %}
+  <section class="section-top">
+    <section class="sidebar-right">
+      {% if logged_in %}
+        <div class="block-welcome block-border">{{ snippet_home_welcome }}</div>
+      {% else %}
+        <div class="block-login block-border">{{ snippet_home_login }}</div>
+      {% endif %}
 
+      <div class="snippet-ethereal-matters">
+        {{ snippet_home_em }}
+      </div>
+    </section>
 
-  <div id="ethereal-matters-logo" class="ethereal-matters-logo">
-    <h2>
-      <a href="/home">
-        <span class="ethereal">Ethereal</span>
-        <span class="matters">Matters</span>
-      </a>
-    </h2>
-  </div>
+    <section class="content-left">
+      <div class="snippet-announcement">{{ snippet_home_announcement }}</div>
+      <div class="snippet-communities">{{ snippet_home_communities }}</div>
+      <div class="block-view-communities">{{ view_home_communities }}</div>
+    </section>
+  </section>
 
-  <div class="header">
-    <div class="section-title">
-      <h1>{{ label }}</h1>
-      {{ content.body }}
+  <section class="section-bottom">
+    <div class="activity">
+      <hr>
+      <div class="block-recent-activity">{{ block_recent_activity }}</div>
     </div>
-
-    {% if logged_in %}
-      <div class="block-welcome">{{ block_welcome_home }}</div>
-    {% else %}
-      <div class="block-login">{{ block_login_home }}</div>
-    {% endif %}
-
-    <div class="open-source-science">
-      {{ section_open_source_science }}
-    </div>
-    <div class="section-announcement">
-      {{ section_announcement }}
-    </div>
-
-  </div>
-
-  <div class="communities">
-    <div class="block-communities">{{ block_community }}</div>
-
-    {% for community in communities %}
-      <div class="block-community">{{ community }}</div>
-    {% endfor %}
-  </div>
-
-  <div class="sidebar-right">
-
-    <div class="block-recent-content">{{ block_recent_content }}</div>
-    <div class="block-donate-home">{{ block_donate_home }}</div>
-  </div>
+topsection>
 
   {{ content.links }}
 </article>

@@ -36,22 +36,21 @@
 {%
   set classes = [
     'block',
+    'block-border',
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
   ]
 %}
 
 <div{{ attributes.addClass(classes) }}>
-
-  <div id="ethereal-matters-nav" class="ethereal-matters-logo">
-    <h2>
-      <a href="/home">
-        <span class="ethereal">Ethereal</span>
-        <span class="matters">Matters</span>
-      </a>
-    </h2>
+  <div class="title-container">
+    {{ title_prefix }}
+    {% if label %}
+      <h2 {{ title_attributes }}>{{ label }}</h2>
+    {% endif %}
+    {{ title_suffix }}
   </div>
-
+  
   <div class="content-container">
     {% block content %}
       {{ content }}

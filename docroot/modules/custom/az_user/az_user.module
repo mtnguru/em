@@ -10,21 +10,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\node\Entity\Node;
 
 /**
- * Implements hook_theme().
- */
-/*
-function az_user_theme($existing, $type, $theme, $path) {
-  return;
-  return [
-    'form__user_login_form' => [
-      'render element' => 'form',
-      'template' => 'form--user-login-form',
-    ],
-  ];
-}
-*/
-
-/**
  * Implements hook_form_FORM_ID_alter().   user_form
  */
 function az_user_form_user_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -99,7 +84,7 @@ function az_user_preprocess_user(&$variables) {
   $activity = [
     'type' => 'entity-stream',
     'id' => 'recent-activity',
-    'tab' => 'Activity',
+    'label' => 'Activity',
     'title' => 'Recent Activity',
     'author' => $user->id(),
     'status' => NODE_PUBLISHED,
@@ -110,19 +95,42 @@ function az_user_preprocess_user(&$variables) {
   $unpublished = [
     'type' => 'entity-stream',
     'id' => 'unpublished-activity',
-    'tab' => 'Unpublished',
+    'label' => 'Unpublished',
     'title' => 'Recent Unpublished Activity',
     'author' => $user->id(),
     'status' => NODE_NOT_PUBLISHED,
     'empty' => 'No unpublished activity for this user',
   ];
 
+  // Create Users Tickets tab
+  if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
+    $tickets = [
+      'type' => 'entity-stream',
+      'id' => 'tickets',
+      'label' => 'My Tickets',
+      'types' => 'ticket',
+      'title' => 'Tickets I created',
+      'author' => $user->id(),
+      'empty' => 'NO DISPLAY',
+    ];
+
+    $assigned = [
+      'type' => 'entity-stream',
+      'id' => 'assigned',
+      'label' => 'My Assigned Tickets',
+      'types' => 'ticket',
+      'title' => 'Tickets Assigned to Me',
+      'assigned' => $user->id(),
+      'empty' => 'NO DISPLAY',
+    ];
+  }
+
   // Create Users Comments tab
   $comments = [
     'type' => 'entity-stream',
     'entityType' => 'comment',
     'id' => 'comments',
-    'tab' => 'Comments',
+    'label' => 'Comments',
     'authorComment' => $user->id(),
     'title' => 'Recent Comments',
     'status' => NODE_PUBLISHED,
@@ -133,6 +141,7 @@ function az_user_preprocess_user(&$variables) {
   if (isset($activity))    $sets[$activity['id']]    = $activity;
   if (isset($unpublished)) $sets[$unpublished['id']] = $unpublished;
   if (isset($tickets))     $sets[$tickets['id']]     = $tickets;
+  if (isset($assigned))    $sets[$assigned['id']]    = $assigned;
   if (isset($comments))    $sets[$comments['id']]    = $comments;
   $variables['tabs'] = _az_content_build_tabs('main', $sets);
 }

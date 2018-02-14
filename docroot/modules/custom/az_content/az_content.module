@@ -391,7 +391,7 @@ function _az_content_build_block($id, $set) {
 
 function _az_content_build_tab(&$set) {
 
-  $tab = (isset($set['tab'])) ? $set['tab'] : '';
+  $label = (isset($set['label'])) ? $set['label'] : '';
   switch ($set['type']) {
 
     // If this is stream then add the #items to the tab.
@@ -424,7 +424,7 @@ function _az_content_build_tab(&$set) {
         return null;
       }
 
-      $tab .= ' - ' . $set['totalRows'];  // Add number of items found by query.
+      $label .= ' - ' . $set['totalRows'];  // Add number of items found by query.
       break;
 
     case 'entity-render':
@@ -441,7 +441,7 @@ function _az_content_build_tab(&$set) {
 
   $tab = [
     'id' => $set['id'],
-    'label' => $tab,
+    'label' => $label,
     'classes' => $classes,
     'title' => (isset($set['title'])) ? $set['title'] : null,
   ];
@@ -647,6 +647,7 @@ function az_content_preprocess_node(&$variables) {
 
       // Dashboard - Front page
       if (\Drupal::service('path.matcher')->isFrontPage()) {
+        _az_content_create_home($node, $variables);
       }
 
       if ($node->id() == 311) {   // User Dashboard
@@ -656,8 +657,48 @@ function az_content_preprocess_node(&$variables) {
   }
 }
 
+function _az_content_render_node($nid, $viewMode = 'full') {
+  return \Drupal::entityTypeManager()
+    ->getViewBuilder('node')
+    ->view(\Drupal::entityManager()->getStorage('node')->load($nid), $viewMode);
+}
+
+function _az_content_wrap_block($title, $content) {
+  $build = [
+    'title' => [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['title-container']],
+      'markup' => ['#markup' => '<h2>' . $title . '</h2>'],
+    ],
+    'content' => [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['content-container']],
+      'content' => $content,
+    ],
+  ];
+  return $build;
+}
+
 function _az_content_create_home($node, &$variables) {
 
+  $variables['snippet_home_em']          = _az_content_render_node(377, 'full');
+  $variables['snippet_home_welcome']     = _az_content_wrap_block('Welcome back', _az_content_render_node(482, 'full'));
+  $variables['snippet_home_login']       = _az_content_wrap_block('Login/Join', _az_content_render_node(481, 'full'));
+  $variables['snippet_home_communities'] = _az_content_render_node(479, 'full');
+
+  // Get view with active communities
+  $variables['view_home_communities'] = views_embed_view('az_groups', 'block_communities');
+
+  $variables['block_recent_activity'] = _az_content_build_block('recent-activity', [
+    'type' => 'entity-stream',
+    'id' => 'recent-activity',
+    'status' => NODE_PUBLISHED,
+    'title' => 'Recent Activity',
+    'viewMode' => 'teaser',
+    'pageNumItems' => 6,
+    'more' => 'none',
+    'empty' => 'NO DISPLAY',
+  ]);
 }
 
 function _az_content_create_dashboard($node, &$variables) {
@@ -667,17 +708,14 @@ function _az_content_create_dashboard($node, &$variables) {
   // Create Announcement block at top of page
   if (!$node->field_announcement->isEmpty()) {
     $nid = $node->field_announcement->getValue()[0]['target_id'];
-    $snippet = \Drupal::entityManager()->getStorage('node')->load($nid);
-    $variables['section_announcement'] = \Drupal::entityTypeManager()
-      ->getViewBuilder('node')
-      ->view($snippet, 'full');
+    $variables['snippet_dashboard_announcement'] = _az_content_render_node($nid, 'full');
   }
 
   // Create Recent Activity tab
   $activity = [
     'type' => 'entity-stream',
     'id' => 'recent-activity',
-    'tab' => 'Activity',
+    'label' => 'Activity',
     'types' => ['article', 'event', 'book', 'news'],
     'title' => 'Recent Activity',
   //        'viewMode' => 'teaser_short',
@@ -689,7 +727,7 @@ function _az_content_create_dashboard($node, &$variables) {
   $comments = [
     'type' => 'entity-stream',
     'id' => 'recent-comments',
-    'tab' => 'Comments',
+    'label' => 'Comments',
     'title' => 'Recent Comments',
     'entityType' => 'comment',
     'types' => 'UNSET',
@@ -724,7 +762,7 @@ function _az_content_create_dashboard($node, &$variables) {
       $unpublished = [
         'type' => 'entity-stream',
         'id' => 'unpublished-activity',
-        'tab' => 'Unpublished',
+        'label' => 'Unpublished',
         'title' => 'Unpublished Activity',
         'status' => NODE_NOT_PUBLISHED,
         'empty' => 'NO DISPLAY',
@@ -735,7 +773,7 @@ function _az_content_create_dashboard($node, &$variables) {
       $tickets = [
         'type' => 'entity-stream',
         'id' => 'tickets',
-        'tab' => 'Tickets',
+        'label' => 'Tickets',
         'title' => 'Tickets',
         'types' => 'ticket',
         'empty' => 'NO DISPLAY',
@@ -746,7 +784,7 @@ function _az_content_create_dashboard($node, &$variables) {
     $my_activity = [
       'type' => 'entity-stream',
       'id' => 'my-activity',
-      'tab' => 'My Activity',
+      'label' => 'My Activity',
       'title' => 'My Activity',
       'author' => $user->id(),
       'types' => 'UNSET',
@@ -757,9 +795,8 @@ function _az_content_create_dashboard($node, &$variables) {
     $my_tickets = [
       'type' => 'entity-stream',
       'id' => 'my-tickets',
-      'tab' => 'My Tickets',
+      'label' => 'My Tickets',
       'author' => $user->id(),
-      'status' => 'UNSET',
       'title' => 'My Tickets',
       'types' => 'ticket',
       'empty' => 'NO DISPLAY',
@@ -769,7 +806,7 @@ function _az_content_create_dashboard($node, &$variables) {
     $my_assigned = [
       'type' => 'entity-stream',
       'id' => 'assigned',
-      'tab' => 'My Assigned',
+      'label' => 'My Assigned Tickets',
       'assigned' => $user->id(),
       'title' => 'My Assigned Tickets',
       'types' => 'ticket',
@@ -780,7 +817,7 @@ function _az_content_create_dashboard($node, &$variables) {
     $my_comments = [
       'type' => 'entity-stream',
       'id' => 'my-comments',
-      'tab' => 'My Comments',
+      'label' => 'My Comments',
       'title' => 'My Comments',
       'entityType' => 'comment',
       'authorComment' => $user->id(),

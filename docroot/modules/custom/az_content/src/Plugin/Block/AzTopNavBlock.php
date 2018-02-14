@@ -45,22 +45,29 @@ class AzTopNavBlock extends BlockBase {
     $tree = $menu_tree_service->transform($tree, $manipulators);
     $topMenu = $menu_tree_service->build($tree);
 
-    // Load the tree based on this set of parameters.
-    $tree = $menu_tree_service->load('account', $parameters);
-    $manipulators = [
-      ['callable' => 'menu.default_tree_manipulators:checkNodeAccess'],
-      ['callable' => 'menu.default_tree_manipulators:checkAccess'],
-      ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
-    ];
-    $tree = $menu_tree_service->transform($tree, $manipulators);
-    $accountMenu = $menu_tree_service->build($tree);
-
-    return [
+    $build = [
       '#type' => 'container',
       '#attributes' => ['class' => ['az-top']],
       'top_menu' => $topMenu,
-      'account_menu' => $accountMenu,
     ];
+
+    $uid = \Drupal::currentUser()->id();
+    if ($uid > 0) {
+      $items[] = ['#markup' => '<a href="/dashboard">View My Dashboard</a>'];
+      $items[] = ['#markup' => '<a href="/user">View My Profile Page</a>'];
+      $items[] = ['#markup' => '<a href="/user/' . \Drupal::currentUser()->id() . '/edit">Edit My Account Settings</a>'];
+      $items[] = ['#markup' => '<a href="/user/logout">Logout</a>'];
+      // Create the top menu
+      $build['account_menu'] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['user-menu']],
+        'menu' => [
+          '#theme' => 'item_list',
+          '#items' => $items,
+        ],
+      ];
+    }
+    return $build;
   }
 }
 

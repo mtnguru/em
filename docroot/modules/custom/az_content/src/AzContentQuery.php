@@ -46,6 +46,16 @@ class AzContentQuery {
       $query->condition('nfd.type', $set['types'], (is_array($set['types'])) ? 'IN' : '=');
     }
 
+    ////////// Promoted to Front Page
+    if (isset($set['promoted'])) {
+      $query->condition('nfd.promote', $set['promoted'], '=');
+    }
+
+    ////////// Sticky to top of list
+    if (isset($set['sticky'])) {
+      $query->condition('nfd.sticky', $set['sticky'], '=');
+    }
+
     ////////// Exclude NID's
     if (isset($set['exclude'])) {
       $query->condition('nfd.nid', $set['exclude'], (is_array($set['exclude'])) ? 'NOT IN' : '!=');
@@ -95,6 +105,11 @@ class AzContentQuery {
     //SORTS
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     if (!$sorted) {
+      // First sort by sticky to top of lists flag
+      if (isset($set['sticky'])) {
+        $query->orderBy('nfd.sticky', 'DESC');
+      }
+
       $sort = (isset($set['sort'])) ? $set['sort'] : 'changed';
       $order = (isset($set['sortOrder'])) ? $set['sortOrder'] : 'DESC';
       switch ($sort) {

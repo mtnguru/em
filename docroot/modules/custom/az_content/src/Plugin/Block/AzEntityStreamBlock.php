@@ -67,7 +67,7 @@ class AzEntityStreamBlock extends BlockBase {
     if (isset($set['class'])) {
       $classes[] = $set['class'];
     }
-    if (isset($set['tab'])) {
+    if (isset($set['label'])) {
       $classes[] = 'tab-content';
     } else {
       $classes[] = 'block-content';
