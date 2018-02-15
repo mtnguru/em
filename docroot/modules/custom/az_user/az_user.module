@@ -85,7 +85,7 @@ function az_user_preprocess_user(&$variables) {
     'type' => 'entity-stream',
     'id' => 'recent-activity',
     'label' => 'Activity',
-    'title' => 'Recent Activity',
+    'title' => 'Activity',
     'author' => $user->id(),
     'status' => NODE_PUBLISHED,
     'empty' => 'No activity for this user',
@@ -107,7 +107,7 @@ function az_user_preprocess_user(&$variables) {
     $tickets = [
       'type' => 'entity-stream',
       'id' => 'tickets',
-      'label' => 'My Tickets',
+      'label' => 'Tickets',
       'types' => 'ticket',
       'title' => 'Tickets I created',
       'author' => $user->id(),
@@ -117,7 +117,7 @@ function az_user_preprocess_user(&$variables) {
     $assigned = [
       'type' => 'entity-stream',
       'id' => 'assigned',
-      'label' => 'My Assigned Tickets',
+      'label' => 'Assigned Tickets',
       'types' => 'ticket',
       'title' => 'Tickets Assigned to Me',
       'assigned' => $user->id(),
@@ -132,7 +132,7 @@ function az_user_preprocess_user(&$variables) {
     'id' => 'comments',
     'label' => 'Comments',
     'authorComment' => $user->id(),
-    'title' => 'Recent Comments',
+    'title' => 'Comments',
     'status' => NODE_PUBLISHED,
     'empty' => 'No comments for this user',
   ];

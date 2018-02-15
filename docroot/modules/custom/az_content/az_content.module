@@ -677,17 +677,19 @@ function _az_content_render_node($nid, $viewMode = 'full') {
 
 function _az_content_wrap_block($title, $content) {
   $build = [
-    'title' => [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['title-container']],
-      'markup' => ['#markup' => '<h2>' . $title . '</h2>'],
-    ],
     'content' => [
       '#type' => 'container',
       '#attributes' => ['class' => ['content-container']],
       'content' => $content,
     ],
   ];
+  if (!empty($title)) {
+    $build['title'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['title-container']],
+      'markup' => ['#markup' => '<h2>' . $title . '</h2>'],
+    ];
+  }
   return $build;
 }
 
@@ -695,7 +697,7 @@ function _az_content_create_home($node, &$variables) {
 
   $variables['snippet_home_em']          = _az_content_render_node(377, 'full');
   $variables['snippet_home_welcome']     = _az_content_wrap_block('Welcome back', _az_content_render_node(482, 'full'));
-  $variables['snippet_home_login']       = _az_content_wrap_block('Login/Join', _az_content_render_node(481, 'full'));
+  $variables['snippet_home_login']       = _az_content_wrap_block(null, _az_content_render_node(481, 'full'));
   $variables['snippet_home_communities'] = _az_content_render_node(479, 'full');
 
   // Get view with active communities
