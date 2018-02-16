@@ -112,7 +112,7 @@ function az_mail_mail_alter(&$message) {
     'langcode' => $message['langcode'],
   ];
 
-  $signature = '<div>Mail sent from <a href="https://realscience.rocks">RealScience.Rocks</a></div>';
+  $signature = '<div>Mail sent from <a href="https://etherealmatters.org">Ethereal Matters</a></div>';
 //$body = $message['params']['message'];
 //$body .= $signature;
 

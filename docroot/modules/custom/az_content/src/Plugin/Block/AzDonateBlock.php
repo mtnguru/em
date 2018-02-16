@@ -50,7 +50,7 @@ class AzDonateBlock extends BlockBase {
       if ($node) {
         return [
           '#theme' => 'block_donate',
-          '#attributes' => ['class' => ['donate-block']],
+          '#attributes' => ['class' => ['donate-block', 'block-border']],
           '#description' => $node->body->value,
           '#more_url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$node->id()),
         ];
@@ -58,7 +58,7 @@ class AzDonateBlock extends BlockBase {
     }
     return [
       '#type' => 'container',
-      '#attributes' => ['class' => ['donate-block']],
+      '#attributes' => ['class' => ['donate-block', 'block-border']],
       'description' => ['#markup' => 'No node selected to display'],
     ];
   }

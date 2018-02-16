@@ -8,7 +8,7 @@
 
 .view-id-az_groups {
   .view-content {
-    margin: 10px -15px;
+    margin: 15px -15px;
     @include clearfix;
   }
 
@@ -30,7 +30,7 @@
     }
 
     .group-image {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       img {
         @extend %box-shadow;
       }
@@ -38,7 +38,7 @@
 
     .group-container {
       position: relative;
-      padding: 10px 20px;
+      padding: 15px 20px;
     }
 
     .group-label {
@@ -46,20 +46,6 @@
       z-index: 5;
       text-shadow: 1px 1px 3px #104;
       margin-bottom: 10px;
-
-      @include media($bp320only) {
-//      top: 10px;
-//      left: 10px;
-//      right: 10px;
-//      bottom: 10px;
-      }
-
-      @include media($bp580) {
-//      top: 20px;
-//      left: 0;
-//      right: 0;
-//      bottom: 0;
-      }
 
       a {
         display: block;
