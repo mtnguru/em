@@ -136,6 +136,7 @@ function az_media_file_presave($file) {
       ->realpath($file->getFileUri());  // /home/atom/private
     $info = pathinfo($srcPath);
     if ($info['extension'] == 'png') {
+      return; // don't modify png files - they lose transparency alpha channel.
       $uinfo = parse_url($file->getFileUri());
       $filename = $uinfo['host'] . '.jpg';
       $file->setFileUri($uinfo['scheme'] . '://' . $filename);

@@ -84,13 +84,15 @@
     {{ content.field_tags }}
   {% endif %}
 
-  <div id="view-select-atom">
-    <div class="header">
-      <button id="atom--select-close" class="close-button fa fa-close"></button>
-      <h2>Select Atom</h2>
+  {% if content.view_select_atom is not empty %}
+    <div id="view-select-atom">
+      <div class="header">
+        <button id="atom--select-close" class="close-button fa fa-close"></button>
+        <h2>Select Atom</h2>
+      </div>
+      {{ content.view_select_atom }}
     </div>
-    {{ content.view_select_atom }}
-  </div>
+  {% endif %}
 
   {{ content.links }}
 </article>
