@@ -64,12 +64,6 @@ function az_groups_preprocess_group(&$variables) {
     'view_mode' => $variables['view_mode'],
   ];
 
-  // Show SAM status block - shown in sidebar.
-  if ($group->label() == 'Structured Atom Model') {
-    $build = \Drupal::entityTypeManager()->getViewBuilder('node')->view(Node::load(425), 'full');
-    $variables['community_status'] = $build;
-  }
-
   $block_entity = Drupal\block\Entity\Block::load('groupoperations');
   $variables['block_groupoperations'] = \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
 

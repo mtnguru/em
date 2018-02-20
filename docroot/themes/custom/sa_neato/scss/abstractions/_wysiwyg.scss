@@ -201,6 +201,11 @@ article.embedded-entity {
       display: none;
     }
   }
+  .az-view-mode-atomizer {
+    .az-canvas-wrapper {
+      width: 100%;
+    }
+  }
 }
 
 .cke_reset_all * {

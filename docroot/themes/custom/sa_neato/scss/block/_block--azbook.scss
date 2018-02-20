@@ -1,7 +1,6 @@
 
 #block-azbooknavigation {
   line-height: 1.2;
-  margin-bottom: 20px;
 
   div.content-container {
 
@@ -72,6 +71,7 @@
     #book-pages {
       position: relative;
       margin-left: 12px;
+      margin-bottom: 20px;
 
       &.hide-unpublished {
         .menu-item--unpublished {
@@ -88,6 +88,11 @@
         padding: 0 0 0 .8em;
       }
     }
+
+    #book-status {
+      margin-bottom: 20px;
+    }
+
     hr {
       margin: 0 0 12px;
     }

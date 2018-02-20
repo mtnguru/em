@@ -83,5 +83,11 @@
         </div>
       {% endif %}
     {% endif %}
+
   </div>
+  {% if status is not empty %}
+    <div id="book-status">
+      {{ status|raw }}
+    </div>
+  {% endif %}
 </nav>

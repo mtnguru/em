@@ -6,6 +6,7 @@ use Drupal\az_groups\AzGroupQuery;
 use Drupal\book\Plugin\Block\BookNavigationBlock;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 
 /**
  * Provides a 'Book navigation' block.
@@ -174,9 +175,18 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         }
       }
 
+      $showUnpublished = \Drupal::currentUser()->hasPermission('show unpublished book pages');
+      $num_published = 0;
+      $num_total = 0;
       // Append children to their parent.
       foreach ($results as &$result) {
         if (empty($result)) continue;
+        $num_total += 1;
+        if ($result->status == 1) {
+          $num_published += 1;
+        } else if ($result->status == 0 && !$showUnpublished) {
+          continue;
+        }
 
         $pid = $result->pid;
         $nid = $result->nid;
@@ -299,6 +309,17 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       if ($is_book_page) {
         $build['#book_title_classes'] = 'menu-item--active';
       }
+
+      // Show SAM status block - shown in sidebar.
+      if ($group->label() == 'Structured Atom Model') {
+        $node = Node::load(425);
+        $body = $node->body->value;
+        $body = preg_replace('/([^ ])\&nbsp;([^ ])/', '$1 $2', $body);
+        $body = preg_replace('/\$num_published/', $num_published, $body);
+        $body = preg_replace('/\$num_total/', $num_total, $body);
+        $build['#status'] = $body;
+      }
+
       return $build;
     }
     return [];
