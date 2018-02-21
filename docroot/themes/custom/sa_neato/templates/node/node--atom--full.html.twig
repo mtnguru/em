@@ -111,6 +111,9 @@
     </div>
 
     {{ content.body }}
+    {% if display_notes %}
+      {{ content.field_notes }}
+    {% endif %}
     {{ content.field_atomic_structure }}
 
     {{ content.links }}

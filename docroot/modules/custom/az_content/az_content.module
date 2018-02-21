@@ -6,12 +6,13 @@
  */
 
 use Drupal\az_content\AzContentQuery;
-use Drupal\az_content\AzMaestroInit;
 use Drupal\az_groups\AzGroupQuery;
 use Drupal\comment\Entity\Comment;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
 use Drupal\Component\Utility\Random;
 use Drupal\Core\Form\FormStateInterface;
@@ -102,15 +103,57 @@ function az_content_form_node_ticket_form_alter(&$form, FormStateInterface $form
 }
 
 /**
+ * Implements hook_entity_access().
+ *
+ * Limit access to hidden groups.
+ *
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ * @param $op
+ * @param \Drupal\Core\Session\AccountInterface $account
+ * @return \Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
+ */
+function az_content_entity_access(EntityInterface $entity, $op, AccountInterface $account) {
+  switch ($entity->getEntityTypeId()) {
+    case 'group':
+      if ($entity->field_status->value == 'hidden') {
+        if ($entity->field_status->value == 'hidden' && !\Drupal::currentUser()->hasPermission('az groups view hidden')) {
+          return AccessResult::forbidden();
+        }
+      }
+      break;
+  }
+  return AccessResult::neutral();
+}
+
+/**
+ * Implements hook_node_access().
+ *
+ * Custom access permissions for nodes.
+ *   Limit access to content in hidden groups.
+ *
+ * @param \Drupal\node\NodeInterface $node
+ * @param $op
+ * @param \Drupal\Core\Session\AccountInterface $account
+ * @return \Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
+ */
+function az_content_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  if ($gid = AzGroupQuery::inGroup($node)) {
+    $group = \Drupal::entityManager()->getStorage('group')->load($gid);
+    $status = $group->field_status->value;
+    if ($status == 'hidden' && !\Drupal::currentUser()->hasPermission('az groups view hidden')) {
+      return AccessResult::forbidden();
+    }
+  }
+  return AccessResult::neutral();
+}
+
+/**
  * Implements hook_node_presave().
+ *
+ * @param \Drupal\node\Entity\Node $node
  */
 function az_content_node_presave(Node $node) {
   if  ($node->getType() == 'article' || $node->getType() == 'book') {
-
-    // If this page belongs to a book, and the book is in a group, create group content reference.
-    if (5) {
-
-    }
 
     // If there is a primary image add reference back to the page.
     if ($node->hasField('field_media')) {
@@ -204,7 +247,6 @@ function az_content_preprocess_comment(&$variables) {
  * @param $variables
  */
 function az_content_preprocess_page(&$variables) {
-
   if ($_SERVER['HTTP_HOST'] == 'atom' ||
       $_SERVER['HTTP_HOST'] == 'structuredatom.org' ||
       $_SERVER['HTTP_HOST'] == 'structuredatom.com') {
@@ -264,14 +306,6 @@ function az_content_preprocess_block(&$variables) {
             ->buildUrl($file->getFileUri());
         }
       }
-
-//    $snippet = \Drupal::entityManager()->getStorage('node')->load(377);
-//    $build = \Drupal::entityTypeManager()->getViewBuilder('node')->view($snippet, 'full');
-//    $variables['logo_popup'] = [
-//      '#type' => 'container',
-//      '#attributes' => ['class' => ['popup']],
-//      'contents' => $build,
-//    ];
       break;
   }
 }
@@ -304,7 +338,6 @@ function _az_content_init_stream_set($set) {
     'id' => 'init-stream',
     'types' => ['article', 'event', 'book', 'news', 'glossary'],
     'more' => 'ajax',
-//  'getTotalRows' => TRUE,
     'viewMode' => 'teaser',
     'entityType' => 'node',
     'pageNum' => 0,
@@ -324,7 +357,6 @@ function _az_content_init_stream_set($set) {
 }
 
 function _az_content_build_block($id, $set) {
-
   switch ($set['type']) {
 
     // If this is stream then add the #items to the tab.
@@ -356,8 +388,6 @@ function _az_content_build_block($id, $set) {
       if ($set['totalRows'] == 0  && $set['empty'] == 'NO DISPLAY') {
         return null;
       }
-
-//    $tab .= ' - ' . $set['totalRows'];  // Add number of items found by query.
       break;
 
     case 'entity-render':
@@ -666,6 +696,12 @@ function az_content_preprocess_node(&$variables) {
         _az_content_create_dashboard($node, $variables);
       }
       break;
+
+    case 'atom':
+      if (\Drupal::currentUser()->hasPermission('atomizer display structure')) {
+        $variables['display_notes'] = true;
+      }
+      break;
   }
 }
 
@@ -734,7 +770,7 @@ function _az_content_create_dashboard($node, &$variables) {
     'label' => 'Activity',
     'types' => ['article', 'event', 'book', 'news'],
     'title' => 'Recent Activity',
-  //        'viewMode' => 'teaser_short',
+    'groupsExclude' => 12,
     'status' => NODE_PUBLISHED,
     'empty' => 'No activity for this site',
   ];

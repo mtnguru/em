@@ -6,6 +6,15 @@ body.page-node-type-atom {
       margin-bottom: 20px;
     }
 
+    .field--name-field-notes {
+      margin-bottom: 20px;
+
+      .field__label {
+        margin-bottom: 10px;
+        color: $color-orange;
+      }
+    }
+
     .field--name-field-atomic-structure {
       text-align: center;
       width: 100%;

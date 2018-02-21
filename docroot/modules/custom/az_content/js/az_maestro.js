@@ -35,6 +35,7 @@
       $('#az-page-' + id).addClass('active');  // Set the first tab active.
       var set = getSet(id);
       getContent(set);
+      $('#' + set['id']).addClass('active');
 
       $tabs.click(function () {        // Set event handlers on tabs
         var id = this.id.replace('az-tab-', '');

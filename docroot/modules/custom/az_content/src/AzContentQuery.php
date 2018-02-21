@@ -85,6 +85,13 @@ class AzContentQuery {
       $query->condition('gcfd.gid', $set['groups'], (is_array($set['groups'])) ? 'IN' : '=');
     }
 
+    ////////// Exclude content from this/these groups.
+    if (isset($set['groupsExclude'])) {
+      $query->join('group_content_field_data', 'gcfd', 'gcfd.entity_id = nfd.nid');
+      $query->condition('gcfd.type', 'theories-group_membership', '!=');
+      $query->condition('gcfd.gid', $set['groupsExclude'], (is_array($set['groupsExclude'])) ? 'NOT IN' : '!=');
+    }
+
     ////////// Page - Ticket CT only - Tickets record which page they relate to.
     if (isset($set['pages'])) {
       $query->join('node__field_page', 'nfp', 'nfd.nid = nfp.entity_id');
@@ -214,6 +221,20 @@ class AzContentQuery {
     if (isset($set['topics'])) {
       $query->join('node__field_topics', 'nft', 'nfd.nid = nft.entity_id');
       $query->condition('nft.field_topics_target_id', $set['topics'], (is_array($set['topics'])) ? 'IN' : '=');
+    }
+
+    ////////// Groups
+    if (isset($set['groups'])) {
+      $query->join('group_content_field_data', 'gcfd', 'gcfd.entity_id = nfd.nid');
+      $query->condition('gcfd.type', 'theories-group_membership', '!=');
+      $query->condition('gcfd.gid', $set['groups'], (is_array($set['groups'])) ? 'IN' : '=');
+    }
+
+    ////////// Exclude content from this/these groups.
+    if (isset($set['groupsExclude'])) {
+      $query->join('group_content_field_data', 'gcfd', 'gcfd.entity_id = nfd.nid');
+      $query->condition('gcfd.type', 'theories-group_membership', '!=');
+      $query->condition('gcfd.gid', $set['groupsExclude'], (is_array($set['groupsExclude'])) ? 'NOT IN' : '!=');
     }
 
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

@@ -152,9 +152,6 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       $query->join('node_field_data', 'nfd', 'nfd.nid = book.nid');
       $query->addField('nfd', 'title');
       $query->addField('nfd', 'status');
-      if (!\Drupal::currentUser()->hasPermission('show unpublished book pages')) {
-        $query->condition('nfd.status', 1);
-      }
 
       $query->leftJoin('content_moderation_state_field_data', 'cmsfd', 'cmsfd.content_entity_id = book.nid');
       $query->addField('cmsfd', 'moderation_state');
@@ -311,7 +308,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       }
 
       // Show SAM status block - shown in sidebar.
-      if ($group->label() == 'Structured Atom Model') {
+      if (isset($group) && $group->label() == 'Structured Atom Model') {
         $node = Node::load(425);
         $body = $node->body->value;
         $body = preg_replace('/([^ ])\&nbsp;([^ ])/', '$1 $2', $body);
