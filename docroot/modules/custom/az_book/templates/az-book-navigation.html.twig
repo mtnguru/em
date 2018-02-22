@@ -56,10 +56,10 @@
       <div id="group-links">
         {{ group_links }}
       </div>
+      <hr>
     {% endif %}
 
     {% if book_title %}
-      <hr>
       <div id="book-title">
         <a class="{{ book_title_classes }}" href="{{ book_url }}">{{ book_title }}</a>
         {% if hide_unpublished %}
@@ -72,7 +72,6 @@
         {% endif %}
       </div>
 
-
       {% if book_pages %}
         <div id="book-pages" class="hide-unpublished">
           <ul>
@@ -82,12 +81,21 @@
           </ul>
         </div>
       {% endif %}
+      <hr>
     {% endif %}
 
+    {% if status is not empty %}
+      <div id="book-status">
+        {{ status|raw }}
+      </div>
+      <hr>
+    {% endif %}
+
+    {% if misc_links %}
+      <div id="misc-links">
+        {{ misc_links }}
+      </div>
+    {% endif %}
   </div>
-  {% if status is not empty %}
-    <div id="book-status">
-      {{ status|raw }}
-    </div>
-  {% endif %}
+
 </nav>

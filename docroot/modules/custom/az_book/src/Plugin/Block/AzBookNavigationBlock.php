@@ -219,63 +219,30 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         $build['#group_logo_url'] = \Drupal\image\Entity\ImageStyle::load('900x300')->buildUrl($file->getFileUri());
 
         // Add the View Recent Content and Submit Ticket links
-        $build['#group_links'] = [
-          'view_content' => [
-            '#type' => 'container',
-            'link' => [
-              '#type' => 'link',
-              '#title' => t('View Recent Content'),
-              '#attributes' => ['title' => t('View recent content for this community.')],
-              '#url' => Url::fromRoute('entity.group.canonical', ['group' => $group->id()], ['absolute' => TRUE]),
-            ],
-          ],
-          'submit_ticket' => [
-            '#type' => 'container',
-            'link' => [
-              '#type' => 'link',
-              '#title' => t('Submit a Ticket'),
-              '#attributes' => ['title' => t('Submit a ticket for suggestions, questions, complaints or bugs regarding this page or the website.')],
-              '#url' => Url::fromRoute('node.add', ['node_type' => 'ticket'], [
-                'absolute' => TRUE,
-                'query' => [
-                  'group' => $group->id(),
-                  'node' => (isset($node)) ? $node->id() : 0
-                ],
-              ]),
-            ],
-          ],
-        ];
-
-        // If this is the group home page then mark View Recent Content as active
-        if ($activePage == 'recent-content') {
-          $build['#group_links']['view_content']['link']['#attributes']['class'][] = 'menu-item--active';
-        }
+//      $build['#group_links'] = [
+//        'view_content' => [
+//          '#type' => 'container',
+//          'link' => [
+//            '#type' => 'link',
+//            '#title' => t('View Recent Content'),
+//            '#attributes' => ['title' => t('View recent content for this community.')],
+//            '#url' => Url::fromRoute('entity.group.canonical', ['group' => $group->id()], ['absolute' => TRUE]),
+//          ],
+//        ],
+//      ];
 
         // If this is the Structured Atom model add in the atomizer links
         if ($group->label() == 'Structured Atom Model') {
-
-          // Add link to the Dynamic Periodic Table
-          $build['#group_links']['periodic_table'] = [
-            '#type' => 'container',
-            'link' => [
-              '#type' => 'link',
-              '#title' => t('Dynamic Periodic Table'),
-              '#attributes' => [
-                'title' => t('Dynamic periodic table that let\'s you explore properties of the elements.'),
-                'target' => '_blank',
-              ],
-              '#url' => Url::fromUri('https://ptable.com/'),
-            ],
-          ];
 
           // Add link to the Atom Viewer
           if (\Drupal::currentUser()->hasPermission('atomizer display atom viewer')) {
             $build['#group_links']['atom_viewer'] = [
               '#type' => 'container',
+              '#attributes' => ['class' => ['atom-viewer-link']],
               'link' => [
                 '#type' => 'link',
-                '#title' => t('Atom Viewer'),
-                '#attributes' => ['title' => t('Display atoms built with the Atom Builder in a 3d interactive JavaScript program.')],
+                '#title' => t('Atom Viewer - Explore the Elements'),
+                '#attributes' => ['title' => t('Display structure of the elements.')],
                 '#url' => Url::fromUri('base:atomizer/atom-viewer', [
                   'absolute' => TRUE,
                 ]),
@@ -287,6 +254,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
           if (\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
             $build['#group_links']['atom_builder'] = [
               '#type' => 'container',
+              '#attributes' => ['class' => ['atom-builder-link']],
               'link' => [
                 '#type' => 'link',
                 '#title' => t('Atom Builder'),
@@ -299,7 +267,38 @@ class AzBookNavigationBlock extends BookNavigationBlock {
               ],
             ];
           }
+
+          // Add link to the Dynamic Periodic Table
+          $build['#group_links']['periodic_table'] = [
+            '#type' => 'container',
+            'link' => [
+              '#type' => 'link',
+              '#title' => t('View Dynamic Periodic Table'),
+              '#attributes' => [
+                'title' => t('Dynamic periodic table that let\'s you explore properties of the elements.'),
+                'target' => '_blank',
+              ],
+              '#url' => Url::fromUri('https://ptable.com/'),
+            ],
+          ];
         }
+
+        $build['#misc_links']['submit_ticket'] = [
+          '#type' => 'container',
+          'link' => [
+            '#type' => 'link',
+            '#title' => t('Submit a Ticket'),
+            '#attributes' => ['title' => t('Use tickets to submit suggestions, questions, complaints or bugs regarding this page or the website.')],
+            '#url' => Url::fromRoute('node.add', ['node_type' => 'ticket'], [
+              'absolute' => TRUE,
+              'query' => [
+                'group' => $group->id(),
+                'node' => (isset($node)) ? $node->id() : 0
+              ],
+            ]),
+          ],
+        ];
+
       }
 
       // If this is a book page then mark the book title as active

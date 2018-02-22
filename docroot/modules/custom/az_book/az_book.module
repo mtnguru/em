@@ -19,6 +19,7 @@ function az_book_theme() {
         'group_logo_url' => false,
         'group_links' => false,
         'hide_unpublished' => false,
+        'misc_links' => false,
         'status' => false,
       ],
     ],

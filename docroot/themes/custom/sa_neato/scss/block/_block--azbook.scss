@@ -48,7 +48,7 @@
     }
 
     #group-links {
-      margin: 0 0 15px 16px;
+      margin-bottom: 15px;
 
       > div {
         margin-bottom: 5px;
@@ -71,7 +71,7 @@
     #book-pages {
       position: relative;
       margin-left: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       &.hide-unpublished {
         .menu-item--unpublished {
@@ -90,6 +90,10 @@
     }
 
     #book-status {
+      margin-bottom: 15px;
+    }
+
+    #misc-links {
       margin-bottom: 20px;
     }
 
