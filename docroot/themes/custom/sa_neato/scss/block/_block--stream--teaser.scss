@@ -110,9 +110,11 @@
       }
     }
   }
+}
 
-  ////////////////////// teaser-short
-  &.view-mode-teaser-short {
+////////////////////// teaser-short
+.sidebar {
+  .view-mode-teaser-short {
 
     h3 {
       margin: 0 0 3px;
@@ -120,9 +122,14 @@
       font-size: 100%;
     }
 
-    .content-container {
-      padding: 0 15px 10px;
+    .page-content {
+      padding: 0 15px 15px;
     }
+    .az-row {
+      padding: 15px 0;
+      border-bottom: 1px solid $base-separator-color;
+    }
+
     .information {
       font-size: 80%;
 

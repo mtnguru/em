@@ -395,6 +395,7 @@ function _az_content_build_block($id, $set) {
   }
 
   $classes = [
+    'maestro-block',
     'entity-type-' . str_replace('_', '-', $set['entityType']),
     'view-mode-' . str_replace('_', '-', $set['viewMode']),
   ];
@@ -406,7 +407,7 @@ function _az_content_build_block($id, $set) {
     '#type' => 'container',
     '#attributes' => [
       'id' => 'az-page-' . $id,
-      'class' => ['block-sidebar maestro-block'],
+      'class' => $classes,
     ],
     '#attached' => [
       'library' => 'az_content/az-maestro',
@@ -673,7 +674,7 @@ function az_content_preprocess_node(&$variables) {
             'viewMode' => 'teaser_short',
             'exclude' => $node->id(),
             'topics' => $tids,
-            'class' => 'block-sidebar',
+            'class' => 'block-border',
             'empty' => 'NO DISPLAY'
           ]);
         }
