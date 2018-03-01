@@ -26,7 +26,7 @@ h6 {
 
 h1 {
   color: $color-title;
-  font-size: 250%;
+  font-size: 205%;
   margin: .25em 0 .5em;
   line-height: 1;
   a {
@@ -36,7 +36,7 @@ h1 {
 
 h2 {
   color : $color-title;
-  font-size: 220%;
+  font-size: 180%;
   a {
     color: $color-title;
   }
@@ -44,7 +44,7 @@ h2 {
 
 h3 {
   color : darken($color-title, 10%);
-  font-size: 190%;
+  font-size: 165%;
   a {
     color: darken($color-title, 10%);
   }
@@ -52,7 +52,7 @@ h3 {
 
 h4 {
   color: tint($color-title, 20%);
-  font-size: 160%;
+  font-size: 140%;
 }
 
 h5 {
@@ -63,7 +63,7 @@ h5 {
 
 h6 {
   color: tint($color-orange, 30%);
-  font-size: 100%;
+  font-size: 110%;
 }
 
 p {

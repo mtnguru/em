@@ -21,6 +21,25 @@
       }
     }
 
+    .field {
+      h3 {
+        font-size: 130%;
+      }
+
+      h4 {
+        font-size: 120%;
+      }
+
+      h5 {
+        font-size: 110%;
+      }
+    }
+
+    .az-row {
+      padding: 15px 0;
+      border-bottom: 1px solid $base-separator-color;
+    }
+
     .information {
       font-size: 80%;
       margin-bottom: 15px;
@@ -125,6 +144,7 @@
     .page-content {
       padding: 0 15px 15px;
     }
+
     .az-row {
       padding: 15px 0;
       border-bottom: 1px solid $base-separator-color;

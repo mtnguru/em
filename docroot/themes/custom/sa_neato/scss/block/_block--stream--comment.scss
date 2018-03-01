@@ -5,9 +5,23 @@
     }
   }
 
+  .az-row {
+    padding: 15px 0;
+    border-bottom: 1px solid $base-separator-color;
+  }
+
   .content {
     h3 {
       margin: 0;
+      font-size: 130%;
+    }
+
+    h4 {
+      font-size: 120%;
+    }
+
+    h5 {
+      font-size: 110%;
     }
 
     ul.inline {
