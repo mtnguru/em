@@ -112,7 +112,7 @@ function az_groups_preprocess_group(&$variables) {
     'id' => 'events',
     'label' => 'Events',
     'types' => 'event',
-//  'groups' => $group->id(),
+    'groups' => $group->id(),
     'title' => 'Upcoming Events',
     'status' => NODE_PUBLISHED,
     'empty' => 'NO DISPLAY',
@@ -132,11 +132,11 @@ function az_groups_preprocess_group(&$variables) {
   ];
 
   $variables['tabs'] = _az_content_build_tabs('main', [
-    $resources['id'] => $resources,
     $home['id']     => $home,
     $activity['id'] => $activity,
     $comments['id'] => $comments,
     $events['id'] => $events,
+    $resources['id'] => $resources,
   ]);
 
   return;
