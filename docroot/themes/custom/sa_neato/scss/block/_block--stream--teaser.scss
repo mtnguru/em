@@ -38,6 +38,7 @@
     .az-row {
       padding: 15px 0;
       border-bottom: 1px solid $base-separator-color;
+      @include clearfix;
     }
 
     .information {
