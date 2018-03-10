@@ -75,6 +75,10 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         case 'published':
           $classes[] = 'menu-item--published';
           break;
+        case 'confidential':
+          $classes[] = 'menu-item--confidential';
+          $classes[] = 'menu-item--published';
+          break;
         case 'archived':
           $classes[] = 'menu-item--archived';
           $classes[] = 'menu-item--unpublished';

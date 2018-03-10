@@ -10,6 +10,7 @@ body {
   }
 }
 
+body.entity-media-canonical,
 body.entity-node-canonical {
   .block-page-title-block {
       display: none;
@@ -93,6 +94,7 @@ article.az-page {
     &.published    { background-color: $color-published; }
     &.unpublished  { background-color: $color-unpublished; }
     &.needs-review { background-color: $color-needs-review; }
+    &.confidential { background-color: $color-confidential; }
     &.draft        { background-color: $color-draft; }
     &.placeholder  { background-color: $color-placeholder; }
   }

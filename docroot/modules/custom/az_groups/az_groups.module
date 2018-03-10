@@ -106,10 +106,37 @@ function az_groups_preprocess_group(&$variables) {
     'empty' => 'No comments posted for this community',
   ];
 
+  // Create Events tab
+  $events = [
+    'type' => 'entity-stream',
+    'id' => 'events',
+    'label' => 'Events',
+    'types' => 'event',
+//  'groups' => $group->id(),
+    'title' => 'Upcoming Events',
+    'status' => NODE_PUBLISHED,
+    'empty' => 'NO DISPLAY',
+  ];
+
+  // Create Resources tab
+  $resources = [
+    'type' => 'entity-stream',
+    'id' => 'resource',
+    'label' => 'Resources',
+    'types' => ['link', 'document', 'video'],
+    'entityType' => 'media',
+//  'groups' => $group->id(),
+    'title' => 'Resources',
+    'status' => NODE_PUBLISHED,
+    'empty' => 'NO DISPLAY',
+  ];
+
   $variables['tabs'] = _az_content_build_tabs('main', [
+    $resources['id'] => $resources,
     $home['id']     => $home,
     $activity['id'] => $activity,
     $comments['id'] => $comments,
+    $events['id'] => $events,
   ]);
 
   return;

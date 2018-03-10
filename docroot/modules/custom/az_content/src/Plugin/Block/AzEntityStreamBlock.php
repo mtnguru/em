@@ -103,6 +103,9 @@ class AzEntityStreamBlock extends BlockBase {
       case 'user':
         $set['totalRows'] = AzContentQuery::userQuery($set);
         break;
+      case 'media':
+        $set['totalRows'] = AzContentQuery::mediaQuery($set);
+        break;
     }
     $set['count'] = false;
 

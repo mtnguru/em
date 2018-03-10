@@ -381,6 +381,9 @@ function _az_content_build_block($id, $set) {
         case 'user':
           $set['totalRows'] = AzContentQuery::userQuery($set);
           break;
+        case 'media':
+          $set['totalRows'] = AzContentQuery::mediaQuery($set);
+          break;
       }
       $set['count'] = false;
 
@@ -458,6 +461,9 @@ function _az_content_build_tab(&$set) {
           break;
         case 'user':
           $set['totalRows'] = AzContentQuery::userQuery($set);
+          break;
+        case 'media':
+          $set['totalRows'] = AzContentQuery::mediaQuery($set);
           break;
       }
       $set['count'] = false;
@@ -923,16 +929,6 @@ function az_content_entity_embed_alter(array &$build, \Drupal\Core\Entity\Entity
   if (!empty($build['entity']['#view_mode'])) {
     $build['#attributes']['class'][] = 'az-view-mode-' . str_replace('_', '-', $build['entity']['#view_mode']);
   }
-}
-
-/**
- * Implements HOOK_preprocess_ENTITY-TYPE().
- *
- * @param $variables
- */
-function az_content_preprocess_media(&$variables) {
-  $variables['attributes']['class'][] = 'az-view-mode-' . str_replace('_', '-', $variables['elements']['#view_mode']);
-  return;
 }
 
 //////////////////////// Start entity_embed module api functions

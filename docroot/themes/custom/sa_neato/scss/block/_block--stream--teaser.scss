@@ -1,4 +1,4 @@
-.az-page.entity-type-node {
+.az-page {
 
   ////////////////////// teaser
   &.view-mode-teaser {
@@ -65,6 +65,7 @@
         &.needs-review { background-color: $color-needs-review; }
         &.draft        { background-color: $color-draft; }
         &.placeholder  { background-color: $color-placeholder; }
+        &.confidential { background-color: $color-confidential; }
       }
     } // .information
 

@@ -24,6 +24,9 @@ class AzStream {
       case 'user':
         $result = AzContentQuery::userQuery($set);
         break;
+      case 'media':
+        $result = AzContentQuery::mediaQuery($set);
+        break;
     }
     $set['numRows'] = $result['numRows'];
     if ($result['totalRows'] != -1) {

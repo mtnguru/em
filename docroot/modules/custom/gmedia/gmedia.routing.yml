@@ -1,0 +1,2 @@
+route_callbacks:
+  - '\Drupal\gmedia\Routing\GroupMediaRouteProvider::getRoutes'
