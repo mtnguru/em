@@ -239,20 +239,18 @@ class AzBookNavigationBlock extends BookNavigationBlock {
         if ($group->label() == 'Structured Atom Model') {
 
           // Add link to the Atom Viewer
-          if (\Drupal::currentUser()->hasPermission('atomizer display atom viewer')) {
-            $build['#group_links']['atom_viewer'] = [
-              '#type' => 'container',
-              '#attributes' => ['class' => ['atom-viewer-link']],
-              'link' => [
-                '#type' => 'link',
-                '#title' => t('Atom Viewer - Explore the Elements'),
-                '#attributes' => ['title' => t('Display structure of the elements.')],
-                '#url' => Url::fromUri('base:atomizer/atom-viewer', [
-                  'absolute' => TRUE,
-                ]),
-              ],
-            ];
-          }
+          $build['#group_links']['atom_viewer'] = [
+            '#type' => 'container',
+            '#attributes' => ['class' => ['atom-viewer-link']],
+            'link' => [
+              '#type' => 'link',
+              '#title' => t('Atom Viewer - Explore the Elements'),
+              '#attributes' => ['title' => t('Display structure of the elements.')],
+              '#url' => Url::fromUri('base:atomizer/atom-viewer', [
+                'absolute' => TRUE,
+              ]),
+            ],
+          ];
 
           // Add link to the Atom Builder
           if (\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
