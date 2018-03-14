@@ -72,6 +72,12 @@ class AzContentQuery {
       $query->condition('nfat.field_assigned_to_target_id', $set['assigned'], (is_array($set['assigned'])) ? 'IN' : '=');
     }
 
+    ////////// Atom CT - Approval field
+    if (isset($set['approval'])) {
+      $query->join('node__field_approval', 'nfa', 'nfd.nid = nfa.entity_id');
+      $query->condition('nfa.field_approval_value', $set['approval'], (is_array($set['approval'])) ? 'IN' : '=');
+    }
+
     ////////// Topics
     if (isset($set['topics'])) {
       $query->join('node__field_topics', 'nft', 'nfd.nid = nft.entity_id');
@@ -129,6 +135,13 @@ class AzContentQuery {
           break;
         case 'created':
           $query->orderBy('nfd.created', $order);
+          $sorted = true;
+          break;
+        case 'select-atom':
+          $query->join('node__field_element', 'nfe', 'nfd.nid = nfe.entity_id');
+          $query->join('node__field_atomic_number', 'nfan', 'nfan.entity_id = nfe.field_element_target_id');
+          $query->orderBy('nfan.field_atomic_number_value', 'ASC');
+          $query->orderBy('nfd.title', 'ASC');
           $sorted = true;
           break;
       }

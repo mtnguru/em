@@ -360,6 +360,7 @@ function _az_content_build_block($id, $set) {
   switch ($set['type']) {
 
     // If this is stream then add the #items to the tab.
+    case 'entity-table':
     case 'entity-stream':
       $set = _az_content_init_stream_set($set);
 
@@ -418,20 +419,25 @@ function _az_content_build_block($id, $set) {
         'azmaestro' => [$id => $set],
       ],
     ],
-    'title' => [
+  ];
+
+  if (!empty($set['title'])) {
+    $block['title'] = [
       '#type' => 'container',
       '#attributes' => [
         'class' => ['title-container'],
       ],
       'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
-    ],
-    'page' => [
-      '#type' => 'container',
-      '#attributes' => [
-        'class' => ['page-content'],
-      ],
+    ];
+  }
+
+  $block['page'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['page-content'],
     ],
   ];
+
   return $block;
 }
 
@@ -441,6 +447,7 @@ function _az_content_build_tab(&$set) {
   switch ($set['type']) {
 
     // If this is stream then add the #items to the tab.
+    case 'entity-table':
     case 'entity-stream':
       $set = _az_content_init_stream_set($set);
 

@@ -20,6 +20,7 @@ class MaestroController extends ControllerBase {
     $set = json_decode(file_get_contents("php://input"), true);
 
     switch ($set['type']) {
+      case 'entity-table':
       case 'entity-stream':
         $build = AzStream::create($set);
         break;

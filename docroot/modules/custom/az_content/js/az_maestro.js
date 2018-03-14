@@ -98,6 +98,7 @@
           var $contentContainer = $('#az-page-' + set['id'] + ' .page-content'); // destination container
 
           switch (set.type) {
+            case 'entity-table':
             case 'entity-stream':
 
               // Remove the old more button

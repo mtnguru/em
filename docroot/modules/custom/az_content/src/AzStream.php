@@ -35,17 +35,40 @@ class AzStream {
 
     $classes = ['stream-container', str_replace('_', '-', $set['viewMode'])];
     if ($result['numRows']) {
-      $ids = array_keys($result['results']);
-      $entities = \Drupal::entityTypeManager()->getStorage($set['entityType'])->loadMultiple($ids);
 
       $stream = [];
-      foreach ($entities as $entity) {
-        $build = \Drupal::entityTypeManager()->getViewBuilder($set['entityType'])->view($entity, $set['viewMode']);
-        $stream['row_' . $entity->id()] = [
-          '#type' => 'container',
-          '#attributes' => ['class' => ['az-row']],
-          'stream' => $build,
-        ];
+      switch($set['type']) {
+        case 'entity-table':
+          $rows = [];
+          foreach ($result['results'] as $row) {
+            $rows['row_' . $row->nid] = [
+              'data' => [
+                ['data' => ['#markup' => '<a data-nid="' . $row->nid . '" href="#" class="atomic-number">' . $row->field_atomic_number_value . '</a>']],
+                ['data' => ['#markup' => '<a data-nid="' . $row->nid . '" href="#" class="atom-name">' . $row->title . '</a>']],
+              ],
+            ];
+          }
+          $stream = [
+            '#type' => 'table',
+            '#header' => ['AN', 'Name'],
+            '#rows' => $rows,
+          ];
+          break;
+
+        case 'entity-stream':
+          $ids = array_keys($result['results']);
+          $entities = \Drupal::entityTypeManager()->getStorage($set['entityType'])->loadMultiple($ids);
+          foreach ($entities as $entity) {
+            $item = \Drupal::entityTypeManager()
+              ->getViewBuilder($set['entityType'])
+              ->view($entity, $set['viewMode']);
+            $stream['row_' . $entity->id()] = [
+              '#type' => 'container',
+              '#attributes' => ['class' => ['az-row']],
+              'stream' => $item,
+            ];
+          }
+          break;
       }
     } else {
       $empty = (isset($set['empty'])) ? $set['empty'] : 'No content found';
