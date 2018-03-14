@@ -85,6 +85,7 @@ class AzStream {
     // Create either a pager or a more button.
     if (isset($set['more'])) {
 
+      $more = [];
       if ($set['more'] == 'pager') {
         $more = [
           '#type' => 'container',
@@ -95,7 +96,6 @@ class AzStream {
           ],
         ];
       }
-
 
       if ($set['more'] == 'ajax') {
         $classes = ['more-container', 'ajax'];

@@ -6,6 +6,7 @@
  */
 
 use Drupal\az_content\AzContentQuery;
+use Drupal\az_content\AzStream;
 use Drupal\az_groups\AzGroupQuery;
 use Drupal\comment\Entity\Comment;
 use Drupal\Core\Access\AccessResult;
@@ -437,6 +438,10 @@ function _az_content_build_block($id, $set) {
       'class' => ['page-content'],
     ],
   ];
+
+  if (isset($set['load']) && $set['load'] == 'immediate') {
+    $block['page']['stream'] = AzStream::create($set);      // Load the first page.
+  };
 
   return $block;
 }
