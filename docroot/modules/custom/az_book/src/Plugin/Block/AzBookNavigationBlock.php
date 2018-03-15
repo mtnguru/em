@@ -244,8 +244,11 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             '#attributes' => ['class' => ['atom-viewer-link']],
             'link' => [
               '#type' => 'link',
-              '#title' => t('Atom Viewer - Explore the Elements'),
-              '#attributes' => ['title' => t('Display structure of the elements.')],
+              '#title' => t('Explore the Elements in 3D!'),
+              '#attributes' => [
+                'title' => t('Interactive 3D program to view the elements.'),
+                'class' => ['atom-viewer'],
+              ],
               '#url' => Url::fromUri('base:atomizer/atom-viewer', [
                 'absolute' => TRUE,
               ]),

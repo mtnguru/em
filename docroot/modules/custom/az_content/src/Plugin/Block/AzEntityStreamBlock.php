@@ -122,6 +122,7 @@ class AzEntityStreamBlock extends BlockBase {
 
     if (isset($set['load']) && $set['load'] == 'immediate') {
       $stream['content']['stream'] = AzStream::create($set);      // Load the first page.
+      $set['loaded'] = true;
     };
 
     AzMaestroInit::start($set, $stream);

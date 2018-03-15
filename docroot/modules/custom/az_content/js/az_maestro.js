@@ -22,7 +22,9 @@
 
     function initBlocks ($cont, context) {
       var id = $cont[0].id.replace('az-page-', '');
-      getContent(getSet(id));
+      if ($set.load && $set.load == 'immediate') {
+        getContent(getSet(id));
+      }
     }
 
     function initTabs ($cont, context) {
