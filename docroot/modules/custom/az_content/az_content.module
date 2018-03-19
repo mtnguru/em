@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @file
  * Contains az_content.module.
@@ -115,6 +116,12 @@ function az_content_form_node_ticket_form_alter(&$form, FormStateInterface $form
  */
 function az_content_entity_access(EntityInterface $entity, $op, AccountInterface $account) {
   switch ($entity->getEntityTypeId()) {
+    case 'node':
+      if (($entity->id() == '511')  && !\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
+        return AccessResult::forbidden();
+      }
+      break;
+
     case 'group':
       if ($entity->field_status->value == 'hidden') {
         if ($entity->field_status->value == 'hidden' && !\Drupal::currentUser()->hasPermission('az groups view hidden')) {
@@ -130,7 +137,7 @@ function az_content_entity_access(EntityInterface $entity, $op, AccountInterface
  * Implements hook_node_access().
  *
  * Custom access permissions for nodes.
- *   Limit access to content in hidden groups.
+ *   Forbid access to content in hidden groups. LLC
  *
  * @param \Drupal\node\NodeInterface $node
  * @param $op
@@ -587,17 +594,17 @@ function az_content_preprocess_node(&$variables) {
   // Add marker if content is New, Updated or has already been read.
   $node = $variables['node'];
   $type = $node->getType();
-  $view_mode = $variables['view_mode'];
+  $viewMode = $variables['view_mode'];
   
   $az_wysiwyg = &drupal_static('az_wysiwyg', []);
   $az_wysiwyg = [  // The wysiwyug filter needs this information.
     'node' => $node,
-    'view_mode' => $view_mode
+    'view_mode' => $viewMode
   ];
 
   $variables['bundle_name'] = $node->type->entity->label();
 
-  if ($view_mode == 'full' || $view_mode == 'teaser') {
+  if ($viewMode == 'full' || $viewMode == 'teaser') {
     $variables['has_new_content'] = _az_content_has_new_content($variables);
   }
 
@@ -626,11 +633,11 @@ function az_content_preprocess_node(&$variables) {
     case 'ticket':
     case 'glossary':
 
-      if ($view_mode == 'teaser') {
+      if ($viewMode == 'teaser') {
         _az_content_add_group_logo($node, $variables);
       }
 
-      if ($view_mode == 'full') {
+      if ($viewMode == 'full') {
 
         // Add block showing any tickets submitted for this page.
         if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
@@ -720,10 +727,52 @@ function az_content_preprocess_node(&$variables) {
       if (\Drupal::currentUser()->hasPermission('atomizer display structure')) {
         $variables['display_notes'] = true;
       }
+
+      // Join the valence list together with comma separators.
+      if ($viewMode == 'atom_viewer') {
+        $items = [];
+        foreach ($node->field_valence->getValue() as $item) {
+          $items[] = $item['value'];
+        }
+        $variables['valence'] = join(", ", $items);
+      }
       break;
+  }
+
+  if ($node->id() == "424") {
+    _az_content_group_status_page($node, $variables);
   }
 }
 
+/**
+ * Create the group book status page
+ *
+ * Create a hierarchical menu of the full book with unpublished pages listed
+ * but not linked to.
+ *
+ * @param $node
+ * @param $variables
+ */
+function _az_content_group_status_page($node, &$variables) {
+  function another ($word) {
+  }
+
+  // Rethink this  - do I really want a menu showing - maybe we just talk about it? Do I want to maintain a page like that?
+  //
+  // Read in the book menu
+  // Create hierarchical menu - this could be done in a template - like I did for the real menu.
+
+  another('fart');
+  return;
+}
+
+/**
+ * Given a node id and view mode - render the content of that node.
+ *
+ * @param $nid
+ * @param string $viewMode
+ * @return array
+ */
 function _az_content_render_node($nid, $viewMode = 'full') {
   return \Drupal::entityTypeManager()
     ->getViewBuilder('node')

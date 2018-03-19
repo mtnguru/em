@@ -14,7 +14,7 @@ article#node-311 {
       }
       @include media($bp960) {
         display: inline-block;
-        width: 300px;
+        width: 325px;
       }
     }
 
@@ -39,7 +39,7 @@ article#node-311 {
 
     @include media($bp960) {
       float: left;
-      width: 300px;
+      width: 325px;
       max-width: 350px;
       padding-right: 40px;
     }
@@ -54,7 +54,7 @@ article#node-311 {
     }
     @include media($bp960) {
       float: left;
-      width: calc(100% - 300px);
+      width: calc(100% - 325px);
     }
   }
 
