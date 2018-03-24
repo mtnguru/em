@@ -125,7 +125,7 @@ function az_groups_preprocess_group(&$variables) {
     'label' => 'Resources',
     'types' => ['link', 'document', 'video'],
     'entityType' => 'media',
-//  'groups' => $group->id(),
+    'groups' => $group->id(),
     'title' => 'Resources',
     'status' => NODE_PUBLISHED,
     'empty' => 'NO DISPLAY',

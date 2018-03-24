@@ -23,7 +23,7 @@
     function initBlocks ($cont, context) {
       var id = $cont[0].id.replace('az-page-', '');
       var set = getSet(id);
-      if (set.load && set.load == 'immediate') {
+      if (!set.load || !set.load == 'immediate') {
         getContent(getSet(id));
       }
     }

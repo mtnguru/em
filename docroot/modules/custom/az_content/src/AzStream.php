@@ -43,8 +43,8 @@ class AzStream {
           foreach ($result['results'] as $row) {
             $rows['row_' . $row->nid] = [
               'data' => [
-                ['data' => ['#markup' => '<a data-nid="' . $row->nid . '" href="#" class="atomic-number">' . $row->field_atomic_number_value . '</a>']],
-                ['data' => ['#markup' => '<a data-nid="' . $row->nid . '" href="#" class="atom-name">' . $row->title . '</a>']],
+                ['data' => ['#markup' => '<a data-nid="' . $row->nid . '" href="#" class="atomic-number atom-select-' . $row->nid . '">' . $row->field_atomic_number_value . '</a>']],
+                ['data' => ['#markup' => '<a data-nid="' . $row->nid . '" href="#" class="atom-name atom-select-' . $row->nid . '">' . $row->title . '</a>']],
               ],
             ];
           }
