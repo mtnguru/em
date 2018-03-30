@@ -72,26 +72,29 @@ function az_groups_preprocess_group(&$variables) {
 
   $variables['view_group_members'] = views_embed_view('group_members', 'group_members');
 
-  $home = [
-    'type' => 'entity-render',
-    'id' => 'home',
-    'label' => 'Home',
-//  'title' => '<h2>Home</h2>',
-    'viewMode' => 'home_tab',
-    'entityType' => 'group',
-    'eid' => $group->id(),
+  // Create Articles tab
+  $articles = [
+    'type' => 'entity-stream',
+    'id' => 'articles',
+    'label' => 'Articles',
+    'types' => ['article'],
+    'groups' => $group->id(),
+    'title' => 'Articles',
+    'status' => \Drupal\node\NodeInterface::PUBLISHED,
+    'empty' => 'NO DISPLAY',
   ];
 
-  // Create Recent Activity tab
-  $activity = [
+  // Create Featured Pages tab
+  $featured = [
     'type' => 'entity-stream',
-    'id' => 'recent-activity',
-    'label' => 'Activity',
-    'types' => ['article', 'event', 'book', 'news'],
+    'id' => 'featured-pages',
+    'label' => 'Featured Pages',
+    'types' => ['book'],
+    'sticky' => true,
     'groups' => $group->id(),
-    'title' => 'Recent Activity',
+    'title' => 'Featured Pages',
     'status' => NODE_PUBLISHED,
-    'empty' => 'No activity for this site',
+    'empty' => 'NO DISPLAY',
   ];
 
   // Create Recent Comments tab
@@ -114,7 +117,7 @@ function az_groups_preprocess_group(&$variables) {
     'types' => 'event',
     'groups' => $group->id(),
     'title' => 'Upcoming Events',
-    'status' => NODE_PUBLISHED,
+    'status' => \Drupal\node\NodeInterface::PUBLISHED,
     'empty' => 'NO DISPLAY',
   ];
 
@@ -127,16 +130,31 @@ function az_groups_preprocess_group(&$variables) {
     'entityType' => 'media',
     'groups' => $group->id(),
     'title' => 'Resources',
-    'status' => NODE_PUBLISHED,
+    'status' => \Drupal\node\NodeInterface::PUBLISHED,
+//  'empty' => 'NO DISPLAY',
+  ];
+
+  // Create Images tab
+  $images = [
+    'type' => 'entity-stream',
+    'id' => 'image',
+    'label' => 'Images',
+    'types' => ['image'],
+    'entityType' => 'media',
+    'groups' => $group->id(),
+    'title' => 'Images',
+    'pageNumItems' => 40,
+    'status' => \Drupal\node\NodeInterface::PUBLISHED,
     'empty' => 'NO DISPLAY',
   ];
 
   $variables['tabs'] = _az_content_build_tabs('main', [
-    $home['id']     => $home,
-    $activity['id'] => $activity,
+    $articles['id'] => $articles,
+    $featured['id'] => $featured,
     $comments['id'] => $comments,
     $events['id'] => $events,
     $resources['id'] => $resources,
+    $images['id'] => $images,
   ]);
 
   return;

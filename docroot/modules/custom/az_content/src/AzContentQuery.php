@@ -354,16 +354,14 @@ class AzContentQuery {
 
     ////////// Groups
     if (isset($set['groups'])) {
-      $query->join('group_content_field_data', 'gmfd', 'gmfd.entity_id = mfd.mid');
-      $query->condition('gmfd.type', 'theories-group_membership', '!=');
-      $query->condition('gmfd.gid', $set['groups'], (is_array($set['groups'])) ? 'IN' : '=');
+      $query->join('media__field_group', 'mft', 'mfd.mid = mft.entity_id');
+      $query->condition('mft.field_group_target_id', $set['groups'], (is_array($set['groups'])) ? 'IN' : '=');
     }
 
     ////////// Exclude content from this/these groups.
     if (isset($set['groupsExclude'])) {
-      $query->join('group_content_field_data', 'gmfd', 'gmfd.entity_id = mfd.mid');
-      $query->condition('gmfd.type', 'theories-group_membership', '!=');
-      $query->condition('gmfd.gid', $set['groupsExclude'], (is_array($set['groupsExclude'])) ? 'NOT IN' : '!=');
+      $query->join('media__field_group', 'mft', 'mfd.mid = mft.entity_id');
+      $query->condition('mft.field_group_target_id', $set['groupsExclude'], (is_array($set['groupsExclude'])) ? 'IN' : '=');
     }
 
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
