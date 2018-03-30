@@ -204,4 +204,29 @@ form {
     margin-bottom: 25px;
   }
 
+  .field--name-moderation-state {
+    margin-bottom: 20px;
+
+    .form-item {
+      margin: 0;
+    }
+
+    select {
+      margin-left: 7px;
+      display: inline-block;
+    }
+  }
+
+  .field--name-field-social-media {
+
+    label {
+      font-weight: normal;
+      margin-left: 5px;
+    }
+    input {
+      float: left;
+      margin: 5px 4px 0 0;
+    }
+  }
+
 }

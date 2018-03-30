@@ -39,7 +39,11 @@
     'block-' ~ configuration.provider|clean_class,
     'block-' ~ plugin_id|clean_class,
   ]
+
 %}
+{% if plugin_id == 'views_block:az_media-block_map_usage' %}
+  {% set classes = classes|merge(['block-border']) %}
+{% endif %}
 
 <div{{ attributes.addClass(classes) }}>
   <div class="title-container">

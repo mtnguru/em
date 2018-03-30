@@ -68,15 +68,25 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
   $node = $form_state->getFormObject()->getEntity();
   $type = $node->getType();
   if (in_array($type, ['article', 'book', 'news'])) {
-    $form['mailit'] = [
+    $form['updateChangedContainer'] = [
       '#type' => 'container',
-      '#weight' => 5,
-      'checkbox' => [
+      '#weight' => 90,
+      'updateChanged' => [
+        '#type' => 'checkbox',
+        '#title' => t('Update Changed Time'),
+        '#default_value' => false,
+      ],
+    ];
+    $form['mailitContainer'] = [
+      '#type' => 'container',
+      '#weight' => 91,
+      'mailit' => [
         '#type' => 'checkbox',
         '#title' => t('Send email notification'),
         '#default_value' => false,
       ],
     ];
+    $form['#validate'][] = '_az_content_node_validate';
     foreach (array_keys($form['actions']) as $action) {
       if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
         $form['actions'][$action]['#submit'][] = '_az_content_node_submit';
@@ -85,7 +95,18 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
   }
 }
 
+function _az_content_node_validate(&$form, FormStateInterface &$form_state) {
+  $node = $form_state->getFormObject()->getEntity();
+  $form_state->setValue(['changed'], $node->changed->value);
+}
+
 function _az_content_node_submit(&$form, FormStateInterface &$form_state) {
+  if ($form_state->hasValue('updateChanged') && !$form_state->getValue('updateChanged')) {
+    $node = $form_state->getFormObject()->getEntity();
+    $node->set('changed', $form_state->getValue('changed'));
+    $node->save();
+  };
+  $mailit = $form_state->getValue('mailit');  // Not used
   return;
 }
 
@@ -638,7 +659,6 @@ function az_content_preprocess_node(&$variables) {
       }
 
       if ($viewMode == 'full') {
-
         // Add block showing any tickets submitted for this page.
         if (\Drupal::currentUser()->hasPermission('az content view tickets')) {
           $tickets = [
@@ -648,19 +668,17 @@ function az_content_preprocess_node(&$variables) {
             'viewMode' => 'teaser_short',
             'types' => 'ticket',
             'pages' => $node->id(),
-            'class' => 'block-sidebar',
+            'class' => 'block-border',
             'empty' => 'NO DISPLAY',
           ];
         }
 
+        // Create book navigation block
         if (in_array($type, ['article', 'news', 'book'])) {
-
-          // Create book navigation block
           $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
           $variables['sidebar']['block_booknavigation'] = \Drupal::entityTypeManager()
             ->getViewBuilder('block')
             ->view($block_entity);
-
         }
 
         // If field_contribute has content - add contribute block

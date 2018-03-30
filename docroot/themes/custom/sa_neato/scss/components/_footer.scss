@@ -3,9 +3,10 @@ footer#site-footer {
 
   #footer-wrapper {
     @include outer-container;
-    min-height: 80px;
+//  min-height: 80px;
     @extend %layout-padding;
-    padding-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .copyright {

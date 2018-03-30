@@ -24,7 +24,7 @@ class AzContributeBlock extends BlockBase {
     if ($node) {
       return [
         '#theme' => 'block_contribute',
-        '#attributes' => ['class' => ['contribute-block']],
+        '#attributes' => ['class' => ['block-border', 'contribute-block']],
         '#description' => $node->field_contribute->value,
         '#more_url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$node->id()),
       ];
