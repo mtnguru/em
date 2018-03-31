@@ -56,7 +56,6 @@ function _az_mail_node_submit(&$form, FormStateInterface $form_state) {
  * Implements HOOK_mail().
  */
 function az_mail_mail($key, &$message, $params) {
-  return;
   // Each message is associated with a language, which may or may not be the
   // current user's selected language, depending on the type of e-mail being
   // sent. This $options array is used later in the t() calls for subject
