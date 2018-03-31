@@ -56,6 +56,7 @@ function _az_mail_node_submit(&$form, FormStateInterface $form_state) {
  * Implements HOOK_mail().
  */
 function az_mail_mail($key, &$message, $params) {
+  return;
   // Each message is associated with a language, which may or may not be the
   // current user's selected language, depending on the type of e-mail being
   // sent. This $options array is used later in the t() calls for subject
@@ -73,7 +74,8 @@ function az_mail_mail($key, &$message, $params) {
       // '<' or '>', we need to make sure these entities are properly escaped,
       // as the body will later be transformed from HTML to text, meaning
       // that a normal use of '<' will result in truncation of the message.
-      $message['body'][] = SafeMarkup::checkPlain($params['message']);
+//    $message['body'][] = SafeMarkup::checkPlain($params['message']);
+      $message['body'][] = $params['message'];
 
       // Note that the message body is an array, not a string.
 //    $account = \Drupal::currentUser();
@@ -85,8 +87,8 @@ function az_mail_mail($key, &$message, $params) {
     case 'email_presave':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = $params['subject'];
-      $message['body'][] = SafeMarkup::checkPlain($params['message']);
-//    $message['body'][] = $params['message'];
+//    $message['body'][] = SafeMarkup::checkPlain($params['message']);
+      $message['body'][] = $params['message'];
       break;
   }
 }
@@ -108,22 +110,20 @@ function az_mail_mail_alter(&$message) {
 
 //$message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
 
-  $options = [
-    'langcode' => $message['langcode'],
-  ];
+//$options = [
+//  'langcode' => $message['langcode'],
+//];
 
-  $signature = '<div>Mail sent from <a href="https://etherealmatters.org">Ethereal Matters</a></div>';
-//$body = $message['params']['message'];
-//$body .= $signature;
+//$signature = '<div>Mail sent from <a href="https://etherealmatters.org">Ethereal Matters</a></div>';
 
   $body = new HtmlEscapedText($signature);
-  if (is_array($message['body'])) {
-    $message['body'][] = $body;
-  }
-  else {
-    // Some modules use the body as a string, erroneously.
-    $message['body'] .= $signature;
-  }
+//if (is_array($message['body'])) {
+//  $message['body'][] = $body;
+//}
+//else {
+//  // Some modules use the body as a string, erroneously.
+//  $message['body'] .= $signature;
+//}
 }
 
 /**
