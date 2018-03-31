@@ -74,7 +74,8 @@ function az_mail_mail($key, &$message, $params) {
       // as the body will later be transformed from HTML to text, meaning
       // that a normal use of '<' will result in truncation of the message.
 //    $message['body'][] = SafeMarkup::checkPlain($params['message']);
-      $message['body'][] = HtmlEscapedText(params['message']);
+//    $message['body'][] = HtmlEscapedText(params['message']);
+      $message['body'][] = params['message'];
 
       // Note that the message body is an array, not a string.
 //    $account = \Drupal::currentUser();
@@ -115,7 +116,8 @@ function az_mail_mail_alter(&$message) {
 
   $signature = '<div>Mail sent from <a href="https://etherealmatters.org">Ethereal Matters</a></div>';
 
-  $body = new HtmlEscapedText($signature);
+//$body = new HtmlEscapedText($signature);
+  $body = $signature;
   if (is_array($message['body'])) {
     $message['body'][] = $body;
   }
@@ -178,7 +180,8 @@ function az_mail_node_presave(Node $node) {
     $body = preg_replace('/\$username/', $recipient->name, $body);
     $body = preg_replace('/\$firstname/', $user->field_first_name->value, $body);
     $body = preg_replace('/\$user_reset/', $resetlink, $body);
-    $params['message'] = new HtmlEscapedText($body);
+//  $params['message'] = new HtmlEscapedText($body);
+    $params['message'] = $body;
 
     if ($mailit) {
       $result = $mailManager->mail(
