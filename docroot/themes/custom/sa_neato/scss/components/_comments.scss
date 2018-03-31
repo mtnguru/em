@@ -50,6 +50,15 @@ section.field--type-comment {
       vertical-align: top;
       margin-top: 8px;
     }
+
+    .links.inline {
+      li {
+        display: block;
+        text-align: center;
+        font-size: 85%;
+        padding: 10px 0 0;
+      }
+    }
   } // article.comment
 
   footer {

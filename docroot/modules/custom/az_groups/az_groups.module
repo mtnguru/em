@@ -84,15 +84,15 @@ function az_groups_preprocess_group(&$variables) {
     'empty' => 'NO DISPLAY',
   ];
 
-  // Create Featured Pages tab
+  // Create Featured Content tab
   $featured = [
     'type' => 'entity-stream',
-    'id' => 'featured-pages',
-    'label' => 'Featured Pages',
-    'types' => ['book'],
+    'id' => 'featured-content',
+    'label' => 'Featured Content',
+    'types' => ['book', 'article'],
     'sticky' => true,
     'groups' => $group->id(),
-    'title' => 'Featured Pages',
+    'title' => 'Featured Content',
     'status' => NODE_PUBLISHED,
     'empty' => 'NO DISPLAY',
   ];

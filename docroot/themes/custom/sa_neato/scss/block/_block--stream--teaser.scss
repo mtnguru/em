@@ -159,7 +159,7 @@
         width: calc(20% - 4px);
       } // $bp1280
 
-      @include media($bp1280) {
+      @include media($bp1920) {
         width: calc(16.6667% - 4px);
       } // $bp1280
 
