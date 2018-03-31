@@ -74,7 +74,7 @@ function az_mail_mail($key, &$message, $params) {
       // as the body will later be transformed from HTML to text, meaning
       // that a normal use of '<' will result in truncation of the message.
 //    $message['body'][] = SafeMarkup::checkPlain($params['message']);
-      $message['body'][] = $params['message'];
+      $message['body'][] = HtmlEscapedText(params['message']);
 
       // Note that the message body is an array, not a string.
 //    $account = \Drupal::currentUser();
@@ -85,7 +85,7 @@ function az_mail_mail($key, &$message, $params) {
       break;
     case 'email_presave':
       $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = $params['subject'];
+      $message['subject'] = new HtmlEscapedText($params['subject']);
 //    $message['body'][] = SafeMarkup::checkPlain($params['message']);
       $message['body'][] = $params['message'];
       break;
@@ -113,16 +113,16 @@ function az_mail_mail_alter(&$message) {
 //  'langcode' => $message['langcode'],
 //];
 
-//$signature = '<div>Mail sent from <a href="https://etherealmatters.org">Ethereal Matters</a></div>';
+  $signature = '<div>Mail sent from <a href="https://etherealmatters.org">Ethereal Matters</a></div>';
 
   $body = new HtmlEscapedText($signature);
-//if (is_array($message['body'])) {
-//  $message['body'][] = $body;
-//}
-//else {
-//  // Some modules use the body as a string, erroneously.
-//  $message['body'] .= $signature;
-//}
+  if (is_array($message['body'])) {
+    $message['body'][] = $body;
+  }
+  else {
+    // Some modules use the body as a string, erroneously.
+    $message['body'] .= $signature;
+  }
 }
 
 /**
@@ -178,7 +178,7 @@ function az_mail_node_presave(Node $node) {
     $body = preg_replace('/\$username/', $recipient->name, $body);
     $body = preg_replace('/\$firstname/', $user->field_first_name->value, $body);
     $body = preg_replace('/\$user_reset/', $resetlink, $body);
-    $params['message'] = $body;
+    $params['message'] = new HtmlEscapedText($body);
 
     if ($mailit) {
       $result = $mailManager->mail(
