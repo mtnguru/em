@@ -59,13 +59,14 @@ form {
   fieldset {
     border: $base-border;
     margin: 0 0 $small-spacing;
-    padding: .5em 1em;
+    padding: 5px 10px;
 
     &.fieldgroup {
       background-color: $secondary-background-color;
       border: $base-border;
+      border-radius: 8px;
       margin: 0 0 $small-spacing;
-      padding: .5em 1em;
+      padding: 5px 10px;
 
       legend {
         background-color: $secondary-background-color;
