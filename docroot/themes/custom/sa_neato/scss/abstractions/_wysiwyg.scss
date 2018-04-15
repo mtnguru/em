@@ -12,6 +12,14 @@ body.cke_editable,
 }
 
 
+.entity-select-dialog {
+  .ui-dialog-content {
+    min-height: 225px !important;
+    overflow-y: scroll;
+  }
+  
+}
+
 .entity-embed-dialog {
   .form-item-attributes-data-caption {
     display: none;

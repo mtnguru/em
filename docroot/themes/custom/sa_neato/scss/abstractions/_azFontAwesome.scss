@@ -1,6 +1,8 @@
 .fa-dot-circle-o {
-  font-size: 120%;
-  margin-top: -3px;
+  &::before {
+//  font-size: 120%;
+//  margin-top: -3px;
+  }
 }
 
 .az-fa {
