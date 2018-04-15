@@ -3,6 +3,7 @@
 namespace Drupal\az_content\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\node\Entity\Node;
 
 /**
  * Provides a contribute block for the current node.
@@ -20,6 +21,9 @@ class AzContributeBlock extends BlockBase {
    */
   public function build() {
     $node = \Drupal::routeMatch()->getParameter('node');
+    if (!is_object($node)) {
+      $node = Node::load($node);
+    }
 
     if ($node) {
       return [
