@@ -40,7 +40,6 @@
         "drupal/masquerade": "2.x-dev",
         "drupal/paragraphs": "^1.2",
         "drupal/social_media": "^1.2",
-        "drush/drush": "^9.0",
         "phayes/geophp": "^1.2",
         "drupal/special_menu_items": "1.x-dev",
         "drupal/examples": "1.x-dev",
@@ -49,7 +48,8 @@
         "drupal/captcha": "1.x-dev",
         "drupal/swiftmailer": "1.x-dev",
         "drupal/autosave_form": "1.x-dev",
-        "drupal/linkit": "^4.3"
+        "drupal/linkit": "^4.3",
+        "drush/drush": "9.x"
     },
     "repositories": [
         {
