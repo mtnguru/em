@@ -25,6 +25,7 @@
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
 <div id="account-menu">
+  {{ kint(); }}
 
   {% if logged_in %}
     <div id="account-menu" class="logged-in">
@@ -39,7 +40,7 @@
     </div>
   {% else %}
     <div id="account-menu" class="do-login">
-      <a href="/user/login" class="login">Login/Join</a>
+      <a href="/user/login?destination={{ current_url }}" class="login">Login/Join</a>
     </div>
   {% endif %}
 
