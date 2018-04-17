@@ -12,6 +12,7 @@ use Drupal\Component\Render\HtmlEscapedText;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element\Html;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -61,8 +62,6 @@ function az_mail_mail($key, &$message, $params) {
   // sent. This $options array is used later in the t() calls for subject
   // and body to ensure the proper translation takes effect.
 
-  return;
-
   $options = [
     'langcode' => $message['langcode'],
   ];
@@ -89,8 +88,8 @@ function az_mail_mail($key, &$message, $params) {
       break;
     case 'email_presave':
       $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = new HtmlEscapedText($params['subject']);
-      $message['body'][] = SafeMarkup::checkPlain($params['message']);
+      $message['subject'] = t('Ethereal Matters Update: @title', array('@title' => $params['title']), $options);
+      $message['body'][] = Html::escape($params['message']);
 //    $message['body'][] = $params['message'];
       break;
   }
