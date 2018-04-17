@@ -60,6 +60,9 @@ function az_mail_mail($key, &$message, $params) {
   // current user's selected language, depending on the type of e-mail being
   // sent. This $options array is used later in the t() calls for subject
   // and body to ensure the proper translation takes effect.
+
+  return;
+
   $options = [
     'langcode' => $message['langcode'],
   ];
@@ -87,8 +90,8 @@ function az_mail_mail($key, &$message, $params) {
     case 'email_presave':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = new HtmlEscapedText($params['subject']);
-//    $message['body'][] = SafeMarkup::checkPlain($params['message']);
-      $message['body'][] = $params['message'];
+      $message['body'][] = SafeMarkup::checkPlain($params['message']);
+//    $message['body'][] = $params['message'];
       break;
   }
 }
@@ -107,6 +110,8 @@ function az_mail_mail_alter(&$message) {
   // For the purpose of this example, modify all the outgoing messages and
   // attach a site signature. The signature will be translated to the language
   // in which message was built.
+
+  return;
 
   $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
 
