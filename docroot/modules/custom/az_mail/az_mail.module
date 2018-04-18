@@ -9,10 +9,10 @@
 use Drupal\az_user\CreateUserList;
 use Drupal\comment\Entity\Comment;
 use Drupal\Component\Render\HtmlEscapedText;
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\Html;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -88,7 +88,7 @@ function az_mail_mail($key, &$message, $params) {
       break;
     case 'email_presave':
       $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('Ethereal Matters Update: @title', array('@title' => $params['title']), $options);
+      $message['subject'] = t('Ethereal Matters Update: @subject', array('@subject' => $params['subject']), $options);
       $message['body'][] = Html::escape($params['message']);
 //    $message['body'][] = $params['message'];
       break;
@@ -112,7 +112,6 @@ function az_mail_mail_alter(&$message) {
 
   return;
 
-  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
 
 //$options = [
 //  'langcode' => $message['langcode'],
@@ -187,6 +186,24 @@ function az_mail_node_presave(Node $node) {
 //  $params['message'] = new HtmlEscapedText($body);
     $params['message'] = $body;
 
+    // Build the default headers.
+    $headers = array(
+      'MIME-Version' => '1.0',
+      'Content-Type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+      'Content-Transfer-Encoding' => '8Bit',
+      'X-Mailer' => 'Drupal',
+    );
+
+/*  // To prevent email from looking like spam, the addresses in the Sender and
+    // Return-Path headers should have a domain authorized to use the
+    // originating SMTP server.
+    $headers['Sender'] = $headers['Return-Path'] = $site_mail;
+    $headers['From'] = $site_config
+        ->get('name') . ' <' . $site_mail . '>';
+    if ($reply) {
+      $headers['Reply-to'] = $reply;
+    }
+*/
     if ($mailit) {
       $result = $mailManager->mail(
         'az_mail',
