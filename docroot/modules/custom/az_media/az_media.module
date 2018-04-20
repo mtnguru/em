@@ -55,13 +55,8 @@ function az_media_entity_presave(EntityInterface $entity) {
  *
  */
 function az_media_media_presave(EntityInterface $entity) {
-  $type = $entity->getEntityType();
-  $id = $type->id();
-  switch ($entity->getEntityType()->id()) {
-    case 'media':
-      $val = 5;
-      break;
-
+  $bundle = $entity->bundle();
+  switch ($bundle) {
     case 'image':
       $fid = $entity->image->getValue()[0]['target_id'];
       $file = \Drupal\file\Entity\File::load($fid);
@@ -130,27 +125,57 @@ function az_media_media_presave(EntityInterface $entity) {
  * @param $file
  */
 function az_media_file_presave($file) {
-  // Preprocess images - resize (scale) and reduce 'quality'
-  if (strstr($file->getMimeType(), 'image') && $file->source != 'icon_file') {
+  $srcPath = \Drupal::service('file_system')->realpath($file->getFileUri());
 
-    $srcPath = \Drupal::service('file_system')
-      ->realpath($file->getFileUri());  // /home/atom/private
-    $info = pathinfo($srcPath);
-    if ($info['extension'] == 'png') {
-      return; // don't modify png files - they lose transparency alpha channel.
-      $uinfo = parse_url($file->getFileUri());
-      $filename = $uinfo['host'] . '.jpg';
-      $file->setFileUri($uinfo['scheme'] . '://' . $filename);
-      $file->setFilename($filename);
+  // Don't process if it's an icon or video_thumbnail.
+  if (!$srcPath || strstr($srcPath, 'video_thumbnails') || $file->source == 'icon_file') {
+    return;
+  }
+
+  $info = pathinfo($srcPath);
+  $uinfo = parse_url($file->getFileUri());
+  $basename = $info['basename'];
+  $date = date('Y-m');
+
+  // Get the mime type
+  if (strstr($file->getMimeType(), 'image')) {
+    $mime = 'image';
+  } else if (strstr($file->getMimeType(), 'application')) {
+    $mime = 'document';
+  } else if (strstr($file->getMimeType(), 'video')) {
+    $mime = 'video';
+  } else {
+    $mime = 'unknown';
+  }
+
+  // Document files already have the date for a directory. Move it from files/$date to files/document/$date
+  $doc = strpos($info['dirname'], 'files/' . $date);
+  if (!strpos($info['dirname'], '/' . $mime . '/') || $doc) {
+    $directory = $mime . '/' . $date;
+    if ($doc) {
+      $info['dirname'] = str_replace($date, $directory, $info['dirname']);
+      $file->setFileUri($uinfo['scheme'] . '://' . $directory . '/' . $basename);
+    } else {
+      $info['dirname'] .= '/' . $directory;
+      $file->setFileUri($uinfo['scheme'] . '://' . $directory . '/' . $basename);
     }
-    else {
-      $filename = $info['basename'];
+
+    if (!is_dir($info['dirname'])) {
+      mkdir($info['dirname'], 0777, TRUE);
     }
 
-    $destPath = $info['dirname'] . '/' . $filename;
+    $tmpPath = file_directory_temp() . '/tmp_' . $basename;
+    $destPath = $info['dirname'] . '/' . $basename;
+    $fn = 0;
+    if (file_exists($destPath)) {
+      while (file_exists($destPath)) {
+        $newfilename = $info['filename'] . '_fn_' . ++$fn . '.' . $info['extension'];
+        $destPath = $info['dirname'] . '/' . $newfilename;
+      }
+      $file->setFileUri($uinfo['scheme'] . '://' . $directory . '/' . $newfilename);
+    }
 
-    if ($file->getCreatedTime() == $_SERVER['REQUEST_TIME'] && $file->status->value == 0) {
-      $tmpPath = file_directory_temp() . '/tmp_' . $filename;
+    if (strstr($file->getMimeType(), 'image') && $info['extension'] != 'png') {
 
       $initialSize = $file->getSize();
       $dims = getimagesize($srcPath);
@@ -167,20 +192,21 @@ function az_media_file_presave($file) {
         ? "-resize " . $resolution['width'] . 'x' . $resolution['height']
         : '';
 
-      // Create and execute gd library convert command
+      // Create and execute gd library convert command to change quality and resolution of image
       $cmd = "convert $res -quality $quality '$srcPath' '$tmpPath';" .
-        " cp '$tmpPath' '$destPath'; ";
-//      " rm '$tmpPath';";
-
-      if ($srcPath != $destPath) {
-//      $cmd .= " rm '$srcPath'";
-      }
-      `$cmd`;
+             " cp '$tmpPath' '$destPath'; rm '$tmpPath';";
 
       $finalSize = filesize($destPath);
       drupal_set_message('File saved: ' . $srcPath . ' -> ' . $destPath .
         '   Size: ' . $initialSize . ' -> ' . $finalSize);
+    } else {
+      $cmd = "mv $srcPath $destPath;";
     }
+
+    if ($srcPath != $destPath) {  // Remove the source file
+      $cmd .= " rm '$srcPath'";
+    }
+    `$cmd`;
   }
 }
 

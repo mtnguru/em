@@ -1,4 +1,5 @@
-﻿/**
+﻿
+/**
  * @license Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
@@ -17,7 +18,7 @@ CKEDITOR.plugins.add( 'colorbutton', {
 	hidpi: true, // %REMOVE_LINE_CORE%
 	init: function( editor ) {
 		var config = editor.config,
-			lang = editor.lang.colorbutton;
+				lang = editor.lang.colorbutton;
 
 		if ( !CKEDITOR.env.hc ) {
 			addButton( 'TextColor', 'fore', lang.textColorTitle, 10, {
@@ -41,7 +42,7 @@ CKEDITOR.plugins.add( 'colorbutton', {
 			} );
 
 			var  bgOptions = {},
-				normalizeBackground = editor.config.colorButton_normalizeBackground;
+					normalizeBackground = editor.config.colorButton_normalizeBackground;
 
 			if ( normalizeBackground === undefined || normalizeBackground ) {
 				// If background contains only color, then we want to convert it into background-color so that it's
@@ -64,9 +65,9 @@ CKEDITOR.plugins.add( 'colorbutton', {
 							},
 							right: function( element ) {
 								var style = new CKEDITOR.style( editor.config.colorButton_backStyle, {
-										color: element.styles.background
-									} ),
-									definition = style.getDefinition();
+											color: element.styles.background
+										} ),
+										definition = style.getDefinition();
 
 								// Align the output object with the template used in config.
 								element.name = definition.element;
@@ -85,8 +86,8 @@ CKEDITOR.plugins.add( 'colorbutton', {
 
 		function addButton( name, type, title, order, options ) {
 			var style = new CKEDITOR.style( config[ 'colorButton_' + type + 'Style' ] ),
-				colorBoxId = CKEDITOR.tools.getNextId() + '_colorBox',
-				panelBlock;
+					colorBoxId = CKEDITOR.tools.getNextId() + '_colorBox',
+					panelBlock;
 
 			options = options || {};
 
@@ -136,9 +137,9 @@ CKEDITOR.plugins.add( 'colorbutton', {
 				onOpen: function() {
 
 					var selection = editor.getSelection(),
-						block = selection && selection.getStartElement(),
-						path = editor.elementPath( block ),
-						automaticColor;
+							block = selection && selection.getStartElement(),
+							path = editor.elementPath( block ),
+							automaticColor;
 
 					if ( !path )
 						return;
@@ -164,9 +165,9 @@ CKEDITOR.plugins.add( 'colorbutton', {
 
 					if ( range ) {
 						var walker = new CKEDITOR.dom.walker( range ),
-							element = range.collapsed ? range.startContainer : walker.next(),
-							finalColor = '',
-							currentColor;
+								element = range.collapsed ? range.startContainer : walker.next(),
+								finalColor = '',
+								currentColor;
 
 						while ( element ) {
 							if ( element.type === CKEDITOR.NODE_TEXT ) {
@@ -194,13 +195,13 @@ CKEDITOR.plugins.add( 'colorbutton', {
 
 		function renderColors( panel, type, colorBoxId ) {
 			var output = [],
-				colors = config.colorButton_colors.split( ',' ),
-				colorsPerRow = config.colorButton_colorsPerRow || 6,
-				// Tells if we should include "More Colors..." button.
-				moreColorsEnabled = editor.plugins.colordialog && config.colorButton_enableMore !== false,
-				// aria-setsize and aria-posinset attributes are used to indicate size of options, because
-				// screen readers doesn't play nice with table, based layouts (http://dev.ckeditor.com/ticket/12097).
-				total = colors.length + ( moreColorsEnabled ? 2 : 1 );
+					colors = config.colorButton_colors.split( ',' ),
+					colorsPerRow = config.colorButton_colorsPerRow || 6,
+			// Tells if we should include "More Colors..." button.
+					moreColorsEnabled = editor.plugins.colordialog && config.colorButton_enableMore !== false,
+			// aria-setsize and aria-posinset attributes are used to indicate size of options, because
+			// screen readers doesn't play nice with table, based layouts (http://dev.ckeditor.com/ticket/12097).
+					total = colors.length + ( moreColorsEnabled ? 2 : 1 );
 
 			var clickFn = CKEDITOR.tools.addFunction( function applyColorStyle( color, type ) {
 
@@ -223,11 +224,11 @@ CKEDITOR.plugins.add( 'colorbutton', {
 					var colorStyle = config[ 'colorButton_' + type + 'Style' ];
 
 					colorStyle.childRule = type == 'back' ?
-					function( element ) {
-						// It's better to apply background color as the innermost style. (http://dev.ckeditor.com/ticket/3599)
-						// Except for "unstylable elements". (http://dev.ckeditor.com/ticket/6103)
-						return isUnstylable( element );
-					} : function( element ) {
+							function( element ) {
+								// It's better to apply background color as the innermost style. (http://dev.ckeditor.com/ticket/3599)
+								// Except for "unstylable elements". (http://dev.ckeditor.com/ticket/6103)
+								return isUnstylable( element );
+							} : function( element ) {
 						// Fore color style must be applied inside links instead of around it. (http://dev.ckeditor.com/ticket/4772,http://dev.ckeditor.com/ticket/6908)
 						return !( element.is( 'a' ) || element.getElementsByTag( 'a' ).count() ) || isUnstylable( element );
 					};
@@ -242,16 +243,16 @@ CKEDITOR.plugins.add( 'colorbutton', {
 			if ( config.colorButton_enableAutomatic !== false ) {
 				// Render the "Automatic" button.
 				output.push( '<a class="cke_colorauto" _cke_focus=1 hidefocus=true' +
-					' title="', lang.auto, '"' +
-					' onclick="CKEDITOR.tools.callFunction(', clickFn, ',null,\'', type, '\');return false;"' +
-					' href="javascript:void(\'', lang.auto, '\')"' +
-					' role="option" aria-posinset="1" aria-setsize="', total, '">' +
+						' title="', lang.auto, '"' +
+						' onclick="CKEDITOR.tools.callFunction(', clickFn, ',null,\'', type, '\');return false;"' +
+						' href="javascript:void(\'', lang.auto, '\')"' +
+						' role="option" aria-posinset="1" aria-setsize="', total, '">' +
 						'<table role="presentation" cellspacing=0 cellpadding=0 width="100%">' +
-							'<tr>' +
-								'<td colspan="' + colorsPerRow + '" align="center"><span class="cke_colorbox" id="', colorBoxId, '"></span>', lang.auto, '</td>' +
-							'</tr>' +
+						'<tr>' +
+						'<td colspan="' + colorsPerRow + '" align="center"><span class="cke_colorbox" id="', colorBoxId, '"></span>', lang.auto, '</td>' +
+						'</tr>' +
 						'</table>' +
-					'</a>' );
+						'</a>' );
 			}
 			output.push( '<table role="presentation" cellspacing=0 cellpadding=0 width="100%">' );
 
@@ -261,8 +262,8 @@ CKEDITOR.plugins.add( 'colorbutton', {
 					output.push( '</tr><tr>' );
 
 				var parts = colors[ i ].split( '/' ),
-					colorName = parts[ 0 ],
-					colorCode = parts[ 1 ] || colorName;
+						colorName = parts[ 0 ],
+						colorCode = parts[ 1 ] || colorName;
 
 				// The data can be only a color code (without #) or colorName + color code
 				// If only a color code is provided, then the colorName is the color with the hash
@@ -272,26 +273,26 @@ CKEDITOR.plugins.add( 'colorbutton', {
 
 				var colorLabel = editor.lang.colorbutton.colors[ colorCode ] || colorCode;
 				output.push( '<td>' +
-					'<a class="cke_colorbox" _cke_focus=1 hidefocus=true' +
+						'<a class="cke_colorbox" _cke_focus=1 hidefocus=true' +
 						' title="', colorLabel, '"' +
 						' onclick="CKEDITOR.tools.callFunction(', clickFn, ',\'', colorName, '\',\'', type, '\'); return false;"' +
 						' href="javascript:void(\'', colorLabel, '\')"' +
 						' data-value="' + colorCode + '"' +
 						' role="option" aria-posinset="', ( i + 2 ), '" aria-setsize="', total, '">' +
 						'<span class="cke_colorbox" style="background-color:#', colorCode, '"></span>' +
-					'</a>' +
-					'</td>' );
+						'</a>' +
+						'</td>' );
 			}
 
 			// Render the "More Colors" button.
 			if ( moreColorsEnabled ) {
 				output.push( '</tr>' +
-					'<tr>' +
+						'<tr>' +
 						'<td colspan="' + colorsPerRow + '" align="center">' +
-							'<a class="cke_colormore" _cke_focus=1 hidefocus=true' +
-								' title="', lang.more, '"' +
-								' onclick="CKEDITOR.tools.callFunction(', clickFn, ',\'?\',\'', type, '\');return false;"' +
-								' href="javascript:void(\'', lang.more, '\')"', ' role="option" aria-posinset="', total, '" aria-setsize="', total, '">', lang.more, '</a>' +
+						'<a class="cke_colormore" _cke_focus=1 hidefocus=true' +
+						' title="', lang.more, '"' +
+						' onclick="CKEDITOR.tools.callFunction(', clickFn, ',\'?\',\'', type, '\');return false;"' +
+						' href="javascript:void(\'', lang.more, '\')"', ' role="option" aria-posinset="', total, '" aria-setsize="', total, '">', lang.more, '</a>' +
 						'</td>' ); // tr is later in the code.
 			}
 
@@ -383,9 +384,9 @@ CKEDITOR.plugins.add( 'colorbutton', {
  * @member CKEDITOR.config
  */
 CKEDITOR.config.colorButton_colors = '1ABC9C,2ECC71,3498DB,9B59B6,4E5F70,F1C40F,' +
-	'16A085,27AE60,2980B9,8E44AD,2C3E50,F39C12,' +
-	'E67E22,E74C3C,ECF0F1,95A5A6,DDD,FFF,' +
-	'D35400,C0392B,BDC3C7,7F8C8D,999,000';
+		'16A085,27AE60,2980B9,8E44AD,2C3E50,F39C12,' +
+		'E67E22,E74C3C,ECF0F1,95A5A6,DDD,FFF,' +
+		'D35400,C0392B,BDC3C7,7F8C8D,999,000';
 
 /**
  * Stores the style definition that applies the text foreground color.
