@@ -61,3 +61,8 @@ form:
   js:
     js/js-src/form.js: {}
 
+
+swiftmailer:
+  css:
+    base:
+      css/sa_mail.css: {}

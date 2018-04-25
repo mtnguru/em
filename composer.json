@@ -46,10 +46,12 @@
         "drupal/calendar": "1.x-dev",
         "drupal/console": "~1.0",
         "drupal/captcha": "1.x-dev",
-        "drupal/swiftmailer": "1.x-dev",
         "drupal/autosave_form": "1.x-dev",
         "drupal/linkit": "^4.3",
-        "drush/drush": "9.x"
+        "tijsverkoyen/css-to-inline-styles": "^2.2",
+        "drush/drush": "8.x-dev",
+        "drupal/mailsystem": "^4.1",
+        "drupal/swiftmailer": "^1.0@beta"
     },
     "repositories": [
         {
