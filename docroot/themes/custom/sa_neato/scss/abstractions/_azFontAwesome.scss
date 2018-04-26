@@ -5,6 +5,18 @@
   }
 }
 
+.sam-tm {
+  &::after {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f25c";
+    font-size: 40%;
+    position: relative;
+    top: -1.5em;
+    margin-left: .2em;
+  }
+}
+
 .az-fa {
   font-family: FontAwesome;
   display: inline-block;

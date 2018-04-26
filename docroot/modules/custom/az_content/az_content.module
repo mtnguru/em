@@ -179,6 +179,14 @@ function az_content_node_access(NodeInterface $node, $op, AccountInterface $acco
   return AccessResult::neutral();
 }
 
+function az_content_preprocess_html(&$variables) {
+//_az_content_add_SAM_tm($variables['head_title']['title']->string);
+}
+
+function az_content_preprocess_page_title(&$variables) {
+//_az_content_add_SAM_tm($variables['title']);
+}
+
 /**
  * Implements hook_node_presave().
  *
@@ -611,6 +619,11 @@ function _az_content_add_query_args($set) {
   return $set;
 }
 
+function _az_content_add_SAM_tm(&$text) {
+  $text = preg_replace('/\bSAM\b/', '<span class="sam-tm">SAM</span>', $text, -1, $count);
+  $text = preg_replace('/Structured Atom Model/', '<span class="sam-tm">Structured Atom Model</span>', $text, -1, $count);
+}
+
 /**
  * Implements HOOK_preprocess_node().
  *
@@ -658,6 +671,11 @@ function az_content_preprocess_node(&$variables) {
     case 'event':
     case 'ticket':
     case 'glossary':
+
+      _az_content_add_SAM_tm($variables['content']['body'][0]['#text']);
+      $title = $node->title->value;
+      _az_content_add_SAM_tm($title);
+      $variables['title'] = ['#markup' => $title];
 
       if ($viewMode == 'teaser') {
         _az_content_add_group_logo($node, $variables);
