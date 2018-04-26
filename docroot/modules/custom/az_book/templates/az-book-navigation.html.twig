@@ -61,7 +61,7 @@
 
     {% if book_title %}
       <div id="book-title">
-        <a class="{{ book_title_classes }}" href="{{ book_url }}">{{ book_title }}</a>
+        <a class="{{ book_title_classes }}" href="{{ book_url }}">{{ book_title|raw }}</a>
         {% if hide_unpublished %}
           <div id="book-buttons">
             <div title="Show unpublished pages" id="book-show-all" class="fa fa-bolt"></div>

@@ -72,6 +72,7 @@ function az_groups_preprocess_group(&$variables) {
 
   $variables['view_group_members'] = views_embed_view('group_members', 'group_members');
 
+  // Add trademarks for SAM.
   _az_content_add_SAM_tm($variables['content']['field_body'][0]['body']['content']['#text']);
 
   // Create Articles tab

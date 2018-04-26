@@ -194,6 +194,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
 
         // Create link to book page.
         $options = ['absolute' => TRUE, 'attributes' => ['class' => 'this-class']];
+        _az_content_add_SAM_tm($result->title);
         $node_title = \Drupal\Core\Render\Markup::create('<span>' . $result->title . '</span>');
         $result->link = \Drupal\Core\Link::createFromRoute($node_title, 'entity.node.canonical', ['node' => $nid], $options);
 
@@ -315,6 +316,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       if (isset($group) && $group->label() == 'Structured Atom Model') {
         $node = Node::load(425);
         $body = $node->body->value;
+        _az_content_add_SAM_tm($body);
         $body = preg_replace('/([^ ])\&nbsp;([^ ])/', '$1 $2', $body);
         $body = preg_replace('/\$num_published/', $num_published, $body);
         $body = preg_replace('/\$num_total/', $num_total, $body);
