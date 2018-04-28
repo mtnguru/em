@@ -1,0 +1,4 @@
+receive new content notifications:
+  title: Receive New Content Notifications
+  description: When new content is added, send an email
+  restrict access: TRUE;

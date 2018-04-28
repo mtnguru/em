@@ -53,6 +53,8 @@
 .az-fa-cube:before              { @extend .az-fa; content: "\f1b2"; }
 .az-fa-dot-circle-o:before      { @extend .az-fa; content: "\f192"; }
 .az-fa-file:before              { @extend .az-fa; content: "\f15b"; }
+.az-fa-email:before,
+.az-fa-envelope:before          { @extend .az-fa; content: "\f0e0"; }
 .az-fa-document:before,
 .az-fa-file-alt:before          { @extend .az-fa; content: "\f15c"; }
 .az-fa-file-o:before            { @extend .az-fa; content: "\f016"; }

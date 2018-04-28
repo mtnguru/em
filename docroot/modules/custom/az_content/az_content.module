@@ -655,7 +655,7 @@ function az_content_preprocess_node(&$variables) {
   );
 
   // Get the status and moderation_state
-  if ($node->hasField('moderation_state')) {
+  if ($node->hasField('moderation_state') && $type != 'email') {
     $variables['state'] = $node->moderation_state->value;
   } else {
     $variables['state'] = ($node->status->value) ? 'published' : 'draft';
