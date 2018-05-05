@@ -8,9 +8,18 @@ body.cke_editable {
 }
 body.cke_editable,
 .field--name-field-body {
-
 }
 
+body.cke_ltr {
+  background-color: $color-dark-blue;
+  h1 {
+    background: darken($color-dark-blue, 5%);
+    color: white;
+  }
+  .cke_panel_listItem a:focus {
+    background: lighten($color-dark-blue, 15%);
+  }
+}
 
 .entity-select-dialog {
   .ui-dialog-content {
@@ -25,12 +34,16 @@ body.cke_editable,
     display: none;
   }
 }
-
+.cke_combopanel {
+//width: 150px;
+  height: 250px !important;
+}
 .cke_inner {
   .cke_bottom,
   .cke_top {
     background: $cke-bg;
     padding: 4px 8px 0;
+
   }
   .cke_contents {
     > textarea.cke_source {
@@ -137,24 +150,25 @@ body.cke_editable,
   }
 }
 
-.az-image  {
-  font-size: 95%;
-  .field--name-image {
-    margin-bottom: 10px;
-  }
-  .field--name-name {
-    color: $color-light-title;
-    text-align: center;
-    margin-bottom: 10px;
-    letter-spacing: -.02em;
-  }
-  .field--name-field-description {
-    font-style: italic;
-    margin: 0 5% 10px;
-  }
-}
 
 article.embedded-entity {
+
+  .az-image  {
+    font-size: 95%;
+    .field--name-image {
+      margin-bottom: 10px;
+    }
+    .field--name-name {
+      color: $color-light-title;
+      text-align: center;
+      margin-bottom: 10px;
+      letter-spacing: -.02em;
+    }
+    .field--name-field-description {
+      font-style: italic;
+      margin: 0 5% 10px;
+    }
+  }
 
   &.az-view-mode-media-tiny {
     @include media($bp320only)  { width: 18%; }
