@@ -287,18 +287,6 @@ function az_content_preprocess_comment(&$variables) {
  * @param $variables
  */
 function az_content_preprocess_page(&$variables) {
-  if ($_SERVER['HTTP_HOST'] == 'atom' ||
-      $_SERVER['HTTP_HOST'] == 'structuredatom.org' ||
-      $_SERVER['HTTP_HOST'] == 'structuredatom.com') {
-    if (\Drupal::currentUser()->isAnonymous() &&
-        strstr($_SERVER['REQUEST_URI'], 'under-construction') == null  &&
-        strstr($_SERVER['REQUEST_URI'], 'user/login') == null  &&
-        strstr($_SERVER['REQUEST_URI'], 'user/password') == null) {
-      drupal_set_message(t('The Structured Atom site is currently under construction ...'), 'status', TRUE);
-      $response = new RedirectResponse('/under-construction');
-      $response->send();
-    }
-  }
   return;
 }
 

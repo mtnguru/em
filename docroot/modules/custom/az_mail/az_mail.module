@@ -15,7 +15,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\node\Entity\Node;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 function _az_mail_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   return;
