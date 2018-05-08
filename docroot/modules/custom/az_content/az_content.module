@@ -610,6 +610,7 @@ function _az_content_add_query_args($set) {
 function _az_content_add_SAM_tm(&$text) {
   $text = preg_replace('/\bSAM\b/', '<span class="sam-tm">SAM</span>', $text, -1, $count);
   $text = preg_replace('/Structured Atom Model/', '<span class="sam-tm">Structured Atom Model</span>', $text, -1, $count);
+  $text = preg_replace('/\bAtomizer\b/', '<span class="sam-tm">Atomizer</span>', $text, -1, $count);
 }
 
 /**
