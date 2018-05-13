@@ -84,15 +84,6 @@
     {{ content.field_tags }}
   {% endif %}
 
-  {% if content.view_select_atom is not empty %}
-    <div id="view-select-atom" class="{{ content.view_select_atom['#display_id'] | replace('_', '-') }}">
-      <div class="header">
-        <button id="atom--select-close" class="close-button fa fa-close"></button>
-        <h2>Select Atom</h2>
-      </div>
-      {{ content.view_select_atom }}
-    </div>
-  {% endif %}
 
   {{ content.links }}
 </article>

@@ -39,6 +39,20 @@ $color-light-title: lighten($color-title, 10%);
 $color-overlay: rgba(0,0,0,.4);
 $color-box-shadow: rgba(0,0,0,.1);
 
+///////////////////// Atomizer //////////////////////
+$color-controls: #305;
+$color-controls-wrapper: lighten($color-controls, 20%);
+$color-active: lighten(#102e4a,15%);
+$color-border: #7fffb0;
+$color-link: #7fffB0;
+$color-icon-selected: #00ddff;
+$color-icon-hover: #00bbdd;
+// $color-background: #102E4A;
+
+$color-button: #5887ff;
+$color-label: #E0ff49;
+
+
 $transparent-captions-color: rgba($color-off-white, 0.56);
 $accent-line-color: $color-purple;
 

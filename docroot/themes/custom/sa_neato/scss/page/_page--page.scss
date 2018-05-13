@@ -19,6 +19,7 @@ body.page-node-type-atomizer {
   }
 }
 
+body.entity-group-canonical,
 body.entity-media-canonical,
 body.entity-node-canonical {
   .block-page-title-block {
@@ -40,9 +41,18 @@ body.entity-node-canonical {
     }
   }
 
-  .az-fullscreen {
-    .az-canvas-wrapper {
-//    width: 100%;
+  @include media(max-width $bp580max) {
+    #book-status,
+    .block-members,
+    .donate-block,
+    #misc-links,
+    .block-group-operations {
+      display: none;
+    }
+    .body-container {
+      hr:last-of-type {
+        display: none;
+      }
     }
   }
 }
@@ -118,7 +128,6 @@ article.az-page {
         color: $color-group;
       }
     }
-
   }
 }
 

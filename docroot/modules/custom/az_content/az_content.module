@@ -458,6 +458,7 @@ function _az_content_build_block($id, $set) {
         'class' => ['title-container'],
       ],
       'markup' => ['#markup' => '<h2>' . $set['title'] . '</h2>'],
+      'close' => ['#markup' => '<div class="az-fa-times az-close"></div>'],
     ];
   }
 

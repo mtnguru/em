@@ -1,0 +1,108 @@
+
+#landing_page-atom-builder {
+  .ui-dialog {
+    width: 535px;
+  }
+}
+
+// Select atom View block
+#az-page-select-atom {
+
+  position: relative;
+  border-radius: 8px;
+  margin-bottom: 0;
+  border: 2px solid $color-border;
+
+  h2 {
+    font-size: 120%;
+    margin-bottom: .2em;
+  }
+
+  table {
+    margin: 0;
+
+    th:first-child {
+      text-align: center;
+    }
+
+    .atomic-number {
+      display: block;
+      text-align: center;
+      font-weight: 600;
+    }
+  }
+
+
+  .header {
+    height: 30px;
+  }
+
+  .title-container {
+    background-color: $color-controls-wrapper;
+    border-radius-topleft: 10px;
+    border-radius-topright: 10px;
+    margin: 0;
+  }
+
+  .close-button {
+    position: absolute;
+    padding: .4em;
+    background: #a0a0a0;
+    right: 15px;
+    &:hover {
+      background-color: $color-button;
+    }
+  }
+
+  .page-content {
+    background-color: $color-controls;
+
+    &::-webkit-scrollbar {
+      background-color: $color-controls;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #194874;
+      -webkit-border-radius: 8px;
+    }
+  }
+
+  .atom-name.atom-active,
+  .atomic-number.atom-active {
+    background-color: lighten($color-controls, 15%);
+    display: block;
+  }
+
+  table {
+    th {
+      &.views-field-field-atomic-number,
+      &.views-field-field__p {
+        text-align: right;
+      }
+    }
+
+    td {
+      background-color: $color-controls;
+      font-size: 14px;
+      padding: 1px;
+      &.is-active {
+        background: $color-active;
+      }
+      &.views-field-field-atomic-number,
+      &.views-field-field__p {
+        text-align: center;
+      }
+    }
+
+    tbody {
+      border: 0;
+    }
+  }
+}
+
+
+body#landing_page-atom-builder {
+  .ui-widget-overlay {
+    background-color: rgba(70,70,70,.4);
+  }
+}
