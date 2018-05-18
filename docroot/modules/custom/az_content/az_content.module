@@ -745,13 +745,9 @@ function az_content_preprocess_node(&$variables) {
     case 'landing_page':
 
       // Dashboard - Front page
-      if (\Drupal::service('path.matcher')->isFrontPage()) {
-        _az_content_create_home($node, $variables);
-      }
-
-      if ($node->id() == 311) {   // User Dashboard
-        _az_content_create_dashboard($node, $variables);
-      }
+      if (\Drupal::service('path.matcher')->isFrontPage()) { _az_content_create_home($node, $variables); } // Home page
+      if ($node->id() == 311) { _az_content_create_dashboard($node, $variables); }                         // User Dashboard
+      if ($node->id() == 585) { _az_content_create_upcoming_events($node, $variables); }                   // Upcoming events
       break;
 
     case 'atom':
@@ -857,6 +853,12 @@ function _az_content_create_home($node, &$variables) {
   */
 }
 
+/**
+ * Create the dashboard page.
+ *
+ * @param $node
+ * @param $variables
+ */
 function _az_content_create_dashboard($node, &$variables) {
   $uid = \Drupal::currentUser()->id();
   $user = User::load($uid);
@@ -1010,6 +1012,36 @@ function _az_content_create_dashboard($node, &$variables) {
   $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()
     ->getViewBuilder('block')
     ->view($block_entity);
+}
+
+/**
+ * Create the Upcoming events page.
+ *
+ * @param $node
+ * @param $variables
+ */
+function _az_content_create_upcoming_events($node, &$variables) {
+  $uid = \Drupal::currentUser()->id();
+  $user = User::load($uid);
+
+  // Create Announcement block at top of page
+  if (!$node->field_announcement->isEmpty()) {
+    $nid = $node->field_announcement->getValue()[0]['target_id'];
+    $variables['snippet_dashboard_announcement'] = _az_content_render_node($nid, 'full');
+  }
+
+  // Create Upcoming Events list
+  $variables['events'] = _az_content_build_block('upcoming-events', [
+    'entityType' => 'node',
+    'type' => 'entity-stream',
+    'id' => 'upcoming-events',
+    'viewMode' => 'card',
+//  'label' => 'Upcoming Events',
+    'types' => ['event'],
+//  'title' => 'Upcoming Events',
+    'status' => \Drupal\node\NodeInterface::PUBLISHED,
+    'empty' => 'No upcoming events for this site',
+  ]);
 }
 
 /**
