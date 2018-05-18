@@ -125,6 +125,25 @@
     <div class="body-container">
 
       <div class="body-header">
+        {# CT - event #}
+        {% if content.field_event_date is not empty %}
+          <div class="field-event-date">
+            {{ content.field_event_date }}
+          </div>
+        {% endif %}
+
+        {% if content.field_website_link is not empty %}
+          <div class="field-website-link">
+            {{ content.field_website_link }}
+          </div>
+        {% endif %}
+
+        {% if content.field_location is not empty %}
+          <div class="field-location">
+            {{ content.field_location }}
+          </div>
+        {% endif %}
+
         {# CT - glossary #}
         {% if content.field_tooltip is not empty %}
           <div class="field-tooltip">
