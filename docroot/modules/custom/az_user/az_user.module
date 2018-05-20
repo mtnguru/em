@@ -98,11 +98,15 @@ function az_user_preprocess_user(&$variables) {
   $user = $variables['user'];
 
   // Create the fullname by concatenating the first and last names.
-  if (!empty($variables['content']['field_first_name'])) {
-    $variables['fullname'] = $variables['content']['field_first_name']['0']['#context']['value'] . ' ';
-  }
-  if (!empty($variables['content']['field_last_name'])) {
-    $variables['fullname'] .= $variables['content']['field_last_name']['0']['#context']['value'];
+  $variables['fullname'] = $user->label();
+  if ($user->field_display_full_user_name->value == true) {
+    $variables['fullname'] .= ' - ';
+    if (!empty($variables['content']['field_first_name'])) {
+      $variables['fullname'] .= $variables['content']['field_first_name']['0']['#context']['value'] . ' ';
+    }
+    if (!empty($variables['content']['field_last_name'])) {
+      $variables['fullname'] .= $variables['content']['field_last_name']['0']['#context']['value'];
+    }
   }
 
   // Get the URL of the user

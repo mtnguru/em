@@ -239,7 +239,7 @@
 
     @include media ($bp960) {
       display: block;
-      margin: 0 0 0 280px;
+      margin: 0 0 0 260px;
     }
   }
 
@@ -283,7 +283,7 @@
         text-shadow: 0px 0px 4px #000;
 
         @include media ($bp960) {
-          padding-right: 1em;
+//        padding-right: 1em;
         }
 
         &:focus,

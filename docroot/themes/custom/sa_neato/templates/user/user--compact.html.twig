@@ -26,12 +26,12 @@
           <a href="{{ url }}">{{ fullname }}</a>
         </div>
 
-        {% if content.field_location is not empty %}
-          <div class="location">{{ content.field_location }}</div>
-        {% endif %}
-
         {% if content.field_title is not empty %}
           <div class="title">{{ content.field_title }}</div>
+        {% endif %}
+
+        {% if content.field_descriptive_location is not empty %}
+          <div class="location">{{ content.field_descriptive_location }}</div>
         {% endif %}
 
       </div>
