@@ -8,8 +8,10 @@ body.user-register {
   }
 }
 
+form#user-pass-reset,
 form#user-register-form,
 form#user-form {
+
   .field--name-field-picture {
     thead,
     .tabledrag-toggle-weight {
@@ -29,13 +31,15 @@ form#user-form {
         display: none;
       }
     }
-    .password-confirm {
-      .ok {
-        color: $color-green;
-      }
-      .error {
-        color: $color-red;
-      }
+  }
+
+  .form-type-password {
+    .ok {
+      color: $color-green;
+    }
+    .error {
+      color: $color-red;
     }
   }
+
 }

@@ -24,8 +24,7 @@
     }
 
     .views-field {
-      background: lighten($color-dark-blue, 10%);
-      border-radius: 8px;
+      @extend .az-block;
       height: 100%;
     }
 
@@ -38,7 +37,6 @@
 
     .group-container {
       position: relative;
-      padding: 15px 20px;
     }
 
     .group-label {
@@ -87,23 +85,19 @@
     .views-row {
       @include media($bp320only) {
         flex-basis: 100%;
-//      width: 100%;
       }
       @include media($bp580only) {
         flex-basis: 50%;
-//      width: calc(100% / 2);
       }
       @include media($bp960only) {
         flex-basis: 50%;
-//      width: calc(100% / 2);
       }
       @include media($bp1280) {
         flex-basis: 50%;
-//      width: calc(100% / 2);
       }
       @include media($bp1920) {
-        flex-basis: 33.333%;
-//      width: calc(100% / 4);
+//      flex-basis: 33.333%;
+        flex-basis: 50%;
       }
     }
   }

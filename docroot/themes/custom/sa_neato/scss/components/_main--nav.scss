@@ -173,18 +173,25 @@
           }
 
           &.logged-in {
-            padding-top: 11px;
+            padding-top: 6px;
 
             img {
-              height: 40px;
+              height: 50px;
               border-radius: 25%;
               box-shadow: 0px 0px 2px 2px $navigation-background;
+              background-color: $color-dark-blue;
             }
 
             .user-name {
-              line-height: 2.3;
-              color: $color-user;
+              display: block;
+              border-radius: 10px;
+              background-color: $color-dark-blue;
+              border: 1px solid $color-green;
+              padding: 6px 8px;
+              margin-top: 12px;
+              color: $color-white;
               @extend %text-shadow;
+              @extend .az-fa-pencil;
             }
 
             .menu {

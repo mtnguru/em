@@ -81,12 +81,10 @@ function _az_user_login_form_submit(&$form, FormStateInterface $form_state) {
   // Check if a destination was set, probably on an exception controller.
   // @see \Drupal\user\Form\UserLoginForm::submitForm()
   $request = \Drupal::service('request_stack')->getCurrentRequest();
-  if (!$request->request->has('destination')) {
-    $url = Url::fromRoute('<front>');
-    $form_state->setRedirectUrl($url);
-  }
-  else {
+  if ($request->request->has('destination')) {
     $request->query->set('destination', $request->request->get('destination'));
+  } else {
+    $form_state->setRedirectUrl(Url::fromRoute('<front>'));
   }
 }
 
