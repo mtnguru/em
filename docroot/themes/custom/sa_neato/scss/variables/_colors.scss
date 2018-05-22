@@ -16,6 +16,7 @@ $color-light-turquoise: #A5FFD1;
 $color-purple: #53C;
 $color-purple-red: #A682ff;
 $color-green: #7FFFB0;
+$color-red: #ff5500;
 //$color-dark-green: #0F5F20;
 $color-dark-green: #064A10;
 $color-off-white: #FAF0FF;
@@ -68,7 +69,7 @@ $topnav-color: $color-light-turquoise;
 // Base colors.
 $base-background-color: $color-dark-blue !default;
 $base-font-color: $color-off-white !default;
-$secondary-background-color: lighten($base-background-color, 15%);
+$secondary-background-color: lighten($base-background-color, 10%);
 
 $border-color-base: darken($color-green, 40%);
 $border-color-hover: darken($color-green, 20%);

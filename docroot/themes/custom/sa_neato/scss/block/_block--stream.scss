@@ -48,11 +48,14 @@
 
     .status-container {
       font-size: 75%;
-      padding-left: 15px;
+      padding: 0 10px;
       background-color: $base-background-color;
       color: $color-turquoise;
+      border: 1px solid $base-separator-color;
+      border-radius: 8px;
       position: absolute;
       right: 0;
+      margin: 0 auto;
       top: -8px;
     }
   }

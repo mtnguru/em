@@ -128,10 +128,9 @@ nav.az-tabs {
 
   > ul.az-tabs-list {
     list-style: none;
-    border-bottom: 2px solid $base-separator-color;
     padding: 0;
     position: relative;
-    margin: 0 0 10px;
+    margin: 0;
     @include clearfix;
 
     > li.az-tab {
@@ -140,7 +139,7 @@ nav.az-tabs {
       margin: 0 -1px 0 0;
 
       border: 2px solid $base-separator-color;
-      border-bottom: 0;
+      margin-bottom: -2px;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
 
@@ -151,6 +150,7 @@ nav.az-tabs {
 
       &.active {
         background-color: $secondary-background-color;
+        border-bottom: 2px solid $secondary-background-color;
       }
 
       &:hover {
@@ -160,6 +160,13 @@ nav.az-tabs {
   }
 
   .az-pages {
+    background: $secondary-background-color;
+    border: 2px solid $base-separator-color;
+    padding: 10px 15px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+
     .az-page {
       .page-title {
         border-bottom: 1px solid $base-separator-color;

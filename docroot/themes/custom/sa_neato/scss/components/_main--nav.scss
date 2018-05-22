@@ -7,7 +7,7 @@
   $dark-gray: #333 !default;
   $large-screen: 53.75em !default;
   $navigation-background: darken($color-purple, 10%);
-  $navigation-height: 50px;
+  $navigation-height: 60px;
   $navigation-nav-button-background: $action-color;
   $navigation-nav-button-background-hover: lighten($navigation-background, 10%);
   $navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20%);
@@ -59,7 +59,9 @@
         width: 100%;
       }
       @include media($bp960) {
-        margin-left: 30px;
+        width: 100%;
+        padding-left: 290px;
+        padding-right: 150px;
       }
 
       .user-menu {
@@ -67,11 +69,11 @@
         top: 0px;
 
         @include media($bp320only) {
-          right: 60px;
+          right: 80px;
         }
 
         @include media($bp580only) {
-          right: 50px;
+          right: 80px;
         }
 
         @include media($bp960) {
@@ -79,6 +81,7 @@
         }
 
         #accessibility {
+          display: none;
           float: right;
           position: relative;
           .accessibility-hover {
@@ -91,7 +94,7 @@
             }
 
             @include media($bp580) {
-              padding-right: 40px;
+              padding-right: 20px;
             }
 
           }
@@ -133,14 +136,21 @@
 
         #account-menu {
           float: right;
-          padding-top: 20px;
 
           .login {
-            font-size: 14px;
+//          font-size: 14px;
+          }
+
+          > a {
+            display: block;
+            padding-top: 23px;
+            padding-bottom: 23px;
           }
 
           @include media(max-width $bp580max) {
-            display: none;
+//          position: absolute;
+//          top: 0px;
+//          right: 50px;
           }
 
           ul.popup {
@@ -163,7 +173,7 @@
           }
 
           &.logged-in {
-            padding-top: 7px;
+            padding-top: 11px;
 
             img {
               height: 40px;
@@ -226,7 +236,10 @@
     display: none;
     overflow: visible;
     padding: 0;
+    list-style: none;
     width: 100%;
+    max-width: 730px;
+    justify-content: center;
 
     &.show {
       display: block;
@@ -238,52 +251,20 @@
     }
 
     @include media ($bp960) {
-      display: block;
-      margin: 0 0 0 260px;
+      display: flex;
+      justify-content: space-around;
+      margin: 0;
     }
-  }
-
-
-  // The nav items
-
-  ul {
-    list-style: none;
 
     li.nav-link {
       display: block;
-      overflow: hidden;
-      width: 100%;
-      margin: 0;
-//    z-index: 101;
-
-      @include media(max-width $bp580max) {
-        padding: 0 20px;
-        line-height: 2.2;
-
-        &:last-child {
-          margin-bottom: 20px;
-        }
-      }
-
-      @include media($bp960) {
-        padding: 0 10px;
-        background: transparent;
-        float: left;
-
-        line-height: $navigation-height;
-        text-decoration: none;
-        width: auto;
-      }
-
-      .title,
       > a {
-        color: $navigation-color;
         display: inline-block;
         text-decoration: none;
         text-shadow: 0px 0px 4px #000;
 
         @include media ($bp960) {
-//        padding-right: 1em;
+          //        padding-right: 1em;
         }
 
         &:focus,
@@ -291,37 +272,79 @@
           color: $navigation-color-hover;
         }
       }
+    }
 
-      &.more {
-        @include media($bp960) {
-          //    padding: 0 $navigation-submenu-padding;
+    @include media(max-width $bp580max) {
+      li {
+        padding: 0 20px;
+        line-height: 2.2;
+
+        &:last-child {
+          margin-bottom: 20px;
         }
 
-        > ul > li:first-child a  {
-          //    padding-top: 10px;
-        }
+        a {
 
-        .title,
-        > a {
-          padding-right: 10px;
-          &::after {
-            line-height: 1;
-            padding-left: 4px;
-            font-size: 100%;
-            content: "\25BE";
-          }
-        }
-
-        &.menu-open {
-          display: block;
-        }
-
-        @include media($bp960) {
-          padding-right: 0.8em;
-//        position: relative;
         }
       }
     }
+
+    @include media($bp960) {
+      li {
+        padding: 0 15px;
+        float: left;
+        height: $navigation-height;
+        line-height: $navigation-height;
+        a {
+          vertical-align: middle;
+          text-decoration: none;
+//        width: 100px;
+          line-height: 1.2;
+          text-align: center;
+        }
+      }
+    }
+
+    @include media($bp1280) {
+      li {
+        padding: 0 25px;
+        a {
+          width: auto;
+        }
+      }
+    }
+
+
+/*
+    &.more {
+      @include media($bp960) {
+        //    padding: 0 $navigation-submenu-padding;
+      }
+
+      > ul > li:first-child a  {
+        //    padding-top: 10px;
+      }
+
+      .title,
+      > a {
+        padding-right: 10px;
+        &::after {
+          line-height: 1;
+          padding-left: 4px;
+          font-size: 100%;
+          content: "\25BE";
+        }
+      }
+
+      &.menu-open {
+        display: block;
+      }
+
+      @include media($bp960) {
+        padding-right: 0.8em;
+        //        position: relative;
+      }
+    } */
 
     .title,
     > a {
@@ -339,7 +362,6 @@
     }
 
     @include media($bp960) {
-      padding-right: 0.8em;
       position: relative;
     }
   }
@@ -414,7 +436,6 @@
       }
     }
   }
-
 
   // Elements on the far right
 

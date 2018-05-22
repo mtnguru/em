@@ -8,6 +8,7 @@ body.user-register {
   }
 }
 
+form#user-register-form,
 form#user-form {
   .field--name-field-picture {
     thead,
@@ -26,6 +27,14 @@ form#user-form {
       padding: 0;
       > p {
         display: none;
+      }
+    }
+    .password-confirm {
+      .ok {
+        color: $color-green;
+      }
+      .error {
+        color: $color-red;
       }
     }
   }

@@ -72,14 +72,10 @@ function az_mail_mail($key, &$message, $params) {
     case 'page_mail':
       // Contact form does not call hook_mail - WTF?
       break;
-    case 'comment_presave':
-      $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('[Ethereal Matters] @subject', array('@subject' => $params['subject']), $options);
-      $message['body'][] = Markup::create($params['message']);
-      $message['headers']['Content-Type'] = SWIFTMAILER_FORMAT_HTML;
-      break;
 
     case 'email_presave':
+    case 'comment_presave':
+    case 'user_presave':
       $message['from'] = \Drupal::config('system.site')->get('mail');
       $message['subject'] = t('[Ethereal Matters] @subject', array('@subject' => $params['subject']), $options);
       $message['body'][] = Markup::create($params['message']);
@@ -143,13 +139,41 @@ function az_mail_mail_alter(&$message) {
 
 /**
  * Implements hook_entity_insert().
+ *
+ * Send and email when a new user is created.
+ *
+ * @param \User $user
  */
-function az_mail_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+function az_mail_entity_insert(Drupal\Core\Entity\EntityInterface $account) {
 
+////////// Send email to ninjas only
+
+  $ninjaUids = \Drupal::entityQuery('user')
+    ->condition('status', 1)
+    ->condition('roles', 'ninja')
+    ->execute();
+
+  if (empty($ninjaUids[$account->id()])) { // Only send if author is not a ninja
+    foreach ($ninjaUids as $uid) {
+      $params['subject'] = t('A new user has been created.');
+
+      $params['message'] = <<<BODY
+<div class="user-name"><a href="#" class="user-link">{$account->name->value}</a></div>
+<hr>
+BODY;
+
+      // Send mail
+      $ninja = \Drupal\user\Entity\User::load($uid);
+      _az_mail_send_mail('user_presave', $ninja, $params);
+    }
+  }
 }
-
 /**
  * Implements HOOK_node_presave().
+ *
+ * Send email when node is saved
+ *   email - build recipient list from checkboxes
+ *   article, book, event, ticket - send email to those with 'ninja' role.
  **/
 function az_mail_node_presave(Node $node) {
   switch ($node->bundle()) {
@@ -173,6 +197,7 @@ function az_mail_node_presave(Node $node) {
 
       $recipients = CreateUserList::queryUsers($set);
 
+      // Set the subject line
       $params['subject'] = $node->title->value;
 
       $mailit = $node->field_send_email->value;
@@ -191,6 +216,7 @@ function az_mail_node_presave(Node $node) {
         $body = $node->get('body')->value;
         $body = preg_replace('/\$username/', $recipient->name, $body);
         $body = preg_replace('/\$firstname/', $user->field_first_name->value, $body);
+        $body = preg_replace('/\$lastname/', $user->field_last_name->value, $body);
         $body = preg_replace('/\$user_reset/', $resetlink, $body);
         $params['message'] = $body;
 
@@ -235,9 +261,9 @@ function az_mail_node_presave(Node $node) {
 
       if (empty($ninjaUids[$node->getOwnerId()])) { // Only send if author is not a ninja
         foreach($ninjaUids as $uid) {
-//      if ($uid == $node->getOwnerId()) continue;
+  //      if ($uid == $node->getOwnerId()) continue;
 
-//      $nodeUrl = $node->toUrl()->setAbsolute()->toString();
+  //      $nodeUrl = $node->toUrl()->setAbsolute()->toString();
 
           $params['subject'] = t('A new page has been posted');
 
@@ -250,8 +276,8 @@ Status: <span class="status">{$node->moderation_state->value}</span></p>
 BODY;
 
           // Send mail
-          $commenter = \Drupal\user\Entity\User::load($uid);
-          _az_mail_send_mail('comment_presave', $commenter, $params);
+          $ninja = \Drupal\user\Entity\User::load($uid);
+          _az_mail_send_mail('comment_presave', $ninja, $params);
         }
       }
       break;
@@ -362,8 +388,8 @@ BODY;
 BODY;
 
     // Send mail
-    $commenter = \Drupal\user\Entity\User::load($uid);
-    _az_mail_send_mail('comment_presave', $commenter, $params);
+    $user = \Drupal\user\Entity\User::load($uid);
+    _az_mail_send_mail('comment_presave', $user, $params);
   }
 
   ////////// Send email to ninjas
@@ -386,8 +412,8 @@ BODY;
 BODY;
 
     // Send mail
-    $commenter = \Drupal\user\Entity\User::load($uid);
-    _az_mail_send_mail('comment_presave', $commenter, $params);
+    $user = \Drupal\user\Entity\User::load($uid);
+    _az_mail_send_mail('comment_presave', $user, $params);
   }
 }
 
