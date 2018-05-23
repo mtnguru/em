@@ -203,3 +203,23 @@ function az_user_theme_suggestions_user_alter(array &$suggestions, array $variab
   $suggestions[] = $variables['theme_hook_original'] . '__' . str_replace('-', '_', $variables['elements']['#view_mode']);
   return $suggestions;
 }
+
+function az_user_get_users_with_permission($permission) {
+  // Get all roles
+  $allRoles =  \Drupal\user\Entity\Role::loadMultiple();
+  $roles = [];
+  // Find those roles with proper permissions
+  foreach ($allRoles as $role) {
+	if ($role->hasPermission($permission)) {
+      $roles[] = $role->id();
+    }
+  }
+
+  $query = \Drupal::database()->select('users', 'u');
+  $query->fields('u', ['uid']);
+  $query->leftJoin('user__roles', 'ur', 'ur.entity_id = u.uid');
+  $query->condition('u.uid', '1', '!=');
+  $query->condition('ur.roles_target_id', $roles, 'IN');
+
+  return $query->execute()->fetchAllAssoc('uid');
+}

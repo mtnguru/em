@@ -158,7 +158,9 @@ function az_mail_entity_insert(Drupal\Core\Entity\EntityInterface $account) {
       $params['subject'] = t('A new user has been created.');
 
       $params['message'] = <<<BODY
-<div class="user-name"><a href="#" class="user-link">{$account->name->value}</a></div>
+<div class="user-name">Username: <a href="#" class="user-link">{$account->name->value}</a></div>
+<div class="user-name">Name: {$account->field_first_name->value} {$account->field_last_name->value}</div>
+<div class="user-name">Location: {$account->field_descriptive_location->value}</div>
 <hr>
 BODY;
 
@@ -254,17 +256,10 @@ function az_mail_node_presave(Node $node) {
 
       ////////// Send email to ninjas
 
-      $ninjaUids = \Drupal::entityQuery('user')
-        ->condition('status', 1)
-        ->condition('roles', 'ninja')
-        ->execute();
+      $ninjaUids = az_user_get_users_with_permission('receive new content notifications');
 
       if (empty($ninjaUids[$node->getOwnerId()])) { // Only send if author is not a ninja
-        foreach($ninjaUids as $uid) {
-  //      if ($uid == $node->getOwnerId()) continue;
-
-  //      $nodeUrl = $node->toUrl()->setAbsolute()->toString();
-
+        foreach($ninjaUids as $uid => $record) {
           $params['subject'] = t('A new page has been posted');
 
           $params['message'] = <<<BODY
@@ -274,7 +269,6 @@ Status: <span class="status">{$node->moderation_state->value}</span></p>
 {$node->body->value}
 <hr>
 BODY;
-
           // Send mail
           $ninja = \Drupal\user\Entity\User::load($uid);
           _az_mail_send_mail('comment_presave', $ninja, $params);
@@ -297,18 +291,19 @@ function _az_mail_send_mail($source, $recipient, $params) {
     TRUE);
   $message = ($result['result'] === true) ? 'Success - ' : 'Failed - ';
 
-
   $name = $recipient->getUsername();
   $mail = $recipient->getEmail();
   $id = $recipient->uid;
 
-  $message .= t('@name - @email - @id', [
-    '@name' => $recipient->getUsername(),
-    '@email' => $recipient->getEmail(),
-    '@id' => $recipient->id(),
-  ]) . "\n";
-  drupal_set_message($message);
-  \Drupal::logger('az_mail')->notice($message);
+  if (\Drupal::currentUser()->hasPermission('show email log messages')) {
+    $message .= t('@name - @email - @id', [
+        '@name' => $recipient->getUsername(),
+        '@email' => $recipient->getEmail(),
+        '@id' => $recipient->id(),
+      ]) . "\n";
+    drupal_set_message($message);
+    \Drupal::logger('az_mail')->notice($message);
+  }
 }
 
 /**

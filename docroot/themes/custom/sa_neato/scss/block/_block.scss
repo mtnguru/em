@@ -1,5 +1,5 @@
 .block-border {
-  border: 2px solid $header-background;
+  border: 2px solid lighten($header-background, 5%);
   border-radius: $base-border-radius;
   margin-bottom: 30px;
   @extend %box-shadow;
