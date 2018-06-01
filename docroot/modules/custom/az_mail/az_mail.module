@@ -144,7 +144,7 @@ function az_mail_mail_alter(&$message) {
  *
  * @param \User $user
  */
-function az_mail_entity_insert(Drupal\Core\Entity\EntityInterface $account) {
+function az_mail_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
 
 ////////// Send email to ninjas only
 
@@ -153,14 +153,14 @@ function az_mail_entity_insert(Drupal\Core\Entity\EntityInterface $account) {
     ->condition('roles', 'ninja')
     ->execute();
 
-  if (empty($ninjaUids[$account->id()])) { // Only send if author is not a ninja
+  if ($entity->getEntityTypeId() == 'user' && empty($ninjaUids[$entity->id()])) {
     foreach ($ninjaUids as $uid) {
       $params['subject'] = t('A new user has been created.');
 
       $params['message'] = <<<BODY
-<div class="user-name">Username: <a href="#" class="user-link">{$account->name->value}</a></div>
-<div class="user-name">Name: {$account->field_first_name->value} {$account->field_last_name->value}</div>
-<div class="user-name">Location: {$account->field_descriptive_location->value}</div>
+<div class="user-name">Username: <a href="#" class="user-link">{$entity->name->value}</a></div>
+<div class="user-name">Name: {$entity->field_first_name->value} {$entity->field_last_name->value}</div>
+<div class="user-name">Location: {$entity->field_descriptive_location->value}</div>
 <hr>
 BODY;
 
