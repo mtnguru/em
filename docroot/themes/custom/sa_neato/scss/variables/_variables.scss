@@ -13,7 +13,10 @@ $heading-line-height: 1.1;
 $base-border-radius: 10px;
 $inner-border-radius: 8px;
 $base-spacing: $base-line-height * 1em;
-$small-spacing: $base-spacing / 2;
+$small-spacing: $base-spacing / 3;
+$top-spacing: $base-spacing / 3;
+
+$paragraph-spacing: $base-spacing / 2;
 $base-z-index: 0;
 
 // Animations

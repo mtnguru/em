@@ -38,7 +38,7 @@ class AzContentQuery {
 
     ////////// Filter on core Drupal published value
     if (isset($set['status'])) {
-      $query->condition('nfd.status', $set['status'], '=');
+      $query->condition('nfd.status', $set['status'], (is_array($set['status'])) ? 'IN' : '=');
     }
 
     ////////// Content Types

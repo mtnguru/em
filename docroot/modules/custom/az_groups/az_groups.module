@@ -75,6 +75,12 @@ function az_groups_preprocess_group(&$variables) {
   // Add trademarks for SAM.
   _az_content_add_SAM_tm($variables['content']['field_body'][0]['body']['content']['#text']);
 
+  if (\Drupal::currentUser()->hasPermission('show unpublished book pages')) {
+    $status = [\Drupal\node\NodeInterface::PUBLISHED, \Drupal\node\NodeInterface::NOT_PUBLISHED];
+  } else {
+    $status = \Drupal\node\NodeInterface::PUBLISHED;
+  }
+
   // Create Articles tab
   $articles = [
     'type' => 'entity-stream',
@@ -83,7 +89,7 @@ function az_groups_preprocess_group(&$variables) {
     'types' => ['article'],
     'groups' => $group->id(),
     'title' => 'Articles',
-    'status' => \Drupal\node\NodeInterface::PUBLISHED,
+    'status' => $status,
     'empty' => 'NO DISPLAY',
   ];
 
@@ -96,7 +102,19 @@ function az_groups_preprocess_group(&$variables) {
     'sticky' => true,
     'groups' => $group->id(),
     'title' => 'Featured Content',
-    'status' => NODE_PUBLISHED,
+    'status' => $status,
+    'empty' => 'NO DISPLAY',
+  ];
+
+  // Create Book pages tab
+  $bookpages = [
+    'type' => 'entity-stream',
+    'id' => 'featured-content',
+    'label' => 'Pages',
+    'types' => ['book'],
+    'groups' => $group->id(),
+    'title' => 'Book Pages',
+    'status' => $status,
     'empty' => 'NO DISPLAY',
   ];
 
@@ -120,7 +138,7 @@ function az_groups_preprocess_group(&$variables) {
     'types' => 'event',
     'groups' => $group->id(),
     'title' => 'Upcoming Events',
-    'status' => \Drupal\node\NodeInterface::PUBLISHED,
+    'status' => $status,
     'empty' => 'NO DISPLAY',
   ];
 
@@ -133,7 +151,7 @@ function az_groups_preprocess_group(&$variables) {
     'entityType' => 'media',
     'groups' => $group->id(),
     'title' => 'Resources',
-    'status' => \Drupal\node\NodeInterface::PUBLISHED,
+    'status' => $status,
 //  'empty' => 'NO DISPLAY',
   ];
 
@@ -147,13 +165,14 @@ function az_groups_preprocess_group(&$variables) {
     'groups' => $group->id(),
     'title' => 'Images',
     'pageNumItems' => 40,
-    'status' => \Drupal\node\NodeInterface::PUBLISHED,
+    'status' => $status,
     'empty' => 'NO DISPLAY',
   ];
 
   $variables['tabs'] = _az_content_build_tabs('main', [
     $articles['id'] => $articles,
     $featured['id'] => $featured,
+    $bookpages['id'] => $bookpages,
     $comments['id'] => $comments,
     $events['id'] => $events,
     $resources['id'] => $resources,
