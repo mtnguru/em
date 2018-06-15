@@ -97,9 +97,10 @@ function az_groups_preprocess_group(&$variables) {
   $featured = [
     'type' => 'entity-stream',
     'id' => 'featured-content',
-    'label' => 'Featured Content',
+    'label' => 'Featured',
     'types' => ['book', 'article'],
-    'sticky' => true,
+//  'types' => ['book'],
+//  'sticky' => true,
     'groups' => $group->id(),
     'title' => 'Featured Content',
     'status' => $status,
@@ -109,7 +110,7 @@ function az_groups_preprocess_group(&$variables) {
   // Create Book pages tab
   $bookpages = [
     'type' => 'entity-stream',
-    'id' => 'featured-content',
+    'id' => 'book-pages',
     'label' => 'Pages',
     'types' => ['book'],
     'groups' => $group->id(),
@@ -170,8 +171,8 @@ function az_groups_preprocess_group(&$variables) {
   ];
 
   $variables['tabs'] = _az_content_build_tabs('main', [
-    $articles['id'] => $articles,
     $featured['id'] => $featured,
+    $articles['id'] => $articles,
     $bookpages['id'] => $bookpages,
     $comments['id'] => $comments,
     $events['id'] => $events,
