@@ -93,11 +93,11 @@
         flex-basis: 50%;
       }
       @include media($bp1280) {
-        flex-basis: 50%;
+        flex-basis: 33%;
       }
       @include media($bp1920) {
 //      flex-basis: 33.333%;
-        flex-basis: 50%;
+        flex-basis: 33%;
       }
     }
   }
