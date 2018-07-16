@@ -8,7 +8,7 @@
 
 .view-id-az_groups {
   .view-content {
-    margin: 15px -15px;
+    margin: 5px -5px;
     @include clearfix;
   }
 
@@ -17,10 +17,10 @@
     overflow: hidden;
 
     @include media(max-width $bp580max) {
-      padding: 10px;
+      padding: 5px;
     }
     @include media($bp960) {
-      padding : 15px;
+      padding : 5px;
     }
 
     .views-field {
