@@ -246,10 +246,13 @@ body.page-node-type-atomizer {
         }
 
         .control-block {
-          width: 160px;
+          width: 180px;
 
           &#blocks--sceneName {
             min-height: 30px;
+          }
+          &#blocks--animation--wrapper {
+            width: auto;
           }
         }
 
@@ -273,6 +276,10 @@ article.az-view-mode-atomizer-minimal {
     top: 20px;
     left: -80px;
     width: 160px;
+
+    &#blocks--animation--wrapper {
+      width: auto;
+    }
   }
 
   #blocks--buttons {

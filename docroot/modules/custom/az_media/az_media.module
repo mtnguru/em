@@ -154,8 +154,11 @@ function az_media_file_presave($file) {
     // do nothing?
 
   } else {
-    $doc = strpos($info['dirname'], 'files/' . $date);
-    if (strpos($info['dirname'], '/' . $mime . '/' === FALSE) || $doc) {
+//  $doc = strpos($info['dirname'], 'files/' . $date);
+    $doc = false;
+//  if (strpos($info['dirname'], '/' . $mime . '/') || $doc) {
+    if (strpos($info['dirname'], '/' . $mime . '/') || $doc) {
+      /*
       $directory = $mime . '/' . $date;
       if ($doc) {
         $info['dirname'] = str_replace($date, $directory, $info['dirname']);
@@ -168,20 +171,37 @@ function az_media_file_presave($file) {
 
       if (!is_dir($info['dirname'])) {
         mkdir($info['dirname'], 0777, TRUE);
-      }
+      } */
+
+//    if (preg_match('/^(.*)\/default\/files\/(.*)$/', $info['dirname'], $matches)) {
+//      $directory = $matches[2];
+//    } else {
+//      // error message needed here.
+//      $val = 5/0;
+//    }
+//    $tmpPath = file_directory_temp() . '/tmp_' . $basename;
+//    $destPath = $info['dirname'] . '/' . $basename;
+//    if (preg_match('/(.*)_fn_(.*)\./', $info['filename'], $matches)) {
+//      $filename = $matches[1];
+//      $fn = $matches[2];
+//    } else {
+//      $filename = $info['filename'];
+//      $fn = 0;
+//    }
+//    if (file_exists($destPath)) {
+//      while (file_exists($destPath)) {
+//        $newfilename = $filename . '_fn_' . ++$fn . '.' . $info['extension'];
+//        $destPath = $info['dirname'] . '/' . $newfilename;
+//      }
+//      $file->setFileUri($uinfo['scheme'] . '://' . $directory . '/' . $newfilename);
+//    }
 
       $tmpPath = file_directory_temp() . '/tmp_' . $basename;
       $destPath = $info['dirname'] . '/' . $basename;
-      $fn = 0;
-      if (file_exists($destPath)) {
-        while (file_exists($destPath)) {
-          $newfilename = $info['filename'] . '_fn_' . ++$fn . '.' . $info['extension'];
-          $destPath = $info['dirname'] . '/' . $newfilename;
-        }
-        $file->setFileUri($uinfo['scheme'] . '://' . $directory . '/' . $newfilename);
-      }
 
-      if (strstr($file->getMimeType(), 'image') && $info['extension'] != 'png') {
+      if (strstr($file->getMimeType(), 'image') &&
+          $info['extension'] != 'png' &&
+          $info['extension'] != 'gif') {
 
         $initialSize = $file->getSize();
         $dims = getimagesize($srcPath);

@@ -1,5 +1,5 @@
 
-.az-wrapper {
+.az-atomizer-wrapper {
   &.az-float-controls {
     .az-controls-wrapper {
       background: $color-controls-wrapper;
@@ -14,6 +14,9 @@
         background: $color-controls-wrapper;
         border: 2px solid $color-border;
       }
+    }
+    #animation--speed--az-slider {
+      width: 38%;
     }
   }
 }
