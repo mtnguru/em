@@ -107,5 +107,5 @@ crons:
 
 variables:
     php:
-        upload_max_filesize = 128M
+        upload_max_filesize: 128M
     
