@@ -104,3 +104,8 @@ crons:
     drupal:
         spec: '*/20 * * * *'
         cmd: 'cd web ; drush core-cron'
+
+variables:
+    php:
+        upload_max_filesize = 128M
+    
