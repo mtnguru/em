@@ -334,9 +334,13 @@ function az_media_preprocess_media(&$variables) {
     case 'image':
       break;
     case 'document':
-      $file = \Drupal\file\Entity\File::load($media->field_document[0]->target_id);
-      $variables['file_url'] = file_create_url($file->getFileUri());
-      $variables['file_name'] = $file->filename->value;
+      if (!$media->field_document->isEmpty()) {
+        $file = \Drupal\file\Entity\File::load($media->field_document[0]->target_id);
+        $variables['file_url'] = file_create_url($file->getFileUri());
+        $variables['file_name'] = $file->filename->value;
+      } else {
+        $variables['file_name'] = 'No file has been assigned';
+      }
       break;
     case 'video':
       break;
