@@ -51,7 +51,8 @@
         "tijsverkoyen/css-to-inline-styles": "^2.2",
         "drush/drush": "^9.0",
         "drupal/mailsystem": "^4.1",
-        "drupal/swiftmailer": "^1.0@beta"
+        "drupal/swiftmailer": "^1.0@beta",
+        "drupal/mailchimp": "^1.7"
     },
     "repositories": [
         {
