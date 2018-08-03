@@ -33,6 +33,18 @@ form#user-form {
     }
   }
 
+  #edit-field-subscriptions-0-value {
+    .description {
+      display: none;
+    }
+    fieldset {
+      legend {
+        display: none;
+      }
+      border: 0;
+    }
+  }
+
   .form-type-password {
     .ok {
       color: $color-green;
