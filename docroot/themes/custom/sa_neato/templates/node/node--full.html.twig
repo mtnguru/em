@@ -184,6 +184,12 @@
           {{ content.body }}
         </div>
       {% endif %}
+
+      {% if content.field_structure is not empty %}
+        <div class="structure">
+          {{ content.field_structure }}
+        </div>
+      {% endif %}
     </div>
 
     {% if content.book_navigation is not empty %}

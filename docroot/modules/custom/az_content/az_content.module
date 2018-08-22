@@ -291,6 +291,19 @@ function az_content_preprocess_page(&$variables) {
 }
 
 /**
+ * Implements HOOK_preprocess_field().
+ *
+ * @param $variables
+ */
+function az_content_preprocess_field(&$variables) {
+ switch ($variables['element']['#field_name']) {
+    case 'field_structure':
+      $variables['structure'] = $variables['items'][0]['content']['#context']['value'];
+      break;
+  }
+}
+
+/**
  * Add a node reference to the media entity field_usage field.
  *
  * @param $media
@@ -645,7 +658,7 @@ function az_content_preprocess_node(&$variables) {
   );
 
   // Get the status and moderation_state
-  if ($node->hasField('moderation_state') && $type != 'email') {
+  if ($node->hasField('moderation_state') && $type != 'email' && $type != 'birkeland') {
     $variables['state'] = $node->moderation_state->value;
   } else {
     $variables['state'] = ($node->status->value) ? 'published' : 'draft';

@@ -44,6 +44,8 @@
 .az-fa-arrow-up:before          { @extend .az-fa; content: "\f062"; }
 .az-fa-arrows-alt:before        { @extend .az-fa; content: "\f0b2"; }
 .az-fa-bars:before              { @extend .az-fa; content: "\f0c9"; }
+.az-fa-birkeland:before,
+.az-fa-bolt:before              { @extend .az-fa; content: "\f0e7"; }
 .az-fa-book-page:before         { @extend .az-fa; content: "\f02d"; }
 .az-fa-book:before              { @extend .az-fa; content: "\f02d"; }
 .az-fa-atom:before,
@@ -62,10 +64,10 @@
 .az-fa-copyright:before         { @extend .az-fa; content: "\f1f9"; }
 .az-fa-cube:before              { @extend .az-fa; content: "\f1b2"; }
 .az-fa-dot-circle-o:before      { @extend .az-fa; content: "\f192"; }
-.az-fa-file:before              { @extend .az-fa; content: "\f15b"; }
 .az-fa-email:before,
 .az-fa-envelope:before          { @extend .az-fa; content: "\f0e0"; }
 .az-fa-document:before,
+.az-fa-file:before              { @extend .az-fa; content: "\f15b"; }
 .az-fa-file-alt:before          { @extend .az-fa; content: "\f15c"; }
 .az-fa-file-o:before            { @extend .az-fa; content: "\f016"; }
 .az-fa-file-image-o:before      { @extend .az-fa; content: "\f1c5"; }

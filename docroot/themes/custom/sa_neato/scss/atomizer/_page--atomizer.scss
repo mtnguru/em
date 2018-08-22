@@ -203,7 +203,19 @@ body.page-node-type-atomizer {
         }
       }
 
-      .az-canvas-wrapper {
+      .atom-builder-canvas-wrapper {
+        display: inline-block;
+        position: relative;
+        width: calc(100% - 430px);
+        //      overflow: hidden;
+        //      @include clearfix;
+
+        canvas {
+          //        position: absolute;
+        }
+      }
+
+      .birkeland-canvas-wrapper {
         display: inline-block;
         position: relative;
         width: calc(100% - 430px);
