@@ -3,19 +3,12 @@ div.az-atom-form {
   bottom: 10px;
 }
 
-form.node-birkeland-form,
-form.node-birkeland-edit-form {
-  textarea#edit-field-structure-0-value {
-    font-family: monospace;
-    line-height: 1.15;
-  }
-}
-
 form.node-atom-form,
 form.node-atom-edit-form {
   font-size: 14px;
 
 
+  #edit-field-birkeland-wrapper,
   #edit-field-atomic-structure-wrapper {
     textarea {
       font-family: monospace;
