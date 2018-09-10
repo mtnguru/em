@@ -139,7 +139,7 @@ class AzContentQuery {
           break;
         case 'select-atom':
           $query->join('node__field_element', 'nfe', 'nfd.nid = nfe.entity_id');
-          $query->join('node__field_atomic_number', 'nfan', 'nfan.entity_id = nfe.field_element_target_id');
+          $query->leftJoin('node__field_atomic_number', 'nfan', 'nfan.entity_id = nfe.field_element_target_id');
           $query->orderBy('nfan.field_atomic_number_value', 'ASC');
           $query->orderBy('nfd.title', 'ASC');
           $sorted = true;
