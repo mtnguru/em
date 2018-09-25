@@ -77,7 +77,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
           break;
         case 'confidential':
           $classes[] = 'menu-item--confidential';
-          $classes[] = 'menu-item--published';
+          $classes[] = 'menu-item--unpublished';
           break;
         case 'archived':
           $classes[] = 'menu-item--archived';
@@ -166,7 +166,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       if (!empty($node) && $node->getType() == 'book') {
 
         $result = &$results[$node->id()];
-        if (count($result)) {
+        if ($result) {
           for ($i = 1; $i <= $result->depth; $i++) {
             $n = 'p' . $i;
             if (!empty($results[$result->$n])) {
