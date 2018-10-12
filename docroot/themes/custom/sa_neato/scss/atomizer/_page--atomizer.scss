@@ -181,14 +181,14 @@ body.page-node-type-atomizer {
         border: 2px solid $color-green;
         padding: 3px;
         vertical-align: top;
-        width: 235px;
+        width: 255px;
         margin-right: 10px;
         border-radius: 12px;
         z-index: 1;
       }
 
       #az-page-select-atom {
-        width: 175px;
+        width: 200px;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -207,7 +207,7 @@ body.page-node-type-atomizer {
       .atom-builder-canvas-wrapper {
         display: inline-block;
         position: relative;
-        width: calc(100% - 430px);
+        width: calc(100% - 475px);
         //      overflow: hidden;
         //      @include clearfix;
 
