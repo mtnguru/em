@@ -275,6 +275,20 @@ class AzBookNavigationBlock extends BookNavigationBlock {
           }
 
           // Add link to the Dynamic Periodic Table
+          $build['#group_links']['nuclides'] = [
+            '#type' => 'container',
+            'link' => [
+              '#type' => 'link',
+              '#title' => t('View Live Chart of Nuclides'),
+              '#attributes' => [
+                'title' => t('Dynamic chart that allows users to explore the Chart of Nuclides.'),
+                'target' => '_blank',
+              ],
+              '#url' => Url::fromUri('https://www-nds.iaea.org/relnsd/vcharthtml/VChartHTML.html'),
+            ],
+          ];
+
+          // Add link to the Dynamic Periodic Table
           $build['#group_links']['periodic_table'] = [
             '#type' => 'container',
             'link' => [
