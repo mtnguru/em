@@ -1,13 +1,13 @@
-name: Media entity link
-description: 'Media entity remote links provider.'
+name: Media entity Link
+description: 'Media entity Link provider.'
 type: module
-package: AZ
+package: Media
 # core: 8.x
 dependencies:
-  - media_entity
+  - drupal:media (>= 8.4)
 
-# Information added by Drupal.org packaging script on 2016-08-03
-version: '8.x-1.1'
+# Information added by Drupal.org packaging script on 2017-10-13
+version: '8.x-2.0-alpha2'
 core: '8.x'
 project: 'media_entity_link'
-datestamp: 1470211440
+datestamp: 1507907346

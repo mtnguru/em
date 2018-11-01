@@ -1,0 +1,18 @@
+integration:
+  version: VERSION
+  js:
+    'js/link.js': {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - media_entity_link/twttr.widgets
+twttr.widgets:
+  remote: //platform.link.com/widgets.js
+  license:
+    name: UNKNOWN
+    url: UNKNOWN
+    gpl-compatible: FALSE
+  js:
+    //platform.link.com/widgets.js:
+      type: external
+      minified: true

@@ -139,6 +139,7 @@ function az_content_form_node_ticket_form_alter(&$form, FormStateInterface $form
  * @return \Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
  */
 function az_content_entity_access(EntityInterface $entity, $op, AccountInterface $account) {
+  $type = $entity->getEntityTypeId();
   switch ($entity->getEntityTypeId()) {
     case 'node':
       if (($entity->id() == '511')  && !\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
@@ -153,7 +154,17 @@ function az_content_entity_access(EntityInterface $entity, $op, AccountInterface
         }
       }
       break;
+
+    case 'group_content':
+      $gid = $entity->gid->value;
+      $group = \Drupal::entityManager()->getStorage('group')->load($gid);
+      $status = $group->field_status->value;
+      if ($status == 'hidden' && !\Drupal::currentUser()->hasPermission('az groups view hidden')) {
+        return AccessResult::forbidden();
+      }
+      break;
   }
+
   return AccessResult::neutral();
 }
 

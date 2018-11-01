@@ -35,7 +35,8 @@ alias dus='FILE=/tmp/`basename $PWD`.`date "+%y%m%d"`.du;  \
 	      head $FILE'
 
 alias dr='cd /app/web; drush'
-alias drcc='dr cc all'
+alias drc='dr cr'
+alias drw='dr watchdog-delete all'
 alias tc='echo Truncate cache table - database $USER; echo "truncate table cache; quit;" > mysql -u root -ptaichi $USER'
 
 alias fn='find . -name'

@@ -53,7 +53,14 @@
         "drupal/mailsystem": "^4.1",
         "drupal/swiftmailer": "^1.0@beta",
         "drupal/mailchimp": "^1.7",
-        "drupal/views_bulk_operations": "^2.4"
+        "drupal/views_bulk_operations": "^2.4",
+        "drupal/login_destination": "1.x-dev",
+        "drupal/color_field": "^2.0",
+        "drupal/geofield": "^1.0@beta",
+        "drupal/geofield_map": "^2.15",
+        "drupal/honeypot": "^1.29",
+        "drupal/google_analytics": "^2.3",
+        "drupal/shs": "^1.0@alpha"
     },
     "repositories": [
         {

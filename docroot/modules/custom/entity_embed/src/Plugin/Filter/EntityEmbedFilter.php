@@ -158,8 +158,7 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
             $depth--;
           }
           else {
-            $alias = \Drupal::service('path.alias_manager')->getAliasByPath(\Drupal::service('path.current')->getPath());
-            throw new EntityNotFoundException(sprintf('Unable to load embedded %s entity in %s - %s', $entity_type, $alias, $id));
+            throw new EntityNotFoundException(sprintf('Unable to load embedded %s entity %s.', $entity_type, $id));
           }
         }
         catch (\Exception $e) {

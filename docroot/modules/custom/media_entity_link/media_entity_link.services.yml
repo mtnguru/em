@@ -1,0 +1,13 @@
+services:
+  media_entity_link.link_fetcher:
+    class: '\Drupal\media_entity_link\LinkFetcher'
+    arguments:
+      - '@media_entity_link.cache.links'
+
+  media_entity_link.cache.links:
+    class: '\Drupal\Core\Cache\CacheBackendInterface'
+    tags:
+      - { name: cache.bin, default_backend: cache.backend.chainedfast }
+    factory: cache_factory:get
+    arguments:
+      - links

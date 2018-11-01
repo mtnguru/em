@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update routines for Lightning Media Link.
+ */
+
+use Drupal\lightning_core\ConfigHelper as Config;
+
+/**
+ * Creates the media_browser form display.
+ */
+function lightning_media_link_update_8001() {
+  Config::forModule('lightning_media_link')
+    ->getEntity('entity_form_display', 'media.link.media_browser')
+    ->save();
+}
+
+/**
+ * Creates the thumbnail display for link.
+ */
+function lightning_media_link_update_8002() {
+  Config::forModule('lightning_media_link')
+    ->getEntity('entity_view_display', 'media.link.thumbnail')
+    ->save();
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function lightning_media_link_update_dependencies() {
+  return [
+    'lightning_media_link' => [
+      // 8002 depends on the thumbnail view mode, which is created by
+      // lightning_media 8015.
+      8002 => [
+        'lightning_media' => 8015,
+      ],
+    ],
+  ];
+}

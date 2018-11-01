@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Support for link as media entities in Lightning.
+ */
+
+use Drupal\lightning_core\OverrideHelper as Override;
+use Drupal\lightning_media_link\Plugin\media\Source\Link;
+
+/**
+ * Implements hook_media_source_info_alter().
+ */
+function lightning_media_link_media_source_info_alter(array &$sources) {
+  $sources['link']['input_match'] = [
+    'constraint' => 'LinkEmbedCode',
+    'field_types' => [
+      'string',
+      'string_long',
+    ],
+  ];
+  $sources['link']['preview'] = TRUE;
+
+  Override::pluginClass($sources['link'], Link::class);
+}
