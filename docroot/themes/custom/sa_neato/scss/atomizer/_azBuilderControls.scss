@@ -218,7 +218,70 @@
       background: inherit;
       margin: 1px 0px;
       padding: 0;
-//    height: 18px;
+      //    height: 18px;
+      border: 0;
+    }
+
+    .az-max,
+    .az-min {
+      vertical-align: middle;
+      font-size: 90%;
+      width: 2em;
+    }
+  }
+
+  .az-control-opacityMaster,
+  .az-control-opacity {
+
+    .az-name {
+      vertical-align: middle;
+      display: inline-flex;
+      width: 32%;
+    }
+
+    .form-item {
+      margin: 0;
+    }
+
+    .az-button {
+      border-radius: 20%;
+      border: 1px solid $color-border;
+      display: inline-flex;
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+      &.opaque {
+        background: $color-white;
+      }
+      &.transparent {
+        background: $color-dim-grey;
+      }
+      &.notvisible {
+        background: $color-black;
+      }
+    }
+
+    .form-item-value {
+      vertical-align: middle;
+      display: inline-flex;
+      .az-value {
+        border-radius: 0;
+        text-align: right;
+        width: 2.2em;
+        padding: 0;
+        border: 0;
+        margin: 0 5px;
+        background: $color-controls;
+      }
+    }
+
+    .az-slider {
+      width: 33%;
+      display: inline-flex;
+      vertical-align: middle;
+      background: inherit;
+      margin: 1px 0px;
+      padding: 0;
       border: 0;
     }
 
