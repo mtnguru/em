@@ -576,3 +576,14 @@ article.atomizer_minimal {
     }
   }
 }
+
+.controls-birkeland-yml {
+  .az-control-opacity .az-color {
+    border-radius: 20%;
+//  border: 1px solid $color-border;
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+  }
+}
