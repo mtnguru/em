@@ -60,7 +60,8 @@
         "drupal/geofield_map": "^2.15",
         "drupal/honeypot": "^1.29",
         "drupal/google_analytics": "^2.3",
-        "drupal/shs": "^1.0@alpha"
+        "drupal/shs": "^1.0@alpha",
+        "drupal/migrate_plus": "^4.0"
     },
     "repositories": [
         {
