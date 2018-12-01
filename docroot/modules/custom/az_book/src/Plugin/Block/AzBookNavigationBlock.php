@@ -288,6 +288,20 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             ],
           ];
 
+          // Add link to List of Oxidation states of the elements
+          $build['#group_links']['nuclides'] = [
+            '#type' => 'container',
+            'link' => [
+              '#type' => 'link',
+              '#title' => t('View Live Chart of Nuclides'),
+              '#attributes' => [
+                'title' => t('List of Oxidation states of the elements'),
+                'target' => '_blank',
+              ],
+              '#url' => Url::fromUri('https://en.wikipedia.org/wiki/List_of_oxidation_states_of_the_elements'),
+            ],
+          ];
+
           // Add link to the Dynamic Periodic Table
           $build['#group_links']['periodic_table'] = [
             '#type' => 'container',
