@@ -74,50 +74,28 @@
 * @see template_process()
 */
 #}
+<article id="node-{{ node.id }}" class="{{ attributes.class }} {{ view_mode }} {{ 'type-' ~ node.bundle }}"{{ attributes }}>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
+  {% endif %}
+  {{ title_suffix }}
 
-<article id="node-{{ node.id }}" class="{{ attributes.class }} {{ display_mode }} {{ view_mode }} az-page {{ 'type-' ~ node.bundle }}"{{ attributes }}>
-
-  <div class='sidebar sidebar-left'>
-    {% for block in sidebar  %}
-      {{ block }}
-    {% endfor %}
-  </div>
-
-  <div class="main-container">
-    <div class="header-container">
-      <div class="header">
-        <h2 class="title">{{ label }}</h2>
-        <div class="information">
-          <span class="az-fa-{{ node.bundle }}">
-            {{ bundle_name }} -
-          </span>
-
-          <span class="changed" title="{{ changed }}">{{ changed_ago }} ago</span>
-
-          {% if has_new_content %}
-            <span class="new">{{ has_new_content }}</span>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-
-    <div class="az-properties">
-      {{ content.field_element }}
-      {{ content.field__protons }}
-      {{ content.field__inner_electrons }}
-      {{ content.field__outer_electrons }}
-      {{ content.field_isotope }}
-      {{ content.field_stability }}
-    </div>
-
-    {{ content.body }}
-    {% if display_notes %}
-      {{ content.field_notes }}
+  {% if display_submitted %}
+  <div class="posted">
+    {% if user_picture %}
+      {{ user_picture }}
     {% endif %}
-    {{ content.field_atomic_structure }}
-
-    {{ content.links }}
-    {{ content.field_comments }}
+    {{ submitted }}
   </div>
-</article>
+  {% endif %}
 
+  {{ content|without('field_contribute', 'field_comments', 'links') }}
+
+  {% if content.field_tags|length and not is_front %}
+    {{ content.field_tags }}
+  {% endif %}
+
+  {{ content.links }}
+  {{ content.field_comments }}
+</article>

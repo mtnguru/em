@@ -33,7 +33,6 @@
     {{ content.field_media_video_embed_field }}
     {{ content.field_description }}
   {% elseif content.name['#bundle'] == 'link' %}
-    {{ kint() }}
     {# content.field_media_video_embed_field #}
     {{ content.field_description }}
   {% elseif content.name['#bundle'] == 'document' %}
@@ -43,7 +42,6 @@
     </div>
     {{ content.field_description }}
   {% else %}
-    {{ kint() }}
     <div>Unknown media bundle - {{ bundle }}</div>
   {% endif %}
 </article>

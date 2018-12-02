@@ -10,22 +10,26 @@ $color-white: #ffffff;
 
 /////////////// Color Scheme /////////////////////
 $color-dark-blue: #102E4A;
+$color-light-blue: #66BBFF;
 $color-blue: #5887FF;
 $color-turquoise: #44D9E6;
 $color-light-turquoise: #A5FFD1;
 $color-purple: #53C;
+$color-light-purple: #BBAAFF;
 $color-purple-red: #A682ff;
 $color-green: #7FFFB0;
 $color-red: #ff5500;
+$color-light-red: #ff7766;
+$color-yellow: #EEEE00;
 //$color-dark-green: #0F5F20;
 $color-dark-green: #064A10;
 $color-off-white: #FAF0FF;
 $color-orange: #ffbb00;
 
 $color-placeholder: #BBBBBB;
-$color-draft: #66BBFF;
+$color-draft: $color-light-blue;
 $color-needs-review: #DD66EE;
-$color-confidential: #FF8899;
+$color-confidential: #color-light-purple;
 $color-published: #EEEE00;
 $color-unpublished: #FF9900;
 

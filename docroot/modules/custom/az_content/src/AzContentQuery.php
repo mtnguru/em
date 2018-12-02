@@ -140,13 +140,23 @@ class AzContentQuery {
         case 'select-atom':
           // Join in the element, Join in atomic number, Join # protons
           // Order by Atomic #, # Protons, Title
+
+          // Join Element entity
           $query->join('node__field_element', 'nfe', 'nfd.nid = nfe.entity_id');
+
+          // Join Atomic Number field and order by it first.
           $query->leftJoin('node__field_atomic_number', 'nfan', 'nfan.entity_id = nfe.field_element_target_id');
           $query->orderBy('nfan.field_atomic_number_value', 'ASC');
+
+          // Join # Protons field and order by it second.
           $query->leftJoin('node__field__protons', 'nfp', 'nfd.nid = nfp.entity_id');
           $query->orderBy('nfp.field__protons_value', 'ASC');
-          $query->orderBy('nfp.field__protons_value', 'ASC');
+
+          // Order by the Atom name third.
           $query->orderBy('nfd.title', 'ASC');
+
+          // Join in the stability field - and the related taxonomy term name.
+          // Not used in sort - Needed in output to build atom list.
           $query->leftJoin('node__field_stability', 'nfs', 'nfd.nid = nfs.entity_id'); // Needed to build select atom list
           $query->leftJoin('taxonomy_term_field_data', 'ttfd', 'ttfd.tid = nfs.field_stability_target_id');
           $sorted = true;

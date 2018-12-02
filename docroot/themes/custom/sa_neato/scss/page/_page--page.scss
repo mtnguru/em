@@ -19,8 +19,11 @@ body.page-node-type-atomizer {
   }
 }
 
-body.entity-group-canonical,
-body.entity-node-canonical {
+body.page-node-type-landing-page,
+body.page-node-type-book,
+body.page-node-type-atom,
+body.page-node-type-resources,
+body.page-node-type-article {
   .block-page-title-block {
       display: none;
   }

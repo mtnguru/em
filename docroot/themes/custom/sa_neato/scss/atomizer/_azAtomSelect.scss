@@ -156,13 +156,16 @@
       color: $color-green;
     }
     &.semi-stable a {
-      color: $color-blue;
+      color: $color-yellow;
     }
     &.unstable a {
-      color: $color-orange;
+      color: $color-light-red;
     }
     &.impossible a {
-      color: $color-red;
+      color: $color-light-purple;
+    }
+    &.alternative a {
+      color: $color-light-blue;
     }
   } // li.isotope
 }
