@@ -289,11 +289,11 @@ class AzBookNavigationBlock extends BookNavigationBlock {
           ];
 
           // Add link to List of Oxidation states of the elements
-          $build['#group_links']['nuclides'] = [
+          $build['#group_links']['oxidation_states'] = [
             '#type' => 'container',
             'link' => [
               '#type' => 'link',
-              '#title' => t('View Live Chart of Nuclides'),
+              '#title' => t('View Oxidation States'),
               '#attributes' => [
                 'title' => t('List of Oxidation states of the elements'),
                 'target' => '_blank',

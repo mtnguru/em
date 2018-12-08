@@ -90,6 +90,7 @@ body.page-node-type-atomizer {
         width: 100%;
 
         canvas {
+          vertical-align: bottom;
           //        position: absolute;
         }
       }
@@ -155,7 +156,7 @@ body.page-node-type-atomizer {
         width: calc(100% - 475px);
 
         canvas {
-          //        position: absolute;
+          vertical-align: bottom;
         }
       }
 
@@ -166,6 +167,7 @@ body.page-node-type-atomizer {
         width: calc(100% - 245px);
 
         canvas {
+          vertical-align: bottom;
           display: none;
         }
       }
@@ -176,6 +178,7 @@ body.page-node-type-atomizer {
         width: calc(100% - 245px);
 
         canvas {
+          vertical-align: bottom;
           //        position: absolute;
         }
       }

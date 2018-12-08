@@ -148,7 +148,7 @@ class AzContentQuery {
           $query->leftJoin('node__field_atomic_number', 'nfan', 'nfan.entity_id = nfe.field_element_target_id');
           $query->orderBy('nfan.field_atomic_number_value', 'ASC');
 
-          // Join # Protons field and order by it second.
+//        // Join # Protons field and order by it second.
           $query->leftJoin('node__field__protons', 'nfp', 'nfd.nid = nfp.entity_id');
           $query->orderBy('nfp.field__protons_value', 'ASC');
 

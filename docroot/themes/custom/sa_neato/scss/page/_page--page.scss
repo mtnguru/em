@@ -10,6 +10,12 @@ body {
   }
 }
 
+body.path-node {
+  .node__links {
+    float: right;
+  }
+}
+
 body.page-node-type-atomizer {
   div.main-wrapper {
     main {
@@ -20,6 +26,7 @@ body.page-node-type-atomizer {
 }
 
 body.page-node-type-landing-page,
+body.page-node-type-nuclet-binding-energies,
 body.page-node-type-book,
 body.page-node-type-atom,
 body.page-node-type-resources,
