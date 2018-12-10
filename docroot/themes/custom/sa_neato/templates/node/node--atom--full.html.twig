@@ -103,11 +103,25 @@
 
     <div class="az-properties">
       {{ content.field_element }}
+      {% if valence %}
+        <div class="field field--label-inline">
+          <div class="field__label">Valence</div>
+          <div class="field__item">{{ valence }}</div>
+        </div>
+      {% endif %}
+
+      {{ content.field_stability }}
+      {{ content.field_isotope }}
+      {{ content.field_abundance }}
+      {{ content.field_half_life }}
       {{ content.field__protons }}
       {{ content.field__inner_electrons }}
       {{ content.field__outer_electrons }}
-      {{ content.field_isotope }}
-      {{ content.field_stability }}
+      {{ content.field_nuclear_spin }}
+      {{ content.field_be_nucleon }}
+      {{ content.field_be_sam }}
+      {{ content.field_be_actual }}
+      {{ content.field_be_accuracy }}
     </div>
 
     {{ content.body }}

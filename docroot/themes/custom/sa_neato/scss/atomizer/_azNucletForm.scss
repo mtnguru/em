@@ -22,12 +22,44 @@ form.az-controls-form {
       }
     }
 
-    .nuclet--list {
-      .nuclet {
-
+    .az-control-button {
+      transition: color .5s;
+      color: rgba($color-button-inactive, .5);
+      &.az-selected {
+        color: $color-icon-selected;
       }
-      .binding-energy {
-        float: right;
+      &:hover {
+        color: $color-icon-hover;
+      }
+    }
+
+    #atom--be-button {
+      float: right;
+    }
+
+    .nuclet--list {
+      .header {
+        color: $color-green;
+      }
+      .nuclet {
+//      clear:both;
+      }
+      .binding-energy-wrapper {
+        @include clearfix;
+        .binding-energy {
+          background-color: lighten($color-controls, 5);
+          float: right;
+          font-size: 12px;
+          padding: 0 5px;
+          .title {
+            display: inline-block;
+            width: 100px;
+          }
+          .value {
+            display: inline-block;
+            width: 40px;
+          }
+        }
       }
     }
 
