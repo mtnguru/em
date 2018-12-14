@@ -7,6 +7,15 @@ body.page-node-type-atomizer {
   }
 
   article.atomizer {
+    &.atom-builder {
+      .field--name-body {
+        margin-left: 245px;
+        margin-top: 15px;
+      }
+      p {
+        margin: 0;
+      }
+    }
     .node__links {
       display: none;
     }
@@ -43,15 +52,11 @@ body.page-node-type-atomizer {
 
         .az-scene-name {
           width: calc(100% - 120px);
-          min-height: 30px;
+          min-height: 45px;
 
           a {
             color: $color-link;
           }
-        }
-
-        &#blocks--sceneName {
-          min-height: 30px;
         }
 
         #atom-select-enable {
@@ -59,14 +64,13 @@ body.page-node-type-atomizer {
           top: 0;
           right: 0;
           margin: 0;
-          padding: 10px 10px;
+          padding: 10px 25px;
           font-size: 90%;
         }
       }
 
       .az-controls-wrapper {
-//      background-color: $color-controls-wrapper;
-//      border: 2px solid $color-green;
+        margin-top: 15px;
         padding: 3px;
         border-radius: 12px;
         width: 100%;

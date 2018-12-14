@@ -104,6 +104,17 @@
     }
   }
 
+  .az-control-toggle {
+    transition: color .5s;
+    color: rgba($color-button-inactive, .5);
+    &.az-selected {
+      color: $color-icon-selected;
+    }
+    &:hover {
+      color: $color-icon-hover;
+    }
+  }
+
   .az-control.button,
   .button-wrapper > div,
   .link-button {
