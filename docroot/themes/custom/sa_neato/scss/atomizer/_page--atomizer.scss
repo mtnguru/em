@@ -8,9 +8,12 @@ body.page-node-type-atomizer {
 
   article.atomizer {
     &.atom-builder {
-      .field--name-body {
-        margin-left: 245px;
+      > .field--name-body {
         margin-top: 15px;
+
+        @include media($bp960) {
+          margin-left: 245px;
+        }
       }
       p {
         margin: 0;

@@ -1,0 +1,178 @@
+
+#landing_page-atom-builder {
+  .ui-dialog {
+    width: 535px;
+  }
+}
+
+// Select atom View block
+#az-select-atom {
+
+  position: relative;
+  border-radius: 8px;
+  margin-bottom: 0;
+  border: 2px solid $color-border;
+  background: $color-controls-wrapper;
+
+  @include media(max-width $bp580max) {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    border: 0;
+
+    body.toolbar-vertical &,
+    body.toolbar-fixed & {
+      top: 30px;
+    }
+  }
+
+  @include media($bp960) {
+    width: 220px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    .az-close {
+      display: none;
+    }
+  }
+    // #az-select-atom
+
+  h2 {
+    font-size: 120%;
+  }
+
+  .az-select-atom-title {
+    padding-left: 15px;
+    border-bottom: solid 2px $color-blue;
+  }
+
+  .element-list {
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: $color-controls;
+
+    &::-webkit-scrollbar {
+      background-color: $color-controls;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #194874;
+      -webkit-border-radius: 8px;
+    }
+  }
+
+  .element {
+    border-bottom: solid 1px $color-blue;
+  }
+
+  .isotope-list {
+    list-style: none;
+    margin: 0;
+    padding-left: 30px;
+  }
+
+  .default-isotope {
+    padding-left: 5px;
+    font-size: .85em;
+    height: 20px;
+
+    .atomic-number {
+      height: 18px;
+      padding: 0 5px 0 0;
+      float: left;
+    }
+
+    .atom-title {
+      display: inline-block;
+      width: 132px;
+      height: 18px;
+      overflow-y: hidden;
+    }
+
+    .num-isotopes {
+      padding: 0px 8px;
+      float: right;
+      border-radius: 5px;
+      background-color: lighten($color-controls, 20%);
+      &.az-closed {
+        background-color: lighten($color-controls, 5%);
+      }
+      &.expand {
+        color: $color-link;
+      }
+    }
+
+    .num-isomers {
+      padding: 0px 5px;
+      float: right;
+      &.expand {
+        color: $color-link;
+      }
+    }
+  }
+
+  .isotopes {
+    &.az-closed {
+      display: none;
+    }
+    padding-bottom: 3px;
+  }
+
+  li.isotope {
+    margin: 0;
+    padding: 0 1px;
+    .title {
+      display: inline-block;
+      overflow-y: hidden;
+      width: 132px;
+      height: 1.1em;
+    }
+
+    font-size: .80em;
+  }
+
+  .az-close {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 150%;
+    padding: 4px;
+  }
+
+  .isotope,
+  .default-isotope {
+    &.stable a {
+      color: $color-green;
+    }
+    &.semi-stable a {
+      color: $color-yellow;
+    }
+    &.unstable a {
+      color: $color-light-red;
+    }
+    &.impossible a {
+      color: $color-light-purple;
+    }
+    &.alternative a {
+      color: $color-light-blue;
+    }
+  } // li.isotope
+}
+
+
+body#landing_page-atom-builder {
+  .ui-widget-overlay {
+    background-color: rgba(70,70,70,.4);
+  }
+}

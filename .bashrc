@@ -159,7 +159,7 @@ set -o vi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/drupal/vendor/console/bin" # Add RVM to PATH for scripting
 
 ## Include Drush completion.
 if [ -f "$HOME/.drush/drush.complete.sh" ] ; then

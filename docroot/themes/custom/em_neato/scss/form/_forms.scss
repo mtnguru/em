@@ -1,0 +1,233 @@
+form {
+  input,
+  label,
+  select {
+    display: block;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: $small-spacing / 2;
+
+    &.required::after {
+      content: "*";
+    }
+
+    abbr {
+      display: none;
+    }
+  }
+
+  > div > .form-item,
+  > div > div > .form-item {
+    label {
+      color: $color-turquoise;
+    }
+    &.form-item-field-contribute-0-format,
+    &.form-item-body-0-format {
+      background: orange;
+      label {
+        color: $base-font-color;
+        font-size: 90%;
+        font-weight: normal;
+      }
+    }
+  }
+
+  > div > .form-item {
+    .form-item-field-contribute-0-format,
+    .form-item-body-0-format {
+      label {
+        color: $base-font-color;
+        font-size: 90%;
+      }
+    }
+  }
+
+  input,
+  select {
+    background-color: lighten($base-background-color, 10%);
+    border-radius: $base-border-radius;
+  }
+
+  textarea {
+    background-color: lighten($base-background-color, 10%);
+  }
+
+  fieldset {
+    border: $base-border;
+    margin: 0 0 $small-spacing;
+    padding: 5px 10px;
+
+    &.fieldgroup {
+      background-color: $secondary-background-color;
+      border: $base-border;
+      border-radius: 8px;
+      margin: 0 0 $small-spacing;
+      padding: 5px 10px;
+
+      legend {
+        background-color: $secondary-background-color;
+        padding: .5em;
+        border: 1px solid $color-green;
+      }
+    }
+  }
+
+  > fieldset.form-item {
+    border-color: $base-separator-color;
+    margin: 0 0 30px;
+
+    > legend {
+      font-size: 125%;
+      font-weight: bold;
+      color: $color-title;
+    }
+  }
+
+  #{$all-text-inputs},
+  select,
+  select[multiple=multiple] {
+    border: 2px solid $border-color-base;
+    box-shadow: $form-box-shadow;
+    box-sizing: border-box;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    padding: .2em .5em;
+    transition: border-color $base-duration $base-timing;
+
+//  width: 100%;
+
+    &:hover {
+      border-color: $border-color-hover;
+    }
+
+    &:focus {
+      border-color: $border-color-focus;
+      box-shadow: $form-box-shadow-focus;
+      outline: none;
+    }
+
+    &:disabled {
+      background-color: shade($base-background-color, 5%);
+      cursor: not-allowed;
+
+      &:hover {
+        border: $base-border;
+      }
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input[type="search"] {
+    appearance: none;
+  }
+
+  .form-item {
+    > legend {
+      padding: 0 10px;
+    }
+  }
+
+//.form-checkboxes,
+//.form-radios {
+    .form-type-checkbox.form-item,
+    .form-type-radio.form-item {
+      margin: .2em 0;
+
+      input {
+        display: inline-block;
+        margin-right: $small-spacing / 2;
+      }
+
+      label {
+        display: inline-block;
+        margin-bottom: 0;
+      }
+    }
+//}
+
+  input[type="file"] {
+    margin-bottom: $small-spacing;
+//  width: 100%;
+  }
+
+  select {
+    max-width: 100%;
+    width: auto;
+    height: 30px;
+  }
+
+  .tabledrag-handle {
+    .handle {
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  .field--widget-link-default {
+
+    .form-type-textfield {
+      margin-bottom: 0;
+    }
+  }
+
+  #edit-contact,
+  #edit-timezone {
+    border: 0;
+    margin: 5px 0;
+
+    summary {
+      display: none;
+    }
+
+    .details-wrapper {
+      padding: 0;
+    }
+
+    label {
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    select {
+      display: inline-block;
+    }
+  }
+
+  .field--name-field-email-updates,
+  #edit-contact {
+    margin-bottom: 25px;
+  }
+
+  .field--name-moderation-state {
+    margin-bottom: 20px;
+
+    .form-item {
+      margin: 0;
+    }
+
+    select {
+      margin-left: 7px;
+      display: inline-block;
+    }
+  }
+
+  .field--name-field-social-media {
+
+    label {
+      font-weight: normal;
+      margin-left: 5px;
+    }
+    input {
+      float: left;
+      margin: 5px 4px 0 0;
+    }
+  }
+
+}
