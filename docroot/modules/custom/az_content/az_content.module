@@ -48,6 +48,7 @@ function az_content_theme() {
     ],
   ];
 }
+
 /**
  * Implements hook_form_alter().
  */
