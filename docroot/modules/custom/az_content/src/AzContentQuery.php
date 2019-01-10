@@ -91,6 +91,14 @@ class AzContentQuery {
       $query->condition('gcfd.gid', $set['groups'], (is_array($set['groups'])) ? 'IN' : '=');
     }
 
+    ////////// Private
+    if (isset($set['private'])) {
+      // $set['private'] = groups the current user belongs to
+      // join in the private field and if true
+      //   join in the group field to find the gid
+      //   condition passes if gid in $set['private']
+    }
+
     ////////// Exclude content from this/these groups.
     if (isset($set['groupsExclude'])) {
       $query->join('group_content_field_data', 'gcfd', 'gcfd.entity_id = nfd.nid');

@@ -143,6 +143,7 @@ function az_content_entity_access(EntityInterface $entity, $op, AccountInterface
   $type = $entity->getEntityTypeId();
   switch ($entity->getEntityTypeId()) {
     case 'node':
+      // If node is atom builder then chech if user has that permission. -- entity 511? weird
       if (($entity->id() == '511')  && !\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
         return AccessResult::forbidden();
       }
@@ -183,9 +184,17 @@ function az_content_entity_access(EntityInterface $entity, $op, AccountInterface
 function az_content_node_access(NodeInterface $node, $op, AccountInterface $account) {
   if ($gid = AzGroupQuery::inGroup($node)) {
     $group = \Drupal::entityManager()->getStorage('group')->load($gid);
+
+    // If the group is hidden check if user has permission 'az groups view hidden'
     $status = $group->field_status->value;
     if ($status == 'hidden' && !\Drupal::currentUser()->hasPermission('az groups view hidden')) {
       return AccessResult::forbidden();
+    }
+    // If node has field_private set then check if current user is a member.
+    if ($node->hasField('field_private') && $node->field_private->value) {
+      if (!$group->getMember(\Drupal::currentUser()->getAccount())) {
+        return AccessResult::forbidden();
+      }
     }
   }
   return AccessResult::neutral();
@@ -346,6 +355,8 @@ function _az_content_add_node_to_media($media, $articleId) {
 function az_content_preprocess_block(&$variables) {
   switch ($variables['plugin_id']) {
     case 'az_top_nav_block':
+    case 'em_top_nav_block':
+    case 'sa_top_nav_block':
       $current_path = \Drupal::service('path.current')->getPath();
       $variables['page_url'] = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
       $uid = \Drupal::currentUser()->id();

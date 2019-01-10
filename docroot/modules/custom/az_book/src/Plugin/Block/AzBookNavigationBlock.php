@@ -256,6 +256,11 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             ],
           ];
 
+          // Add header to tools links - should I remove this?
+          $build['#group_links']['title'] = [
+            '#markup' => '<h4>' .  t('Tools') . '</h4>',
+          ];
+
           // Add link to the Atom Builder
           if (\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
             $build['#group_links']['atom_builder'] = [
@@ -316,7 +321,6 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             ],
           ];
         }
-
         $build['#misc_links']['submit_ticket'] = [
           '#type' => 'container',
           'link' => [

@@ -43,7 +43,7 @@ function az_user_form_user_login_form_alter(&$form, FormStateInterface $form_sta
       '#type' => 'container',
       '#attributes' => ['class' => ['forgot-password']],
       '#weight' => 101,
-      'markup' => ['#markup' => 'Forgot your password? - <a href="/user/register">Click here</a>'],
+      'markup' => ['#markup' => 'Forgot your password? - <a href="/user/password">Click here</a>'],
     ],
     'actions' => $form['actions'],
   ];

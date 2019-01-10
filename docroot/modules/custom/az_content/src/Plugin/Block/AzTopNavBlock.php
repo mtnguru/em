@@ -45,10 +45,6 @@ class AzTopNavBlock extends BlockBase {
     $tree = $menu_tree_service->transform($tree, $manipulators);
     $topMenu = $menu_tree_service->build($tree);
 
-    foreach ($tree as &$item) {
-      $item->link->pluginDefinition['title'] = 'fart';
-      $fart = 0;
-    }
     $build = [
       '#type' => 'container',
       '#attributes' => ['class' => ['az-top']],

@@ -1,22 +1,72 @@
-#atomizer-bessel {
-  background-color: $color-dark-green;
-  border-radius: 8px;
-//border: solid 1px $color-green;
+$color-white: #e0e0f0;
+$color-black: #000022;
+$color-blue: blue;
+$color-red: red;
+$color-green: #66ff00;
+$color-magenta: magenta;
 
-  .title {
-    margin: 5px;
-    display: none;
+$color-border: $color-green;
+$color-title: $color-black;
+$color-background: lighten($color-black, 15%);
+$color-title-background: lighten($color-blue, 15%);
+$color-button-background: lighten($color-blue, 15%);
+
+div.az-dialog {
+
+  background-color: $color-background;
+  border-radius: 10px;
+  border: 2px solid $color-border;
+  overflow: hidden;
+
+  position: absolute ;
+  float: right;
+  top: -100px;
+  left: calc(100% - 580px);
+
+  .title-pane {
+    padding: 0 15px;
+    background-color: $color-title-background;
+    h2 {
+      margin: 0;
+    }
+    .button {
+      width: 20px;
+      height: 20px;
+      float: right;
+      &:before {
+        font-size: 130%;
+        padding-right: 0;
+      }
+    }
   }
-  position: absolute;
-  canvas {
-    border-radius: 6px;
-    margin: 5px;
-    height: 33%;
-    background-color: black;
-    vertical-align: bottom;
+
+  .content-pane {
+    margin: 10px 15px;
+    .image-wrapper {
+      position: relative;
+    }
+    img {
+      vertical-align: bottom;
+    }
+    canvas {
+      border: 1px solid #000;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
   }
-  img {
-    margin: 10px;
-    display: none;
+  .button-pane {
+    @include clearfix;
+    padding: 7px 15px;
+    background-color: $color-button-background;
+    height: 20px;
+    button {
+      float: right;
+      margin-left: 5px;
+      border-radius: 7px;
+//    font-size: 110%;
+    }
   }
 }

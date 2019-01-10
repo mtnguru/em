@@ -23,7 +23,7 @@
   $navigation-submenu-padding: 20px;
   $navigation-submenu-width: 20em;
 
-  background-image: url('/sites/default/files/topnav.jpg');
+  background-image: url('/sites/default/files/emnav.jpg');
   background-size: cover;
   background-position-y: 15%;
 
@@ -40,7 +40,8 @@
 
 //z-index: 20;
 
-  #block-aztopnavblock {
+  #block-aztopnavblock,
+  .az-top {
     display: inline-block;
     width: 100%;
 
@@ -49,7 +50,6 @@
       margin: 0 auto;
       position: relative;
     }
-
 
     .content-container {
       float: left;

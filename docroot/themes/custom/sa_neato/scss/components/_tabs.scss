@@ -4,6 +4,7 @@ body.user-login {
   }
 }
 
+#block-em-neato-local-tasks,
 #block-sa-neato-local-tasks {
   nav.tabs {
     a {
@@ -24,6 +25,7 @@ body.entity-user-canonical,
 body.entity-group-canonical,
 body.entity-media-canonical,
 body.entity-node-canonical {
+  #block-em-neato-local-tasks,
   #block-sa-neato-local-tasks {
     position: relative;
 

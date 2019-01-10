@@ -64,9 +64,15 @@
           font-size: 110%;
           border-radius: 6px;
           border: 1px solid $color-purple;
-          margin: 0 5% 15px;
+          margin: 0 5% 10px;
           font-weight: bold;
         }
+      }
+
+      h4 {
+        text-align: center;
+        margin: 0;
+        font-size: 120%;
       }
     }
 

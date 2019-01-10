@@ -36,6 +36,19 @@ body.page-node-type-atomizer {
 .az-atomizer-wrapper {
   position: relative;
 
+  .az-canvas-wrapper {
+    position: relative;
+  }
+  .az-canvas-labels {
+    display: none;
+    z-index: 1000;
+    font-size: 40px;
+    margin: 0;
+    position: absolute;
+    top: 2%;
+    left: 3%;
+  }
+
   ////////////////////////////////////// Mobile display mode ///////////
   &.display-mode-mobile {
 

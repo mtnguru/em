@@ -1,0 +1,24 @@
+<?php
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * @file
+ * Contains az_domain.module.
+ */
+
+/**
+ * Implements hook_preprocess_html().
+ *
+ * @param $variables
+ */
+function az_domain_preprocess_html(&$variables) {
+  $active = \Drupal::service('domain.negotiator')->getActiveDomain();
+
+  $variables['active_domain'] = str_replace('_', '-', $active->id());
+  return;
+}
+
+
