@@ -73,7 +73,10 @@ https://RealScience.Rocks/:
     client_certificate_authorities: []
   to: https://etherealmatters.org
 https://structuredatom.org/:
-  type: redirect
+  primary: null
+  id: null
+  attributes: {}
+  type: upstream
   redirects:
     expires: -1s
     paths: {}
@@ -85,7 +88,17 @@ https://structuredatom.org/:
     min_version: null
     client_authentication: null
     client_certificate_authorities: []
-  to: https://etherealmatters.org
+  cache:
+    enabled: true
+    default_ttl: 0
+    cookies:
+    - '*'
+    headers:
+    - Accept
+    - Accept-Language
+  ssi:
+    enabled: false
+  upstream: app:http
 https://etherealmatters.org/:
   type: upstream
   redirects:
