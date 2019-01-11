@@ -18,7 +18,7 @@ use Drupal\Core\Menu;
  * @Block(
  *   id = "em_top_nav_block",
  *   admin_label = @Translation("EM Top Navigation Block"),
- *   category = @Translation("Atomizer")
+ *   category = @Translation("AZ Domain")
  * )
  */
 class EmTopNavBlock extends BlockBase {

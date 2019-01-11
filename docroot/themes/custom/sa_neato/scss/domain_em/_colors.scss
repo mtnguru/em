@@ -9,14 +9,14 @@ $color-light-grey: #DDDDDD !default;
 $color-white: #ffffff;
 
 /////////////// Color Scheme /////////////////////
-$color-dark-blue: #102E4A;
+$color-dark-blue: #18284a;
 $color-light-blue: #66BBFF;
 $color-blue: #5887FF;
 $color-turquoise: #44D9E6;
 $color-light-turquoise: #A5FFD1;
-$color-purple: #53C;
+$color-purple: #42a;
 $color-light-purple: #BBAAFF;
-$color-dark-purple: #443355;
+$color-dark-purple: #331144;
 $color-purple-red: #A682ff;
 $color-green: #7FFFB0;
 $color-red: #ff5500;
@@ -72,7 +72,7 @@ $topnav-background: $color-dark-green;
 $topnav-color: $color-light-turquoise;
 
 // Base colors.
-$base-background-color: $color-dark-purple !default;
+$base-background-color: $color-dark-blue !default;
 $base-font-color: $color-off-white !default;
 $secondary-background-color: lighten($base-background-color, 7.5%);
 

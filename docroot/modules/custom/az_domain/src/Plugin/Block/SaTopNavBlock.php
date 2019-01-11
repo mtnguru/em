@@ -20,7 +20,7 @@ use Drupal\Core\Menu;
  * @Block(
  *   id = "sa_top_nav_block",
  *   admin_label = @Translation("SA Top Navigation Block"),
- *   category = @Translation("Atomizer")
+ *   category = @Translation("AZ Domain")
  * )
  */
 class SaTopNavBlock extends BlockBase {
