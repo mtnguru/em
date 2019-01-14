@@ -3,18 +3,22 @@
 namespace Drupal\entity\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
+use Drupal\Core\Entity\RevisionableEntityBundleInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\entity\Entity\RevisionableEntityBundleInterface;
+
+@trigger_error('\Drupal\entity\Form\RevisionableContentEntityForm has been deprecated in favor of \Drupal\Core\Entity\ContentEntityForm. Use that instead.');
 
 /**
  * Extends the base entity form with revision support in the UI.
+ *
+ * @deprecated Use \Drupal\Core\Entity\ContentEntityForm instead.
  */
 class RevisionableContentEntityForm extends ContentEntityForm {
 
   /**
    * The entity being used by this form.
    *
-   * @var \Drupal\Core\Entity\EntityInterface|\Drupal\Core\Entity\RevisionableInterface|\Drupal\entity\Revision\EntityRevisionLogInterface
+   * @var \Drupal\Core\Entity\ContentEntityInterface|\Drupal\Core\Entity\RevisionLogInterface
    */
   protected $entity;
 
@@ -38,12 +42,14 @@ class RevisionableContentEntityForm extends ContentEntityForm {
   }
 
   /**
-   * Returns the bundle entity of the entity, or NULL if there is none.
+   * Gets the bundle entity of the current entity.
    *
    * @return \Drupal\Core\Entity\EntityInterface|null
+   *   The bundle entity, or NULL if there is none.
    */
   protected function getBundleEntity() {
-    if ($bundle_key = $this->entity->getEntityType()->getKey('bundle')) {
+    if ($this->entity->getEntityType()->getBundleEntityType()) {
+      $bundle_key = $this->entity->getEntityType()->getKey('bundle');
       return $this->entity->{$bundle_key}->referencedEntities()[0];
     }
     return NULL;

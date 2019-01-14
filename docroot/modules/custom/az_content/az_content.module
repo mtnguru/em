@@ -69,14 +69,14 @@ function az_content_form_alter(&$form, FormStateInterface $form_state, $form_id)
 function az_content_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
   $type = $node->getType();
-  if (in_array($type, ['article', 'book', 'news'])) {
+  if (in_array($type, ['article', 'glossary', 'book', 'news'])) {
     $form['updateChangedContainer'] = [
       '#type' => 'container',
       '#weight' => 90,
       'updateChanged' => [
         '#type' => 'checkbox',
         '#title' => t('Update Changed Time'),
-        '#default_value' => false,
+        '#default_value' => true,
       ],
     ];
     $form['mailitContainer'] = [
@@ -140,7 +140,6 @@ function az_content_form_node_ticket_form_alter(&$form, FormStateInterface $form
  * @return \Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
  */
 function az_content_entity_access(EntityInterface $entity, $op, AccountInterface $account) {
-  $type = $entity->getEntityTypeId();
   switch ($entity->getEntityTypeId()) {
     case 'node':
       // If node is atom builder then chech if user has that permission. -- entity 511? weird
@@ -159,10 +158,12 @@ function az_content_entity_access(EntityInterface $entity, $op, AccountInterface
 
     case 'group_content':
       $gid = $entity->gid->value;
-      $group = \Drupal::entityManager()->getStorage('group')->load($gid);
-      $status = $group->field_status->value;
-      if ($status == 'hidden' && !\Drupal::currentUser()->hasPermission('az groups view hidden')) {
-        return AccessResult::forbidden();
+      if ($gid) {
+        $group = \Drupal::entityManager()->getStorage('group')->load($gid);
+        $status = $group->field_status->value;
+        if ($status == 'hidden' && !\Drupal::currentUser()->hasPermission('az groups view hidden')) {
+          return AccessResult::forbidden();
+        }
       }
       break;
   }
@@ -723,7 +724,7 @@ function az_content_preprocess_node(&$variables) {
         }
 
         // Create book navigation block
-        if (in_array($type, ['article', 'news', 'book'])) {
+        if (in_array($type, ['article', 'glossary', 'news', 'book'])) {
           $block_entity = Drupal\block\Entity\Block::load('azbooknavigation');
           $variables['sidebar']['block_booknavigation'] = \Drupal::entityTypeManager()
             ->getViewBuilder('block')
@@ -910,7 +911,7 @@ function _az_content_create_dashboard($node, &$variables) {
     'type' => 'entity-stream',
     'id' => 'recent-activity',
     'label' => 'Activity',
-    'types' => ['article', 'event', 'book', 'news'],
+    'types' => ['article', 'event', 'glossary', 'book', 'news'],
     'title' => 'Recent Activity',
     'groupsExclude' => 12,
     'status' => NODE_PUBLISHED,

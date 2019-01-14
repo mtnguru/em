@@ -125,7 +125,7 @@ function az_groups_preprocess_group(&$variables) {
     'label' => 'Comments',
     'title' => 'Recent Comments',
     'entityType' => 'comment',
-    'types' => ['article', 'event', 'book', 'news'],
+    'types' => ['article', 'event', 'topic', 'book', 'news'],
     'groups' => $group->id(),
     'empty' => 'No comments posted for this community',
   ];
