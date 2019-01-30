@@ -1,57 +1,110 @@
 <?php
 
-use Drupal\Core\Entity\EntityInterface;
+use Drupal\az_groups\AzGroupQuery;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\group\Entity\GroupContent;
 use Drupal\node\Entity\Node;
+use Drupal\group\Entity;
+use Drupal\group\Entity\Group;
 
 /**
  * @file
  * Contains az_groups.module.
  */
 
-function az_groups_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function az_groups_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'group_content_theories-group_node-book_add_form') {
+    $node = $form_state->getFormObject()->getEntity();
+  }
+  return;
+}
 
-  /**
-   * Attempting to add groups and roles to the node form - on hold for now
-  // Query for all groups.
-  $query = \Drupal::database()->select('groups_field_data', 'gfd');
-  $query->addField('gfd', 'id');
-  $query->addField('gfd', 'label');
-  $query->orderBy('gfd.label', 'ASC');
-  $results = $query->execute()->fetchAllAssoc('id');
+/**
+ * Implements hook_form_TYPE_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function az_groups_form_node_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+  $node = $form_state->getFormObject()->getEntity();
 
-  // Set up groups array
-  $groups = ['0' => 'None'];
-  foreach($results as $result) {
-    $groups[$result->id] = $result->label;
+  $results = AzGroupQuery::findGroups([
+    'roles' => [
+      'theories-admin',
+      'theories-contributor',
+      'theories-reviewer',
+    ],
+    'member' => \Drupal::currentUser()->id(),
+    'fields' => [
+      'gfd' => ['id', 'label'],
+    ],
+    'sort' => 'label'
+  ]);
+
+  // If not a new node then add form element to select the group this item belongs to.
+  $defaults = [];
+  $gcs = [];
+  $groups = [];
+
+  if (!$node->isNew()) {
+    $gcs = GroupContent::loadByEntity($node);
+    foreach ($gcs as $key => $gc) {
+      $gid = $gc->getGroup()->id();
+      $defaults[] = $gid;
+      $groups[$gid] = $gc->id();
+    }
   }
 
-  // Query for roles current user has in this? group.  WTF.  This ain't no fun.
+  $form['#az_groups'] = [
+    'gcs' => $gcs,
+    'groups' => $groups,
+    'defaults' => $defaults,
+  ];
+
+  $options = [];
+  foreach ($results as $result) {
+    $options[$result->id] = $result->label;
+  }
 
   $form['group'] = [
-    '#type' => 'fieldset',
-    '#title' => t('Community'),
-    'group_id' => [
-      '#type' => 'select',
-      '#title' => 'Community',
-      '#default_value' => '0',
-      '#options' => $groups,
-    ],
-    'group_role' => [
-      '#type' => 'select',
-      '#title' => 'Community Role',
-      '#description' => 'Select the role that can view this post',
-      '#options' => $options,
-    ],
+    '#title' => 'Groups',
+    '#type' => 'checkboxes',
+    '#description' => 'Groups this content belongs to - normally this is set automatically when adding content from the Group home page.',
+    '#options' => $options,
+    '#weight' => 5,
+    '#default_value' => $defaults,
   ];
 
   $form['actions']['submit']['#submit'][] = '_az_groups_node_form_submit';
-  **/
   return;
 }
 
 function _az_groups_node_form_submit($form, FormStateInterface $form_state) {
-  $group = $form_state->getValue('group');
+  $node = $form_state->getFormObject()->getEntity();
+  $gids = $form_state->getValue('group');
+
+  foreach ($gids as $gid => $selected) {
+    if ($selected) {  // If the group is selected
+      if (!empty($form['#az_groups']['groups'][$gid])) {
+        // Already in the group - don't do anything
+      }
+      else {
+        // Create a new content_entity
+        $plugin_id = 'group_node:' . $node->bundle();
+        $group = Group::load($gid);
+        $group->addContent($node, $plugin_id);
+      }
+    } else {     // If the groups in NOT selected
+      if (!empty($form['#az_groups']['groups'][$gid])) {
+        $gcid = $form['#az_groups']['groups'][$gid];
+        $storage = \Drupal::entityManager()->getStorage('group_content');
+        $group_content = $storage->load($gcid);
+        $group_content->delete();
+      }
+    }
+  }
+
   return;
 }
 

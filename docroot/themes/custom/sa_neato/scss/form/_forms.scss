@@ -49,7 +49,7 @@ form {
   input,
   select {
     background-color: lighten($base-background-color, 10%);
-    border-radius: $base-border-radius;
+    border-radius: 6px;
   }
 
   textarea {
@@ -59,18 +59,19 @@ form {
   fieldset {
     border: $base-border;
     margin: 0 0 $small-spacing;
-    padding: 5px 10px;
+    padding: 5px 15px;
+    border-radius: 8px;
 
-    &.fieldgroup {
+    &.form-item {
       background-color: $secondary-background-color;
       border: $base-border;
       border-radius: 8px;
       margin: 0 0 $small-spacing;
-      padding: 5px 10px;
+      padding: 5px 15px;
 
       legend {
         background-color: $secondary-background-color;
-        padding: .5em;
+        padding: .1em .5em;
         border: 1px solid $color-green;
       }
     }
@@ -84,6 +85,7 @@ form {
       font-size: 125%;
       font-weight: bold;
       color: $color-title;
+      border-radius: .5em;
     }
   }
 
@@ -134,23 +136,52 @@ form {
     }
   }
 
-//.form-checkboxes,
-//.form-radios {
-    .form-type-checkbox.form-item,
-    .form-type-radio.form-item {
-      margin: .2em 0;
+  .form-type-checkbox.form-item {
+    input {
+      display: inline-block;
+      width: 1.2em;
+      height: 1.2em;
+      margin-right: .3em;
+    }
+    label {
+      vertical-align: text-bottom;
+    }
+    .description {
+      display: inline-block;
+      vertical-align: text-bottom;
+    }
+  }
 
-      input {
-        display: inline-block;
-        margin-right: $small-spacing / 2;
-      }
+  .form-type-radio.form-item {
+    margin: .2em 0;
 
-      label {
-        display: inline-block;
-        margin-bottom: 0;
+    input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      /* create custom radiobutton appearance */
+      display: inline-block;
+      width: 1.1em;
+      height: 1.1em;
+      padding: 2px;
+      margin-right: .2em;
+      /* background-color only for content */
+      background-clip: content-box;
+      border: 2px solid $color-grey;
+      background-color: $base-background-color;
+      border-radius: 50%;
+
+      &:checked {
+        background-color: cyan;
+        border-color: $color-white;
       }
     }
-//}
+
+    label {
+      display: inline-block;
+      vertical-align: text-bottom;
+    }
+  }
 
   input[type="file"] {
     margin-bottom: $small-spacing;
@@ -228,6 +259,16 @@ form {
       float: left;
       margin: 5px 4px 0 0;
     }
+  }
+
+  .field--type-datetime {
+    .form-type-date {
+      display: inline-block;
+    }
+  }
+
+  .field--name-field-topics {
+    margin-bottom: 30px;
   }
 
 }

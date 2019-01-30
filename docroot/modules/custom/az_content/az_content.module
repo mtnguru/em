@@ -11,6 +11,7 @@ use Drupal\az_content\AzStream;
 use Drupal\az_groups\AzGroupQuery;
 use Drupal\comment\Entity\Comment;
 use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -72,28 +73,35 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
   if (in_array($type, ['article', 'glossary', 'book', 'news'])) {
     $form['updateChangedContainer'] = [
       '#type' => 'container',
-      '#weight' => 90,
+      '#weight' => 6,
       'updateChanged' => [
         '#type' => 'checkbox',
         '#title' => t('Update Changed Time'),
-        '#default_value' => true,
-      ],
-    ];
-    $form['mailitContainer'] = [
-      '#type' => 'container',
-      '#weight' => 91,
-      'mailit' => [
-        '#type' => 'checkbox',
-        '#title' => t('Send email notification'),
         '#default_value' => false,
+        '#description' => t('Change the update time for the article. Update time determines the sort order of content when sorted by date.'),
       ],
     ];
+//  $form['mailitContainer'] = [
+//    '#type' => 'container',
+//    '#weight' => 6,
+//    'mailit' => [
+//      '#type' => 'checkbox',
+//      '#title' => t('Send email notification'),
+//      '#default_value' => false,
+//    ],
+//  ];
+
+    $form['#az_content'] = [
+      'moderation_state' => $node->moderation_state->value,
+    ];
+
     $form['#validate'][] = '_az_content_node_validate';
-    foreach (array_keys($form['actions']) as $action) {
-      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
-        $form['actions'][$action]['#submit'][] = '_az_content_node_submit';
-      }
-    }
+    $form['actions']['submit']['#submit'][] = '_az_content_node_submit';
+//  foreach (array_keys($form['actions']) as $action) {
+//    if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+//      $form['actions'][$action]['#submit'][] = '_az_content_node_submit';
+//    }
+//  }
   }
 }
 
@@ -105,12 +113,21 @@ function _az_content_node_validate(&$form, FormStateInterface &$form_state) {
 }
 
 function _az_content_node_submit(&$form, FormStateInterface &$form_state) {
+  $node = $form_state->getFormObject()->getEntity();
+  $t1 = '111111';
   if ($form_state->hasValue('updateChanged') && !$form_state->getValue('updateChanged')) {
-    $node = $form_state->getFormObject()->getEntity();
+    $t1 = $form_state->getValue('changed');
     $node->set('changed', $form_state->getValue('changed'));
-    $node->save();
   };
-  $mailit = $form_state->getValue('mailit');  // Not used
+
+  // if the node moderation state has changed and is now published then set the published date.
+  if ($form_state->getValue('moderation_state')[0]['value'] == 'published' &&
+      !in_array($form['#az_content']['moderation_state'], ['published', 'archived'])) {
+    $date= DrupalDateTime::createFromTimestamp((int)\Drupal::time()->getRequestTime('UTC'));
+    $node->field_publish_date->value = format_date($date->getTimestamp() , 'custom', 'Y-m-d\TH:i:s', 'UTC');
+  }
+
+  $node->save();
   return;
 }
 
@@ -125,6 +142,7 @@ function az_content_form_node_ticket_form_alter(&$form, FormStateInterface $form
   if ($request->query->has('node')) {
     $nid = $request->query->get('node');
     $node = is_numeric($nid) ? Node::load($nid) : NULL;
+    $form['field_page']['widget'][0]['target_id']['#default_value'] = $node;
     $form['field_page']['widget'][0]['target_id']['#default_value'] = $node;
   }
 }
@@ -183,7 +201,7 @@ function az_content_entity_access(EntityInterface $entity, $op, AccountInterface
  * @return \Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
  */
 function az_content_node_access(NodeInterface $node, $op, AccountInterface $account) {
-  if ($gid = AzGroupQuery::inGroup($node)) {
+  if ($gid = AzGroupQuery::nodeInGroup($node)) {
     $group = \Drupal::entityManager()->getStorage('group')->load($gid);
 
     // If the group is hidden check if user has permission 'az groups view hidden'
@@ -601,7 +619,7 @@ function _az_content_build_tabs($id, $sets) {
 }
 
 function _az_content_add_group_logo($node, &$variables) {
-  if ($gid = AzGroupQuery::inGroup($node)) {
+  if ($gid = AzGroupQuery::nodeInGroup($node)) {
     $group = \Drupal::entityManager()->getStorage('group')->load($gid);
     $variables['group_url'] = \Drupal::service('path.alias_manager')
       ->getAliasByPath('/group/' . $gid);

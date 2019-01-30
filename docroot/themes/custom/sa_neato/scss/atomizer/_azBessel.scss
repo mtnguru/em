@@ -17,6 +17,7 @@ div.az-dialog {
   border-radius: 10px;
   border: 2px solid $color-border;
   overflow: hidden;
+  width: 20%;
 
   position: absolute ;
   float: right;
@@ -24,14 +25,16 @@ div.az-dialog {
   left: calc(100% - 580px);
 
   .title-pane {
-    padding: 0 15px;
     background-color: $color-title-background;
-    h2 {
+    h3 {
+      padding: .2em .3em;
       margin: 0;
+      font-size: 120%;
     }
     .button {
       width: 20px;
       height: 20px;
+      margin-right: 10px;
       float: right;
       &:before {
         font-size: 130%;
@@ -41,11 +44,13 @@ div.az-dialog {
   }
 
   .content-pane {
-    margin: 10px 15px;
     .image-wrapper {
+
+//    @include fixed-aspect(480/640 * 100%, img);
       position: relative;
     }
     img {
+      width: 100%;
       vertical-align: bottom;
     }
     canvas {

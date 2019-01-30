@@ -1,4 +1,10 @@
 
+.az-slideOut {
+  max-height: 0;
+  @include transition-3d($duration: 1500ms);
+  overflow-y: hidden;
+}
+
 .az-hidden {
   display: none !important;
 }

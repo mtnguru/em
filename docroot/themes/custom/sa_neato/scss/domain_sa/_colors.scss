@@ -18,6 +18,7 @@ $color-purple: #53C;
 $color-light-purple: #BBAAFF;
 $color-purple-red: #A682ff;
 $color-dark-purple: #301E4A;
+$color-yellow-green: #e0ff49;
 $color-green: #7FFFB0;
 $color-red: #ff5500;
 $color-light-red: #ff7766;
@@ -36,9 +37,9 @@ $color-unpublished: #FF9900;
 
 $color-user: #dd99ff;
 //$color-group: #ffaaff;
-$color-group: #e0ff49;
+$color-group: $color-yellow-green;
 $color-topic: #00ffff;
-$color-title: #e0ff49;
+$color-title: $color-yellow-green;
 //$color-title: #eeaaff;
 $color-light-title: lighten($color-title, 10%);
 
@@ -56,7 +57,7 @@ $color-icon-hover: #00bbdd;
 $color-background: #102E4A;
 
 $color-button: #5887ff;
-$color-label: #E0ff49;
+$color-label: $color-yellow-green;
 
 $transparent-captions-color: rgba($color-off-white, 0.56);
 $accent-line-color: $color-purple;

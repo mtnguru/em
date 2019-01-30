@@ -130,7 +130,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
       case 'entity.node.canonical':
         $node = $this->requestStack->getCurrentRequest()->get('node');
         $bid = $node->book['bid'];
-        if ($gid = AzGroupQuery::inGroup($node)) {
+        if ($gid = AzGroupQuery::nodeInGroup($node)) {
           $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
           if (!$bid && $value = $group->field_directory_book->getValue()) {
             $bid = $value[0]['target_id'];

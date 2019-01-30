@@ -458,5 +458,114 @@ class AzContentQuery {
       'totalRows' => (int)$totalRows,
     ];
   }
+
+  static public function groupQuery(Array $set) {
+    $sorted = false; // Prevent duplicate sorts.
+
+    ////////// Build database query = root table group_field_data
+    $query = \Drupal::database()->select('group_field_data', 'gfd');
+
+    ////////// Set the output fields
+    if (isset($set['fields'])) {
+      foreach ($set['fields'] as $name => $fields) {
+        $query->fields(($name == 'null') ? null : $name, $fields);
+      }
+    } else {
+      $query->fields('gfd', ['gid']);
+    }
+
+    ////////// Filter on core Drupal published value
+    if (isset($set['status'])) {
+      $query->condition('gfd.status', $set['status'], (is_array($set['status'])) ? 'IN' : '=');
+    }
+
+    ////////// Content Types
+    if (isset($set['types'])) {
+      $query->condition('mfd.bundle', $set['types'], (is_array($set['types'])) ? 'IN' : '=');
+    }
+
+    ////////// Topics
+    if (isset($set['topics'])) {
+      $query->join('media__field_topics', 'mft', 'mfd.mid = mft.entity_id');
+      $query->condition('mft.field_topics_target_id', $set['topics'], (is_array($set['topics'])) ? 'IN' : '=');
+    }
+
+    ////////// Groups
+    if (isset($set['groups'])) {
+      $query->join('media__field_group', 'mft', 'mfd.mid = mft.entity_id');
+      $query->condition('mft.field_group_target_id', $set['groups'], (is_array($set['groups'])) ? 'IN' : '=');
+    }
+
+    ////////// Exclude content from this/these groups.
+    if (isset($set['groupsExclude'])) {
+      $query->join('media__field_group', 'mft', 'mfd.mid = mft.entity_id');
+      $query->condition('mft.field_group_target_id', $set['groupsExclude'], (is_array($set['groupsExclude'])) ? 'IN' : '=');
+    }
+
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    // EXECUTE COUNT QUERY
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    if ((isset($set['getTotalRows']) && $set['getTotalRows']) ||
+      (isset($set['count']) && $set['count'])) {
+      $totalRows = $query->countQuery()->execute()->fetchField();
+      if (isset($set['count'])) {
+        return $totalRows;
+      }
+    } else {
+      $totalRows = -1;
+    }
+
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    // SORTS
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    if (!$sorted) {
+      $sort = (isset($set['sort'])) ? $set['sort'] : 'changed';
+      $order = (isset($set['sortOrder'])) ? $set['sortOrder'] : 'DESC';
+      switch ($sort) {
+        case 'none':
+          $sorted = true;
+          break;
+        case 'changed':
+          $query->orderBy('mfd.changed', $order);
+          $sorted = true;
+          break;
+        case 'created':
+          $query->orderBy('mfd.created', $order);
+          $sorted = true;
+          break;
+      }
+    }
+
+    // Execute the query depending on 'more' setting.
+    switch ((isset($set['more'])) ? $set['more'] : 'none') {
+      case 'none':
+        $results = $query->execute()->fetchAllAssoc('mid');
+        break;
+
+      case 'ajax':
+        // If using AJAX then we keep track of page number and items per page.
+        if (isset($set['pageNum'])) {
+          $query->range($set['pageNum'] * $set['pageNumItems'], $set['pageNumItems']);
+        }
+        $result = $query->execute();
+        $results = $result->fetchAllAssoc('mid');
+
+        break;
+
+      case 'pager':
+        $result = $query->extend('Drupal\Core\Database\Query\PagerSelectExtender')
+          ->limit((isset($set['pageNumItems'])) ? $set['pageNumItems'] : 20)
+          ->element((isset($set['pagerId'])) ? $set['pagerId'] : 0)
+          ->execute();
+        $results = $result->fetchAllAssoc('mid');
+        break;
+    }
+    return [
+      'results' => $results,
+      'numRows' => count($results),
+      'totalRows' => (int)$totalRows,
+    ];
+  }
 }
 

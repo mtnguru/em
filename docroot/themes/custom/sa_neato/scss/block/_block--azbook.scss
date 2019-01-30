@@ -183,6 +183,7 @@
 
   li.menu-item--children {
     &::before {
+      @include transition(all 250ms ease-in-out);
       background-image: url($images-path + 'right-arrow.svg');
       background-size: cover;
       background-position: center;
@@ -204,13 +205,14 @@
 
     &.menu-item--expanded {
       &::before {
+        @include transition(all 250ms ease-in-out);
         @include transform(rotate(90deg));
         background-image: url($images-path + 'right-arrow.svg');
         display: block;
       }
 
       > .list-wrapper {
-        max-height: 400px;
+        max-height: 600px;
         > ul {
           display: block;
         }
