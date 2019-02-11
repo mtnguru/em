@@ -53,9 +53,20 @@ class SaTopNavBlock extends BlockBase {
 
     $uid = \Drupal::currentUser()->id();
     if ($uid > 0) {
-      $items[] = ['#markup' => '<a href="/dashboard">View My Dashboard</a>'];
-      $items[] = ['#markup' => '<a href="/user">View My Profile Page</a>'];
-      $items[] = ['#markup' => '<a href="/user/' . \Drupal::currentUser()->id() . '/edit">Edit Account Settings</a>'];
+
+      $build['account_menu'] = [
+        '#type' => 'theme',
+        '#theme' => 'user_popup_menu',
+        '#uid' => \Drupal::currentUser()->id(),
+      ];
+
+      /*
+      $items[] = ['#markup' => '<a href="/dashboard">My Dashboard</a>'];
+      $items[] = ['#markup' => '<a href="/user">My Profile Page</a><br>'];
+      $items[] = ['#markup' => 'Edit Account Settings'];
+      $items[] = ['#markup' => '&nbsp;&nbsp;<a href="/user/' . \Drupal::currentUser()->id() . '/edit?display=account">Identification</a>'];
+      $items[] = ['#markup' => '&nbsp;&nbsp;<a href="/user/' . \Drupal::currentUser()->id() . '/edit?display=email_notifications">Email Notifications</a>'];
+      $items[] = ['#markup' => '&nbsp;&nbsp;<a href="/user/' . \Drupal::currentUser()->id() . '/edit?display=social_media_and_website">Social Media Links</a>'];
       $items[] = ['#markup' => '<a href="/user/logout">Logout</a>'];
       // Create the top menu
       $build['account_menu'] = [
@@ -66,7 +77,7 @@ class SaTopNavBlock extends BlockBase {
           '#attributes' => ['class' => ['menu', 'popup']],
           '#items' => $items,
         ],
-      ];
+      ]; */
     }
     return $build;
   }

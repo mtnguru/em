@@ -49,23 +49,15 @@ class EmTopNavBlock extends BlockBase {
       'top_menu' => $topMenu,
     ];
 
+    /*
     $uid = \Drupal::currentUser()->id();
     if ($uid > 0) {
-      $items[] = ['#markup' => '<a href="/dashboard">View My Dashboard</a>'];
-      $items[] = ['#markup' => '<a href="/user">View My Profile Page</a>'];
-      $items[] = ['#markup' => '<a href="/user/' . \Drupal::currentUser()->id() . '/edit">Edit Account Settings</a>'];
-      $items[] = ['#markup' => '<a href="/user/logout">Logout</a>'];
-      // Create the top menu
       $build['account_menu'] = [
-        '#type' => 'container',
-        '#attributes' => ['class' => ['user-menu']],
-        'menu' => [
-          '#theme' => 'item_list',
-          '#attributes' => ['class' => ['menu', 'popup']],
-          '#items' => $items,
-        ],
+        '#type' => 'theme',
+        '#theme' => 'user_popup_menu',
+        '#uid' => $uid,
       ];
-    }
+    } */
     return $build;
   }
 }

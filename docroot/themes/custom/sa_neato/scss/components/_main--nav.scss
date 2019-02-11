@@ -53,13 +53,15 @@
 
     .content-container {
       float: left;
-      font-weight: bold;
+
+      .navigation-menu {
+        font-weight: bold;
+      }
 
       @include media(max-width $bp580max) {
         width: 100%;
       }
       @include media($bp960) {
-        width: 100%;
         padding-left: 290px;
         padding-right: 150px;
       }
@@ -80,6 +82,22 @@
           right: $page-padding-desktop;
         }
 
+        .links {
+          margin-bottom: 3px;
+        }
+
+        .account-links {
+          margin-top: 6px;
+          .account-title {
+            margin-bottom: 5px;
+            text-align: center;
+          }
+          .account-link {
+            margin-bottom: 3px;
+          }
+        }
+
+
         #accessibility {
           display: none;
           float: right;
@@ -96,8 +114,8 @@
             @include media($bp580) {
               padding-right: 20px;
             }
-
           }
+
           .popup {
             @include transition-3d($timing: 500ms);
             position: absolute;
@@ -153,9 +171,10 @@
 //          right: 50px;
           }
 
-          ul.popup {
+
+          .popup {
             position: absolute;
-            top: -300px;
+            top: -260px;
             right: -10px;
             width: 230px;
             background-color: $color-dark-green;
@@ -164,7 +183,7 @@
             padding: 10px 15px;
             z-index: 20;
             @extend %text-shadow;
-            @include transition-3d($timing: 500ms);
+            @include transition-3d($timing: 200ms);
 
             li {
               padding: 6px 0;
@@ -198,9 +217,9 @@
             }
 
             &:hover {
-              ul.popup {
+              .popup {
                 bottom: auto;
-                top: 30px;
+                top: -30px;
                 right: -10px;
               }
             }

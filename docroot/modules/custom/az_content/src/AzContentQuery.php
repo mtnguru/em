@@ -9,6 +9,7 @@
  */
 
 namespace Drupal\az_content;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -110,6 +111,16 @@ class AzContentQuery {
     if (isset($set['pages'])) {
       $query->join('node__field_page', 'nfp', 'nfd.nid = nfp.entity_id');
       $query->condition('nfp.field_page_target_id', $set['pages'], (is_array($set['pages'])) ? 'IN' : '=');
+    }
+
+    ////////// Publish Date
+    if (isset($set['publishDate'])) {
+      $seconds = DrupalDateTime::createFromTimestamp((int)\Drupal::time()->getRequestTime() - $set['publishDate'] * 60);
+      $date = format_date($seconds->getTimestamp() , 'custom', 'Y-m-d\TH:i:s', 'UTC');
+
+      $query->join('node__field_publish_date', 'nfpd', 'nfd.nid = nfpd.entity_id');
+//    $query->condition('nfpd.field_publish_date_value', $nseconds, $operator);
+      $query->condition('nfpd.field_publish_date_value', $date, '>');
     }
 
     // If requested query for total rows matching all filters.

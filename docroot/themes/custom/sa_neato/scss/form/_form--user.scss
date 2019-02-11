@@ -12,6 +12,21 @@ form#user-pass-reset,
 form#user-register-form,
 form#user-form {
 
+  details {
+    border: 0px;
+    summary {
+      font-size: 140%;
+      font-weight: bold;
+      &:focus {
+        border: none;
+      }
+    }
+  }
+  .details-wrapper {
+    background-color: lighten($base-background-color, 10%);
+    border-radius: 10px;
+  }
+
   .field--name-field-picture {
     thead,
     .tabledrag-toggle-weight {
@@ -55,5 +70,4 @@ form#user-form {
       color: $color-red;
     }
   }
-
 }

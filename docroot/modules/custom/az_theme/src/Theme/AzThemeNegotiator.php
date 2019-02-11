@@ -18,6 +18,6 @@ class AzThemeNegotiator implements ThemeNegotiatorInterface {
   }
  
   public function determineActiveTheme(RouteMatchInterface $route_match) {
-    return 'sa_neato';
+    return 'em_neato';
   }
 }
