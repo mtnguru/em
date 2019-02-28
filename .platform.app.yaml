@@ -101,12 +101,12 @@ web:
                     expires: 2w
 
 # The configuration of scheduled execution.
-c rons:
-    drupal:
-        spec: '*/20 * * * *'
-        cmd: 'cd web ; drush core-cron'
+crons:
+#   drupal:
+#       spec: '*/20 * * * *'
+#       cmd: 'cd web ; drush core-cron'
     daily_mail:
-        spec: '* * * * *'
+        spec: '*/5 * * * *'
         cmd: 'cd web/mail; ./cron_mail.php >> /tmp/cron_mail.log 2>/tmp/cron_mail_errors.log'
 
 variables:
