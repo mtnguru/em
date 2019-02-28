@@ -32,6 +32,7 @@ mounts:
     '/drush-backups': 'shared:files/drush-backups'
     '/web/modules/custom/atomizer/config': 'shared:files/az-config'
     '/config': 'shared:files/config'
+    '/web/mail': 'shared:files/mail'
 
 # Configuration of the build of this application.
 build:

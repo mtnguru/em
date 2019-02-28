@@ -14,3 +14,4 @@ config/
 
 .idea/
 *.css.map
+/docroot/mail
