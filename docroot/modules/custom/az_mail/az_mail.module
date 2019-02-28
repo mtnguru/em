@@ -16,10 +16,14 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\node\Entity\Node;
 
-function _az_mail_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  return;
-}
-
+/**
+ * Remove site roles from list of roles.
+ * Set send email widget to false.
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
 function _az_mail_email_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Remove site roles from list of roles - Leave group roles.
   foreach ($form['field_group_roles']['widget']['#options'] as $key => $option) {
@@ -39,7 +43,7 @@ function _az_mail_email_form_alter(&$form, FormStateInterface $form_state, $form
     '#weight' => 10,
   ]; */
 
-  $form['actions']['submit']['#submit'][] = '_az_mail_node_submit';
+//$form['actions']['submit']['#submit'][] = '_az_mail_node_submit';
 }
 
 function az_mail_form_node_email_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -51,11 +55,6 @@ function az_mail_form_node_email_form_alter(&$form, FormStateInterface $form_sta
 }
 
 function _az_mail_node_submit(&$form, FormStateInterface $form_state) {
-  return;
-}
-
-function az_mail_preprocess_swiftmailer(&$variables) {
-//$variables['body'] = 'darnit body';
   return;
 }
 
@@ -140,7 +139,7 @@ function az_mail_mail_alter(&$message) {
 /**
  * Implements hook_entity_insert().
  *
- * Send and email when a new user is created.
+ * Send an email to Ninjas when a new user is created.
  *
  * @param \User $user
  */
@@ -170,6 +169,7 @@ BODY;
     }
   }
 }
+
 /**
  * Implements HOOK_node_presave().
  *

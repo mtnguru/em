@@ -76,11 +76,23 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
       '#weight' => 6,
       'updateChanged' => [
         '#type' => 'checkbox',
-        '#title' => t('Update Changed Time'),
+        '#title' => t('Update Changed Date'),
         '#default_value' => false,
         '#description' => t('Change the update time for the article. Update time determines the sort order of content when sorted by date.'),
       ],
     ];
+
+    $form['publishChangedContainer'] = [
+      '#type' => 'container',
+      '#weight' => 6,
+      'publishChanged' => [
+        '#type' => 'checkbox',
+        '#title' => t('Update Published Date'),
+        '#default_value' => false,
+        '#description' => t('Change the publish time for the article. Publish time is used to determine Email Recent Content notifications.'),
+      ],
+    ];
+
 //  $form['mailitContainer'] = [
 //    '#type' => 'container',
 //    '#weight' => 6,
@@ -110,19 +122,21 @@ function _az_content_node_validate(&$form, FormStateInterface &$form_state) {
   if ($form_state->hasValue('updateChanged') && !$form_state->getValue('updateChanged')) {
     $form_state->setValue(['changed'], $node->changed->value);
   }
+  if ($form_state->hasValue('publishChanged') && !$form_state->getValue('publishChanged')) {
+    $form_state->setValue(['field_publish_date'], $node->changed->value);
+  }
 }
 
 function _az_content_node_submit(&$form, FormStateInterface &$form_state) {
   $node = $form_state->getFormObject()->getEntity();
-  $t1 = '111111';
   if ($form_state->hasValue('updateChanged') && !$form_state->getValue('updateChanged')) {
-    $t1 = $form_state->getValue('changed');
     $node->set('changed', $form_state->getValue('changed'));
   };
 
   // if the node moderation state has changed and is now published then set the published date.
-  if ($form_state->getValue('moderation_state')[0]['value'] == 'published' &&
-      !in_array($form['#az_content']['moderation_state'], ['published', 'archived'])) {
+  if ($form_state->hasValue('publishChanged') ||
+        ($form_state->getValue('moderation_state')[0]['value'] == 'published' &&
+         !in_array($form['#az_content']['moderation_state'], ['published', 'archived']))) {
     $date= DrupalDateTime::createFromTimestamp((int)\Drupal::time()->getRequestTime('UTC'));
     $node->field_publish_date->value = format_date($date->getTimestamp() , 'custom', 'Y-m-d\TH:i:s', 'UTC');
   }

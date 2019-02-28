@@ -193,13 +193,17 @@ class AzContentQuery {
         $results = $query->execute()->fetchAllAssoc('nid');
         break;
 
+      case 'limit':
+        $query->range(0, (isset($set['limit'])) ? $set['limit'] : 10);
+        $results = $query->execute()->fetchAllAssoc('nid');
+        break;
+
       case 'ajax':
         // If using AJAX then we keep track of page number and items per page.
         if (isset($set['pageNum'])) {
           $query->range($set['pageNum'] * $set['pageNumItems'], $set['pageNumItems']);
         }
-        $result = $query->execute();
-        $results = $result->fetchAllAssoc('nid');
+        $results = $query->execute()->fetchAllAssoc('nid');
 
         break;
 

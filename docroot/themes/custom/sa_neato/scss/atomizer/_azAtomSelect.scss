@@ -89,15 +89,22 @@
 
     .atomic-number {
       height: 18px;
-      padding: 0 5px 0 0;
+      padding: 0 7px 0 0;
       float: left;
+      width: 1.4em;
+      text-align: center;
     }
 
     .atom-title {
       display: inline-block;
-      width: 132px;
+      width: 150px;
       height: 18px;
       overflow-y: hidden;
+      .symbol {
+        width: 1.4em;
+        display: inline-block;
+        text-align: center;
+      }
     }
 
     .num-isotopes {
@@ -113,7 +120,7 @@
       }
     }
 
-    .num-isomers {
+    .num-isobars {
       padding: 0px 5px;
       float: right;
       &.expand {
