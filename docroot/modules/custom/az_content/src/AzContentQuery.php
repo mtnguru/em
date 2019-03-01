@@ -114,7 +114,7 @@ class AzContentQuery {
     }
 
     ////////// Publish Date
-    if (isset($set['publishAge'])) {
+    if (isset($set['publishAgent'])) {
       $seconds = DrupalDateTime::createFromTimestamp((int)\Drupal::time()->getRequestTime() - $set['publishDate'] * 60);
       $date = format_date($seconds->getTimestamp() , 'custom', 'Y-m-d\TH:i:s', 'UTC');
 
