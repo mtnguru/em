@@ -1,0 +1,156 @@
+// Color definitions
+
+// Greys
+$color-black: #000000;
+$color-dark-grey: #333333 !default;
+$color-dim-grey: #666666;
+$color-grey: #BBBBBB !default;
+$color-light-grey: #DDDDDD !default;
+$color-white: #ffffff;
+
+/////////////// Color Scheme /////////////////////
+$color-dark-blue: #104a28;
+$color-light-blue: #66BBFF;
+$color-blue: #5887FF;
+$color-turquoise: #44D9E6;
+$color-light-turquoise: #A5FFD1;
+$color-purple: #42a;
+$color-light-purple: #BBAAFF;
+$color-dark-purple: #331144;
+$color-purple-red: #A682ff;
+$color-green: #7FFFB0;
+$color-red: #ff5500;
+$color-light-red: #ff7766;
+$color-yellow: #EEEE00;
+//$color-dark-green: #0F5F20;
+$color-dark-green: #064A10;
+$color-off-white: #FAF0FF;
+$color-orange: #ffbb00;
+
+$color-placeholder: #BBBBBB;
+$color-draft: $color-light-blue;
+$color-needs-review: #DD66EE;
+$color-confidential: #color-light-purple;
+$color-published: #EEEE00;
+$color-unpublished: #FF9900;
+
+$color-user: #dd99ff;
+//$color-group: #ffaaff;
+
+$color-group: #e0ff49;
+$color-topic: #00ffff;
+$color-title: #e0ff49;
+//$color-title: #eeaaff;
+$color-light-title: lighten($color-title, 10%);
+
+$color-overlay: rgba(0,0,0,.4);
+$color-box-shadow: rgba(0,0,0,.1);
+
+///////////////////// Atomizer //////////////////////
+$color-controls: #305;
+$color-controls-wrapper: lighten($color-controls, 20%);
+$color-active: lighten(#102e4a,15%);
+$color-border: #7fffb0;
+$color-link: #7fffB0;
+$color-icon-selected: #00ddff;
+$color-icon-hover: #00bbdd;
+// $color-background: #102E4A;
+
+$color-button: #5887ff;
+$color-label: #E0ff49;
+
+
+$transparent-captions-color: rgba($color-off-white, 0.56);
+$accent-line-color: $color-purple;
+
+// Headers
+$header-background: $color-purple;
+$header-background: $color-blue;
+$header-color: $color-light-turquoise;
+
+// Top Navigation
+$topnav-background: $color-dark-green;
+$topnav-color: $color-light-turquoise;
+
+// Base colors.
+$base-background-color: $color-dark-blue !default;
+$base-font-color: $color-off-white !default;
+$secondary-background-color: lighten($base-background-color, 7.5%);
+
+$border-color-base: darken($color-green, 40%);
+$border-color-hover: darken($color-green, 20%);
+$border-color-focus: $color-green;
+$border-color-filled: darken($color-turquoise, 10%);
+
+$base-border-color: $color-green !default;
+$base-border: 2px solid $base-border-color;
+
+$base-accent-color: $color-dark-green !default;
+$base-link-color: $color-green !default;
+
+$base-header-bar-color: $color-light-turquoise;
+$base-date-color: $color-grey;
+
+$base-separator-color: lighten($base-background-color, 25%);
+
+$page-title-color: #9cf;
+
+$form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($base-link-color, $lightness: -5%, $alpha: -0.3);
+
+// Buttons
+$color-button-selected: #006688;
+$color-button-hover: #005577;
+$color-button-inactive: #999;
+
+// Messages colors.
+$alert-color: #fff6bf !default;
+$error-color: #fbe3e4 !default;
+$notice-color: #e5edf8 !default;
+$success-color: #e0ffee !default;
+/////////////////////////////////////////////////
+
+// Table colors.
+$table-border-color: $base-separator-color;
+$table-background: $base-background-color;
+$table-header-background: lighten($table-background, 10%);
+$table-hover-background: darken($table-background, 6%);
+$table-stripe-background: darken($table-background, 5%);
+$table-stripe-background-hover: darken($table-stripe-background, 5%);
+
+// Tasks colors.
+$tab-link-color: $color-dark-grey;
+$tab-active-background: $base-background-color;
+$tab-inactive-color: $base-background-color;
+$tab-inactive-hover-color: silver;
+
+// Breadcrumb colors.
+$breadcrumb-border-color: $base-border-color;
+$breadcrumb-arrow-color: $breadcrumb-border-color;
+$breadcrumb-background: $base-background-color;
+$breadcrumb-inactive-hover-color: $breadcrumb-background;
+$breadcrumb-color: $color-grey;
+$breadcrumb-color-hover: $base-link-color;
+$breadcrumb-color-active: $breadcrumb-color;
+
+// Flexbox colors.
+$flex-box-border-color: $color-light-grey;
+$flex-box-background: lighten($color-light-grey, 10%);
+$flex-box-color: transparentize($base-font-color, 0.3);
+$flex-box-top-colors:
+        tomato,
+        #72BFBF,
+        #92B1E3,
+        #E3D743,
+        #CCC,
+        #F6C05C;
+
+// Footer colors.
+// $footer-background: desaturate(darken($base-accent-color, 20%), 30%);
+$footer-background: #00404a;
+$footer-color: white;
+$footer-link-color: transparentize($footer-color, 0.6);
+$footer-disclaimer-color: transparentize($footer-color, 0.35);
+
+// Atomizer colors
+$atomizer-background: desaturate(darken($base-accent-color, 20%), 30%);
