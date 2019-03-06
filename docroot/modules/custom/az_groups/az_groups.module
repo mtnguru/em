@@ -28,55 +28,61 @@ function az_groups_form_alter(&$form, FormStateInterface $form_state, $form_id) 
  */
 function az_groups_form_node_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
+  $type = $node->getType();
+  if ($type == 'article' ||
+      $type == 'book' ||
+      $type == 'event' ||
+      $type == 'news') {
 
-  $results = AzGroupQuery::findGroups([
-    'roles' => [
-      'theories-admin',
-      'theories-contributor',
-      'theories-reviewer',
-    ],
-    'member' => \Drupal::currentUser()->id(),
-    'fields' => [
-      'gfd' => ['id', 'label'],
-    ],
-    'sort' => 'label'
-  ]);
+    $results = AzGroupQuery::findGroups([
+      'roles' => [
+        'theories-admin',
+        'theories-contributor',
+        'theories-reviewer',
+      ],
+      'member' => \Drupal::currentUser()->id(),
+      'fields' => [
+        'gfd' => ['id', 'label'],
+      ],
+      'sort' => 'label'
+    ]);
 
-  // If not a new node then add form element to select the group this item belongs to.
-  $defaults = [];
-  $gcs = [];
-  $groups = [];
+    // If not a new node then add form element to select the group this item belongs to.
+    $defaults = [];
+    $gcs = [];
+    $groups = [];
 
-  if (!$node->isNew()) {
-    $gcs = GroupContent::loadByEntity($node);
-    foreach ($gcs as $key => $gc) {
-      $gid = $gc->getGroup()->id();
-      $defaults[] = $gid;
-      $groups[$gid] = $gc->id();
+    if (!$node->isNew()) {
+      $gcs = GroupContent::loadByEntity($node);
+      foreach ($gcs as $key => $gc) {
+        $gid = $gc->getGroup()->id();
+        $defaults[] = $gid;
+        $groups[$gid] = $gc->id();
+      }
     }
+
+    $form['#az_groups'] = [
+      'gcs' => $gcs,
+      'groups' => $groups,
+      'defaults' => $defaults,
+    ];
+
+    $options = [];
+    foreach ($results as $result) {
+      $options[$result->id] = $result->label;
+    }
+
+    $form['group'] = [
+      '#title' => 'Groups',
+      '#type' => 'checkboxes',
+      '#description' => 'Groups this content belongs to - normally this is set automatically when adding content from the Group home page.',
+      '#options' => $options,
+      '#weight' => 5,
+      '#default_value' => $defaults,
+    ];
+
+    $form['actions']['submit']['#submit'][] = '_az_groups_node_form_submit';
   }
-
-  $form['#az_groups'] = [
-    'gcs' => $gcs,
-    'groups' => $groups,
-    'defaults' => $defaults,
-  ];
-
-  $options = [];
-  foreach ($results as $result) {
-    $options[$result->id] = $result->label;
-  }
-
-  $form['group'] = [
-    '#title' => 'Groups',
-    '#type' => 'checkboxes',
-    '#description' => 'Groups this content belongs to - normally this is set automatically when adding content from the Group home page.',
-    '#options' => $options,
-    '#weight' => 5,
-    '#default_value' => $defaults,
-  ];
-
-  $form['actions']['submit']['#submit'][] = '_az_groups_node_form_submit';
   return;
 }
 

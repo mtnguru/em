@@ -71,7 +71,7 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
   $node = $form_state->getFormObject()->getEntity();
   $type = $node->getType();
   if (in_array($type, ['article', 'glossary', 'book', 'news'])) {
-    $form['updateChangedContainer'] = [
+/*  $form['updateChangedContainer'] = [
       '#type' => 'container',
       '#weight' => 6,
       'updateChanged' => [
@@ -81,6 +81,7 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
         '#description' => t('Change the update time for the article. Update time determines the sort order of content when sorted by date.'),
       ],
     ];
+*/
 
     $form['publishChangedContainer'] = [
       '#type' => 'container',
@@ -119,9 +120,9 @@ function az_content_form_node_form_alter(&$form, FormStateInterface $form_state,
 
 function _az_content_node_validate(&$form, FormStateInterface &$form_state) {
   $node = $form_state->getFormObject()->getEntity();
-  if ($form_state->hasValue('updateChanged') && !$form_state->getValue('updateChanged')) {
-    $form_state->setValue(['changed'], $node->changed->value);
-  }
+//if ($form_state->hasValue('updateChanged') && !$form_state->getValue('updateChanged')) {
+//  $form_state->setValue(['changed'], $node->changed->value);
+//}
   if ($form_state->hasValue('publishChanged') && !$form_state->getValue('publishChanged')) {
     $form_state->setValue(['field_publish_date'], $node->changed->value);
   }
@@ -129,9 +130,9 @@ function _az_content_node_validate(&$form, FormStateInterface &$form_state) {
 
 function _az_content_node_submit(&$form, FormStateInterface &$form_state) {
   $node = $form_state->getFormObject()->getEntity();
-  if ($form_state->hasValue('updateChanged') && !$form_state->getValue('updateChanged')) {
-    $node->set('changed', $form_state->getValue('changed'));
-  };
+//if ($form_state->hasValue('updateChanged') && !$form_state->getValue('updateChanged')) {
+//  $node->set('changed', $form_state->getValue('changed'));
+//};
 
   // if the node moderation state has changed and is now published then set the published date.
   if ($form_state->hasValue('publishChanged') ||

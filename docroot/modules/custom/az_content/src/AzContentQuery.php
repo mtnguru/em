@@ -114,12 +114,12 @@ class AzContentQuery {
     }
 
     ////////// Publish Date
-    if (isset($set['publishAgent'])) {
-      $seconds = DrupalDateTime::createFromTimestamp((int)\Drupal::time()->getRequestTime() - $set['publishDate'] * 60);
+    if (isset($set['publishAge'])) {
+      $seconds = DrupalDateTime::createFromTimestamp((int)\Drupal::time()->getRequestTime() - $set['publishAge'] * 60);
       $date = format_date($seconds->getTimestamp() , 'custom', 'Y-m-d\TH:i:s', 'UTC');
 
       $query->join('node__field_publish_date', 'nfpd', 'nfd.nid = nfpd.entity_id');
-      $query->condition('nfpd.field_publish_date_value', $nseconds, $operator);
+//    $query->condition('nfpd.field_publish_date_value', $nseconds, $operator);
       $query->condition('nfpd.field_publish_date_value', $date, '>');
     }
 
