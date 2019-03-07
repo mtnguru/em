@@ -86,8 +86,25 @@
   <div class="main-container">
     <div class="header-container">
       <div class="header">
-        <h2 class="title">{{ label }}</h2>
+        <div class="block-right">
+          {% if content.field_social_media is not empty %}
+            {{ content.field_social_media }}
+          {% endif %}
+
+          {# if content.field_topics is not empty %}
+            <div class="topics">
+              {{ content.field_topics }}
+            </div>
+          {% endif #}
+
+        </div>
+
+        <h2 class="title">{{ title }}</h2>
+
         <div class="information">
+          {% if state != 'published' %}
+            <span class="state {{ state|replace('_', '-') }}">{{ state|capitalize|replace('_', ' ') }}</span> -
+          {% endif %}
           <span class="az-fa-{{ node.bundle }}">
             {{ bundle_name }} -
           </span>
@@ -101,35 +118,40 @@
       </div>
     </div>
 
-    <div class="az-properties">
-      <table>
-        <tr><td class="field__label">Element</td><td>{{ content.field_element }}</td></tr>
-        {% if valence %}
-          <tr><td class="field__label">Valence</td><td class="field__item">{{ valence }}</td></tr>
+    <div class="body-container">
+
+      <div class="body-header">
+        {# CT - event #}
+        {% if content.field_event_date is not empty %}
+          <div class="field-event-date">
+            {{ content.field_event_date }}
+          </div>
         {% endif %}
 
-        <tr><td class="field__label">Stability</td><td>{{ content.field_stability }}</td></tr>
-        <tr><td class="field__label">Isotope</td><td>{{ content.field_isotope }}</td></tr>
-        <tr><td class="field__label">Abundance</td><td>{{ content.field_abundance }}</td></tr>
-        <tr><td class="field__label">Half Life</td><td>{{ content.field_half_life }}</td></tr>
-        <tr><td class="field__label"># Protons</td><td>{{ content.field__protons }}</td></tr>
-        <tr><td class="field__label"># Inner Electrons</td><td>{{ content.field__inner_electrons }}</td></tr>
-        <tr><td class="field__label"># Outer Electrons</td><td>{{ content.field__outer_electrons }}</td></tr>
-        <tr><td class="field__label">Nuclear Spin</td><td>{{ content.field_nuclear_spin }}</td></tr>
-        <tr><td class="field__label">Mass - Actual</td><td>{{ content.field_mass_actual }}</td></tr>
-        <tr><td class="field__label">Mass - Calculated</td><td>{{ content.field_mass_calculated }}</td></tr>
-        <tr><td class="field__label">BE Nucleon</td><td>{{ content.field_be_nucleon }}</td></tr>
-        <tr><td class="field__label">BE SAM</td><td>{{ content.field_be_sam }}</td></tr>
-        <tr><td class="field__label">BE Actual</td><td>{{ content.field_be_actual }}</td></tr>
-        <tr><td class="field__label">BE Accuracy</td><td>{{ content.field_be_accuracy }}</td></tr>
-      </table>
+        {% if content.field_website_link is not empty %}
+          <div class="field-website-link">
+            {{ content.field_website_link }}
+          </div>
+        {% endif %}
+
+        {% if content.body is not empty %}
+          <div class="body">
+            {{ content.body }}
+          </div>
+        {% endif %}
+
+        {% if content.field_gps_location is not empty %}
+          <div class="field-gps-location">
+            {{ content.field_gps_location }}
+          </div>
+        {% endif %}
+      </div>
+
     </div>
 
-    {{ content.body }}
-    {% if display_notes %}
-      {{ content.field_notes }}
+    {% if content.book_navigation is not empty %}
+      {{ content.book_navigation }}
     {% endif %}
-    {{ content.field_atomic_structure }}
 
     {{ content.links }}
     {{ content.field_comments }}

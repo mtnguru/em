@@ -102,7 +102,7 @@ article.az-page {
   }
 
   .field--name-body {
-    margin-bottom: 20px;
+    margin: 20px 0;
     p > img {
       @include media(max-width $bp580max) {
         padding: 15px 5%

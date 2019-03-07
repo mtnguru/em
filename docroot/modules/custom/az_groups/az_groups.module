@@ -31,7 +31,6 @@ function az_groups_form_node_form_alter(&$form, FormStateInterface &$form_state,
   $type = $node->getType();
   if ($type == 'article' ||
       $type == 'book' ||
-      $type == 'event' ||
       $type == 'news') {
 
     $results = AzGroupQuery::findGroups([
