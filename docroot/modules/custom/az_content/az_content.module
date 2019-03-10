@@ -714,6 +714,8 @@ function az_content_preprocess_node(&$variables) {
     $changed, REQUEST_TIME, ['granularity' => 2, 'return_as_object' => TRUE]
   );
 
+  $variables['nid'] = $node->id();
+
   // Get the status and moderation_state
   if ($node->hasField('moderation_state') && $type != 'email' && $type != 'birkeland') {
     $variables['state'] = $node->moderation_state->value;

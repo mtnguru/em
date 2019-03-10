@@ -113,6 +113,10 @@ if ($handle) {
         $mass = atomizer_calculate_mass($protons, $inner, $outer);
         $atom->field_mass_calculated->value = $mass;
 
+        $atom->field_an_isotope->value =
+          sprintf ("%3s:%3s\n", $element['atomicNumber'], $protons);
+
+
         if (!$atom->field_mass_actual->isEmpty()) {
           $actual = $atom->field_mass_actual->value;
           if ($actual > 1000000) {
@@ -142,10 +146,15 @@ function build_atom_list() {
     $nelements[$element['atomicNumber']] = &$element;
   }
 
+  $natoms = count($atoms);
+  print("Atoms: $natoms\n");
+
+  $natoms = 0;
   // Go through each atom and count number of atoms per element
   foreach ($atoms as $atom) {
     $eid = $atom->field_element_target_id;
     if (!empty($elements[$eid])) {
+      $natoms++;
       $elements[$eid]['isotopes'][$atom->field__protons_value][] = $atom;
       if (empty($elements[$eid]['numIsotopes'])) {
         $elements[$eid]['numIsotopes'] = 1;
@@ -153,7 +162,12 @@ function build_atom_list() {
         $elements[$eid]['numIsotopes']++;
       }
     }
+    else {
+      $fart = 5;
+    }
   }
+
+  print ("Number of atoms: $natoms\n");
 
   return $nelements;
 }
