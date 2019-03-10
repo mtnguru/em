@@ -824,15 +824,8 @@ function az_content_preprocess_node(&$variables) {
       if (\Drupal::currentUser()->hasPermission('atomizer display structure')) {
         $variables['display_notes'] = true;
       }
-
-      // Join the valence list together with comma separators.
-      if ($viewMode == 'atom_viewer') {
-        $items = [];
-        foreach ($node->field_valence->getValue() as $item) {
-          $items[] = $item['value'];
-        }
-        $variables['valence'] = join(", ", $items);
-      }
+      $element = Node::load($node->field_element->target_id);
+      $variables['valence'] = $element->field_valence->value;
       break;
   }
 

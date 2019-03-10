@@ -107,7 +107,7 @@ crons:
         cmd: 'cd web ; /app/bin/drush core-cron'
     daily_mail:
         spec: '30 13 * * *'
-        cmd: 'cd web; mail/cron_mail.php >> /tmp/cron_mail.log 2>/tmp/cron_mail_errors.log'
+        cmd: 'cd web; mail/load_atomic_weights.php >> /tmp/cron_mail.log 2>/tmp/cron_mail_errors.log'
 
 variables:
     php:

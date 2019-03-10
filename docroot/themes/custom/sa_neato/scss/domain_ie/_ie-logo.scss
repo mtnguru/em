@@ -1,16 +1,11 @@
 div.its-all-electric-logo {
-  background-color: #218;
-  border-radius: 47%;
+
+  width: 180px;
+  float: left;
+  display: inline-block;
 
   > a {
     text-decoration: none;
-  }
-
-  @include media($bp320only) {
-    //      margin-left: 20px;
-  }
-  @include media($bp580only) {
-    //      margin-left: 30px;
   }
 
   h2 {
@@ -22,11 +17,12 @@ div.its-all-electric-logo {
     } // $bp320only
 
     @include media($bp960) {
-      padding: 0 30px;
+      font-size: 120%;
+      padding: 20px;
     } // $bp960
   }
 
-  .its-all-electric {
+  .sitename {
     color: #c6a2ff;
     text-shadow: 0 0 4px #5ff;
     opacity: .7;
@@ -41,51 +37,5 @@ div.its-all-electric-logo {
     z-index: 1;
     @include transform (rotate(-8deg));
   }
-
-  .matters {
-    position: relative;
-    display: inline-block;
-    vertical-align:top;
-    color: #efb000;
-    margin: 16px 10px 0 -45px;
-    font-size: 27px;
-    @extend %text-shadow;
-  }
 }
-
-div#its-all-electric-logo {
-  width: 500px;
-  height: 80px;
-//width: 350px;
-  .its-all-electric {
-    font-size: 32px;
-    margin-left: 22px;
-  }
-  .matters {
-    font-size: 40px;
-  }
-}
-
-div#its-all-electric-nav {
-  position: absolute;
-  top: 8px;
-  left: 20px;
-  height: 47px;
-  width: 230px;
-
-  @include media($bp960) {
-    margin-left: 30px;
-  }
-
-  h2 {
-    @include media(max-width $bp580max) {
-      padding: 0 20px;
-    } // $bp320only
-
-    @include media($bp960) {
-      padding: 0 30px;
-    } // $bp960
-  }
-}
-
 
