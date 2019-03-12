@@ -152,6 +152,7 @@ function build_atom_list() {
   $natoms = 0;
   // Go through each atom and count number of atoms per element
   foreach ($atoms as $atom) {
+    $id = $atom->nid;
     $eid = $atom->field_element_target_id;
     if (!empty($elements[$eid])) {
       $natoms++;

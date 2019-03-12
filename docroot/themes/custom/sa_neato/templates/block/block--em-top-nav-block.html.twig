@@ -72,7 +72,7 @@
                 <div class="popup">
                   <div class="links"><a href="/dashboard">My Dashboard</a></div>
                   <div class="links"><a href="/user">My Profile Page</a></div>
-                  <div class="links"><a href="/user/logout">Logout</a></div>
+                  <div class="links"><a href="/user/logout?destination={{ page_url }}">Logout</a></div>
                   <div class="account-links">
                     <div class="account-title">Account Settings</div>
                     <div class="account-link"><a href="/user/{{ user.id }}/edit?display=account">Identification</a></div>
@@ -90,7 +90,6 @@
         {% else %}
           <div id="account-menu" class="do-login">
           <a href="/user/login?destination={{ page_url }}" class="login">Login/Join</a>
-          {#<a href="/user/login" class="login">Login/Join</a>#}
           </div>
         {% endif %}
 
