@@ -34,6 +34,7 @@ mounts:
     '/config': 'shared:files/config'
     '/web/mail': 'shared:files/mail'
 
+
 # Configuration of the build of this application.
 build:
     flavor: composer
