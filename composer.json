@@ -35,7 +35,7 @@
         "drupal/devel": "^1.2",
         "drupal/exif": "^1.0",
         "drupal/field_group": "^1.0",
-        "drupal/fontawesome": "^1.2",
+        "drupal/fontawesome": "^2.0",
         "drupal/libraries": "^3.0",
         "drupal/masquerade": "2.x-dev",
         "drupal/paragraphs": "^1.2",
@@ -68,7 +68,8 @@
         "drupal/daul": "^1.0",
         "drupal/form_mode_control": "^2.0@RC",
         "drupal/graphql": "^3.0@RC",
-        "drupal/graphql_views": "^1.0@beta"
+        "drupal/graphql_views": "^1.0@beta",
+        "drupal/vbo_export": "^2.1"
     },
     "repositories": [
         {
