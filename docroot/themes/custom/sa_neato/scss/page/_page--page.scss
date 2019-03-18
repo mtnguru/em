@@ -25,19 +25,19 @@ body.page-node-type-atomizer {
   }
 }
 
-// body.page-node-type-landing-page,
-// body.page-node-type-nuclet-binding-energies,
-// body.page-node-type-book,
-// body.page-node-type-atom,
-// body.page-node-type-glossary,
-// body.page-node-type-resources,
-// body.page-node-type-article {
+//body.page-node-type-glossary,
+//body.page-node-type-resources,
+body.page-node-type-landing-page,
+body.page-node-type-book,
+body.page-node-type-news,
+body.page-node-type-atom,
+body.page-node-type-article {
+  .block-page-title-block {
+    display: none;
+  }
+}
 
 div#page-view {
-  .block-page-title-block {
-      display: none;
-  }
-
   #block-em-neato-content,
   #block-sa-neato-content {
     > div.content-container {
@@ -93,7 +93,7 @@ article.az-page {
       width: 100%;
     }
     @include media($bp960) {
-      width: 70%;
+      width: 70%
     }
 
     > h2 {

@@ -209,7 +209,7 @@
               margin-top: 12px;
               color: $color-white;
               @extend %text-shadow;
-              @extend .az-fa-pencil;
+//            @extend .az-fa-pencil;
             }
 
             .menu {
@@ -243,7 +243,7 @@
     line-height: $navigation-height;
     padding: 0 20px;
     font-size: 160%;
-    @extend .az-fa-bars;
+//  @extend .az-fa-bars;
 
     @include media ($bp960) {
       display: none;

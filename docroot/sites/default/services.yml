@@ -34,7 +34,7 @@ parameters:
     # the cookie domain should start with a dot.
     #
     # @default none
-#   cookie_domain: '.ethermatters.com'
+    # cookie_domain: '.example.com'
     #
   twig.config:
     # Twig debugging:
@@ -55,7 +55,7 @@ parameters:
     #
     # Not recommended in production environments
     # @default false
-    debug: true
+    debug: false
     # Twig auto-reload:
     #
     # Automatically recompile Twig templates whenever the source code changes.
@@ -83,6 +83,7 @@ parameters:
     # render array, hence varying every render array by these cache contexts.
     #
     # @default ['languages:language_interface', 'theme', 'user.permissions']
+#   required_cache_contexts: ['languages:language_interface', 'theme', 'user.permissions', 'url.site']
     required_cache_contexts: ['languages:language_interface', 'theme', 'user.permissions']
     # Renderer automatic placeholdering conditions:
     #

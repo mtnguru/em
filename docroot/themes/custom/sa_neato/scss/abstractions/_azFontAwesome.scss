@@ -1,3 +1,22 @@
+.fas {
+  margin-right: 3px;
+  font-size: 120%;
+}
+
+/*
+.fas-bars {
+  ::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    content: "\f133";
+  }
+}
+*/
+
+// .fa-event        { @extend .fa-calendar; }
+// .fa-article      { @extend .fa-file-alt; }
+
+/*
 .fa-dot-circle-o {
   &::before {
 //  font-size: 120%;
@@ -28,7 +47,6 @@
 
 .az-fa {
   font-family: FontAwesome;
-  font-weight: lighter;
   display: inline-block;
   padding-right: 5px;
   width: (18em/14);
@@ -55,6 +73,7 @@
 .az-fa-calendar:before          { @extend .az-fa; content: "\f073"; }
 .az-fa-camera:before            { @extend .az-fa; content: "\f030"; }
 .az-fa-chart-bar:before         { @extend .az-fa; content: "\f080"; }
+.az-fa-chart-line:before        { @extend .az-fa; content: "\f201"; }
 .az-fa-clock-o:before           { @extend .az-fa; content: "\f017"; }
 .az-fa-close:before             { @extend .az-fa; content: "\f00d"; }
 .az-fa-cog:before               { @extend .az-fa; content: "\f013"; }
@@ -113,7 +132,8 @@
 .az-fa-video-camera:before      { @extend .az-fa; content: "\f03d"; }
 .az-fa-window-maximize:before   { @extend .az-fa; content: "\f2d0"; }
 .az-fa-window-minimize:before   { @extend .az-fa; content: "\f2d1"; }
+*/
 
-.az-book {
-  @extend .az-fa-book;
-}
+// .az-book {
+//   @extend .az-fa-book;
+// }

@@ -1,5 +1,9 @@
 
-#landing_page-atom-builder {
+body#landing_page-molecule-builder,
+body#landing_page-atom-builder {
+  .ui-widget-overlay {
+    background-color: rgba(70,70,70,.4);
+  }
   .ui-dialog {
     width: 535px;
   }
@@ -175,11 +179,4 @@
       color: $color-light-blue;
     }
   } // li.isotope
-}
-
-
-body#landing_page-atom-builder {
-  .ui-widget-overlay {
-    background-color: rgba(70,70,70,.4);
-  }
 }

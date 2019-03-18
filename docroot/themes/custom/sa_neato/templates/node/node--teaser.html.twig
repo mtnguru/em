@@ -94,7 +94,8 @@
     {% if state != 'published' %}
       <span class="state {{ state|replace('_', '-') }}">{{ state|capitalize|replace('_', ' ') }}</span> -
     {% endif %}
-    <span class="type az-fa-{{ node.bundle|lower|replace(' ', '-') }}">{{ bundle_name }}</span> -
+    <i class="fas fa-{{ node.bundle|lower|replace(' ', '-') }}"></i>
+    <span class="type">{{ bundle_name }}</span> -
     <span class="changed" title="{{ changed_ago }}">{{ changed }}</span>
     {% if (show_author) %}
       - <span class="author">{{ author_name }}</span>

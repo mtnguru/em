@@ -75,6 +75,22 @@
 */
 #}
 
+{% if node.bundle == 'article' %}
+  {% set fa_icon = 'fa-file-alt' %}
+{% elseif node.bundle == 'news' %}
+  {% set fa_icon = 'fa-newspaper' %}
+{% elseif node.bundle == 'book' %}
+  {% set fa_icon = 'fa-book' %}
+{% elseif node.bundle == 'glossary' %}
+  {% set fa_icon = 'fa-puzzle-piece' %}
+{% elseif node.bundle == 'molecule' %}
+  {% set fa_icon = 'fa-project-diagram' %}
+{% elseif node.bundle == 'event' %}
+  {% set fa_icon = 'fa-calendar-alt' %}
+{% else %}
+  {% set fa_icon = 'fa-bomb' %}
+{% endif %}
+
 <article id="node-{{ node.id }}" class="{{ attributes.class }} {{ display_mode }} {{ view_mode }} az-page {{ 'type-' ~ node.bundle }}"{{ attributes }}>
 
   <div class='sidebar sidebar-left'>
@@ -105,7 +121,8 @@
           {% if state != 'published' %}
             <span class="state {{ state|replace('_', '-') }}">{{ state|capitalize|replace('_', ' ') }}</span> -
           {% endif %}
-          <span class="az-fa-{{ node.bundle }}">
+          <i class="fas {{ fa_icon }}"></i>
+          <span>
             {{ bundle_name }} -
           </span>
 
@@ -189,6 +206,14 @@
         <div class="structure">
           {{ content.field_structure }}
         </div>
+      {% endif %}
+
+      {% if content.field_molecule_structure is not empty %}
+        <pre class="molecule-structure">
+          <code>
+            {{ node.field_molecule_structure.value | trim }}
+          </code>
+        </pre>
       {% endif %}
     </div>
 

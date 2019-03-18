@@ -88,7 +88,8 @@
       <div class="header">
         <h2 class="title">{{ label }}</h2>
         <div class="information">
-          <span class="az-fa-{{ node.bundle }}">
+          <i class="fas fa-atom"></i>
+          <span>
             {{ bundle_name }} -
           </span>
 
@@ -101,6 +102,8 @@
       </div>
     </div>
 
+    {{ content.body }}
+
     <div class="az-properties">
       <table>
         <tr><td class="field__label">Element</td><td>{{ content.field_element }}</td></tr>
@@ -112,12 +115,12 @@
         <tr><td class="field__label">Isotope</td><td>{{ content.field_isotope }}</td></tr>
         <tr><td class="field__label">Abundance</td><td>{{ content.field_abundance }}</td></tr>
         <tr><td class="field__label">Half Life</td><td>{{ content.field_half_life }}</td></tr>
-        <tr><td class="field__label"># Protons</td><td>{{ content.field__protons }}</td></tr>
-        <tr><td class="field__label"># Inner Electrons</td><td>{{ content.field__inner_electrons }}</td></tr>
-        <tr><td class="field__label"># Outer Electrons</td><td>{{ content.field__outer_electrons }}</td></tr>
+        <tr><td class="field__label">Protons</td><td>{{ content.field__protons }}</td></tr>
+        <tr><td class="field__label">Inner Electrons</td><td>{{ content.field__inner_electrons }}</td></tr>
+        <tr><td class="field__label">Outer Electrons</td><td>{{ content.field__outer_electrons }}</td></tr>
         <tr><td class="field__label">Nuclear Spin</td><td>{{ content.field_nuclear_spin }}</td></tr>
-        <tr><td class="field__label">Mass - Actual</td><td>{{ content.field_mass_actual }}</td></tr>
-        <tr><td class="field__label">Mass - Calculated</td><td>{{ content.field_mass_calculated }}</td></tr>
+        <tr><td class="field__label">Mass Actual</td><td>{{ content.field_mass_actual }}</td></tr>
+        <tr><td class="field__label">Mass Calc</td><td>{{ content.field_mass_calculated }}</td></tr>
         <tr><td class="field__label">BE Nucleon</td><td>{{ content.field_be_nucleon }}</td></tr>
         <tr><td class="field__label">BE SAM</td><td>{{ content.field_be_sam }}</td></tr>
         <tr><td class="field__label">BE Actual</td><td>{{ content.field_be_actual }}</td></tr>
@@ -127,11 +130,11 @@
       </table>
     </div>
 
-    {{ content.body }}
+    {{ content.field_atomic_structure }}
+
     {% if display_notes %}
       {{ content.field_notes }}
     {% endif %}
-    {{ content.field_atomic_structure }}
 
     {{ content.links }}
     {{ content.field_comments }}

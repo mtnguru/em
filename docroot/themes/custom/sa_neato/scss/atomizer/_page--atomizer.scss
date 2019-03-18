@@ -45,8 +45,13 @@ body.page-node-type-atomizer {
     font-size: 40px;
     margin: 0;
     position: absolute;
-    top: 2%;
+    top: 3%;
     left: 3%;
+
+    h3 {
+      color: $color-green;
+      margin: 0;
+    }
   }
 
   ////////////////////////////////////// Mobile display mode ///////////
@@ -118,8 +123,8 @@ body.page-node-type-atomizer {
 
     &.az-overlay-controls {
       .az-controls-wrapper {
-        width: 100%;
-        left: -16px;
+//      width: 100%;
+//      left: -16px;
       }
 
       .az-header {
@@ -127,7 +132,7 @@ body.page-node-type-atomizer {
       }
 
       #controls-blocks {
-        width: 100%;
+        width: 235px;
         position: absolute;
         top: 0;
         left: 0;
@@ -137,13 +142,13 @@ body.page-node-type-atomizer {
           //        border: 2px solid $color-border;
         }
         .control-block {
-          width: 160px;
+//        width: 160px;
         }
         #blocks--buttons {
           position: relative;
           left: auto;
           top: auto;
-          width: 240px;
+//        width: 240px;
         }
       }
     }
@@ -170,6 +175,7 @@ body.page-node-type-atomizer {
       }
 
       .atom-viewer-canvas-wrapper,
+      .molecule-builder-canvas-wrapper,
       .atom-builder-canvas-wrapper {
         display: inline-block;
         position: relative;
@@ -215,8 +221,10 @@ body.page-node-type-atomizer {
 
     &.az-overlay-controls {
       .az-controls-wrapper {
-        width: 100%;
-        left: -16px;
+        background-color: $color-controls-wrapper;
+        border: 2px solid $color-green;
+//      width: 235px;
+//      left: -16px;
       }
 
       .az-header {
@@ -224,18 +232,19 @@ body.page-node-type-atomizer {
       }
 
       #controls-blocks {
-        width: 100%;
+//      width: 100%;
         position: absolute;
         top: 0;
         left: 0;
         padding: 2px;
         border: 2px solid transparent;
+        width: 235px;
         &:hover {
           //        border: 2px solid $color-border;
         }
 
         .control-block {
-          width: 180px;
+//        width: 220px;
 
           &#blocks--sceneName {
             min-height: 30px;
@@ -249,7 +258,6 @@ body.page-node-type-atomizer {
           position: relative;
           left: auto;
           top: auto;
-          width: 240px;
         }
       }
     }

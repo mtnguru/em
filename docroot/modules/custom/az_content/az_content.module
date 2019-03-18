@@ -388,7 +388,7 @@ function _az_content_add_node_to_media($media, $articleId) {
  */
 function az_content_preprocess_block(&$variables) {
   switch ($variables['plugin_id']) {
-    case 'az_top_nav_block':
+    case 'ie_top_nav_block':
     case 'em_top_nav_block':
     case 'sa_top_nav_block':
       $current_path = \Drupal::service('path.current')->getPath();
@@ -717,13 +717,27 @@ function az_content_preprocess_node(&$variables) {
   $variables['nid'] = $node->id();
 
   // Get the status and moderation_state
-  if ($node->hasField('moderation_state') && $type != 'email' && $type != 'birkeland') {
+  if ($node->hasField('moderation_state') &&
+      $node->moderation_state->value && 
+      $type != 'email' && 
+      $type != 'birkeland') {
     $variables['state'] = $node->moderation_state->value;
   } else {
     $variables['state'] = ($node->status->value) ? 'published' : 'draft';
   }
 
   $variables['show_author'] = ($node->hasField('field_show_author') && $node->field_show_author->value) ? true : false;
+
+  switch ($type) {
+    case 'article':   $variables['fontAwesomeIcon'] = 'fa-file-alt';    break;
+    case 'book':      $variables['fontAwesomeIcon'] = 'fa-book';        break;
+    case 'event':     $variables['fontAwesomeIcon'] = 'fa-file-alt';    break;
+    case 'news':      $variables['fontAwesomeIcon'] = 'fa-file-alt';    break;
+    case 'page':      $variables['fontAwesomeIcon'] = 'fa-file-alt';    break;
+    case 'ticket':    $variables['fontAwesomeIcon'] = 'fa-file-alt';    break;
+    case 'glossary':  $variables['fontAwesomeIcon'] = 'fa-file-alt';    break;
+    default:          $variables['fontAwesomeIcon'] = 'fa-bomb';        break;
+  }
 
   switch ($type) {
     case 'article':
@@ -1202,3 +1216,17 @@ function az_content_node_embed_context_alter(array &$context, \Drupal\Core\Entit
   return;
 }
 
+function az_content_get_icon($name) {
+  static $icons = [
+    'article' => 'fa-file-alt',
+    'book' =>    'fa-book',
+    'event' =>    'fa-calendar-alt',
+    'news' =>     'fa-newspaper',
+    'page' =>     'fa-file-alt',
+    'ticket' =>   'fa-file-alt',
+    'glossary' => 'fa-file-alt',
+    'theme' =>    'fa-paint-brush',
+  ];
+
+  return 'fas ' . (empty($icons[$name])) ? $icons[$name] : 'fa-bomb';
+}

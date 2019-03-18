@@ -2,19 +2,20 @@
 .az-atomizer-wrapper {
   &.az-float-controls {
     .az-controls-wrapper {
-      background: $color-controls-wrapper;
-      border: 2px solid $color-border;
-      padding: 3px;
+//    background: $color-controls-wrapper;
+//    border: 2px solid $color-border;
+//    padding: 3px;
     }
   }
   &.az-overlay-controls {
     .az-controls-wrapper {
       border: 2px solid transparent;
-      &:hover {
-        background: $color-controls-wrapper;
-        border: 2px solid $color-border;
-      }
+//    &:hover {
+//      background: $color-controls-wrapper;
+//      border: 2px solid $color-border;
+//    }
     }
+    #animation--interval--az-slider,
     #animation--speed--az-slider {
       width: 38%;
     }
@@ -24,10 +25,6 @@
 // Atom Builder Controls form
 .az-controls-wrapper {
   color: $color-white;
-
-  form {
-    width: 100%;
-  }
 
   h2 {
     font-size: 150%;
@@ -454,7 +451,7 @@
   }
 
   .blocks--animation--wrapper {
-    margin-bottom: 1em;
+    margin: 0 40px 5px;
   }
 
   .blocks--animation--wrapper,
@@ -590,7 +587,12 @@ article.atomizer_minimal {
   }
 }
 
+.controls-birkeland-viewer-yml,
 .controls-birkeland-yml {
+  .control-block {
+//  width: 300px;
+  }
+
   .az-control-opacity,
   .az-control-opacityMaster {
     .az-color {

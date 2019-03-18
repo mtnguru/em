@@ -105,7 +105,8 @@
           {% if state != 'published' %}
             <span class="state {{ state|replace('_', '-') }}">{{ state|capitalize|replace('_', ' ') }}</span> -
           {% endif %}
-          <span class="az-fa-{{ node.bundle }}">
+          <i class="fas fa-calendar-alt"></i>
+          <span>
             {{ bundle_name }} -
           </span>
 

@@ -4,6 +4,7 @@ body.user-login {
   }
 }
 
+#block-ie-neato-local-tasks,
 #block-em-neato-local-tasks,
 #block-sa-neato-local-tasks {
   nav.tabs {
@@ -20,24 +21,31 @@ body.user-login {
   }
 }
 
+
+nav.tabs {
+  i.fas {
+    display: none;
+  }
+}
+
+
 body.entity-taxonomy_term-canonical,
 body.entity-user-canonical,
 body.entity-group-canonical,
 body.entity-media-canonical,
 body.entity-node-canonical {
-  #block-em-neato-local-tasks,
-  #block-sa-neato-local-tasks {
+  .block-local-tasks-block {
     position: relative;
 
     .contextual {
-      display: none;
+//    display: none;
     }
     .content-container {
       height: 0;
     }
 
     .edit-button {
-      @extend .az-fa-pencil;
+//    @extend .az-fa-pencil;
       &:before {
         color: $base-font-color;
         position: absolute;
@@ -58,8 +66,8 @@ body.entity-node-canonical {
         margin-bottom: 20px;
       }
 
-      @extend .az-fa-tasks;
-      &:before {
+      i.fas {
+        display: inline-block;
         position: absolute;
         opacity: .4;
         @include transition-3d($property: opacity);
@@ -83,7 +91,6 @@ body.entity-node-canonical {
           right: -10px;
           top: -20px;
         } // $bp1280
-
       }
 
       ul.tabs {
@@ -95,7 +102,7 @@ body.entity-node-canonical {
         background-color: $color-dark-green;
         border: 2px solid $color-green;
         border-radius: 8px;
-        @include transition-3d($property: opacity, $timing: 500ms);
+        @include transition-3d($property: opacity, $timing: 200ms);
         @include transition-3d($property: right, $duration: 0);
 
         li {
@@ -111,13 +118,13 @@ body.entity-node-canonical {
       }
 
       &:hover {
-        &:before {
+        i {
           opacity: 1;
         }
 
         ul.tabs {
           right: -20px;
-          top: -20px;
+          top: -60px;
 
           opacity: 1;
         }
