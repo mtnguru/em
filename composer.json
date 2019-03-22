@@ -69,7 +69,8 @@
         "drupal/form_mode_control": "^2.0@RC",
         "drupal/graphql": "^3.0@RC",
         "drupal/graphql_views": "^1.0@beta",
-        "drupal/vbo_export": "^2.1"
+        "drupal/vbo_export": "^2.1",
+        "drupal/fontyourface": "^3.2"
     },
     "repositories": [
         {
