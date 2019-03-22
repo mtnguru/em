@@ -16,3 +16,4 @@ regions:
   footer_bottom: 'Footer Bottom'
 ckeditor_stylesheets:
   - css/wysiwyg.css
+

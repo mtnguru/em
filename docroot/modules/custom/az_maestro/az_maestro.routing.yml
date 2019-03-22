@@ -1,0 +1,8 @@
+maestro.getContent:
+  path: 'maestro/getContent'
+  defaults:
+    _title: "Get different type of content"
+    _controller: '\Drupal\az_maestro\Controller\MaestroController::getContent'
+  requirements:
+    _permission: 'access content'
+

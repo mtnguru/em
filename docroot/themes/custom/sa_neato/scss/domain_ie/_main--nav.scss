@@ -38,7 +38,7 @@
     text-align: left;
   }
 
-//z-index: 20;
+  //z-index: 20;
 
   .az-top {
     display: inline-block;
@@ -155,7 +155,7 @@
           float: right;
 
           .login {
-//          font-size: 14px;
+            //          font-size: 14px;
           }
 
           > a {
@@ -165,9 +165,9 @@
           }
 
           @include media(max-width $bp580max) {
-//          position: absolute;
-//          top: 0px;
-//          right: 50px;
+            //          position: absolute;
+            //          top: 0px;
+            //          right: 50px;
           }
 
           .popup {
@@ -208,7 +208,7 @@
               margin-top: 12px;
               color: $color-white;
               @extend %text-shadow;
-//            @extend .az-fa-pencil;
+              //            @extend .az-fa-pencil;
             }
 
             .menu {
@@ -230,7 +230,7 @@
   .navigation-wrapper {
     @include clearfix;
     position: relative;
-//  z-index: 101;
+    //  z-index: 101;
   }
 
   // Mobile view
@@ -242,7 +242,7 @@
     line-height: $navigation-height;
     padding: 0 20px;
     font-size: 160%;
-//  @extend .az-fa-bars;
+    //  @extend .az-fa-bars;
 
     @include media ($bp960) {
       display: none;
@@ -286,6 +286,7 @@
         display: inline-block;
         text-decoration: none;
         text-shadow: 0px 0px 4px #000;
+        color: $color-cyan;
 
         @include media ($bp960) {
           //        padding-right: 1em;
@@ -322,7 +323,7 @@
         a {
           vertical-align: middle;
           text-decoration: none;
-//        width: 100px;
+          //        width: 100px;
           line-height: 1.2;
           text-align: center;
         }
@@ -337,38 +338,6 @@
         }
       }
     }
-
-
-/*
-    &.more {
-      @include media($bp960) {
-        //    padding: 0 $navigation-submenu-padding;
-      }
-
-      > ul > li:first-child a  {
-        //    padding-top: 10px;
-      }
-
-      .title,
-      > a {
-        padding-right: 10px;
-        &::after {
-          line-height: 1;
-          padding-left: 4px;
-          font-size: 100%;
-          content: "\25BE";
-        }
-      }
-
-      &.menu-open {
-        display: block;
-      }
-
-      @include media($bp960) {
-        padding-right: 0.8em;
-        //        position: relative;
-      }
-    } */
 
     .title,
     > a {
@@ -540,14 +509,32 @@
   }
 }
 
-  @include media($bp320only) {
-  } // $bp320only
+div#site-logo {
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  height: 47px;
+  width: 240px;
+  background-color: #218;
+  border-radius: 47%;
 
-  @include media($bp580only) {
-  } // $bp580only
+  > a {
+    text-decoration: none;
+  }
 
-  @include media($bp960only) {
-  } // $bp960
+  h2 {
+//  font-family: ultra;
+    margin: 11px 0 0;
+    word-wrap: break-word;
+    font-size: 140%;
 
-  @include media($bp1280) {
-  } // $bp1280
+    @include media(max-width $bp580max) {
+      padding: 0 20px;
+    } // $bp320only
+
+    @include media($bp960) {
+      padding: 0 30px;
+    } // $bp960
+  }
+}
+

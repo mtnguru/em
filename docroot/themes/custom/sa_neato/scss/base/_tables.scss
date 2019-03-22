@@ -29,6 +29,17 @@ td {
       margin: 0;
     }
   }
+  &.selected {
+
+  }
+}
+
+tr {
+  &.selected  {
+    td.views-field {
+      background: $table-selected-background;
+    }
+  }
 }
 
 tr,

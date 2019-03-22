@@ -27,119 +27,126 @@ body.page-node-type-atomizer {
 
 //body.page-node-type-glossary,
 //body.page-node-type-resources,
-body.page-node-type-landing-page,
-body.page-node-type-book,
-body.page-node-type-news,
-body.page-node-type-atom,
-body.page-node-type-article {
-  .block-page-title-block {
-    display: none;
+body {
+  &.page-node-type-landing-page,
+  &.page-node-type-book,
+  &.page-node-type-news,
+  &.page-node-type-atom,
+  &.page-node-type-article {
+    .block-page-title-block {
+      display: none;
+    }
   }
-}
-
-div#page-view {
-  #block-em-neato-content,
-  #block-sa-neato-content {
-    > div.content-container {
-      max-width: $max-width;
-      margin: 0 auto;
+  &.entity-node-edit_form {
+    .block-page-title-block {
+      display: block;
     }
   }
 
-  &.page-node-type-atomizer {
+  div#page-view {
     #block-em-neato-content,
     #block-sa-neato-content {
       > div.content-container {
-        max-width: none;
+        max-width: $max-width;
+        margin: 0 auto;
       }
     }
-  }
 
-  @include media(max-width $bp580max) {
-    #book-status,
-    .block-members,
-    .donate-block,
-    #misc-links,
-    .block-group-operations {
-      display: none;
+    &.page-node-type-atomizer {
+      #block-em-neato-content,
+      #block-sa-neato-content {
+        > div.content-container {
+          max-width: none;
+        }
+      }
     }
-    .body-container {
-      hr:last-of-type {
+
+    @include media(max-width $bp580max) {
+      #book-status,
+      .block-members,
+      .donate-block,
+      #misc-links,
+      .block-group-operations {
         display: none;
       }
-    }
-  }
-}
-
-article.az-page {
-
-  .sidebar-left {
-    float: left;
-
-    @include media(max-width $bp580) {
-      width: 100%;
-    }
-    @include media($bp960) {
-      width: 30%;
-      max-width: 350px;
-      padding-right: 40px;
+      .body-container {
+        hr:last-of-type {
+          display: none;
+        }
+      }
     }
   }
 
-  .main-container {
-    float: left;
+  article.az-page {
 
-    @include media(max-width $bp580) {
-      width: 100%;
-    }
-    @include media($bp960) {
-      width: 70%
-    }
+    .sidebar-left {
+      float: left;
 
-    > h2 {
-      font-size: 225%;
-    }
-  }
-
-  .field--name-body {
-    margin: 20px 0;
-    p > img {
-      @include media(max-width $bp580max) {
-        padding: 15px 5%
+      @include media(max-width $bp580) {
+        width: 100%;
       }
       @include media($bp960) {
-        padding: 15px 10%
+        width: 30%;
+        max-width: 350px;
+        padding-right: 40px;
       }
     }
-  }
 
-  .body-header {
-//  margin-bottom: 15px;
-//  padding-bottom: 15px;
-//  border-bottom: 1px solid $base-separator-color;
-  }
+    .main-container {
+      float: left;
 
-  .state {
-    color: black;
-    padding: 2px 6px;
-    border-radius: 5px;
+      @include media(max-width $bp580) {
+        width: 100%;
+      }
+      @include media($bp960) {
+        width: 70%
+      }
 
-    &.published    { background-color: $color-published; }
-    &.unpublished  { background-color: $color-unpublished; }
-    &.needs-review { background-color: $color-needs-review; }
-    &.confidential { background-color: $color-confidential; }
-    &.draft        { background-color: $color-draft; }
-    &.placeholder  { background-color: $color-placeholder; }
-  }
+      > h2 {
+        font-size: 225%;
+      }
+    }
 
-  article {
+    .field--name-body {
+      margin: 20px 0;
+      p > img {
+        @include media(max-width $bp580max) {
+          padding: 15px 5%
+        }
+        @include media($bp960) {
+          padding: 15px 10%
+        }
+      }
+    }
 
-    .field--name-title {
-      display: block;
-      font-weight: bold;
-//    @extend h2;
-      a {
-        color: $color-group;
+    .body-header {
+      //  margin-bottom: 15px;
+      //  padding-bottom: 15px;
+      //  border-bottom: 1px solid $base-separator-color;
+    }
+
+    .state {
+      color: black;
+      padding: 2px 6px;
+      border-radius: 5px;
+
+      &.published    { background-color: $color-published; }
+      &.unpublished  { background-color: $color-unpublished; }
+      &.needs-review { background-color: $color-needs-review; }
+      &.confidential { background-color: $color-confidential; }
+      &.draft        { background-color: $color-draft; }
+      &.placeholder  { background-color: $color-placeholder; }
+    }
+
+    article {
+
+      .field--name-title {
+        display: block;
+        font-weight: bold;
+        //    @extend h2;
+        a {
+          color: $color-group;
+        }
       }
     }
   }

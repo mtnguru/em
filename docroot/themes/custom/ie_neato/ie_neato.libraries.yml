@@ -18,6 +18,12 @@ global-scripts:
     - core/jquery.once
     - core/jquery.tooltip
 
+#fonts:
+#  version VERSION
+#  css:
+#    theme:
+#      'fonts/Ultra.otf'
+
 left-nav:
   js:
     js/js-src/leftNav.js: {}
