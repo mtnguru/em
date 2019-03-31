@@ -3,7 +3,7 @@
 namespace Drupal\az_content\Plugin\Block;
 
 use Drupal\az_content\AzContentQuery;
-use Drupal\az_content\AzMaestroInit;
+use Drupal\az_content\AzContentInit;
 use Drupal\az_content\AzStream;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Database\Connection;
@@ -60,7 +60,7 @@ class AzEntityStreamBlock extends BlockBase {
 
     // Set up the container classes
     $classes = [
-      'maestro-stream',
+      'content-stream',
       'entity-' . $set['entityType'],
       str_replace('_', '-', $set['viewMode'])
     ];
@@ -125,7 +125,7 @@ class AzEntityStreamBlock extends BlockBase {
       $set['loaded'] = true;
     };
 
-    AzMaestroInit::start($set, $stream);
+    AzContentInit::start($set, $stream);
     return $stream;
   }
 }

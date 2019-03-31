@@ -1,17 +1,17 @@
 <?php
 
-namespace Drupal\az_maestro\Controller;
-use Drupal\az_maestro\AzStream;
-use Drupal\az_maestro\Command\GetContentCommand;
+namespace Drupal\az_content\Controller;
+use Drupal\az_content\AzStream;
+use Drupal\az_content\Command\GetContentCommand;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Controller\ControllerBase;
 
 /**
- * Class MaestroController.
+ * Class ContentController.
  *
- * @package Drupal\az_maestro\Controller
+ * @package Drupal\az_content\Controller
  */
-class MaestroController extends ControllerBase {
+class ContentController extends ControllerBase {
 
   /**
    * Create a stream of content.

@@ -180,9 +180,13 @@ class AzContentQuery {
           $query->leftJoin('taxonomy_term_field_data', 'ttfd', 'ttfd.tid = nfs.field_stability_target_id');
           $sorted = true;
           break;
-        case 'elements':
+        case 'element':
           $query->leftJoin('node__field_atomic_number', 'nfan', 'nfan.entity_id = nfd.nid');
           $query->orderBy('nfan.field_atomic_number_value', 'ASC');
+          break;
+        case 'title':
+//        $query->leftJoin('node__field_atomic_number', 'nfan', 'nfan.entity_id = nfd.nid');
+          $query->orderBy('nfd.title', 'ASC');
           break;
       }
     }

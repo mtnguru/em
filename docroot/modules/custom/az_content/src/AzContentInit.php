@@ -6,22 +6,22 @@ use Drupal\Component\Serialization\Yaml;
 use Drupal\Component\Utility\Xss;
 
 /**
- * Class AzMaestroInit.
+ * Class AzContentInit.
  *
  * @package Drupal\az_content
  */
-class AzMaestroInit {
+class AzContentInit {
 
   static public function start($set, &$element) {
 
-    $element['#attached']['drupalSettings']['azmaestro'] = [
+    $element['#attached']['drupalSettings']['azcontent'] = [
       $set['id'] => $set,
     ];
 
-    $loaded = &drupal_static('maestroLoaded', false);
+    $loaded = &drupal_static('contentLoaded', false);
     if (!$loaded) {
       $loaded = true;
-      $element['#attached']['library'] = 'az_content/az-maestro';
+      $element['#attached']['library'] = 'az_content/az-content';
     }
   }
 }

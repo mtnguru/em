@@ -1,5 +1,4 @@
 
-body#landing_page-molecule-builder,
 body#landing_page-atom-builder {
   .ui-widget-overlay {
     background-color: rgba(70,70,70,.4);
@@ -10,7 +9,7 @@ body#landing_page-atom-builder {
 }
 
 // Select atom View block
-#az-select-atom {
+#select-atom-wrapper {
 
   position: relative;
   border-radius: 8px;
@@ -51,12 +50,12 @@ body#landing_page-atom-builder {
     font-size: 120%;
   }
 
-  .az-select-atom-title {
+  .select-title {
     padding-left: 15px;
     border-bottom: solid 2px $color-blue;
   }
 
-  .element-list {
+  .select-list {
     width: 100%;
     position: absolute;
     top: 40px;
@@ -76,7 +75,11 @@ body#landing_page-atom-builder {
     }
   }
 
-  .element {
+  .select-item-name {
+//  border-bottom: solid 1px $color-blue;
+  }
+
+  .select-item-wrapper {
     border-bottom: solid 1px $color-blue;
   }
 

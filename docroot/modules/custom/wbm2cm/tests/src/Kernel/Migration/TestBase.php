@@ -67,7 +67,7 @@ abstract class TestBase extends KernelTestBase {
    * {@inheritdoc}
    */
   protected function prepareDatabase() {
-    // TODO: Put this bullshit in the source plugin configuration.
+    // TODO: Put this into the source plugin configuration.
     $db = $this->getDatabaseConnectionInfo();
     $db['default']['prefix']['default'] = $this->getDatabasePrefix();
     Database::addConnectionInfo('migrate', 'default', $db['default']);

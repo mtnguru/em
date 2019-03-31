@@ -34,7 +34,7 @@ abstract class TestBase extends BrowserTestBase {
    * {@inheritdoc}
    */
   protected function prepareDatabase() {
-    // TODO: Put this bullshit in the source plugin configuration.
+    // TODO: Put this into the source plugin configuration.
     $db = $this->getDatabaseConnection()->getConnectionOptions();
     $db['prefix']['default'] = $this->databasePrefix;
     Database::addConnectionInfo('migrate', 'default', $db);

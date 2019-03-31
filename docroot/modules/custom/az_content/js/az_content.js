@@ -1,5 +1,5 @@
 /**
- * @file az_maestro.js
+ * @file az_content.js
  * Controller that loads content into blocks.
  */
 (function ($) {
@@ -9,14 +9,14 @@
     Drupal.az = {};
   }
 
-  Drupal.az.maestroC = function () {
+  Drupal.az.contentC = function () {
 
     var $container;
     var $tabs;
     var $pages;
 
     function getSet(id) {
-      return drupalSettings.azmaestro[id];
+      return drupalSettings.azcontent[id];
 
     }
 
@@ -58,8 +58,8 @@
 //    getContent(set);
 
       // Initialize content
-      $('.maestro-content', context).once('az-attached').each(function() {
-        var set = drupalSettings.azmaestro[this.id.replace('az-tab-', '')];
+      $('.content-content', context).once('az-attached').each(function() {
+        var set = drupalSettings.azcontent[this.id.replace('az-tab-', '')];
 
         // Load the block-content - no tab to trigger it.
 //      if ($(this).hasClass('block-content')) {
@@ -136,7 +136,7 @@
 
     var getContent = function (set) {
       set['loaded'] = true;
-      doAjax('/maestro/getContent', set, contentLoaded);
+      doAjax('/content/getContent', set, contentLoaded);
     };
 
     return {
@@ -145,17 +145,17 @@
     };
   };
 
-  Drupal.behaviors.az_maestro = {
+  Drupal.behaviors.az_content = {
     // Attach functions are executed by Drupal upon page load or ajax loads.
     attach: function (context, settings) {
-      if (!Drupal.az.maestro) {  // Ensures we only run this once
-        Drupal.az.maestro = Drupal.az.maestroC();
+      if (!Drupal.az.content) {  // Ensures we only run this once
+        Drupal.az.content = Drupal.az.contentC();
       }
       $('.az-tabs').once('az-attached').each(function () {
-        Drupal.az.maestro.initTabs($(this), context);
+        Drupal.az.content.initTabs($(this), context);
       });
-      $('.maestro-block').once('az-attached').each(function () {
-        Drupal.az.maestro.initBlocks($(this), context);
+      $('.content-block').once('az-attached').each(function () {
+        Drupal.az.content.initBlocks($(this), context);
       });
     }
   };

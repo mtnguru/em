@@ -1,6 +1,8 @@
 <?php
 
-$text = 'name="shitty shitty bang bang"';
+// Not sure what this file is for?  Testing something
+
+$text = 'name="chitty chitty bang bang"';
 
 if (preg_match('/name=\"*([a-z ]+)\"*/', $text, $matches)) {
   print ('matches[0] ' . $matches[0] . "\n");
@@ -11,7 +13,7 @@ return;
 
 // $text = "This is a sentence <footnote>This is a sentence footnote</footnote> with a couple real cool <topic>things</topic>. " .
 //         "<pb>This is another <topic>sentence</topic> with a <footnote>This is the second footnote</footnote> and this is a <topic>Birkeland Current</topic> so what do you think of that?";
-$text = 'This is a topic <topic name="shitty shitty bang bang">dude</topic> is this cool.';
+$text = 'This is a topic <topic name="chitty chitty bang bang">dude</topic> is this cool.';
 
 $reg = '<([a-z]+) *(.*?)>(.*?)<\/([a-z]+?)>';
 $pagebreakReg = '<pb>';

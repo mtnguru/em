@@ -1,15 +1,15 @@
-$color-white: #e0e0f0;
-$color-black: #000022;
-$color-blue: blue;
-$color-red: red;
-$color-green: #66ff00;
-$color-magenta: magenta;
+$color-bessel-white: #e0e0f0;
+$color-bessel-black: #000022;
+$color-bessel-blue: blue;
+$color-bessel-red: red;
+$color-bessel-green: #66ff00;
+$color-bessel-magenta: magenta;
 
-$color-border: $color-green;
-$color-title: $color-black;
-$color-background: lighten($color-black, 15%);
-$color-title-background: lighten($color-blue, 15%);
-$color-button-background: lighten($color-blue, 15%);
+$color-border: $color-bessel-green;
+$color-title: $color-bessel-black;
+$color-background: lighten($color-bessel-black, 15%);
+$color-title-background: lighten($color-bessel-blue, 15%);
+$color-button-background: lighten($color-bessel-blue, 15%);
 
 div.az-dialog {
 

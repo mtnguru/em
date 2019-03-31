@@ -45,7 +45,7 @@ class IeTopNavBlock extends BlockBase {
 
     $build = [
       '#type' => 'container',
-      '#attributes' => ['class' => ['az-top', 'az-shit']],
+      '#attributes' => ['class' => ['az-top']],
       'top_menu' => $topMenu,
     ];
 
