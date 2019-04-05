@@ -844,6 +844,12 @@ function az_content_preprocess_node(&$variables) {
       $element = Node::load($node->field_element->target_id);
       $variables['valence'] = $element->field_valence->value;
       break;
+
+    case 'molecule':
+      if (\Drupal::currentUser()->hasPermission('atomizer display structure')) {
+        $variables['display_notes'] = true;
+      }
+      break;
   }
 
   if ($node->id() == "424") {
