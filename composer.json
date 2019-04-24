@@ -21,7 +21,7 @@
     "require": {
         "drupal-composer/drupal-scaffold": "^2.0.0",
         "cweagans/composer-patches": "^1.6.0",
-        "acquia/lightning": "^3.2.3",
+        "acquia/lightning": "^4.0",
         "drupal/core": "8.*",
         "drupal/neato": "~1.6",
         "drupal/module_filter": "^3.1",
@@ -32,7 +32,7 @@
         "drupal/colorbutton": "^1.1",
         "drupal/ckeditor_font": "^1.0",
         "drupal/ckeditor_smiley": "^1.0",
-        "drupal/devel": "^1.2",
+        "drupal/devel": "^2.0",
         "drupal/exif": "^1.0",
         "drupal/field_group": "^1.0",
         "drupal/fontawesome": "^2.0",
@@ -70,7 +70,8 @@
         "drupal/graphql": "^3.0@RC",
         "drupal/graphql_views": "^1.0@beta",
         "drupal/vbo_export": "^2.1",
-        "drupal/fontyourface": "^3.2"
+        "drupal/fontyourface": "^3.2",
+        "drupal/lightning_layout": "^2.0"
     },
     "repositories": [
         {
