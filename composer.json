@@ -71,7 +71,8 @@
         "drupal/graphql_views": "^1.0@beta",
         "drupal/vbo_export": "^2.1",
         "drupal/fontyourface": "^3.2",
-        "drupal/lightning_layout": "^2.0"
+        "drupal/lightning_layout": "^2.0",
+        "drupal/node_revisions_autoclean": "^1.0@beta"
     },
     "repositories": [
         {

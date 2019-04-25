@@ -176,3 +176,7 @@ details summary:hover {
 img {
   display: block;
 }
+
+div.handle {
+  position: inherit;
+}

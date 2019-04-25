@@ -55,7 +55,7 @@ parameters:
     #
     # Not recommended in production environments
     # @default false
-    debug: false
+    debug: true
     # Twig auto-reload:
     #
     # Automatically recompile Twig templates whenever the source code changes.
@@ -83,7 +83,7 @@ parameters:
     # render array, hence varying every render array by these cache contexts.
     #
     # @default ['languages:language_interface', 'theme', 'user.permissions']
-#   required_cache_contexts: ['languages:language_interface', 'theme', 'user.permissions', 'url.site']
+#   required_cache_contexts: ['languages:language_interface', 'theme', 'user.permissions', url.site]
     required_cache_contexts: ['languages:language_interface', 'theme', 'user.permissions']
     # Renderer automatic placeholdering conditions:
     #
