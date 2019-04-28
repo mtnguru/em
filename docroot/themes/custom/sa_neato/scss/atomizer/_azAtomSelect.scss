@@ -86,13 +86,17 @@ body#landing_page-atom-builder {
   .isotope-list {
     list-style: none;
     margin: 0;
-    padding-left: 30px;
+    padding-left: 20px;
   }
 
   .default-isotope {
     padding-left: 5px;
     font-size: .85em;
     height: 20px;
+
+    &.selected {
+      background-color: lighten($color-dark-blue, 15%);
+    }
 
     .atomic-number {
       height: 18px;
@@ -145,7 +149,8 @@ body#landing_page-atom-builder {
 
   li.isotope {
     margin: 0;
-    padding: 0 1px;
+    padding: 0 1px 0 4px;
+    font-size: .80em;
     .title {
       display: inline-block;
       overflow-y: hidden;
@@ -153,7 +158,9 @@ body#landing_page-atom-builder {
       height: 1.1em;
     }
 
-    font-size: .80em;
+    &.selected {
+      background-color: lighten($color-dark-blue, 15%);
+    }
   }
 
   .az-close {
@@ -166,19 +173,19 @@ body#landing_page-atom-builder {
 
   .isotope,
   .default-isotope {
-    &.stable a {
+    &.stability-stable a {
       color: $color-green;
     }
-    &.semi-stable a {
+    &.stability-semi-stable a {
       color: $color-yellow;
     }
-    &.unstable a {
+    &.stability-unstable a {
       color: $color-light-red;
     }
-    &.impossible a {
+    &.stability-impossible a {
       color: $color-light-purple;
     }
-    &.alternative a {
+    &.stability-alternative a {
       color: $color-light-blue;
     }
   } // li.isotope

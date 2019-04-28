@@ -469,8 +469,13 @@
     }
 
     .az-control {
-      font-size: 90%;
-      padding: 3px;
+      font-size: 95%;
+      padding: 3px 3px;
+      &.fa-caret-left,
+      &.fa-caret-right {
+        font-size: 140%;
+        padding: 0 3px;
+      }
       transition: color .5s;
       color: rgba($color-button-inactive, .5);
       &.az-selected {
