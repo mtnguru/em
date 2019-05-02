@@ -1,18 +1,22 @@
-form.node-atom-form,
-form.node-atom-edit-form {
+div.az-molecule-form {
+  top: 10px !important;
+  bottom: 10px;
+}
+
+form.node-molecule-form,
+form.node-molecule-edit-form {
   font-size: 14px;
 
-
-  #edit-field-birkeland-wrapper {
+  #edit-field-molecule-structure-wrapper {
     textarea {
       font-family: monospace;
       line-height: 1.15;
     }
   }
 
+  /*
   .form-item {
     margin: 5px 0;
-
 
     .description {
       display: none;
@@ -66,5 +70,6 @@ form.node-atom-edit-form {
   .form-type-vertical-tabs {
     display: none;
   }
+  */
 }
 

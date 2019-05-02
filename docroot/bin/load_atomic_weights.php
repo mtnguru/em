@@ -163,9 +163,6 @@ function build_atom_list() {
         $elements[$eid]['numIsotopes']++;
       }
     }
-    else {
-      $fart = 5;
-    }
   }
 
   print ("Number of atoms: $natoms\n");

@@ -211,7 +211,7 @@
       display: inline-flex;
       .az-value {
         text-align: right;
-        width: 2.2em;
+        width: 2.5em;
         padding: 0;
         border: 0;
         margin: 0 5px;
@@ -220,7 +220,7 @@
     }
 
     .az-slider {
-      width: 43%;
+      width: 41%;
       display: inline-flex;
       vertical-align: middle;
       background: inherit;
@@ -235,6 +235,21 @@
       vertical-align: middle;
       font-size: 90%;
       width: 2em;
+    }
+  }
+
+  #blocks--atom-form {
+    .az-name {
+      width: 10%;
+    }
+    .az-value {
+      background: $color-controls-wrapper;
+    }
+    .az-slider {
+      width: 62%;
+    }
+    .atom--delete {
+      margin-top: 16px;
     }
   }
 
@@ -322,6 +337,10 @@
     &not:first-child {
       border-top: 2px solid #aaa;
       padding-top: 10px;
+    }
+
+    img.colorpick-eyedropper-input-trigger {
+      display: none;
     }
 
     label {
@@ -484,6 +503,12 @@
       &:hover {
         color: $color-icon-hover;
       }
+    }
+  }
+
+  #blocks--molecule-structure {
+    #atom--list {
+      margin-bottom: 10px;
     }
   }
 
