@@ -39,6 +39,7 @@ body#landing_page-atom-builder {
     top: 0;
     bottom: 0;
     right: 0;
+    z-index: 1;
 
     .az-close {
       display: none;
@@ -190,3 +191,15 @@ body#landing_page-atom-builder {
     }
   } // li.isotope
 }
+
+body.atomizer-molecule-builder {
+  #select-atom-wrapper {
+    display: block;
+    right: unset;
+    left: 150px;
+    &.az-hidden {
+      display: none;
+    }
+  }
+}
+

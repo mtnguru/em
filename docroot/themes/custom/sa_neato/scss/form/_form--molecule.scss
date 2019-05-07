@@ -9,5 +9,11 @@ form.node-molecule-edit-form {
   .filter-wrapper {
     display: none;
   }
+
+  .field--name-field-formula {
+    .cke_contents {
+      max-height: 35px;
+    }
+  }
 }
 

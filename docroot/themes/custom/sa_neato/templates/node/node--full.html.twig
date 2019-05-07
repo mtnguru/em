@@ -196,6 +196,18 @@
         </div>
       {% endif %}
 
+      {% if content.field_formula is not empty %}
+        <div class="formula">
+          {{ content.field_formula }}
+        </div>
+      {% endif %}
+
+      {% if content.field_common_name is not empty %}
+        <div class="common-name">
+          {{ content.field_common_name }}
+        </div>
+      {% endif %}
+
       {% if content.body is not empty %}
         <div class="body">
           {{ content.body }}
