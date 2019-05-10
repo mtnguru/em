@@ -56,6 +56,18 @@ body#landing_page-atom-builder {
     border-bottom: solid 2px $color-blue;
   }
 
+  .pte-enable {
+    float: right;
+    padding-right: 10px;
+    color: rgba($color-button-inactive, .5);
+    &.az-selected {
+      color: $color-icon-selected;
+    }
+    &:hover {
+      color: $color-icon-hover;
+    }
+  }
+
   .select-list {
     width: 100%;
     position: absolute;

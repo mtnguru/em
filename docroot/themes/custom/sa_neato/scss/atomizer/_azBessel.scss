@@ -1,53 +1,13 @@
-$color-bessel-white: #e0e0f0;
-$color-bessel-black: #000022;
-$color-bessel-blue: blue;
-$color-bessel-red: red;
-$color-bessel-green: #66ff00;
-$color-bessel-magenta: magenta;
+#bessel-graph-dialog-container {
+  width: 28%;
 
-$color-border: $color-bessel-green;
-$color-title: $color-bessel-black;
-$color-background: lighten($color-bessel-black, 15%);
-$color-title-background: lighten($color-bessel-blue, 15%);
-$color-button-background: lighten($color-bessel-blue, 15%);
-
-div.az-dialog {
-
-  background-color: $color-background;
-  border-radius: 10px;
-  border: 2px solid $color-border;
-  overflow: hidden;
-  width: 35%;
-
-  position: absolute ;
   float: right;
-  bottom: 10px;
-  left: 10px;
-
-  .title-pane {
-    background-color: $color-title-background;
-    h3 {
-      padding: .2em .3em;
-      margin: 0;
-      font-size: 120%;
-    }
-    .button {
-      width: 20px;
-      height: 20px;
-      margin-top: 3px;
-      margin-right: 10px;
-      float: right;
-      &:before {
-        font-size: 130%;
-        padding-right: 0;
-      }
-    }
-  }
+  position: absolute;
+  top: -10px;
+  left: 250px;
 
   .content-pane {
     .image-wrapper {
-
-//    @include fixed-aspect(480/640 * 100%, img);
       position: relative;
     }
     img {
@@ -61,18 +21,6 @@ div.az-dialog {
       bottom: 0;
       left: 0;
       right: 0;
-    }
-  }
-  .button-pane {
-    @include clearfix;
-    padding: 7px 15px;
-    background-color: $color-button-background;
-    height: 20px;
-    button {
-      float: right;
-      margin-left: 5px;
-      border-radius: 7px;
-//    font-size: 110%;
     }
   }
 }

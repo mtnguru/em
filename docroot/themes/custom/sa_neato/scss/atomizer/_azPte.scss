@@ -1,0 +1,110 @@
+
+#periodic-table-dialog-container,
+.pte-container {
+  top: 0;
+  left: 50px;
+  bottom: unset;
+  right: unset;
+  width: 35%;
+  background-color: #001133;
+  z-index: 5;
+
+  #menu {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .content-pane {
+    width: 100%;
+  }
+
+  .element {
+    width: 132px;
+    height: 132px;
+    border: 2px solid #777777;
+    text-align: center;
+    cursor: default;
+    background-color: #1a2a3a;
+    color: #dddddd;
+    font-family: monospace;
+    //    font-weight: bold;
+  }
+
+  .element:hover {
+    border: 9px solid #ff6cf0;
+    background-color: #ff6cf0;
+    color: #000000;
+  }
+
+  .element .number {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 12px;
+    color: rgba(127, 255, 255, 0.75);
+  }
+
+  .element .symbol {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    right: 0px;
+    font-size: 84px;
+    /*      font-weight: bold; */
+  }
+
+  .element .details {
+    display: none;
+    position: absolute;
+    bottom: 15px;
+    left: 0px;
+    right: 0px;
+    font-size: 12px;
+    color: cyan;
+  }
+
+  .element.color-red {
+    background-color: #ff5577;
+    color: #111111;
+  }
+  .element.color-orange {
+    background-color: #ff9944;
+    color: #111111;
+  }
+  .element.color-yellow {
+    background-color: #ffff55;
+    color: #111111;
+  }
+  .element.color-green {
+    background-color: #66ff66;
+    color: #111111;
+  }
+  .element.color-blue {
+    background-color: #77bbff;
+    color: #111111;
+  }
+  .element.color-purple {
+    background-color: #bb55ff;
+    color: #111111;
+  }
+
+  button {
+    color: rgba(127, 255, 255, 0.75);
+    background: transparent;
+    outline: 1px solid rgba(127, 255, 255, 0.75);
+    border: 0px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: rgba(0, 255, 255, 0.5);
+  }
+  button:active {
+    color: #000000;
+    background-color: rgba(0, 255, 255, 0.75);
+  }
+}
+
