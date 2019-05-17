@@ -20,11 +20,24 @@ form {
     }
   }
 
+  .form-type-number,
+  .form-type-entity-autocomplete,
+  .form-type-textfield {
+    label {
+      display: inline-block;
+      width: 150px;
+    }
+  }
+
   > div > .form-item,
   > div > div > .form-item {
+    margin-top: 1em;
+    margin-bottom: 1em;
+
     label {
       color: $color-turquoise;
     }
+
     &.form-item-field-contribute-0-format,
     &.form-item-body-0-format {
       background: orange;
@@ -48,6 +61,7 @@ form {
 
   input,
   select {
+    display: inline-block;
     background-color: lighten($base-background-color, 10%);
     border-radius: 6px;
   }
@@ -133,6 +147,9 @@ form {
   .form-item {
     > legend {
       padding: 0 10px;
+    }
+    .description {
+      display: none;
     }
   }
 

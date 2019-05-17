@@ -174,10 +174,16 @@ class AzContentQuery {
           // Order by the Atom name third.
           $query->orderBy('nfd.title', 'ASC');
 
-          // Join in the stability field - and the related taxonomy term name.
-          // Not used in sort - Needed in output to build atom list.
+          // Kludge alert - the following fields are merged in - needed for the select atom list and periodic table.
           $query->leftJoin('node__field_stability', 'nfs', 'nfd.nid = nfs.entity_id'); // Needed to build select atom list
           $query->leftJoin('taxonomy_term_field_data', 'ttfd', 'ttfd.tid = nfs.field_stability_target_id');
+
+          // Rows and columns of the official PTE and SAM PTE
+//        $query->leftJoin('node__field_pte_row',    'nfpr', 'nfd.nid = nfpr.entity_id');
+//        $query->leftJoin('node__field_pte_column', 'nfpc', 'nfd.nid = nfpc.entity_id');
+//        $query->leftJoin('node__field_sam_row',    'nfsr', 'nfd.nid = nfpr.entity_id');
+//        $query->leftJoin('node__field_sam_column', 'nfsc', 'nfd.nid = nfpc.entity_id');
+
           $sorted = true;
           break;
         case 'element':
