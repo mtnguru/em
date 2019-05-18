@@ -7,28 +7,61 @@
   border: 2px solid $color-border;
   border-radius: 8px;
   z-index: 6;
-  max-width: 225px;
+  max-width: 250px;
 
   .isotopes {
-    margin-top: 10px;
+//  margin-top: 10px;
+    margin: 0;
+    table {
+      margin: .5em 0 0;
+      font-size: 90%;
+      tr:first-child {
+        border: none;
+      }
+      td {
+        border: none;
+        padding: 0;
+      }
+      td:last-child {
+        padding-left: 1em;
+      }
+    }
   }
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 4px 0;
-    li {
-      padding: 0 0 0 15px;
-    }
+  .close-button {
+    float: right;
+    margin-left: 15px;
+  }
+
+  .element-name {
+    display: inline-block;
+    margin-top: 0;
+  }
+
+
+  a.stability-stable {
+     color: $color-green;
+  }
+  a.stability-semi-stable {
+    color: $color-yellow;
+  }
+  a.stability-unstable {
+    color: $color-light-red;
+  }
+  a.stability-impossible {
+    color: $color-light-purple;
+  }
+  a.stability-alternative {
+    color: $color-light-blue;
   }
 }
 
 #periodic-table-of-elements-dialog-container,
 .pte-container {
-  bottom: 0;
+  top: 0;
   right: 0;
   left: unset;
-  top: unset;
+  bottom: unset;
   width: 35%;
   background-color: #001133;
   z-index: 5;
@@ -119,9 +152,8 @@
       color: #111111;
     }
 
-    .element-popup {
+    .element-popup-hidden {
       display: none;
-
     }
 
   }
