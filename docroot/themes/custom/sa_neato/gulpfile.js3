@@ -139,17 +139,17 @@ gulp.task('flush', function() {
  * Defines the watcher task.
  */
 gulp.task('watch', function() {
-  let watcher;
+
   // watch scss for changes and clear drupal theme cache on change
-  gulp.watch(['scss/**/*.scss'], gulp.parallel('sass', 'drush:cc'));
+  gulp.watch(['scss/**/*.scss'], ['sass', 'drush:cc']);
 
   // watch js for changes and clear drupal theme cache on change
-  watcher = gulp.watch(['js/js-src/**/*.js'], gulp.parallel('sass', 'drush:cc'));
+  gulp.watch(['js/js-src/**/*.js'], ['compress', 'drush:cc']);
 
   // If user has specified an override, rebuild Drupal cache
-//if (!config.twig.useCache) {
-//  gulp.watch(['templates/**/*.html.twig'], ['flush']);
-//}
+  if (!config.twig.useCache) {
+    gulp.watch(['templates/**/*.html.twig'], ['flush']);
+  }
 });
 
-gulp.task('default', gulp.series('sass', 'watch', 'browser-sync'));
+gulp.task('default', gulp.series('watch', 'browser-sync'));

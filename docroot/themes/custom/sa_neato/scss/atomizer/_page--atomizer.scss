@@ -174,9 +174,10 @@ body.page-node-type-atomizer {
         z-index: 1;
       }
 
-      .atom-viewer-canvas-wrapper,
-      .molecule-builder-canvas-wrapper,
-      .atom-builder-canvas-wrapper {
+      .atom-viewer-container,
+      .molecule-builder-container,
+
+      .atom-builder-container {
         display: inline-block;
         position: relative;
         width: calc(100% - 475px);
@@ -187,7 +188,7 @@ body.page-node-type-atomizer {
       }
 
 
-      .pte-canvas-wrapper {
+      .pte-container {
         display: inline-block;
         position: relative;
         width: calc(100% - 245px);
@@ -198,7 +199,7 @@ body.page-node-type-atomizer {
         }
       }
 
-      .birkeland-canvas-wrapper {
+      .birkeland-container {
         display: inline-block;
         position: relative;
         width: calc(100% - 245px);

@@ -56,13 +56,17 @@
   }
 }
 
-#periodic-table-of-elements-dialog-container,
-.pte-container {
+
+#periodic-table-of-elements-dialog-container {
   top: 0;
   right: 0;
   left: unset;
   bottom: unset;
   width: 35%;
+  background-color: #001133;
+}
+
+.pte-container {
   background-color: #001133;
   z-index: 5;
 
