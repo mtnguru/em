@@ -141,10 +141,10 @@ gulp.task('flush', function() {
 gulp.task('watch', function() {
   let watcher;
   // watch scss for changes and clear drupal theme cache on change
-  gulp.watch(['scss/**/*.scss'], gulp.parallel('sass', 'drush:cc'));
+  gulp.watch(['scss/**/*.scss'], gulp.parallel('sass'));
 
   // watch js for changes and clear drupal theme cache on change
-  watcher = gulp.watch(['js/js-src/**/*.js'], gulp.parallel('sass', 'drush:cc'));
+  gulp.watch(['js/js-src/**/*.js'], gulp.parallel('sass'));
 
   // If user has specified an override, rebuild Drupal cache
 //if (!config.twig.useCache) {

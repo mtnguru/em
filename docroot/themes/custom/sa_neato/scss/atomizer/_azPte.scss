@@ -33,7 +33,7 @@
     margin-left: 15px;
   }
 
-  .element-name {
+  .name {
     display: inline-block;
     margin-top: 0;
   }
@@ -93,15 +93,27 @@
     text-align: center;
     cursor: default;
     background-color: #1a2a3a;
-    color: #dddddd;
+    color: #ffffff;
     font-family: monospace;
     //    font-weight: bold;
 
+    img {
+      display: block;
+      width: 132px;
+      height: 128px;
+    }
+
     &:hover {
-      border: 9px solid #ff6cf0;
+      border: 8px solid #ff6cf0;
       background-color: #ff6cf0;
       color: #000000;
+
+      img {
+        width: 126px;
+        height: 116px;
+      }
     }
+
 
     .number {
       display: none;
@@ -118,7 +130,13 @@
       left: 0px;
       right: 0px;
       font-size: 84px;
-      /*      font-weight: bold; */
+    }
+
+    .symbol-small {
+      position: absolute;
+      top: 2px;
+      left: 4px;
+      font-size: 30px;
     }
 
     .details {
@@ -155,11 +173,6 @@
       background-color: #bb55ff;
       color: #111111;
     }
-
-    .element-popup-hidden {
-      display: none;
-    }
-
   }
 
   button {

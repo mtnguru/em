@@ -180,7 +180,7 @@ class AzContentQuery {
           // Kludge alert - the following fields are merged in - needed for the select atom list and periodic table.
           $query->leftJoin('node__field_stability', 'nfs', 'nfd.nid = nfs.entity_id'); // Needed to build select atom list
           $query->leftJoin('taxonomy_term_field_data', 'ttfd', 'ttfd.tid = nfs.field_stability_target_id');
-          $query->leftJoin('node__field_media', 'nfm', 'nfd.nid = nfs.entity_id');
+          $query->leftJoin('node__field_media', 'nfm', 'nfd.nid = nfm.entity_id');
 
           // Rows and columns of the official PTE and SAM PTE
 //        $query->leftJoin('node__field_pte_row',    'nfpr', 'nfd.nid = nfpr.entity_id');

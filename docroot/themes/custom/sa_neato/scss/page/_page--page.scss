@@ -52,15 +52,6 @@ body {
       }
     }
 
-    &.page-node-type-atomizer {
-      #block-em-neato-content,
-      #block-sa-neato-content {
-        > div.content-container {
-          max-width: none;
-        }
-      }
-    }
-
     @include media(max-width $bp580max) {
       #book-status,
       .block-members,
@@ -72,6 +63,17 @@ body {
       .body-container {
         hr:last-of-type {
           display: none;
+        }
+      }
+    }
+  }
+
+  &.page-node-type-atomizer {
+    div#page-view {
+      #block-em-neato-content,
+      #block-sa-neato-content {
+        > div.content-container {
+          max-width: none;
         }
       }
     }
