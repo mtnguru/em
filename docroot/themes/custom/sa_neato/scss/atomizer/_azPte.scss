@@ -28,16 +28,31 @@
     }
   }
 
+  .popup-name {
+    display: inline-block;
+    margin-top: 0;
+  }
+
   .close-button {
     float: right;
     margin-left: 15px;
   }
 
-  .name {
-    display: inline-block;
-    margin-top: 0;
+  .popup-valence {
+    font-size: 14px;
+    line-height: 1;
+    background-color: rgba(0,0,0,.25);
+    span {
+      margin: 0 2px;
+    }
+    .primary {
+      color: $color-orange;
+      font-weight: bold;
+    }
+    .secondary {
+      //      color: lightgrey;
+    }
   }
-
 
   a.stability-stable {
      color: $color-green;
@@ -89,18 +104,24 @@
   .element {
     width: 132px;
     height: 132px;
-    border: 2px solid #777777;
+    border: 2px solid lightslategrey;
     text-align: center;
     cursor: default;
     background-color: #1a2a3a;
     color: #ffffff;
-    font-family: monospace;
+    &.no-isotopes {
+      color: lightslategray;
+    }
+//  font-family: monospace;
     //    font-weight: bold;
 
-    img {
-      display: block;
-      width: 132px;
-      height: 128px;
+    image-primary {
+      border: 0;
+      img {
+        display: block;
+        width: 135px;
+        height: 128px;
+      }
     }
 
     &:hover {
@@ -110,10 +131,9 @@
 
       img {
         width: 126px;
-        height: 116px;
+        height: 120px;
       }
     }
-
 
     .number {
       display: none;
@@ -124,19 +144,81 @@
       color: rgba(127, 255, 255, 0.75);
     }
 
-    .symbol {
+    .symbol-large {
       position: absolute;
-      top: 10px;
+      top: 2px;
       left: 0px;
       right: 0px;
       font-size: 84px;
     }
 
-    .symbol-small {
+    .symbol {
       position: absolute;
-      top: 2px;
+      top: -4px;
       left: 4px;
-      font-size: 30px;
+      font-size: 26px;
+      text-shadow: 0px 0px 2px black;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+    }
+
+    .name {
+      font-size: 18px;
+      line-height: 1;
+      background-color: rgba(0,0,0,.25);
+    }
+
+    .atomic-number {
+      position: absolute;
+      top: -4px;
+      right: 4px;
+      font-size: 26px;
+      text-shadow: 0px 0px 2px black;
+    }
+
+    .valence-primary,
+    .valence {
+      font-size: 14px;
+      line-height: 1;
+      background-color: rgba(0,0,0,.25);
+      span {
+        margin: 0 1px;
+      }
+      .primary {
+        color: $color-orange;
+        font-weight: bold;
+      }
+      .secondary {
+        //      color: lightgrey;
+      }
+    }
+
+    .valence-primary {
+      font-size: 24px;
+    }
+
+    .valence-primary-lg {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      left: 0;
+      font-size: 64px;
+      line-height: 1;
+      span {
+        margin: 0 1px;
+      }
+      .primary {
+        color: $color-orange;
+        font-weight: bold;
+      }
+      .secondary {
+        //      color: lightgrey;
+      }
     }
 
     .details {

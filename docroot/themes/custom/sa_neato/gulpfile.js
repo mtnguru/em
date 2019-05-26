@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-//var gutil = require('gulp-util');
+var gutil = require('gulp-util');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var shell = require('gulp-shell');
@@ -40,7 +40,7 @@ gulp.task('sass', function () {
       loadPath: './css/*',
       sourceMap: true
     })).on('error', function(error) {
-//    gutil.log(error);
+      gutil.log(error);
       this.emit('end');
     })
     .pipe(sourcemaps.write('./maps'))
