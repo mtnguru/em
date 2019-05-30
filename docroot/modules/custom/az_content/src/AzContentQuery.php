@@ -182,6 +182,7 @@ class AzContentQuery {
           $query->leftJoin('taxonomy_term_field_data', 'ttfd', 'ttfd.tid = nfs.field_stability_target_id');
           $query->leftJoin('node__field_media', 'nfm', 'nfd.nid = nfm.entity_id');
           $query->leftJoin('node__field_image', 'nfi', 'nfd.nid = nfi.entity_id');
+          $query->leftJoin('node__field_approval', 'nfap', 'nfd.nid = nfap.entity_id');
 
           // Rows and columns of the official PTE and SAM PTE
 //        $query->leftJoin('node__field_pte_row',    'nfpr', 'nfd.nid = nfpr.entity_id');

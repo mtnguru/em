@@ -25,6 +25,7 @@ body.page-node-type-atomizer {
   }
 }
 
+
 //body.page-node-type-resources,
 body {
   &.page-node-type-landing-page,
@@ -50,6 +51,7 @@ body {
         margin: 0 auto;
       }
     }
+
 
     @include media(max-width $bp580max) {
       #book-status,

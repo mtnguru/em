@@ -64,9 +64,10 @@ if ($handle) {
 
     $element = $elements[$an];
     $elementName = $element['name'];
-    print "Element $elementName $protons\n";
+    print "Atom $elementName $protons\n";
     if (empty($element['isotopes'][$protons])) {
       // New atom - create it
+      print "Create Atom: $elementName $protons\n";
       $isotope = null;
       $name = $element['name'] . ' ' . $protons;
       $atom = Node::create([
@@ -83,13 +84,15 @@ if ($handle) {
         'field_abundance' => $abundance,
         'field_element' => $element['nid'],
         'field_approval' => 'stats',
-//      'field_stability' => $abundance ? 34 : 35,
+        'field_an_isotope' => sprintf("%3s:%3s\n", $element['atomicNumber'], $protons),
+        'field_stability' => $abundance ? 34 : 35,
 //      'field_isotope' => $protons - 2 * $element['atomicNumber'],
       ]);
       $mass = atomizer_calculate_mass($protons, $protons - $element['atomicNumber'], $element['atomicNumber']);
       $atom->field_mass_calculated->value = $mass;
       if ($first) {
         $atom->save();
+        print "Created atom " . $atom->id() . "\n";
 //      $first = false;
       }
     }
@@ -97,25 +100,16 @@ if ($handle) {
       foreach ($element['isotopes'][$protons] as $isotope) {
         $atom = Node::load($isotope->nid);
 
+        print "Update isotope: " . $atom->label() . " " . $atom->field__protons->value . "\n";
         $atom->field_mass_actual->setValue($mass);
-        if ($abundance > 0) {
-          $atom->field_abundance->setValue($abundance);
-        }
-        else {
-          $atom->field_abundance->setValue(NULL);
-        }
+        $atom->field_abundance->setValue($abundance > 0 ? $abundance : null);
 
         $protons = $atom->field__protons->value;
         $inner = $atom->field__inner_electrons->value = $protons - $element['atomicNumber'];
         $outer = $atom->field__outer_electrons->value = $element['atomicNumber'];
-        //    $atom->field_isotope->value = $protons - 2 * $element['atomicNumber'];
 
-        $mass = atomizer_calculate_mass($protons, $inner, $outer);
-        $atom->field_mass_calculated->value = $mass;
-
-        $atom->field_an_isotope->value =
-          sprintf ("%3s:%3s\n", $element['atomicNumber'], $protons);
-
+        $atom->field_mass_calculated->value = atomizer_calculate_mass($protons, $inner, $outer);
+        $atom->field_an_isotope->value = sprintf("%3s:%3s\n", $element['atomicNumber'], $protons);
 
         if (!$atom->field_mass_actual->isEmpty()) {
           $actual = $atom->field_mass_actual->value;
@@ -123,10 +117,9 @@ if ($handle) {
             $atom->field_mass_actual->value = $actual / 1000000;
           }
         }
-
         $atom->save();
-      }
-    };
+      };
+    }
   }
 
   fclose($handle);
