@@ -73,7 +73,8 @@
         "drupal/fontyourface": "^3.2",
         "drupal/lightning_layout": "^2.0",
         "drupal/node_revisions_autoclean": "^1.0@beta",
-        "drupal/allowed_formats": "^1.1"
+        "drupal/allowed_formats": "^1.1",
+        "drupal/domain_access": "^1.0@alpha"
     },
     "repositories": [
         {
