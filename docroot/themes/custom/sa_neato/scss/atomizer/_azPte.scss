@@ -27,6 +27,13 @@
       }
     }
   }
+  .isotope {
+    &.disabled {
+      a {
+        color: $color-grey;
+      }
+    }
+  }
 
   .popup-name {
     display: inline-block;
