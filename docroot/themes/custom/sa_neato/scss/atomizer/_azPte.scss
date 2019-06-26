@@ -238,6 +238,10 @@
       color: cyan;
     }
 
+    &.color-active {
+      background-color: #ffff00;
+      color: #111111;
+    }
     &.color-red {
       background-color: #ff5577;
       color: #111111;
