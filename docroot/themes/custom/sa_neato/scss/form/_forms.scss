@@ -20,22 +20,23 @@ form {
     }
   }
 
+  .form-type-select,
   .form-type-number,
   .form-type-entity-autocomplete,
   .form-type-textfield {
     label {
       display: inline-block;
-      width: 150px;
+      width: 142px;
     }
   }
 
+  > .form-item,
   > div > .form-item,
   > div > div > .form-item {
-    margin-top: 1em;
     margin-bottom: 1em;
 
     label {
-      color: $color-turquoise;
+      color: $color-light-turquoise;
     }
 
     &.form-item-field-contribute-0-format,
@@ -111,7 +112,7 @@ form {
     box-sizing: border-box;
     font-family: $base-font-family;
     font-size: $base-font-size;
-    padding: .0em .5em;
+    padding: 3px 5px;
     transition: border-color $base-duration $base-timing;
 
 //  width: 100%;
@@ -133,6 +134,11 @@ form {
       &:hover {
         border: $base-border;
       }
+    }
+
+    option {
+      line-height: 1;
+      min-height: auto;
     }
   }
 
@@ -209,7 +215,7 @@ form {
   select {
     max-width: 100%;
     width: auto;
-    height: 30px;
+    padding: 3px 5px;
   }
 
   .tabledrag-handle {

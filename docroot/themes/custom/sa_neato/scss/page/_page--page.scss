@@ -36,6 +36,11 @@ body {
     .block-page-title-block {
       display: none;
     }
+    &.entity-node-delete_form {
+      .block-page-title-block {
+        display: inherit ;
+      }
+    }
   }
   &.entity-node-edit_form {
     .block-page-title-block {

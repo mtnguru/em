@@ -153,10 +153,11 @@
 
     .symbol-large {
       position: absolute;
-      top: 2px;
+      top: 10px;
       left: 0px;
       right: 0px;
-      font-size: 84px;
+      font-size: 70px;
+      text-shadow: 0px 0px 2px black;
     }
 
     .symbol {
@@ -172,12 +173,12 @@
       bottom: 0;
       right: 0;
       left: 0;
+      //    background-color: rgba(0,0,0,.25);
     }
 
     .name {
       font-size: 18px;
       line-height: 1;
-      background-color: rgba(0,0,0,.25);
     }
 
     .atomic-number {
@@ -192,7 +193,6 @@
     .valence {
       font-size: 14px;
       line-height: 1;
-      background-color: rgba(0,0,0,.25);
       span {
         margin: 0 1px;
       }
@@ -211,10 +211,10 @@
 
     .valence-primary-lg {
       position: absolute;
-      top: 30px;
+      top: 36px;
       right: 0;
       left: 0;
-      font-size: 64px;
+      font-size: 54px;
       line-height: 1;
       span {
         margin: 0 1px;
@@ -262,7 +262,23 @@
       background-color: #bb55ff;
       color: #111111;
     }
-  }
+
+    &.dark-red {
+      background-color: #992222;
+    }
+    &.dark-green {
+      background-color: #008800;
+    }
+    &.dark-purple {
+      background-color: #7700aa;
+    }
+    &.dark-blue {
+      background-color: #0055aa;
+    }
+    &.dark-grey {
+      background-color: #111111;
+    }
+  } // .element
 
   button {
     color: rgba(127, 255, 255, 0.75);
