@@ -76,6 +76,7 @@
         <div id="book-pages" class="hide-unpublished">
           <ul>
             {% for page in book_pages %}
+              {# kint(page) #}
               {{ buildMenu(page) }}
             {% endfor %}
           </ul>
