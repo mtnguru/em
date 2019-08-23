@@ -3,7 +3,6 @@ body.page-node-type-atom {
   }
 
   .az-properties {
-    float: left;
     width: 315px;
     table {
       td.field__label {
@@ -27,11 +26,12 @@ body.page-node-type-atom {
   @include media($bp960) {
     .az-properties {
       float: left;
+      width: 315px;
     }
 
     .field--name-field-atomic-structure {
       position: relative;
-//    float: left;
+      float: left;
       width: calc(100% - 315px);
       .az-wrapper {
         margin-left: 20px;
