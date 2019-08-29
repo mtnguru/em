@@ -238,6 +238,25 @@ class AzBookNavigationBlock extends BookNavigationBlock {
 //      ];
 
         // If this is the Structured Atom model add in the atomizer links
+        if ($group->label() == 'EU Cosmology') {
+          // Add link to the Birkeland Current Simulator
+          $build['#group_links']['atom_builder'] = [
+            '#type' => 'container',
+            '#attributes' => ['class' => ['birkeland-link']],
+            'link' => [
+              '#type' => 'link',
+              '#title' => t('Birkeland Current Simulator'),
+              '#attributes' => [
+                'title' => t('Interactive 3D program to demonstrate the structure of a Birkeland Current.'),
+              ],
+              '#url' => Url::fromUri('base:atomizer/birkeland', [
+                'absolute' => TRUE,
+              ]),
+            ],
+          ];
+        }
+
+        // If this is the Structured Atom model add in the atomizer links
         if ($group->label() == 'Structured Atom Model') {
 
           // Add link to the Atom Viewer
