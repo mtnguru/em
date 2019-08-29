@@ -308,6 +308,22 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             ],
           ];
 
+          // Add link to SAM Periodic Table
+          $build['#group_links']['sam_periodic_table'] = [
+            '#type' => 'container',
+            'link' => [
+              '#type' => 'link',
+              '#title' => t('View SAM Periodic Table'),
+              '#attributes' => [
+                'title' => t('Periodic table used in research for SAM - shows images of each elements nucleus and other critical information..'),
+                'target' => '_blank',
+              ],
+              '#url' => Url::fromUri('base:atomizer/pte', [
+                'absolute' => TRUE,
+              ]),
+            ],
+          ];
+
           // Add link to the Dynamic Periodic Table
           $build['#group_links']['periodic_table'] = [
             '#type' => 'container',
