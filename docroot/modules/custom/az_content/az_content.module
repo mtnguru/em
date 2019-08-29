@@ -978,7 +978,7 @@ function _az_content_create_dashboard($node, &$variables) {
     'empty' => 'No comments have been submitted.',
   ];
 
-  // If the user is logged in then create the My Activity, My Comments and My Media tabs
+  // If the user is logged in then create user tabs.
   if ($uid != 0) {
 
     // Create the user block in the upper left corner.
@@ -1068,6 +1068,20 @@ function _az_content_create_dashboard($node, &$variables) {
       'types' => 'UNSET',
       'empty' => 'NO DISPLAY',
     ];
+
+    // Create My Media tab
+    $my_media = [
+      'type' => 'entity-stream',
+      'id' => 'my-media',
+      'label' => 'My Media',
+      'title' => 'My Media',
+      'author' => $user->id(),
+      'entityType' => 'media',
+      'types' => 'UNSET',
+      'empty' => 'NO DISPLAY',
+    ];
+
+
 
   }
   else {

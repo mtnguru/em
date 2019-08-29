@@ -11,7 +11,6 @@
         "behat/mink-goutte-driver": "~1.2",
         "jcalderonzumba/gastonjs": "~1.0.2",
         "drupal/coder": "8.*",
-        "mikey179/vfsStream": "~1.2",
         "phpunit/phpunit": "~4.8",
         "symfony/css-selector": "~2.8",
         "behat/behat": "^3.0",
@@ -74,7 +73,10 @@
         "drupal/lightning_layout": "^2.0",
         "drupal/node_revisions_autoclean": "^1.0@beta",
         "drupal/allowed_formats": "^1.1",
-        "drupal/domain_access": "^1.0@alpha"
+        "drupal/domain_access": "^1.0@alpha",
+        "mikey179/vfsstream": "^1.6",
+        "phpoffice/phpspreadsheet": "^1.9",
+        "drupal/seckit": "^1.2"
     },
     "repositories": [
         {

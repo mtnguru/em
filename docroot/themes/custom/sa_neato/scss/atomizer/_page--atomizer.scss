@@ -38,6 +38,10 @@ body.page-node-type-atomizer {
 
   .az-canvas-wrapper {
     position: relative;
+    canvas {
+//    margin-top: 10px;
+//    border: 1px solid #1056ba;
+    }
   }
   .az-canvas-labels {
     display: none;
