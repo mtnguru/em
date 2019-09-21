@@ -19,6 +19,16 @@ body.page-node-type-atomizer {
         margin: 0;
       }
     }
+
+    .az-more-field {
+      max-width: 1000px;
+      margin: 0 1.5em 2.5em;
+      @include media($bp960) {
+        margin: 0 2.5em 2.5em;
+      }
+    }
+
+
     .node__links {
       display: none;
     }
@@ -31,7 +41,6 @@ body.page-node-type-atomizer {
     padding-top: 10px;
   }
 }
-
 
 .az-atomizer-wrapper {
   position: relative;

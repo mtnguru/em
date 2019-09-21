@@ -854,6 +854,7 @@ function az_content_preprocess_node(&$variables) {
 
   if ($node->id() == "424") {
     _az_content_group_status_page($node, $variables);
+    _az_content_safire_block($node, $variables);
   }
 }
 
@@ -867,7 +868,7 @@ function az_content_preprocess_node(&$variables) {
  * @param $variables
  */
 function _az_content_group_status_page($node, &$variables) {
-  function another ($word) {
+/*function another ($word) {
   }
 
   // Rethink this  - do I really want a menu showing - maybe we just talk about it? Do I want to maintain a page like that?
@@ -875,7 +876,7 @@ function _az_content_group_status_page($node, &$variables) {
   // Read in the book menu
   // Create hierarchical menu - this could be done in a template - like I did for the real menu.
 
-  another('fart');
+  another('fart'); */
   return;
 }
 
