@@ -60,6 +60,15 @@ abbr.taxonomy-tooltip-tip {
   color: $color-white;
 }
 
+
+
+.cke_reset_all
+{
+  * {
+    color: white;
+  }
+}
+
 a:-webkit-any-link {
   color: $color-green;
 }

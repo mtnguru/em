@@ -30,6 +30,11 @@ form {
     }
   }
 
+  > fieldset,
+  > .form-wrapper {
+    margin: 2em 0;
+  }
+
   > .form-item,
   > div > .form-item,
   > div > div > .form-item {
@@ -64,44 +69,42 @@ form {
   select {
     display: inline-block;
     background-color: lighten($base-background-color, 10%);
-    border-radius: 6px;
+    border-radius: 5px;
   }
 
   textarea {
     background-color: lighten($base-background-color, 10%);
   }
 
+  .fieldgroup,
   fieldset {
-    border: $base-border;
-    margin: 0 0 $small-spacing;
+    margin-right: $small-spacing;
     padding: 5px 15px;
-    border-radius: 8px;
+    border-radius: 5px;
+    border: 2px solid $base-separator-color;
 
     &.form-item {
-      background-color: $secondary-background-color;
-      border: $base-border;
-      border-radius: 8px;
-      margin: 0 0 $small-spacing;
+      margin-right: $small-spacing;
+      background-color: darken($secondary-background-color, 15%);
       padding: 5px 15px;
 
       legend {
-        background-color: $secondary-background-color;
+        background-color: darken($secondary-background-color, 15%);
         padding: .1em .5em;
-        border: 2px solid $color-green;
+        border: 2px solid $base-separator-color;
+        border-radius: 5px;
+        font-size: 125%;
+        font-weight: bold;
+        color: $color-title;
       }
     }
   }
 
-  > fieldset.form-item {
-    border-color: $base-separator-color;
-    margin: 0 0 30px;
-
-    > legend {
-      font-size: 125%;
-      font-weight: bold;
-      color: $color-title;
-      border-radius: .5em;
-    }
+  .field--name-field-topics {
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 2px solid $base-separator-color;
+    background-color: darken($secondary-background-color, 15%);
   }
 
   #{$all-text-inputs},
@@ -155,7 +158,7 @@ form {
       padding: 0 10px;
     }
     .description {
-      display: none;
+//    display: none;
     }
   }
 
@@ -291,9 +294,4 @@ form {
       display: inline-block;
     }
   }
-
-  .field--name-field-topics {
-    margin-bottom: 30px;
-  }
-
 }

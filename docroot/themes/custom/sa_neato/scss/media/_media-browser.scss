@@ -1,3 +1,7 @@
+div.entity-select-dialog.ui-dialog.ui-widget-content {
+  overflow: unset;
+}
+
 .field--name-field-media {
   details.form-wrapper {
     background: darken($base-background-color, 10%);
@@ -50,7 +54,78 @@ form.entity-browser-form {
     }
   }
 
+  .entity-form {
+    margin-top: 20px;
+  }
+
+  .form-actions {
+//  display: none;
+  }
+
+  .details-wrapper {
+    .tabledrag-toggle-weight-wrapper,
+    > p {
+      display: none;
+    }
+  }
+
+  table.entities-list {
+    td:nth-child(4),
+    td:nth-child(5) {
+      display: none;
+    }
+
+    .form-text {
+      display: inline-block;
+      margin: 10px 0;
+    }
+    .populated {
+      padding-top: 20px;
+    }
+  }
+
+  .field--name-revision-log-message {
+    display: none;
+  }
+
+  .form-type-select {
+    label {
+      width: 80px;
+    }
+  }
+
   .view.eb-media {
+    &.views-exposed-form {
+      padding: 0;
+    }
+  }
+
+  .view-filters {
+    margin-top: 10px;
+  }
+
+  select,
+  input {
+    display: block;
+  }
+
+  label {
+    margin-bottom: 3px;
+  }
+
+  .form-item-mid,
+  .form-item-keywords {
+    margin-left: 40px;
+    label {
+      width: 88px;
+    }
+  }
+
+  .view.eb-media {
+
+    .view-content {
+      margin: 1em 0;
+    }
 
     .views-exposed-form {
       background-color: $color-dark-green;
@@ -75,10 +150,9 @@ form.entity-browser-form {
     .views-row {
       min-width: 0;
       float: left;
-      overflow: hidden;
       clear: none;
       margin: 0;
-//    @include fixed-aspect(5/3 * 100%, '.views-field');
+      //    @include fixed-aspect(5/3 * 100%, '.views-field');
 
       &:last-of-type {
         padding-bottom: 0;
@@ -106,12 +180,24 @@ form.entity-browser-form {
         @include fixed-aspect(3/3 * 100%, '.field-content');
         background-color: inherit;
       }
+      .views-field-name {
+        .field-content {
+          padding: 0 3px;
+        }
+      }
+
+      img {
+        border-radius: 5px;
+      }
     } // .views-row
 
     .views-col {
-      border: 3px solid lighten($color-dark-green, 15%);
-      border-radius: 12px;
-      margin: 3px;
+      overflow: hidden;
+      background-color: darken($color-dark-green, 7%);
+      border: 1px solid lighten($color-dark-green, 15%);
+      border-radius: 4px;
+      margin: 2px;
+      font-size: 13px;
     }
 
     .views-col.selected {
@@ -150,11 +236,6 @@ form.entity-browser-form {
     }
   } // .view.eb-media
 
-/*table.entities-list {
-    td {
-      border: none;
-    }
-  } */
 } // form.entity-browser-form
 
 form.media-form {
@@ -181,3 +262,4 @@ form.media-form {
     }
   }
 }
+

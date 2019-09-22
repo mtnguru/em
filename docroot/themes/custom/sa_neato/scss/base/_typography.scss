@@ -21,6 +21,9 @@ h6 {
   font-size: $base-font-size;
   line-height: $heading-line-height;
   margin: $top-spacing 0 $small-spacing;
+  &:first-child {
+    margin: 0 0 $small-spacing;
+  }
   @extend %text-shadow;
 }
 
