@@ -703,7 +703,7 @@ function az_content_preprocess_node(&$variables) {
 
   $variables['bundle_name'] = $node->type->entity->label();
 
-  if ($viewMode == 'full' || $viewMode == 'teaser') {
+  if ($viewMode == 'full' || $viewMode == 'teaser' || $viewMode == 'listing') {
     $variables['has_new_content'] = _az_content_has_new_content($variables);
   }
 
