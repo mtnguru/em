@@ -76,7 +76,8 @@
         "drupal/domain_access": "^1.0@alpha",
         "mikey179/vfsstream": "^1.6",
         "phpoffice/phpspreadsheet": "^1.9",
-        "drupal/seckit": "^1.2"
+        "drupal/seckit": "^1.2",
+        "drupal/devel_entity_updates": "^1.0"
     },
     "repositories": [
         {

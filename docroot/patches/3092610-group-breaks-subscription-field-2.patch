@@ -1,0 +1,104 @@
+diff --git a/modules/mailchimp_lists/src/Plugin/Field/FieldType/MailchimpListsSubscription.php b/modules/mailchimp_lists/src/Plugin/Field/FieldType/MailchimpListsSubscription.php
+index f7e8764..47599a0 100644
+--- a/modules/mailchimp_lists/src/Plugin/Field/FieldType/MailchimpListsSubscription.php
++++ b/modules/mailchimp_lists/src/Plugin/Field/FieldType/MailchimpListsSubscription.php
+@@ -269,7 +269,7 @@ class MailchimpListsSubscription extends FieldItemBase {
+   public function preSave() {
+     parent::preSave();
+ 
+-    $choices = $this->values;
++    $choices = $this->value;
+ 
+     // Only act if the field has a value to prevent unintended unsubscription.
+     if (!empty($choices)) {
+@@ -300,12 +300,23 @@ class MailchimpListsSubscription extends FieldItemBase {
+   /**
+    * Returns the field 'subscribe' value.
+    *
++   * @param bool $is_default_value_widget
++   *   This value being used in a default value widget.
++   *
+    * @return bool
+    *   The field 'subscribe' value.
+    */
+-  public function getSubscribe() {
+-    if (isset($this->values['subscribe'])) {
+-      return ($this->values['subscribe'] == 1);
++  public function getSubscribe($is_default_value_widget = FALSE) {
++    // Default value widget stores values differently.
++    if ($is_default_value_widget) {
++      if (isset($this->values['value']['subscribe'])) {
++        return ($this->values['value']['subscribe'] == 1);
++      }
++    }
++    else {
++      if (isset($this->values['subscribe'])) {
++        return ($this->values['subscribe'] == 1);
++      }
+     }
+ 
+     return NULL;
+@@ -317,9 +328,17 @@ class MailchimpListsSubscription extends FieldItemBase {
+    * @return array
+    *   The field 'interest_groups' value.
+    */
+-  public function getInterestGroups() {
+-    if (isset($this->values['interest_groups'])) {
+-      return $this->values['interest_groups'];
++  public function getInterestGroups($is_default_value_widget = FALSE) {
++    // Default value widget stores values differently.
++    if ($is_default_value_widget) {
++      if (isset($this->values['value']['interest_groups'])) {
++        return $this->values['value']['interest_groups'];
++      }
++    }
++    else {
++      if (isset($this->values['interest_groups'])) {
++        return $this->values['interest_groups'];
++      }
+     }
+ 
+     return NULL;
+diff --git a/modules/mailchimp_lists/src/Plugin/Field/FieldWidget/MailchimpListsSelectWidget.php b/modules/mailchimp_lists/src/Plugin/Field/FieldWidget/MailchimpListsSelectWidget.php
+index 31f9fb4..d558ba6 100644
+--- a/modules/mailchimp_lists/src/Plugin/Field/FieldWidget/MailchimpListsSelectWidget.php
++++ b/modules/mailchimp_lists/src/Plugin/Field/FieldWidget/MailchimpListsSelectWidget.php
+@@ -31,7 +31,10 @@ class MailchimpListsSelectWidget extends WidgetBase {
+     /* @var $instance \Drupal\mailchimp_lists\Plugin\Field\FieldType\MailchimpListsSubscription */
+     $instance = $items[0];
+ 
+-    $subscribe_default = $instance->getSubscribe();
++    // TRUE if widget is being used to set default values via admin form.
++    $is_default_value_widget = $this->isDefaultValueWidget($form_state);
++
++    $subscribe_default = $instance->getSubscribe($is_default_value_widget);
+ 
+     $email = NULL;
+     if (!empty($instance->getEntity())) {
+@@ -61,8 +64,6 @@ class MailchimpListsSelectWidget extends WidgetBase {
+     $show_interest_groups = $this->fieldDefinition->getSetting('show_interest_groups');
+     // TRUE if interest groups are enabled but hidden from the user.
+     $interest_groups_hidden = $this->fieldDefinition->getSetting('interest_groups_hidden');
+-    // TRUE if widget is being used to set default values via admin form.
+-    $is_default_value_widget = $this->isDefaultValueWidget($form_state);
+ 
+     // Hide the Subscribe checkbox if:
+     // - The form is not being used to configure default values.
+@@ -104,7 +105,7 @@ class MailchimpListsSelectWidget extends WidgetBase {
+         ];
+       }
+ 
+-      $groups_default = $instance->getInterestGroups();
++      $groups_default = $instance->getInterestGroups($is_default_value_widget);
+ 
+       if ($groups_default == NULL) {
+         $groups_default = [];
+@@ -135,7 +136,7 @@ class MailchimpListsSelectWidget extends WidgetBase {
+       ];
+     }
+ 
+-    return $element;
++    return array('value' => $element);
+   }
+ 
+ }

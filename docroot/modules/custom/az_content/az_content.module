@@ -694,7 +694,7 @@ function az_content_preprocess_node(&$variables) {
   $node = $variables['node'];
   $type = $node->getType();
   $viewMode = $variables['view_mode'];
-  
+
   $az_wysiwyg = &drupal_static('az_wysiwyg', []);
   $az_wysiwyg = [  // The wysiwyug filter needs this information.
     'node' => $node,
@@ -718,8 +718,8 @@ function az_content_preprocess_node(&$variables) {
 
   // Get the status and moderation_state
   if ($node->hasField('moderation_state') &&
-      $node->moderation_state->value && 
-      $type != 'email' && 
+      $node->moderation_state->value &&
+      $type != 'email' &&
       $type != 'birkeland') {
     $variables['state'] = $node->moderation_state->value;
   } else {
