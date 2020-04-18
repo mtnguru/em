@@ -77,16 +77,6 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
       $context['data-entity-embed-display'] = 'entity_reference:entity_reference_entity_view';
     }
 
-    // James Sorensen - added class name
-    if (isset($context['az-class'])) {
-      $build['#attributes']['class'][] = $context['az-class'];
-    }
-
-    // James Sorensen - added az data
-    if (isset($context['az-data'])) {
-      $build['#attributes']['data-az'][] = $context['az-data'];
-    }
-
     // The caption text is double-encoded, so decode it here.
     if (isset($context['data-caption'])) {
       $context['data-caption'] = Html::decodeEntities($context['data-caption']);
@@ -123,6 +113,16 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
       $context['class'] = [];
     }
     $context['class'][] = 'embedded-entity';
+
+    // James Sorensen - added class name
+    if (isset($context['az-class'])) {
+      $build['#attributes']['class'][] = $context['az-class'];
+    }
+
+    // James Sorensen - added az data
+    if (isset($context['az-data'])) {
+      $build['#attributes']['data-az'][] = $context['az-data'];
+    }
 
     // Maintain data- attributes.
     if (isset($context)) {

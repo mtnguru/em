@@ -500,7 +500,7 @@ class EntityEmbedDialog extends FormBase {
       $form['attributes']['data-entity-embed-display-settings'] += $display->buildConfigurationForm($form, $form_state);
     }
 
-     // James Sorensen - added class name to embedded entity
+    // James Sorensen - added class name to embedded entity
     $form['attributes']['az-class'] = array(
       '#title' => $this->t('Class(es)'),
       '#description' => $this->t('Ex: az-tiny az-small az-medium az-large az-clear'),

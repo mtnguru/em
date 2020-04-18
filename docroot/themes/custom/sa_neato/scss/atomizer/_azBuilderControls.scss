@@ -64,7 +64,8 @@
 
   fieldset.form-composite {
     position: relative;
-    margin-bottom: 5px;
+    margin: 0 0 5px 0;
+//  margin-bottom: 5px;
 
     legend {
       border-radius: 8px;
@@ -492,7 +493,7 @@
     }
 
     .az-control {
-      font-size: 95%;
+      font-size: 90%;
       padding: 3px 3px;
       &.fa-caret-left,
       &.fa-caret-right {
