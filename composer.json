@@ -35,7 +35,7 @@
         "drupal/exif": "^1.0",
         "drupal/field_group": "^3.0",
         "drupal/fontawesome": "^2.15",
-        "drupal/libraries": "^3.0",
+        "drupal/libraries": "^3.0@alpha",
         "drupal/masquerade": "2.x-dev",
         "drupal/paragraphs": "^1.11",
         "drupal/social_media": "^1.8",
