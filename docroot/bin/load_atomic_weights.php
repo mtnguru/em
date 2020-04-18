@@ -99,7 +99,6 @@ if ($handle) {
     else {
       foreach ($element['isotopes'][$protons] as $isotope) {
         $atom = Node::load($isotope->nid);
-
         print "Update isotope: " . $atom->label() . " " . $atom->field__protons->value . "\n";
         $atom->field_mass_actual->setValue($mass);
         $atom->field_abundance->setValue($abundance > 0 ? $abundance : null);
@@ -133,7 +132,7 @@ exit(0);
 
 function build_atom_list() {
   $elements = AtomizerInit::queryElements();
-  $atoms = AtomizerInit::queryAtoms()['results'];
+  $atoms = AtomizerInit::queryAtoms('full')['results'];
 
   foreach ($elements as &$element) {
     $nelements[$element['atomicNumber']] = &$element;
