@@ -3,6 +3,7 @@ global-styling:
   css:
     base:
       css/sa_neato.css: {}
+      fonts/fontawesome/css/all.css: {}
   dependencies:
     - lightning_media/browser.styling
     
