@@ -1,6 +1,7 @@
 name: 'Entity Embed Translation test'
 type: module
 description: 'Aids in testing translation within entity embed'
+core_version_requirement: ^8.8 || ^9
 package: Testing
 dependencies:
  - drupal:content_translation

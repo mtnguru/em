@@ -1,6 +1,7 @@
 name: 'Entity Embed test'
 type: module
 description: 'Support module for the Entity Embed module tests.'
+core_version_requirement: ^8.8 || ^9
 package: Testing
 dependencies:
  - drupal:file
