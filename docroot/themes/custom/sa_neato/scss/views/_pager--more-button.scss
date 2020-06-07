@@ -16,8 +16,15 @@
           background: darken($color-blue, 10%);
         }
       }
+      .pager__item--previous,
+      .pager__item--first,
+      .pager__item--next,
+      .pager__item--last {
+        a {
+          width: 95px;
+        }
+      }
     }
-
   }
 
   .js-pager__items {
@@ -27,7 +34,7 @@
 
     a {
       margin: 0 auto;
-      display: block;
+      display: inline-block;
       color: white;
       padding: 5px;
       width: 160px;

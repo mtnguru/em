@@ -164,6 +164,7 @@
     font-weight: bold;
     margin: 0 0 5px;
     color: $color-label;
+    text-align: center;
     &:before {
       margin-right: 5px;
       color: $color-icon-selected;
@@ -497,7 +498,7 @@
       padding: 3px 3px;
       &.fa-caret-left,
       &.fa-caret-right {
-        font-size: 140%;
+        font-size: 125%;
         padding: 0 3px;
       }
       transition: color .5s;
