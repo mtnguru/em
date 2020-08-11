@@ -43,7 +43,9 @@ function em_neato_preprocess_html(&$variables) {
 
   $host = \Drupal::request()->getHttpHost();
   $site = AzGroupConfig::getConfig($host);
-  $variables['attributes']['class'][] = $site['class'];
+  if ($site) {
+    $variables['attributes']['class'][] = $site['class'];
+  }
 }
 
 /**
