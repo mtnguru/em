@@ -546,8 +546,56 @@
   @include media($bp580only) {
   } // $bp580only
 
-  @include media($bp960only) {
-  } // $bp960
+  @div#site-logo {
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  height: 47px;
+  width: 230px;
+  background-color: #218;
+  border-radius: 47%;
 
-  @include media($bp1280) {
-  } // $bp1280
+  > a {
+    text-decoration: none;
+  }
+
+  h2 {
+    margin: 0;
+    word-wrap: break-word;
+
+    @include media(max-width $bp580max) {
+      padding: 0 20px;
+    } // $bp320only
+
+    @include media($bp960) {
+      padding: 0 30px;
+    } // $bp960
+  }
+
+  .ethereal {
+    color: #c6a2ff;
+    text-shadow: 0 0 4px #5ff;
+    opacity: .7;
+    position: relative;
+    display: inline-block;
+    vertical-align:top;
+    font-style: italic;
+    font-family: cursive;
+    font-weight: 100;
+    margin-top: 3px;
+    z-index: 1;
+    font-size: 24px;
+    @include transform (rotate(-8deg));
+  }
+
+  .matters {
+    position: relative;
+    display: inline-block;
+    vertical-align:top;
+    color: #efb000;
+    margin: 16px 10px 0 -45px;
+    @extend %text-shadow;
+    font-size: 27px;
+  }
+}
+
