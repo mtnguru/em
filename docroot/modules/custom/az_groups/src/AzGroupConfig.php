@@ -26,22 +26,10 @@ class AzGroupConfig {
 
   // @TODO move this into database with config form
   protected static $sites = [
-    'em' => [
-      'hosts' => [
-        'etherealmatters.org',
-        'em',
-      ],
-      'name' => 'Ethereal Matters',
-      'theme' => 'ethereal-matters',
-      'menu' => 'ethereal-matters',
-      'class' => 'em',
-      'icon' => 'public://icons/em_icon.gif',
-    ],
     'sam' => [
       'hosts' => [
-        'master-7rqtwti-ocf5zhiadchks.us.platform.sh',
         'structuredatom.org',
-        'atom',
+        's.a',
       ],
       'name' => 'Structured Atom Model',
       'theme' => 'structured-atom-model',

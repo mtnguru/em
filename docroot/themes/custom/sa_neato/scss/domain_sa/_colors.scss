@@ -42,9 +42,9 @@ $topnav-background: $color-dark-green;
 $topnav-color: $color-light-turquoise;
 
 // Base colors.
-$base-background-color: $color-dark-brown !default;
+$base-background-color: $color-dark-purple !default;
 $base-font-color: $color-white !default;
-$secondary-background-color: lighten($base-background-color, 7.5%);
+$secondary-background-color: lighten($base-background-color, 15%);
 
 $border-color-base: darken($color-green, 40%);
 $border-color-hover: darken($color-green, 20%);
