@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62a112a93ea25e491ba0529b17dfa237",
+    "content-hash": "09297f635a77d603edd78dbe076fd4cb",
     "packages": [
         {
             "name": "acquia/lightning",
@@ -284,7 +284,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jquery/jquery-dist.git",
+                "url": "https://github.com/jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -5166,29 +5166,26 @@
         },
         {
             "name": "drupal/entity",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity.git",
-                "reference": "8.x-1.0"
+                "reference": "8.x-1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "ac359ada43416ca3a8d0e44f2985b0a9fae07625"
+                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "6009845bab8e76e23a0657cf898dc15365568e5c"
             },
             "require": {
-                "drupal/core": "^8.7.7 || ^9"
+                "drupal/core": "^8.8 || ^9"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-1.x": "1.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1582735747",
+                    "version": "8.x-1.1",
+                    "datestamp": "1595445791",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5197,7 +5194,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -5219,6 +5216,10 @@
                 {
                     "name": "fago",
                     "homepage": "https://www.drupal.org/user/16747"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
                 }
             ],
             "description": "Provides expanded entity APIs, which will be moved to Drupal core one day.",
@@ -6072,17 +6073,17 @@
         },
         {
             "name": "drupal/geofield_map",
-            "version": "2.66.0",
+            "version": "2.67.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/geofield_map.git",
-                "reference": "8.x-2.66"
+                "reference": "8.x-2.67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/geofield_map-8.x-2.66.zip",
-                "reference": "8.x-2.66",
-                "shasum": "6de69eb448fe636264fe74410239a477e76dc173"
+                "url": "https://ftp.drupal.org/files/projects/geofield_map-8.x-2.67.zip",
+                "reference": "8.x-2.67",
+                "shasum": "6b98bbcaf1de0c38da8683b39aa9c43ccf226d82"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9",
@@ -6091,8 +6092,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.66",
-                    "datestamp": "1593119796",
+                    "version": "8.x-2.67",
+                    "datestamp": "1597844476",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6101,7 +6102,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -6343,17 +6344,17 @@
         },
         {
             "name": "drupal/group",
-            "version": "1.0.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/group.git",
-                "reference": "8.x-1.0"
+                "reference": "8.x-1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/group-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "ccc9e63152c8fabce2286d8c3a736c1157ef8272"
+                "url": "https://ftp.drupal.org/files/projects/group-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "f9b9607fea3b169152165ce64d3bc871ddd40b73"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9",
@@ -6363,8 +6364,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1594887104",
+                    "version": "8.x-1.2",
+                    "datestamp": "1596658355",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -17949,6 +17950,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2017-12-04T08:55:13+00:00"
         },
         {
