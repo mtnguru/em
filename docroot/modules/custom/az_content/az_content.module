@@ -182,7 +182,7 @@ function az_content_entity_access(EntityInterface $entity, $op, AccountInterface
       break;
 
     case 'group':
-      if ($entity->field_status->value == 'hidden') {
+      if ($entity->hasField('field_status') && $entity->field_status->value == 'hidden') {
         if ($entity->field_status->value == 'hidden' && !\Drupal::currentUser()->hasPermission('az groups view hidden')) {
           return AccessResult::forbidden();
         }
