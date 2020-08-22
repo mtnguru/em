@@ -114,6 +114,11 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
     }
     $context['class'][] = 'embedded-entity';
 
+    // Maintain data- attributes.
+    if (isset($context)) {
+      $build['#attributes'] = $context;
+    }
+
     // James Sorensen - added class name
     if (isset($context['az-class'])) {
       $build['#attributes']['class'][] = $context['az-class'];
@@ -122,11 +127,6 @@ class EntityEmbedBuilder implements EntityEmbedBuilderInterface {
     // James Sorensen - added az data
     if (isset($context['az-data'])) {
       $build['#attributes']['data-az'][] = $context['az-data'];
-    }
-
-    // Maintain data- attributes.
-    if (isset($context)) {
-      $build['#attributes'] = $context;
     }
 
     // Make sure that access to the entity is respected.
