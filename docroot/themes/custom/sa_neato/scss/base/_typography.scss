@@ -108,4 +108,9 @@ picture {
   height: auto;
 }
 
+// don't display no-thumbnail.png when embedded images are not found
+img.missing-image {
+//display: none;
+}
+
 
