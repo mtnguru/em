@@ -26,7 +26,7 @@ class AzGroupQuery {
     $query = \Drupal::database()->select('group_content_field_data', 'gcfd');
     $query->fields('gcfd', ['gid', 'entity_id', 'type']);
     $query->condition('gcfd.entity_id', $node->id());
-    $query->condition('gcfd.type', 'theories-group_node-' . $node->getType());
+    $query->condition('gcfd.type', ['theories-group_node-' . $node->getType(), 'book-group_node-' . $node->getType()], 'IN');
     $results = $query->execute()->fetchAll();
     return (count($results)) ? $results[0]->gid : null;
   }
@@ -58,13 +58,13 @@ class AzGroupQuery {
     // Query for groups this user is a member of
     if (isset($set['member'])) {
       $query->condition('gcfd.entity_id', $set['member'], (is_array($set['member'])) ? 'IN' : '=');
-      $query->condition('gcfd.type', 'theories-group_membership');
+      $query->condition('gcfd.type', ['theories-group_membership', 'book-group_membership'], 'IN');
     }
 
     // Group roles
     if (isset($set['roles'])) {
       $query->leftJoin('group_content__group_roles', 'gcgr', 'gcfd.id = gcgr.entity_id');
-      $query->condition('gcgr.bundle', 'theories-group_membership', '=');
+      $query->condition('gcgr.bundle', ['theories-group_membership', 'book-group_membership'], 'IN');
       $query->condition('gcgr.group_roles_target_id', $set['roles'], (is_array($set['roles'])) ? 'IN' : '=');
     }
 
