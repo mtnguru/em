@@ -29,6 +29,8 @@ function _az_mail_email_form_alter(&$form, FormStateInterface $form_state, $form
   foreach ($form['field_group_roles']['widget']['#options'] as $key => $option) {
     if ($key == 'theories-administrator' ||
         $key == 'theories-anonymous' ||
+        $key == 'book-administrator' ||
+        $key == 'book-anonymous' ||
         preg_match('/\\d/', $key) > 0 ) {   // look for keys with digits - they are site roles
       unset($form['field_group_roles']['widget']['#options'][$key]);
     }

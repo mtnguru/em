@@ -88,7 +88,7 @@ class AzContentQuery {
     ////////// Groups
     if (isset($set['groups'])) {
       $query->join('group_content_field_data', 'gcfd', 'gcfd.entity_id = nfd.nid');
-      $query->condition('gcfd.type', 'theories-group_membership', '!=');
+      $query->condition('gcfd.type', ['theories-group_membership', 'book-group_membership'], 'NOT IN');
       $query->condition('gcfd.gid', $set['groups'], (is_array($set['groups'])) ? 'IN' : '=');
     }
 
@@ -103,7 +103,7 @@ class AzContentQuery {
     ////////// Exclude content from this/these groups.
     if (isset($set['groupsExclude'])) {
       $query->join('group_content_field_data', 'gcfd', 'gcfd.entity_id = nfd.nid');
-      $query->condition('gcfd.type', 'theories-group_membership', '!=');
+      $query->condition('gcfd.type', ['theories-group_membership', 'book-group_membership'], 'NOT IN');
       $query->condition('gcfd.gid', $set['groupsExclude'], (is_array($set['groupsExclude'])) ? 'NOT IN' : '!=');
     }
 
@@ -299,14 +299,14 @@ class AzContentQuery {
     ////////// Groups
     if (isset($set['groups'])) {
       $query->join('group_content_field_data', 'gcfd', 'gcfd.entity_id = nfd.nid');
-      $query->condition('gcfd.type', 'theories-group_membership', '!=');
+      $query->condition('gcfd.type', ['theories-group_membership','book-group_membership'], 'NOT IN');
       $query->condition('gcfd.gid', $set['groups'], (is_array($set['groups'])) ? 'IN' : '=');
     }
 
     ////////// Exclude content from this/these groups.
     if (isset($set['groupsExclude'])) {
       $query->join('group_content_field_data', 'gcfd', 'gcfd.entity_id = nfd.nid');
-      $query->condition('gcfd.type', 'theories-group_membership', '!=');
+      $query->condition('gcfd.type', ['theories-group_membership', 'book-group_membership'], 'NOT IN');
       $query->condition('gcfd.gid', $set['groupsExclude'], (is_array($set['groupsExclude'])) ? 'NOT IN' : '!=');
     }
 
