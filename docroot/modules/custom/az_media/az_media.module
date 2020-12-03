@@ -197,6 +197,8 @@ function az_media_file_presave($file) {
       $tmpPath = file_directory_temp() . '/tmp_' . $basename;
       $destPath = $info['dirname'] . '/' . $basename;
 
+      $cmd = '';
+
       switch ($mime) {
         case 'image';
           if ($info['extension'] != 'png' && $info['extension'] != 'gif') {
@@ -246,7 +248,9 @@ function az_media_file_presave($file) {
       if ($srcPath != $destPath) {  // Remove the source file
         $cmd .= " rm '$srcPath'";
       }
-      `$cmd`;
+      if ($cmd) {
+        `$cmd`;
+      }
     }
   }
 }

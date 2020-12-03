@@ -97,6 +97,7 @@ if ($handle) {
       }
     }
     else {
+
       foreach ($element['isotopes'][$protons] as $isotope) {
         $atom = Node::load($isotope->nid);
         print "Update isotope: " . $atom->label() . " " . $atom->field__protons->value . "\n";
