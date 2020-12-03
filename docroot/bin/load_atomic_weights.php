@@ -97,9 +97,16 @@ if ($handle) {
       }
     }
     else {
-
+      $natoms = count($element['isotopes'][$protons]);
       foreach ($element['isotopes'][$protons] as $isotope) {
         $atom = Node::load($isotope->nid);
+        if ($natoms > 1) {
+          if ($atom->field_approval->value == 'stats') {
+            $atom->delete();
+          }
+          continue;
+        }
+
         print "Update isotope: " . $atom->label() . " " . $atom->field__protons->value . "\n";
         $atom->field_mass_actual->setValue($mass);
         $atom->field_abundance->setValue($abundance > 0 ? $abundance : null);
