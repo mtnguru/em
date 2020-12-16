@@ -129,6 +129,9 @@
     margin: 2px 10%;
     width: 80%;
 
+    &.snapshot--save {
+      margin-top: 15px;
+    }
   }
 
   .control-block {
