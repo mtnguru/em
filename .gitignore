@@ -15,4 +15,5 @@ config/
 
 .idea/
 *.css.map
+*services.yml
 /docroot/mail

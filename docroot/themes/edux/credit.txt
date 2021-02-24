@@ -1,0 +1,13 @@
+Google web font
+---------------------------
+https://fonts.google.com/
+
+
+Slider demo image
+---------------------
+https://undraw.co/
+
+
+FontAwesome version 4.7
+-------------------
+https://fontawesome.com/v4.7.0/

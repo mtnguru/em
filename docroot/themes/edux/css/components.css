@@ -1,0 +1,25 @@
+/* Components -> Admin tabs */
+.page-tabs li a {
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+/* Components -> Social icons */
+.footer-social {
+  padding: 1rem 0;
+}
+.social-icons li {
+  border: 2px solid #000000;
+  border-radius: 6px;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+.social-icons li:hover {
+  border: 2px solid var(--theme-color);
+
+}
+.social-icons i {
+  padding: 10px;
+}

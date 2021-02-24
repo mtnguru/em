@@ -1,0 +1,11 @@
+.settings-form-title {
+	background-color: #222;
+	background-image: url("../logo.svg");
+	background-size: contain;
+	background-size: auto 70%;
+	background-position: 6px center;
+	background-repeat: no-repeat;
+	padding: 2rem 2rem 2rem 5rem;
+	color: #fff;
+	margin: 0 auto;
+}

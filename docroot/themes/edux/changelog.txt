@@ -1,0 +1,33 @@
+version 8.0.0
+05 Jan 2021
++-----------------------------+
+# Initial release
+
+version 8.0.1
+05 Jan 2021
++-----------------------------+
+# Minor bugs fixed.
+
+
+version 8.0.2
+09 Jan 2021
++-----------------------------+
+# Fixed homepage slider.
+# Added footer bottom last block region.
+# Added shortcode for notice block.
+
+
+version 8.0.3
+12 Jan 2021
++-----------------------------+
+# Assigned default block regions.
+# Fixed bugs of theme settings.
+# Added option to set "Default settings" in theme settings.
+
+
+version 8.0.4
+13 Jan 2021
++-----------------------------+
+# Added credit.txt to attribute credit to the resources used in this theme.
+# Fixed social icons appearance issue.
+# Fixed fontawesome font icon.

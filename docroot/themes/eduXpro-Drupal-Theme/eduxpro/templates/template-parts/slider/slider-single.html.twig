@@ -1,0 +1,22 @@
+<section class="slider single-slide">
+  <div class="single-slide-image">
+    {% if single_slide_image_path != '' %}
+      <img class="single-slide-bg" src="{{ single_slide_image_path }}" alt="slider image" />
+    {% else %}
+      <img class="single-slide-bg" src="{{ directory }}/images/demo/single-slide-bg.jpg" alt="slider image" />
+    {% endif %}
+  </div><!-- /single-slide-image -->
+  <div class="single-slide-text-container">
+    <div class="container">
+    <div class="single-slide-text">
+      {% if single_slide_code != '' %}
+        {{ single_slide_code | striptags('<ol>,<ul>,<li>,<p>,<a>,<img>,<video>,<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<em>,<strong>,<br>,<i>,<button>,<mark>,<hr>') | raw }}
+      {% else %}
+        <h1>This is slider heading</h1>
+        <h4>And the slider sub-heading</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Habitant morbi tristique senectus et. Facilisis gravida neque convallis</p>
+      {% endif %}
+    </div><!-- /single-slide-text -->
+    </div><!-- /container -->
+  </div><!-- single-slide-text-container -->
+</section>

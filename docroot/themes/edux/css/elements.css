@@ -1,0 +1,22 @@
+/* Elements -> Box */
+.box {
+  background-color: var(--content-bg);
+  box-shadow: 0 3px 6px #bbbbbb ;
+}
+
+/* Icon Box */
+.icon-box {
+  font-family: var(--body-font);
+  line-height: 1.7;
+  background-color: var(--content-bg);
+  box-shadow: 0 3px 6px #bbbbbb;
+  display: flex;
+}
+.icon-box-icon {
+  padding-right: 1rem;
+  flex: 0 0 auto;
+}
+.icon-box-text {
+  font-family: var(--body-font);
+  line-height: 1.7;
+}
