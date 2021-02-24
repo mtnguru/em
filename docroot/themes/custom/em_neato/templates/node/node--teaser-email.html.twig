@@ -70,74 +70,39 @@
  *   in different view modes.
  */
 #}
-{{ attach_library('sa_neato/left-nav') }}
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+{{ attach_library('classy/node') }}
+<article{{ attributes.addClass(classes) }}>
 
-<article{{ attributes.addClass('left-nav') }}>
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
 
-  <div{{ content_attributes }}>
-
-    <div class="content-container">
-      <div id="content-sidebar-container">
-        <div class="content-sidebar">
-          <div class="leftnav">
-            <div class="leftnav-open-container">
-              <button class="leftnav-open">{{ 'Jump to a Section'|t }}</button>
-            </div>
-            <nav>
-              <ul class="leftnav-menu leftnav-is-open">
-                {% set contents = [] %}
-                {% for key in content.field_sections|children %}
-                  {% set section = content.field_sections[key] %}
-                  {% set title = section['#paragraph'].field_section_title.value %}
-                  {% set id = title|htmlid %}
-                  {% set contents = contents|merge([{'title': title, 'id': id}]) %}
-                  <li><a href="#{{ id }}">{{ title }}</a></li>
-                {% endfor %}
-                {% if content.field_additional_links|render|trim is not empty %}
-                  <li class="additional-links-left-nav-link"><a href="#additional-links">{{ 'Additional Links'|t }}</a></li>
-                {% endif %}
-              </ul>
-            </nav>
-
-            {% if content.field_additional_links|render|trim is not empty %}
-              {{ content.field_additional_links }}
-            {% endif %}
-          </div>
-          {{ content_extra }}
-        </div>
+  {% if display_submitted %}
+    <footer class="node__meta">
+      {{ author_picture }}
+      <div{{ author_attributes.addClass('node__submitted') }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
       </div>
+    </footer>
+  {% endif %}
 
-      <main class="content-main">
-
-        {% for key in content.field_sections|children %}
-          {% set section=content.field_sections[key] %}
-          <div class="leftnav-section" id="{{ contents[key].id }}">
-            <button class="back-to-menu-anchor" id="anchor-{{ contents[key].id }}" tabindex="0">{{ 'Return to Teaching Programs / Fellowships Menu'|t }}</button>
-            {{ section }}
-          </div>
-        {% endfor %}
-
-        <div class="leftnav-section" id="additional-links">
-          <div class="buttons">
-            {% if content.field_additional_links|render|trim is not empty %}
-              {{ content.field_additional_links }}
-            {% endif %}
-            <div class="print-button-container">
-              <button class="print-button">
-                <span class="text">{{ 'Print'|t }}</span>
-                <span class="icon"></span>
-              </button>
-            </div>
-            {{ content.sharethis }}
-          </div>
-        </div>
-
-        {{ content|without('field_hero_image', 'field_description', 'field_additional_links', 'field_sections', 'sharethis') }}
-
-      </main>
-
-    </div>
-
+  <div{{ content_attributes.addClass('node__content') }}>
+    {{ content }}
   </div>
 
 </article>
