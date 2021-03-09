@@ -1,0 +1,10 @@
+.sidebar .block {
+  background-color: #f5f5ff;
+  padding: 20px;
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+.sidebar .block-title {
+  font-size: 2.2rem;
+  text-transform: none;
+}

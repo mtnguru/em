@@ -1,0 +1,109 @@
+/*
+ * Custom Shortcodes
+ */
+ .yellow {
+  color: var(--yellow);
+}
+
+/* 
+ * Buttons
+ */
+ .link-button,
+ .button-link,
+ .button-dark {
+  display: inline-block;
+  border-radius: 30px;
+  padding: 0.8rem 1.8rem;
+  transition: all 0.3s ease;  
+ }
+.link-button,
+.button-link {
+  color: #ffffff;
+  background-color: var(--theme-color-two);
+  border: 4px solid var(--theme-color);
+}
+
+.link-button:hover,
+.button-link:hover {
+  color: var(--theme-color);
+  background-color: var(--dark);
+  border: 4px solid var(--theme-color);
+}
+.button-dark {
+  background-color: var(--dark);
+  color: var(--theme-color);
+  border: 4px solid var(--theme-color);
+}
+.button-dark:hover {
+  color: #ffffff;
+  border: 4px solid var(--theme-color);
+}
+/* 
+ * Features
+ */
+.features {
+  display: flex;
+  flex-direction: column;
+}
+.feature {
+  background-color: #ffffff;
+  margin: 0 0 2rem 0;
+  padding: 2rem;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s linear;
+  backface-visibility: hidden;
+}
+.feature:hover {
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+  transform: translateY(-20px);
+}
+.feature-icon {
+  margin-bottom: 1.5rem;
+  padding: 2rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--theme-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 10px 2px #ffffff;
+}
+.feature:hover .feature-icon {
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 10px 2px var(--theme-color-two);
+  box-shadow: 0 0 10px 2px var(--theme-color-two);
+}
+.feature .link-button {
+  display: inline-block;
+}
+/*
+ * Notice 
+ */
+.notice-block {
+  position: relative;
+  background-color: var(--theme-color);
+  padding: 2rem;
+  width: 100%;
+}
+.notice-block .views-field-title {
+  font-family: var(--heading-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.notice-block .views-field-title a {
+  color: var(--dark);
+}
+.notice-block .views-field-title a:hover {
+  color: #ffffff;
+}
+.notice-block .views-row {
+  border-bottom: 1px solid var(--dark);
+}

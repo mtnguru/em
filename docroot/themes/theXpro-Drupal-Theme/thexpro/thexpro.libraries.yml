@@ -1,0 +1,95 @@
+global-styling:
+  version: VERSION
+  css:
+    base:
+      css/base.css: {}
+    layout:
+      css/layout.css: {}
+    component:
+      css/core/field.css: {}
+      css/block.css: {}
+      css/header.css: {}
+      css/highlighted.css: {}
+      css/node.css: {}
+      css/search.css: {}
+      css/comments.css: {}
+      css/sidebar.css: {}
+      css/footer.css: {}
+      css/components.css: {}
+      css/elements.css: {}
+      css/shortcodes.css: {}
+      css/clear.css: {}
+      css/xpro.css: {}
+      css/responsive.css: {}
+  js:
+    js/thexpro.js: {}
+  dependencies:
+    - core/jquery
+
+# Book
+book:
+  version: VERSION
+  css:
+    component:
+      css/book.css: {}
+
+# FontAwesome 4
+fontawesome4:
+  version: 4.7.0
+  css:
+    component:
+      css/font-awesome.css: {}
+
+# FontAwesome 5
+fontawesome5:
+  version: 5.15.1
+  css:
+    component:
+      css/font-awesome.min.css: {}
+
+# maintenance page
+maintenance:
+  version: VERSION
+  css:
+    theme:
+      css/maintenance.css: {}
+
+# Sliding Sidebar
+sliding-sidebar:
+  version: VERSION
+  css:
+    component:
+      css/sliding-sidebar.css: {}
+
+# Slider Layered
+tiny-slider:
+  version: 2.9.3
+  js:
+    js/tiny-slider.js: {}
+  css:
+    component:
+      css/tiny-slider.css: {}
+
+# Slider classic
+slider-classic:
+  version: 2.1.2
+  js:
+    js/slider-classic.js: {}
+  dependencies:
+    - core/jquery
+  css:
+    component:
+      css/slider-classic.css: {}
+
+# Animated content when in view
+animated-content:
+  version: VERSION
+  css:
+    component:
+      css/animate.css: {}
+
+# cookiealert script
+cookiealert-scripts:
+  version: 1.0
+  js:
+    js/cookiealert.js: {}

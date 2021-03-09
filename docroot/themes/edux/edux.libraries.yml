@@ -1,0 +1,69 @@
+global-styling:
+  version: VERSION
+  css:
+    base:
+      css/variables.css: {}
+      css/base.css: {}
+    component:
+      css/core.css: {}
+      css/header.css: {}
+      css/highlighted.css: {}
+      css/node.css: {}
+      css/sidebar.css: {}
+      css/footer.css: {}
+      css/components.css: {}
+      css/elements.css: {}
+      css/shortcodes.css: {}
+      css/responsive.css: {}
+      icofont.css: {}
+    theme:
+      css/syle.css: {}
+      '//cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css': { type: external }
+      css/print.css: { media: print }
+  js:
+    js/edux.js: {}
+  dependencies:
+    - core/jquery
+
+# Google Fonts from CDN
+googlefontscdn:
+  css:
+    base:
+      //fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700: { type: external }
+
+# Google Fonts from local
+googlefontslocal:
+  css:
+    base:
+      css/fonts.css: {}
+
+# Comments
+comments:
+  css:
+    component:
+      css/comments.css: {}
+
+# Slider
+slider:
+  version: 2.1.2
+  js:
+    js/slider.js: {}
+  dependencies:
+    - core/jquery
+  css:
+    component:
+      css/slider.css: {}
+
+# maintenance page
+maintenance:
+  version: VERSION
+  css:
+    theme:
+      css/maintenance.css: {}
+
+# Theme settings page 
+theme-settings:
+  version: VERSION
+  css:
+    theme:
+      css/theme-settings.css: {}

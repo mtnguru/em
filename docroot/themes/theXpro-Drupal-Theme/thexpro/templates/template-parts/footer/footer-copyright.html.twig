@@ -1,0 +1,7 @@
+<div class="website-copyright">
+  {% if copyright_text_custom != '' %}
+    {{ copyright_text_custom | striptags('<p>,<div>,<span>,<a>,<img>,<ol>,<ul>,<li>,<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<em>,<strong>,<mark>,<br>,<hr>,<i>') | raw }}
+  {% else %}
+    &copy; {{ "now"|date("Y") }} {{ site_name }}, All rights reserved.
+  {% endif %}
+</div>

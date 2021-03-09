@@ -1,0 +1,33 @@
+/**
+ * Variables
+ */
+ :root {
+   /* Theme Colors */
+   --theme-color: #FFCC18;
+   --theme-color-two: #383a68;
+   --theme-color-three: #1a1b31;
+   --dark: #1a1b31;
+   --light: #d1d8e0;
+   --border: #cccccc;
+  /* Font */
+  --body-font: 'Noto Sans', sans-serif;
+  --heading-font: 'Noto Sans', sans-serif;
+  /* Background */
+  --body-bg: #ffffff;
+  --header-top-bg: #1a1b31;
+  --header-bg: #383a68;
+  --footer-bg: #22233e;
+  --footer-bg-two: #1a1b31;
+  --comment-bg: #d1d8e0;
+  --form-bg: #e9e9e9;
+  --content-bg: #f2f2f2;
+  /* color */
+  --text-color: #222222;
+  --link-hover: #383a68;
+  --header-top-color: #bcbcc1;
+  --footer-top-color: #ffffff;
+  --footer-color: #ffffff;
+  --footer-border-color: #0a0b20;
+  --border-color: #cccccc;
+  --yellow: #FFCC18;
+}
