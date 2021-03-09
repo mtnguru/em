@@ -174,6 +174,9 @@ class AzContentQuery {
           // Join Abundance in
           $query->leftJoin('node__field_abundance', 'nfab', 'nfd.nid = nfab.entity_id');
 
+          // Join Abundance in
+          $query->leftJoin('node__field_half_life', 'nfhl', 'nfd.nid = nfab.entity_id');
+
           // Order by the Atom name third.
           $query->orderBy('nfd.title', 'ASC');
 
