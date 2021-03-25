@@ -1,0 +1,12 @@
+global-styling:
+  version: VERSION
+  css:
+    base:
+      css/eduxpro_sub.css: {}
+  dependencies:
+    - eduxpro/global-styling
+# js:
+#   js/eduxpro.js: {}
+# dependencies:
+#   - core/jquery
+
