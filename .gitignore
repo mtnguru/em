@@ -13,6 +13,8 @@
 vendor/
 config/
 
+*node_modules*
+
 .idea/
 services.yml
 *.css.map

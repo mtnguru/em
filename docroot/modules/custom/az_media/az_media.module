@@ -22,6 +22,97 @@ function az_media_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().  media
+ */
+function az_media_form_editor_media_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $storage = $form_state->getStorage();
+
+  /*
+  $display_plugin_options = [
+//  'view_mode:media.embedded'               => "Embedded",
+//  'view_mode:media.media_large'            => "Media - Large",
+//  'view_mode:media.media_large_w_desc'     => "Media - Large w/desc",
+//  'view_mode:media.media_med_large'        => "Media - Med-Large",
+//  'view_mode:media.media_med_large_w_desc' => "Media - Med-Large w/desc",
+//  'view_mode:media.media_medium'           => "Media - Medium",
+//  'view_mode:media.media_medium_w_desc'    => "Media - Medium w/desc",
+//  'view_mode:media.media_small'            => "Media - Small",
+//  'view_mode:media.media_small_w_desc'     => "Media - Small w/desc",
+//  'view_mode:media.media_tiny'             => "Media - Tiny",
+    'embedded'               => "Embedded",
+    'media_large'            => "Media - Large",
+    'media_large_w_desc'     => "Media - Large w/desc",
+    'media_med_large'        => "Media - Med-Large",
+    'media_med_large_w_desc' => "Media - Med-Large w/desc",
+    'media_medium'           => "Media - Medium",
+    'media_medium_w_desc'    => "Media - Medium w/desc",
+    'media_small'            => "Media - Small",
+    'media_small_w_desc'     => "Media - Small w/desc",
+    'media_tiny'             => "Media - Tiny",
+  ];
+
+//$form['attributes']['data-view-mode'] = [
+//$form['attributes']['data-entity-embed-display'] = [
+  $form['attributes']['az-view-mode'] = [
+    '#type' => 'select',
+    '#title' => 'Display as',
+    '#options' => $display_plugin_options,
+    '#default_value' => isset($storage['media_embed_element']['az-view-mode']) ? $storage['media_embed_element']['az-view-mode'] : '',
+//  '#default_value' => isset($storage['media_embed_element']['data-entity-embed-display']) ? $storage['media_embed_element']['data-entity-embed-display'] : '',
+//  '#default_value' => isset($storage['media_embed_element']['data-view-mode']) ? $storage['media_embed_element']['data-view-mode'] : '',
+    '#required' => TRUE,
+//  '#ajax' => [
+//    'callback' => '::updatePluginConfigurationForm',
+//    'wrapper' => 'data-entity-embed-display-settings-wrapper',
+//    'effect' => 'fade',
+//  ],
+    // Hide the selection if only one option is available.
+    '#access' => count($display_plugin_options) > 1,
+  ];
+  */
+
+  $form['attributes']['az-class'] = array(
+    '#title' => 'Classes',
+    '#description' => 'Ex: az-tiny az-small az-medium az-large az-clear',
+    '#type' => 'textfield',
+    '#default_value' => isset($storage['media_embed_element']['az-class']) ? $storage['media_embed_element']['az-class'] : '',
+  );
+
+  // added az data attribute
+  if (\Drupal::currentUser()->hasPermission('atomizer embed atoms')) {
+    $form['az-data'] = array(
+      '#title' => 'Data fields',
+      '#description' => 'Advanced formatting for atomizer only - Ex: zoom=.5',
+      '#type' => 'textfield',
+//    '#default_value' => isset($entity_element['az-data']) ? $entity_element['az-data'] : '',
+    );
+  }
+
+  $form['#validate'][] = 'az_media_form_editor_media_dialog_validate';
+  foreach (array_keys($form['actions']) as $action) {
+    if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+      $form['actions'][$action]['#submit'][] = 'az_media_form_editor_media_dialog_submit';
+    }
+  }
+  return;
+}
+
+function az_media_form_editor_media_dialog_validate(&$form, FormStateInterface &$formState) {
+//if (!empty($formState->errors['field_create_date'])) {
+//  $date = $formState->getValue('field_create_date');
+//}
+  return;
+}
+
+function az_media_form_editor_media_dialog_submit (&$form, FormStateInterface $form_state) {
+//$form_state->setValue(['field_configuration_file', 0, 'value'], $form_state->getValue('field_config'));
+  return;
+}
+
+
+
+
+/**
  * Implements hook_form_FORM_ID_alter().
  */
 function az_media_form_media_image_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -34,6 +125,7 @@ function az_media_form_media_image_edit_form_validate(&$form, FormStateInterface
 //}
   return;
 }
+
 
 /**
  * Implements hook_node_presave().
@@ -260,7 +352,6 @@ function az_media_file_presave($file) {
   *
   * @param string $uri
   *   The uri for the file that we are getting the Exif.
-  * @param string $field
   *   The name of the exif field.
   *
   * @return string|bool
@@ -332,7 +423,16 @@ function az_media_preprocess_media(&$variables) {
   $media = $variables['media'];
 
   // Add view mode to class
+
+  if (!empty($variables['#attributes']['az-view-mode'])) {
+    $variables['elements']['class'][] = $variables['#attributes']['az-view-mode'];
+  }
+
   $variables['attributes']['class'][] = 'az-view-mode-' . str_replace('_', '-', $variables['elements']['#view_mode']);
+
+  if (!empty($variables['attributes']['az-class'])) {
+    $variables['attributes']['class'][] = $variables['attributes']['az-class'];
+  }
 
   $changed = $media->changed->value;
   $variables['changed'] = \Drupal::service('date.formatter')->format($changed);

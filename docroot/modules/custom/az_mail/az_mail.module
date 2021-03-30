@@ -254,7 +254,7 @@ function az_mail_node_presave(Node $node) {
     case 'book':
     case 'event':
     case 'ticket':
-      $author = \Drupal\user\Entity\User::load($node->getOwnerId());
+/*    $author = \Drupal\user\Entity\User::load($node->getOwnerId());
 
       ////////// Send email to ninjas
 
@@ -276,6 +276,7 @@ BODY;
           _az_mail_send_mail('comment_presave', $ninja, $params);
         }
       }
+*/
       break;
   }
   return;
