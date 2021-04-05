@@ -47,23 +47,30 @@ function az_user_form_user_login_form_alter(&$form, FormStateInterface $form_sta
     ],
     'actions' => $form['actions'],
   ];
+
   unset($form['name']);
   unset($form['pass']);
   unset($form['actions']);
 
-  // Add the join block that goes below the login form.   nid 321
-  $node = Node::load(321);
-  $body = $node->body->value;
-  $body = preg_replace('/\$num_users/', '666', $body);
-//$node->body->setValue($body);
+  $active_id = \Drupal::service('domain.negotiator')->getActiveId();
+  if ($active_id == 'etherealmatters_org') {
+    // Add the join block that goes below the login form.   nid 321
+    $node = Node::load(321);
+    $body = $node->body->value;
+    $body = preg_replace('/\$num_users/', '666', $body);
+    //$node->body->setValue($body);
 
-  $build = \Drupal::entityTypeManager()->getViewBuilder('node')->view($node, 'full');
-  $build['#status'] = $body;$form['join_block'] = [
-    '#type' => 'container',
-    '#attributes' => ['class' => ['join-block']],
-    '#weight' => 100,
-    'markup' => ['#markup' => render($build)],
-  ];
+    $build = \Drupal::entityTypeManager()
+      ->getViewBuilder('node')
+      ->view($node, 'full');
+    $build['#status'] = $body;
+    $form['join_block'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['join-block']],
+      '#weight' => 100,
+      'markup' => ['#markup' => render($build)],
+    ];
+  }
 
  $form['#submit'][] = '_az_user_login_form_submit';
 

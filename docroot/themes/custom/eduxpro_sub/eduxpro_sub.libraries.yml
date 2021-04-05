@@ -3,6 +3,7 @@ global-styling:
   css:
     base:
       css/eduxpro_sub.css: {}
+      fonts/fontawesome/css/all.css: {}
   dependencies:
     - eduxpro/global-styling
 # js:

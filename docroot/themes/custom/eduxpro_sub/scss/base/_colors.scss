@@ -1,22 +1,60 @@
 $color-white: #f0f0f0;
+$color-black: #000000;
 
-$color-published: #ff00ff;
-$color-unpublished: #ff00ff;
-$color-needs-review: #ff00ff;
-$color-draft: #ff00ff;
-$color-placeholder: #ff00ff;
-$color-confidential: #ff00ff;
-$color-box-shadow: #ff00ff;
-$color-overlay: #ff00ff;
-$color-title: #ff00ff;
-$color-topic: #ff00ff;
-$color-light-title: #ff00ff;
+$color-blue: #5887ff;
+$color-green: #7fffb0;
+$color-dark-green: #063008;
+$color-dark-blue: #062045;
+$color-light-blue: #66bbff;
+$color-cyan: #00ffff;
+$color-yellow: #eeee00;
+$color-yellow-green: #e0ff49;
+$color-light-red: #ff7766;
+$color-orange: #ffcc00;
+$color-light-purple: #bbaaff;
+$color-dark-purple-red: #330055;
+$color-pink: #dd66ee;
 
-$base-background-color: #555555;
+$color-light-grey: #dddddd;
+$color-grey: #bbbbbb;
+$color-dark-grey: #666666;
 
-$color-green: #00cc00;
-$color-dark-green: #005500;
-$color-dark-blue: #000055;
+$color-published: $color-yellow;
+$color-unpublished: $color-orange;
+$color-needs-review: $color-pink;
+$color-draft: $color-light-blue;
+$color-placeholder: $color-grey;
+$color-confidential: $color-light-purple;
+$color-box-shadow: rgba(0,0,0,.1);
+$color-overlay: rgba(0,0,0,.4);
+$color-title: $color-yellow-green;
+$color-light-title: lighten($color-title, 10%);
+$color-topic: $color-cyan;
+$color-border: $color-green;
+$color-link: $color-green;
+$color-label: $color-yellow-green;
 
-$base-font-color: #00ffff;
-$base-date-color: #ff00ff;
+$color-controls: $color-dark-purple-red;
+$color-controls-wrapper: lighten($color-controls, 10%);
+$color-button: $color-blue;
+$color-button-inactive: $color-grey;
+$color-button-active: lighten(#102e4a, 15%);
+$color-icon-selected: $color-cyan;
+$color-icon-hover: darken($color-cyan, 10%);
+
+$base-background-color: #1a1b31;
+
+$table-border-color: lighten($base-background-color, 25%);
+$table-hover-background: #882244;
+$table-header-background: #00aacc;
+$table-background: lighten($base-background-color, 15%);
+
+$base-font-color: $color-white;
+$base-date-color: $color-grey;
+
+$base-timing: ease;
+$base-border-radius: 10px;
+$base-separator-color: lighten($base-background-color, 25%);
+
+
+$images-path: '/themes/custom/sa_neato/images/';

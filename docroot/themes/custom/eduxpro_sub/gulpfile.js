@@ -33,18 +33,18 @@ gulp.task('sass', function () {
   return gulp.src('./scss/**/*.scss')
     .pipe(sassGlob())
     .pipe(sourcemaps.init())
-    .pipe(sass({
+    .pipe(sass( {
       noCache: true,
       outputStyle: "compressed",
       lineNumbers: false,
       loadPath: './css/*',
       sourceMap: true
-    })).on('error', function(error) {
+    } )).on('error', function(error) {
       gutil.log(error);
       this.emit('end');
     })
     .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest('./css'))
+    .pipe(gulp.dest('./css/'))
     .pipe(notify({
       title: "SASS Compiled",
       message: "All SASS files have been recompiled to CSS.",
