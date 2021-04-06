@@ -202,22 +202,22 @@ form.entity-browser-form {
         padding-bottom: 0;
       } // &:last-of-type
 
-      @include media($bp320only) {
+      @include media($bpsmonly) {
         width: calc(100% / 3);
-      } // $bp320only
+      } // $bpsmonly
 
-      @include media($bp580only) {
+      @include media($bpmedonly) {
         width: calc(100% / 6);
-      } // $bp580only
+      } // $bpmedonly
 
-      @include media($bp960only) {
+      @include media($bplgonly) {
         width: calc(100% / 8);
 
-      } // $bp960only
+      } // $bplgonly
 
-      @include media($bp1280) {
+      @include media($bpxlg) {
         width: 200px;
-      } // $bp1280
+      } // $bpxlg
 
       .views-field {
         width: 100%;

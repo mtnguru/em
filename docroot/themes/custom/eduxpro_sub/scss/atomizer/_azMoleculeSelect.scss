@@ -17,7 +17,7 @@ body#landing_page-molecule-builder {
   border: 2px solid $color-border;
   background: $color-controls-wrapper;
 
-  @include media(max-width $bp580max) {
+  @include media(max-width $bpsmmax) {
     width: 100%;
     position: fixed;
     top: 0;
@@ -33,7 +33,7 @@ body#landing_page-molecule-builder {
     }
   }
 
-  @include media($bp960) {
+  @include media($bpmed) {
     width: 220px;
     position: absolute;
     top: 0;

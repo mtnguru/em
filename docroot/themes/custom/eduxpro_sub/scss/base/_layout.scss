@@ -9,3 +9,10 @@
 .layout-builder__add-section {
   background-color: inherit;
 }
+
+
+.layout--twocol-section {
+  .layout__region--first {
+    padding-right: 1.5em;
+  }
+}

@@ -23,16 +23,16 @@ article.media.full {
   .field--type-video-embed-field {
     padding-bottom: 20px;
 
-    @include media(max $bp580max) {
+    @include media(max $bpmedmax) {
       margin: 0 auto;
       width: 100%;
-    } // $bp580only
+    } // $bpmedmax
 
-    @include media($bp960) {
+    @include media($bpmed) {
       margin: 0 auto;
       width: 80%;
       max-width: 1000px;
-    } // $bp960only
+    } // $bpmedonly
   }
 
   .field--name-field-usage {

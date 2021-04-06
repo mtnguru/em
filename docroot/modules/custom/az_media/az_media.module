@@ -12,16 +12,6 @@ use Drupal\Component\Utility\Random;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Implements hook_form_alter().
- */
-function az_media_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == "entity_browser_image_browser_form" || $form_id == "entity_browser_media_browser_form") {
-    $fart = 5;
-  }
-  return;
-}
-
-/**
  * Implements hook_form_FORM_ID_alter().  media
  */
 function az_media_form_editor_media_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {

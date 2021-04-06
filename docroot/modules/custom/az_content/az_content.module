@@ -67,6 +67,9 @@ function az_content_form_alter(&$form, FormStateInterface $form_state, $form_id)
   return;
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function az_content_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $node = $form_state->getFormObject()->getEntity();
   $type = $node->getType();
@@ -146,6 +149,9 @@ function _az_content_node_submit(&$form, FormStateInterface &$form_state) {
   return;
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function az_content_form_node_ticket_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $request = \Drupal::request();
   if ($request->query->has('group')) {

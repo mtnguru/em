@@ -30,6 +30,9 @@ loadConfig();
  * This task generates CSS from all SCSS files and compresses them down.
  */
 gulp.task('sass', function () {
+  `touch /tmp/shit`;
+  `touch ./css/eduxpro_sub.css`;
+  return;
   return gulp.src('./scss/**/*.scss')
     .pipe(sassGlob())
     .pipe(sourcemaps.init())

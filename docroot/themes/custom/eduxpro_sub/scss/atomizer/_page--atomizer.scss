@@ -11,7 +11,7 @@ body.page-type-atomizer {
       > .field--name-body {
         margin-top: 15px;
 
-        @include media($bp960) {
+        @include media($bpmed) {
           margin-left: 245px;
         }
       }
@@ -23,7 +23,7 @@ body.page-type-atomizer {
     .az-more-field {
       max-width: 1000px;
       margin: 0 1.5em 2.5em;
-      @include media($bp960) {
+      @include media($bpmed) {
         margin: 0 2.5em 2.5em;
       }
     }
@@ -80,7 +80,7 @@ body.page-type-atomizer {
 
   ////////////////////////////////////// Tablet display mode ///////////
 
-  @include media(max-width $bp580max) {
+  @include media(max-width $bpsmmax) {
 
     &.az-float-controls {
       .az-header {
@@ -170,7 +170,7 @@ body.page-type-atomizer {
   }
 
   ////////////////////////////////////// Desktop display mode //////////
-  @include media($bp960) {
+  @include media($bpmed) {
 
     &.az-float-controls {
       .az-header {
@@ -279,7 +279,7 @@ body.page-type-atomizer {
     }
 
 //  min-height: 30px;
-  } // media $bp960
+  } // media $bpmed
 }
 
 article.az-view-mode-atomizer-minimal {

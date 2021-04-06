@@ -20,10 +20,10 @@ body.page-type-atom {
     width: 100%;
   }
 
-  @include media(max-width $bp580max) {
+  @include media(max-width $bpsmmax) {
   }
 
-  @include media($bp960) {
+  @include media($bpmed) {
     .az-properties {
       float: left;
       width: 315px;

@@ -24,20 +24,20 @@
     width: 4px;
     background-color: $accent-line-color;
 
-    @include media($bp320only) {
+    @include media($bpclonly) {
       height: $height;
       margin-top: $margin-top;
-    } // $bp320only
+    } // $bpclonly
 
-    @include media($bp580only) {
+    @include media($bpsmonly) {
       height: $desktop-height;
       margin-top: $desktop-margin-top;
-    } // $bp580only
+    } // $bpsmonly
 
-    @include media($bp960) {
+    @include media($bpmed) {
       height: $desktopPlus-height;
       margin-top: $desktopPlus-margin-top;
-    } // $bp960
+    } // $bpmed
   } // &::before
 } // @mixin accent-line
 
