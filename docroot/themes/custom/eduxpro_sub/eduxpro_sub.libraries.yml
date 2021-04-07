@@ -4,10 +4,8 @@ global-styling:
     base:
       css/eduxpro_sub.css: {}
       fonts/fontawesome/css/all.css: {}
+  js:
+    js/eduxpro_sub.js: {}
   dependencies:
     - eduxpro/global-styling
-# js:
-#   js/eduxpro.js: {}
-# dependencies:
-#   - core/jquery
 

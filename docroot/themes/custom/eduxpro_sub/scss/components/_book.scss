@@ -1,0 +1,21 @@
+
+
+ul.book-pager {
+  width: 100%;
+  position: relative;
+  display: flex;
+  list-style: none;
+  li {
+    flex-grow: 1;
+  }
+  li:nth-child(1) {
+    text-align: left;
+  }
+  li:nth-child(2) {
+    text-align: center;
+//  margin: 0 auto;
+  }
+  li:nth-child(3) {
+    text-align: right;
+  }
+}

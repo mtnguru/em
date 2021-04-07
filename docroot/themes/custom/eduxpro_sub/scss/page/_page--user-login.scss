@@ -1,5 +1,13 @@
-
-
+body.path-user {
+  ul.page-tabs {
+    li:nth-child(2) {
+      display: none;
+    }
+  }
+  .block-eduxpro-sub-primary-local-tasks {
+    padding-top: 2em;
+  }
+}
 
 form.user-login-form {
   .header {
