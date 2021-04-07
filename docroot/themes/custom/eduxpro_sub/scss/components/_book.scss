@@ -5,8 +5,10 @@ ul.book-pager {
   position: relative;
   display: flex;
   list-style: none;
+  padding: 0;
+
   li {
-    flex-grow: 1;
+    flex-basis: 100%;
   }
   li:nth-child(1) {
     text-align: left;
@@ -18,4 +20,16 @@ ul.book-pager {
   li:nth-child(3) {
     text-align: right;
   }
+}
+
+ul.book-tree {
+  line-height: 1;
+  list-style: none;
+  text-align: center;
+  margin-top: 1.5em;
+  padding: 0;
+  li {
+    padding: .5em 0;
+  }
+
 }
