@@ -9,16 +9,15 @@ ul.book-pager {
 
   li {
     flex-basis: 100%;
-  }
-  li:nth-child(1) {
-    text-align: left;
-  }
-  li:nth-child(2) {
-    text-align: center;
-//  margin: 0 auto;
-  }
-  li:nth-child(3) {
-    text-align: right;
+    &.book-pager-item-previous {
+      text-align: left;
+    }
+    &.book-pager-item-center {
+      text-align: center;
+    }
+    &.book-pager-item-next {
+      text-align: right;
+    }
   }
 }
 

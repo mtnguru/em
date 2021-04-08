@@ -13,8 +13,6 @@ jQuery(document).ready(function ($) {
   if ($navmenu) {
     let $dest = $(".block-content .field--name-body");
     $dest[0].appendChild($navmenu[0])
-
-
   }
 
 /* End document
