@@ -144,7 +144,7 @@ gulp.task('watch', function() {
   gulp.watch(['scss/**/*.scss'], gulp.parallel('sass'));
 
   // watch js for changes and clear drupal theme cache on change
-  gulp.watch(['js/js-src/**/*.js'], gulp.parallel('sass'));
+  gulp.watch(['js/js-src/**/*.js'], gulp.parallel('compress'));
 
   // If user has specified an override, rebuild Drupal cache
 //if (!config.twig.useCache) {
