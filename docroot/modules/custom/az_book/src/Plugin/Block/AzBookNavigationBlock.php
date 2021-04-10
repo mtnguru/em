@@ -129,15 +129,13 @@ class AzBookNavigationBlock extends BookNavigationBlock {
 
       case 'entity.node.canonical':
         $node = $this->requestStack->getCurrentRequest()->get('node');
-        if ($node->hasField('book')) {
-          $bid = $node->book['bid'];
+        $book = $node->book;
+        if (!empty($node->book)) {
+          $bid = $book['bid'];
           if ($gid = AzGroupQuery::nodeInGroup($node)) {
             $group = \Drupal::entityTypeManager()->getStorage('group')->load($gid);
             if (!$bid && $value = $group->field_directory_book->getValue()) {
               $bid = $value[0]['target_id'];
-            }
-            if ($bid) {
-              $is_book_page = true;
             }
           }
         }
@@ -146,6 +144,7 @@ class AzBookNavigationBlock extends BookNavigationBlock {
 
     // If this is a book page query for all book pages and create book menu
     if (!empty($bid)) {
+      $is_book_page = true;
 
       // Query for all pages in this book
       $query = \Drupal::database()->select('book');

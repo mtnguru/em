@@ -6,6 +6,9 @@ global-styling:
       fonts/fontawesome/css/all.css: {}
   js:
     js/eduxpro_sub.js: {}
+    js/menu.js: {} 
   dependencies:
     - eduxpro/global-styling
+    - thexpro/global-styling
+
 

@@ -11,6 +11,7 @@ $color-yellow: #eeee00;
 $color-yellow-green: #e0ff49;
 $color-light-red: #ff7766;
 $color-orange: #ffcc00;
+$color-purple: #dd22ff;
 $color-light-purple: #bbaaff;
 $color-dark-purple-red: #330055;
 $color-pink: #dd66ee;
@@ -41,8 +42,10 @@ $color-button-inactive: $color-grey;
 $color-button-active: lighten(#102e4a, 15%);
 $color-icon-selected: $color-cyan;
 $color-icon-hover: darken($color-cyan, 10%);
+$color-group: yellow;
 
 $base-background-color: #1a1b31;
+$secondary-background-color: lighten($base-background-color, 15%);
 
 $table-border-color: lighten($base-background-color, 25%);
 $table-hover-background: #882244;
@@ -51,8 +54,10 @@ $table-background: lighten($base-background-color, 15%);
 
 $base-font-color: $color-white;
 $base-date-color: $color-grey;
+$base-link-color: $color-link;
 
 $base-timing: ease;
+$base-duration: 500ms;
 $base-border-radius: 10px;
 $base-separator-color: lighten($base-background-color, 25%);
 
