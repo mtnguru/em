@@ -43,7 +43,7 @@
         "drupal/special_menu_items": "1.x-dev",
         "drupal/examples": "1.x-dev",
         "drupal/calendar": "1.x-dev",
-        "drupal/console": "^1.8",
+        "drupal/console": "~1.0",
         "drupal/captcha": "1.x-dev",
         "drupal/autosave_form": "1.x-dev",
         "drupal/linkit": "^4.3",
