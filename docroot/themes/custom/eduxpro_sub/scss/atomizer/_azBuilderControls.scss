@@ -38,12 +38,75 @@
     font-size: 14px;
   }
 
-  [dir] .field:not(:last-child) {
-    margin-bottom: 0;
-  }
-
   #controls-blocks {
     margin: 5px 0 0;
+  }
+  .control-block {
+    font-size: 14px;
+    background: $color-controls;
+    padding: 5px 10px;
+    border: 2px solid $color-border;
+    margin-top: 4px;
+    border-radius: 8px;
+
+    &#blocks--sceneName {
+      background-color: inherit;
+      margin-top: 0;
+      border: 0;
+      padding: 0 10px 5px;
+
+      h3 {
+        margin: 0;
+        line-height: 1.0;
+
+        a {
+          color: $color-link;
+        }
+      }
+    }
+
+    .field {
+      &:not(:last-child) {
+        margin-bottom: 2px;
+      }
+      &.field--label-inline {
+        .field__label {
+          color: $color-label;
+        }
+        &> .field__item {
+          padding-right: 0;
+        }
+      }
+    }
+
+    article.atom_viewer {
+      .node-taxonomy-container {
+        margin: 0;
+        padding: 0;
+        h3 {
+          color: $color-label;
+          margin-right: 1em;
+          float: left;
+          line-height: 1.4;
+          font-size: 1em;
+          font-weight: bold;
+          &::after {
+            content: ':';
+
+          }
+        }
+        ul.taxonomy-terms {
+          margin: 0;
+          li {
+            padding: 0;
+          }
+          a {
+            border: none;
+            padding: 0;
+          }
+        }
+      }
+    }
   }
 
   .form-checkboxes {
@@ -136,30 +199,6 @@
     &.snapshot--save {
       margin-top: 15px;
     }
-  }
-
-  .control-block {
-    font-size: 14px;
-    background: $color-controls;
-    padding: 5px 10px;
-    border: 2px solid $color-border;
-    margin-top: 4px;
-    border-radius: 8px;
-
-    &#blocks--sceneName {
-      background-color: inherit;
-      margin-top: 0;
-      border: 0;
-      padding: 0 10px 5px;
-
-      h3 {
-        margin: 0;
-        a {
-          color: $color-link;
-        }
-      }
-    }
-
     hr {
       margin: 5px 0;
       border-top: 2px solid $color-border;
@@ -268,7 +307,6 @@
 
   .az-control-opacityMaster,
   .az-control-opacity {
-
     .az-name {
       vertical-align: middle;
       display: inline-flex;
@@ -430,9 +468,6 @@
     display: inline;
   }
 
-  legend {
-
-  }
   .blocks--mouse-mode {
     legend {
       border-radius: 5px;

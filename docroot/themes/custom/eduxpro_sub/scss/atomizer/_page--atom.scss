@@ -1,5 +1,25 @@
 body.page-type-atom {
   .main-container {
+    flex-direction: inherit;
+    display: block;
+  }
+
+  .header-container {
+    margin-bottom: 1em;
+    .header {
+      padding: .5em;
+    }
+    h2 {
+      margin: 0;
+      line-height: 1.1;
+    }
+    .information {
+      font-size: 80%;
+    }
+  }
+
+  .node-links-container {
+    padding: 0;
   }
 
   .az-properties {
@@ -7,6 +27,18 @@ body.page-type-atom {
     table {
       td.field__label {
         text-align: right;
+      }
+      .node-taxonomy-container {
+        padding: 0;
+        ul.taxonomy-terms {
+          margin: 0;
+          li {
+            a {
+              padding: 0;
+              border: none;
+            }
+          }
+        }
       }
     }
   }

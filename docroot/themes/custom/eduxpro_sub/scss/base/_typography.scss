@@ -1,0 +1,103 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  margin: $top-spacing 0 $small-spacing;
+  &:first-child {
+    margin: 0 0 $small-spacing;
+  }
+}
+
+h1 {
+  color: $color-title;
+  font-size: 210%;
+  font-weight: bold;
+  a {
+    color: $color-title;
+  }
+}
+
+h2 {
+  color : $color-title;
+  font-weight: bold;
+  font-size: 180%;
+  a {
+    color: $color-title;
+  }
+}
+
+h3 {
+  color : darken($color-title, 10%);
+  font-weight: bold;
+  font-size: 160%;
+  a {
+    color: darken($color-title, 10%);
+  }
+}
+
+h4 {
+  color: darken($color-title, 15%);
+  font-size: 140%;
+  a {
+    color: darken($color-title, 15%);
+  }
+}
+
+h5 {
+  color: $color-orange;
+  clear: both;
+  font-size: 120%;
+}
+
+h6 {
+  color: tint($color-orange, 30%);
+  font-size: 110%;
+}
+
+p {
+  margin: 0 0 $paragraph-spacing;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a {
+  color: $base-link-color;
+  text-decoration: none;
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: lighten($base-link-color, 15%);
+    text-decoration: underline;
+  }
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 3px solid $base-separator-color;
+  margin: 1em 0;
+  padding: 0;
+}
+
+img,
+picture {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+  border-radius: 8px;
+  height: auto;
+}
+
+// don't display no-thumbnail.png when embedded images are not found
+img.missing-image {
+//display: none;
+}
+
+
