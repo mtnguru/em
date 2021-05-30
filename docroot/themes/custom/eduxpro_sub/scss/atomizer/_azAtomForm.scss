@@ -22,6 +22,19 @@ form.node-atom-edit-form {
     .description {
       display: none;
     }
+    &.js-form-type-number,
+    &.js-form-type-entity-autocomplete,
+    &.js-form-type-textfield,
+    &.js-form-type-number {
+      label {
+        width: 15rem;
+        float: left;
+      }
+      input {
+        max-width: 25rem;
+        height: 24px;
+      }
+    }
   }
 
   .fieldgroup {
@@ -30,7 +43,8 @@ form.node-atom-edit-form {
 
     legend {
       border-radius: 8px;
-      padding: 3px 10px;
+      font-weight: bold;
+//    padding: 3px 10px;
     }
 
     .fieldset-wrapper {

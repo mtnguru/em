@@ -55,10 +55,10 @@ function az_maestro_preprocess_node(&$variables) {
     ];
 
     // Create sidebar donate block.
-    $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-    $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()
-      ->getViewBuilder('block')
-      ->view($block_entity);
+//  $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+//  $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()
+//    ->getViewBuilder('block')
+//    ->view($block_entity);
 
 
     // Create Announcement block at top of page
@@ -68,10 +68,10 @@ function az_maestro_preprocess_node(&$variables) {
     }
 
     // Create sidebar donate block.
-    $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-    $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()
-      ->getViewBuilder('block')
-      ->view($block_entity);
+//  $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+//  $variables['sidebar']['block_donate'] = \Drupal::entityTypeManager()
+//    ->getViewBuilder('block')
+//    ->view($block_entity);
 
     //  $dashConfig = Yaml::decode(file_get_contents($path));
     $variables['tabs'] = [

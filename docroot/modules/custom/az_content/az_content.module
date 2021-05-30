@@ -828,9 +828,9 @@ function az_content_preprocess_node(&$variables) {
         }
 
         // Add the Donate block.
-        $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
-        $variables['sidebar']['block_donate'] =
-          \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
+//      $block_entity = Drupal\block\Entity\Block::load('azdonateblock');
+//      $variables['sidebar']['block_donate'] =
+//        \Drupal::entityTypeManager()->getViewBuilder('block')->view($block_entity);
       }
       break;
 

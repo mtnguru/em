@@ -16,7 +16,8 @@ div.az-dialog {
   background-color: $color-background;
   border-radius: 10px;
   border: 2px solid $color-border;
-  overflow: hidden;
+  overflow-y: scroll;
+  z-index: 1260;
 
   position: absolute ;
 
