@@ -1,0 +1,16 @@
+
+.menu-wrap {
+  #block-topnavsa-2 {
+    margin: .5em 0;
+    ul.menu {
+      a {
+        padding: 7px;
+      }
+      @media (min-width: 992px) {
+        ul.submenu {
+          top: 30px;
+        }
+      }
+    }
+  }
+}
