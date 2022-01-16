@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')(require('sass'))
 var watch = require('gulp-watch');
 var shell = require('gulp-shell');
 var notify = require('gulp-notify');
@@ -40,7 +40,7 @@ gulp.task('sass', function () {
       loadPath: './css/*',
       sourceMap: true
     })).on('error', function(error) {
-      gutil.log(error);
+//    gutil.log(error);
       this.emit('end');
     })
     .pipe(sourcemaps.write('./maps'))
@@ -141,15 +141,15 @@ gulp.task('flush', function() {
 gulp.task('watch', function() {
 
   // watch scss for changes and clear drupal theme cache on change
-  gulp.watch(['scss/**/*.scss'], ['sass', 'drush:cc']);
+  gulp.watch(['scss/**/*.scss'], gulp.parallel(['sass', 'drush:cc']));
 
   // watch js for changes and clear drupal theme cache on change
-  gulp.watch(['js/js-src/**/*.js'], ['compress', 'drush:cc']);
+  gulp.watch(['js/js-src/**/*.js'], gulp.parallel(['compress', 'drush:cc']));
 
   // If user has specified an override, rebuild Drupal cache
   if (!config.twig.useCache) {
-    gulp.watch(['templates/**/*.html.twig'], ['flush']);
+    gulp.watch(['templates/**/*.html.twig'], gulp.parallel(['flush']));
   }
 });
 
-gulp.task('default', ['watch', 'browser-sync']);
+gulp.task('default', gulp.parallel('watch', 'browser-sync'));

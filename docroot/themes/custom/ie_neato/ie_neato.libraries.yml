@@ -3,6 +3,7 @@ global-styling:
   css:
     base:
       css/ie_neato.css: {}
+      fonts/fontawesome/css/all.css: {}
   dependencies:
     - lightning_media/browser.styling
     
@@ -17,12 +18,6 @@ global-scripts:
     - core/jquery
     - core/jquery.once
     - core/jquery.tooltip
-
-#fonts:
-#  version VERSION
-#  css:
-#    theme:
-#      'fonts/Ultra.otf'
 
 left-nav:
   js:

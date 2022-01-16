@@ -9,9 +9,9 @@ $("nav").navigation();
 ```markup
 <h4 id="handle">Navigation</h4>
 <nav data-navigation-handle="#handle">
-	<a href="#">Home</a>
-	<a href="#">About</a>
-	<a href="#">Contact</a>
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Contact</a>
 </nav>
 ```
 
@@ -21,7 +21,7 @@ By default, Navigation will enable itself on screens smaller then 980 pixels wid
 
 ```javascript
 $("nav").navigation({
-	maxWidth: "740px"
+  maxWidth: "740px"
 });
 ```
 
@@ -36,12 +36,12 @@ $("nav").navigation();
 ```markup
 <h4 id="handle">Navigation</h4>
 <nav data-navigation-handle="#handle" data-navigation-content="#content">
-	<a href="#">Home</a>
-	<a href="#">About</a>
-	<a href="#">Contact</a>
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#">Contact</a>
 </nav>
 <div id="content">
-	...
+  ...
 </nav>
 ```
 
@@ -51,12 +51,8 @@ React to the navigation by listening for the `open.navigation` and `close.naviga
 
 ```javascript
 $("nav").on("open.navigation", function() {
-	// ...
+  // ...
 }).on("close.navigation", function() {
-	// ...
+  // ...
 });
 ```
-
-### IE Support
-
-When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) and matchMedia polyfill ([IE 8](https://gist.github.com/benplum/8045336), [IE 9](https://gist.github.com/benplum/8045327)) are required.

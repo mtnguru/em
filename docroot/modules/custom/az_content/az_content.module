@@ -928,6 +928,7 @@ function _az_content_create_home($node, &$variables) {
   $variables['snippet_home_welcome']     = _az_content_wrap_block('Welcome back', _az_content_render_node(482, 'full'));
   $variables['snippet_home_login']       = _az_content_wrap_block(null, _az_content_render_node(481, 'full'));
   $variables['snippet_home_communities'] = _az_content_render_node(479, 'full');
+  $variables['snippet_home_birkeland']   = _az_content_render_node(3071, 'full');
 
   // Get view with active communities
   $variables['view_home_communities'] = views_embed_view('az_groups', 'block_communities');

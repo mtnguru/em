@@ -1,9 +1,9 @@
 /*!
- * VERSION: 1.8.1
- * DATE: 2017-01-17
+ * VERSION: 1.9.1
+ * DATE: 2018-05-21
  * UPDATES AND DOCS AT: http://greensock.com
  *
- * @license Copyright (c) 2008-2017, GreenSock. All rights reserved.
+ * @license Copyright (c) 2008-2018, GreenSock. All rights reserved.
  * This work is subject to the terms at http://greensock.com/standard-license or for
  * Club GreenSock members, the software agreement that was issued with your membership.
  * 
@@ -14,7 +14,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 
 	"use strict";
 
-	var _doc = document.documentElement,
+	var _doc = (_gsScope.document || {}).documentElement,
 		_window = _gsScope,
 		_max = function(element, axis) {
 			var dim = (axis === "x") ? "Width" : "Height",
@@ -49,6 +49,17 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 		},
 		_getOffset = function(element, container) {
 			var rect = _unwrapElement(element).getBoundingClientRect(),
+				b = document.body,
+				isRoot = (!container || container === _window || container === b),
+				cRect = isRoot ? {top:_doc.clientTop - (window.pageYOffset || _doc.scrollTop || b.scrollTop || 0), left:_doc.clientLeft - (window.pageXOffset || _doc.scrollLeft || b.scrollLeft || 0)} : container.getBoundingClientRect(),
+				offsets = {x: rect.left - cRect.left, y: rect.top - cRect.top};
+			if (!isRoot && container) { //only add the current scroll position if it's not the window/body.
+				offsets.x += _buildGetter(container, "x")();
+				offsets.y += _buildGetter(container, "y")();
+			}
+			return offsets;
+			/*	PREVIOUS
+			var rect = _unwrapElement(element).getBoundingClientRect(),
 				isRoot = (!container || container === _window || container === document.body),
 				cRect = (isRoot ? _doc : container).getBoundingClientRect(),
 				offsets = {x: rect.left - cRect.left, y: rect.top - cRect.top};
@@ -57,22 +68,18 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 				offsets.y += _buildGetter(container, "y")();
 			}
 			return offsets;
+			*/
 		},
 		_parseVal = function(value, target, axis) {
 			var type = typeof(value);
-			if (type === "number" || (type === "string" && value.charAt(1) === "=")) {
-				return value;
-			} else if (value === "max") {
-				return _max(target, axis);
-			}
-			return Math.min(_max(target, axis), _getOffset(value, target)[axis]);
+			return !isNaN(value) ? parseFloat(value) : (type === "number" || (type === "string" && value.charAt(1) === "=")) ? value : (value === "max") ? _max(target, axis) : Math.min(_max(target, axis), _getOffset(value, target)[axis]);
 		},
 
 		ScrollToPlugin = _gsScope._gsDefine.plugin({
 			propName: "scrollTo",
 			API: 2,
 			global: true,
-			version:"1.8.1",
+			version:"1.9.1",
 
 			//called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
 			init: function(target, value, tween) {
@@ -158,6 +165,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 
 	ScrollToPlugin.max = _max;
 	ScrollToPlugin.getOffset = _getOffset;
+	ScrollToPlugin.buildGetter = _buildGetter;
 	ScrollToPlugin.autoKillThreshold = 7;
 
 	p._kill = function(lookup) {
@@ -178,10 +186,10 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 	var getGlobal = function() {
 		return (_gsScope.GreenSockGlobals || _gsScope)[name];
 	};
-	if (typeof(define) === "function" && define.amd) { //AMD
-		define(["TweenLite"], getGlobal);
-	} else if (typeof(module) !== "undefined" && module.exports) { //node
+	if (typeof(module) !== "undefined" && module.exports) { //node
 		require("../TweenLite.js");
 		module.exports = getGlobal();
+	} else if (typeof(define) === "function" && define.amd) { //AMD
+		define(["TweenLite"], getGlobal);
 	}
 }("ScrollToPlugin"));

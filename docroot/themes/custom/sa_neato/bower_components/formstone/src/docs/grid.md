@@ -1,4 +1,4 @@
-The grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on 'small', 6 columns on 'medium' and 12 columns on 'large' displays.
+The Formstone Grid is flexbox-based class system that works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on 'small', 6 columns on 'medium' and 12 columns on 'large' displays.
 
 ### Markup
 
@@ -6,11 +6,11 @@ A basic example may look something like:
 
 ```markup
 <body class="fs-grid">
-	<div class="fs-row">
-		<div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
-		<div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
-		<div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
-	</div>
+  <div class="fs-row">
+    <div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
+    <div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
+    <div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
+  </div>
 </body>
 ```
 
@@ -38,7 +38,7 @@ Grid relies on border-box and includes a global box-sizing reset:
 *,
 *:before,
 *:after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 ```
 
@@ -53,6 +53,22 @@ This will effect every element on the page and can have unexpected results. In t
 | `md` | 740px to 980px | 720px | 6 |
 | `lg` | 980px to 1220px | 960px | 12 |
 | `xl` | larger than 1220px | 1200px | 12 |
+
+### Row Helper Classes
+
+Helper classes can be added to rows to modify their default behavior in predictable ways.
+
+| Class | Description |
+| --- | --- |
+| `fs-[x]-reverse` | reverse order of cells |
+| `fs-[x]-justify-between` | even spacing between cells |
+| `fs-[x]-justify-around` | even spacing around cells |
+| `fs-[x]-justify-start` | align cells to start of row horizontally |
+| `fs-[x]-justify-center` | align cells to center of row horizontally |
+| `fs-[x]-justify-end` | align cells to end of row horizontally |
+| `fs-[x]-align-start` | align cells to top of row vertically |
+| `fs-[x]-align-center` | align cells to center of row vertically |
+| `fs-[x]-align-end` | align cells to bottom of row vertically |
 
 ### Defining Cells
 
@@ -95,32 +111,27 @@ The fraction classes can be used in place of specific column counts:
 | `fs-[x]-fourth` | 1/4 row width |
 | `fs-[x]-fifth` | 1/5 row width |
 
-### Hidden Cells
-
-To hide cells at specific screen sizes:
-
-| Class | Description |
-| --- | --- |
-| `fs-xs-hide` | Hide on extra small |
-| `fs-sm-hide` | Hide on small |
-| `fs-md-hide` | Hide on medium |
-| `fs-lg-hide` | Hide on large |
-| `fs-xl-hide` | Hide on extra large |
-
-### Helper Classes
+### Cell Helper Classes
 
 Helper classes can be added to cells to modify their default behavior in predictable ways.
 
 | Class | Description |
 | --- | --- |
-| `fs-padded` | Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters. |
-| `fs-contained` | Removes cell margin. Allows backgrounds to touch by removing gutters. |
-| `fs-centered` | Centers cell. Useful for centering odd column count cells. |
-| `fs-right` | Right aligns cell. Useful for changing document flow on different device sizes. |
+| `fs-[x]-first` | Force cell to front of row. |
+| `fs-[x]-last` | Force cell to end of row. |
+| `fs-[x]-hide` | Hide cell at specific size. |
+| `fs-[x]-justify-start` | align cell to start of row horizontally |
+| `fs-[x]-justify-center` | align cell to center of row horizontally |
+| `fs-[x]-justify-end` | align cell to end of row horizontally |
+| `fs-[x]-align-start` | align cell to top of row vertically |
+| `fs-[x]-align-center` | align cell to center of row vertically |
+| `fs-[x]-align-end` | align cell to bottom of row vertically |
+| `fs-cell-padded` | Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters. |
+| `fs-cell-contained` | Removes cell margin. Allows backgrounds to touch by removing gutters. |
 
 ### LESS Configuration
 
-Grid can also be configured and rebuilt using Grunt. Simply edit the variables found in `/src/grid/grid-config.less` before running the default `grunt` process.
+Grid can also be configured and rebuilt using Gulp. Simply edit the variables found in `/src/grid/grid-config.less` before running the default `gulp` process.
 
 | Variable | Default | Description |
 | --- | --- | --- |
@@ -168,9 +179,9 @@ Grid can also be configured and rebuilt using Grunt. Simply edit the variables f
 | **Mixin-Only Grid** | | |
 | `@fs-grid-mixin-only` | `false` | Disables generation of classes based grid |
 
-### LESS Extends & Mixins 
+### LESS Extends & Mixins
 
-Grid can be compiled into CSS directly. This allows for a similar declarative approach, without adding classes to markup. 
+Grid can be compiled into CSS directly. This allows for a similar declarative approach, without adding classes to markup.
 
 | Name | Description |
 | --- | --- |
@@ -178,13 +189,31 @@ Grid can be compiled into CSS directly. This allows for a similar declarative ap
 | `.fs_grid_row` | Base row |
 | `.fs_grid_row_fluid` | Base fluid row |
 | `.fs_grid_row_fluid_sm` | Base fluid row (small only) |
+| `.fs_grid_row_adaptive` | Base adaptive row |
+| `.fs_grid_row_reverse` | Base reversed row |
+| `.fs_grid_row_justify_around` | Base justify around row |
+| `.fs_grid_row_justify_between` | Base justify between row |
+| `.fs_grid_row_justify_start` | Base justify start row |
+| `.fs_grid_row_justify_center` | Base justify center row |
+| `.fs_grid_row_justify_end` | Base justify end row |
+| `.fs_grid_row_align_start` | Base align start row |
+| `.fs_grid_row_align_center` | Base align center row |
+| `.fs_grid_row_align_end` | Base align end row |
 | `.fs_grid_row_row` | Base nested row |
 | `.fs_grid_row_row_contained` | Base nested row (parent cell is contained) |
+| `.fs_grid_row_destroy` | Base destroy row |
 | `.fs_grid_cell` | Base cell |
-| `.fs_grid_cell_centered` | Base centered cell |
 | `.fs_grid_cell_padded` | Base padded cell |
 | `.fs_grid_cell_contained` | Base contained cell |
-| `.fs_grid_cell_right` | Base right cell |
+| `.fs_grid_cell_justify_start` | Base justify start cell |
+| `.fs_grid_cell_justify_center` | Base justify center cell |
+| `.fs_grid_cell_justify_end` | Base justify end cell |
+| `.fs_grid_cell_align_start` | Base align start cell |
+| `.fs_grid_cell_align_center` | Base align center cell |
+| `.fs_grid_cell_align_end` | Base align end cell |
+| `.fs_grid_cell_first` | Base first cell |
+| `.fs_grid_cell_last` | Base last cell |
+| `.fs_grid_cell_destroy` | Base destroy cell |
 | **Mixins** | |
 | `.fs_row();` | Base row |
 | `.fs_row_fluid();` | Base row fluid |
@@ -192,10 +221,8 @@ Grid can be compiled into CSS directly. This allows for a similar declarative ap
 | `.fs_row_row();` | Base nested row |
 | `.fs_row_row_contained();` | Base nested row (parent cell is contained) |
 | `.fs_cell();` | Base cell |
-| `.fs_cell_centered();` | Base centered cell |
 | `.fs_cell_padded();` | Base padded cell |
 | `.fs_cell_contained();` | Base contained cell |
-| `.fs_cell_right();` | Base right cell |
 | `.fs_cell_xs(@count [, @total]);` | Extra Small cell; Pass @total to define fractions |
 | `.fs_cell_sm(@count [, @total]);` | Small cell; Pass @total to define fractions |
 | `.fs_cell_md(@count [, @total]);` | Medium cell; Pass @total to define fractions |

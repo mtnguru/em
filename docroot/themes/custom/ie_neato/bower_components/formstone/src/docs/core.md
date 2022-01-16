@@ -38,7 +38,7 @@ The `Formstone.Plugin` factory function is used to define a plugin. The factory 
 
 ```javascript
 $(".target").plugin({
-	option: value
+  option: value
 });
 ```
 
@@ -48,18 +48,18 @@ Plugins should remain compatible with module loaders like [RequireJS](http://req
 
 ```javascript
 (function(factory) {
-	if (typeof define === "function" && define.amd) {
-		define([
-			"jquery",
-			"./core",
-			"./dependency",
-		], factory);
-	} else {
-		factory(jQuery, Formstone);
-	}
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./dependency",
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
 }(function($, Formstone) {
 
-	// Plugin
+  // Plugin
 
 })
 
@@ -78,79 +78,79 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 /* global define */
 
 (function(factory) {
-	if (typeof define === "function" && define.amd) {
-		define([
-			"jquery",
-			"./core",
-			"./dependency",
-		], factory);
-	} else {
-		factory(jQuery, Formstone);
-	}
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./dependency",
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
 }(function($, Formstone) {
 
-	"use strict";
+  "use strict";
 
-	function setUp() {
-		// this = document
-	}
+  function setup() {
+    // this = document
+  }
 
-	function construct(data) {
-		// this = jQuery wrapped target element
-		// data = instance data
-	}
+  function construct(data) {
+    // this = jQuery wrapped target element
+    // data = instance data
+  }
 
-	function destruct(data) {
-		// this = jQuery wrapped target element
-		// data = instance data
-	}
+  function destruct(data) {
+    // this = jQuery wrapped target element
+    // data = instance data
+  }
 
-	function reset(data) {
-		// this = jQuery wrapped target element
-		// data = instance data
-	}
+  function reset(data) {
+    // this = jQuery wrapped target element
+    // data = instance data
+  }
 
-	// Register Plugin
+  // Register Plugin
 
-	var Plugin = Formstone.Plugin("namespace", {
-			widget: true,
-			defaults: {
-				option:    value
-			},
-			classes: [
-				"visible"
-			],
-			methods: {
-				_setup         : setup,
-				_construct     : construct,
-				_postConstruct : construct,
-				_destruct      : destruct,
-				_resize        : resize,
-				_raf           : raf,
+  var Plugin = Formstone.Plugin("namespace", {
+      widget: true,
+      defaults: {
+        option:    value
+      },
+      classes: [
+        "visible"
+      ],
+      methods: {
+        _construct     : construct,
+        _postConstruct : construct,
+        _destruct      : destruct,
+        _resize        : resize,
+        _raf           : raf,
 
-				reset          : reset
-			},
-			utilities: {
-				close:         close
-			}
-		}),
+        reset          : reset
+      },
+      utilities: {
+        close:         close
+      }
+    }),
 
-		// Localize References
+    // Localize References
 
-		Classes      = Plugin.classes,
-		Events       = Plugin.events,
-		Functions    = Plugin.functions;
+    Classes      = Plugin.classes,
+    Events       = Plugin.events,
+    Functions    = Plugin.functions;
+
+  Formstone.Ready(setup);
 
 })
 
 );
 ```
 
-As in the example above, Widgets can override three internal methods by pointing a key to the corresponding local function:
+As in the example above, Widgets can override the following internal methods by pointing a key to the corresponding local function:
 
 | Method | Description |
 | --- | --- |
-| `_setup` | Run once when document is ready, scoped to document |
 | `_construct` | Run at initialization of each instance, scoped to specific instance |
 | `_postConstruct` | Run after initialization of current instance set, scoped to specific instance |
 | `_destruct` | Run at destruction of each instance, scoped to specific instance |
@@ -179,39 +179,39 @@ Utility plugins may interact with DOM nodes but are not necessarily tied to any 
 /* global define */
 
 (function(factory) {
-	if (typeof define === "function" && define.amd) {
-		define([
-			"jquery",
-			"./core"
-		], factory);
-	} else {
-		factory(jQuery, Formstone);
-	}
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
 }(function($, Formstone) {
 
-	"use strict";
+  "use strict";
 
-	function delegate() {
-		// Manually handle public methods
-	}
+  function delegate() {
+    // Manually handle public methods
+  }
 
-	// Register Plugin
+  // Register Plugin
 
-	var Plugin = Formstone.Plugin("namespace", {
-			utilties: {
-				_delegate:     delegate
-			}
-		}),
+  var Plugin = Formstone.Plugin("namespace", {
+      utilties: {
+        _delegate:     delegate
+      }
+    }),
 
-		// Internal Defaults
+    // Internal Defaults
 
-		Defaults = {
-			option    : value
-		},
+    Defaults = {
+      option    : value
+    },
 
-		// Localize References
+    // Localize References
 
-		Document = Formstone.$document[0];
+    Document = Formstone.$document[0];
 
 })
 
@@ -243,14 +243,14 @@ These values can then be localized in the scope of the plugin for optimal minimi
 
 ```javascript
 var Plugin = Formstone.Plugin(“namespace”, {
-		...
-	}),
-	Defaults     = Plugin.defaults,
-	Functions    = Plugin.functions,
-	Methods      = Plugin.methods,
-	Utilities    = Plugin.utilities,
-	Classes      = Plugin.classes,
-	Events       = Plugin.events;
+    ...
+  }),
+  Defaults     = Plugin.defaults,
+  Functions    = Plugin.functions,
+  Methods      = Plugin.methods,
+  Utilities    = Plugin.utilities,
+  Classes      = Plugin.classes,
+  Events       = Plugin.events;
 ```
 
 This may seem strangely redundant at first, however multi-dimensional objects do not minimize efficiently. This is also one reason standard prototypal inheritance is not used when building a plugin, however this is not to say a specific plugin could not contain locally scoped prototypes. Plugin design is always up to the developer, the factory simply provides a consistent, DRY approach to the basic plugin pattern.
@@ -261,12 +261,12 @@ The `classes` object returned when defining a plugin will contain properly names
 
 ```javascript
 var Plugin = Formstone.Plugin(“namespace”, {
-	...
-	classes: [
-		"visible",
-		"content"
-	],
-	...
+  ...
+  classes: [
+    "visible",
+    "content"
+  ],
+  ...
 });
 ```
 
@@ -293,12 +293,12 @@ The `events` object returned when defining a plugin will contain properly namesp
 
 ```javascript
 var Plugin = Formstone.Plugin(“namespace”, {
-	...
-	events: [
-		"enable",
-		"disable"
-	],
-	...
+  ...
+  events: [
+    "enable",
+    "disable"
+  ],
+  ...
 });
 ```
 
@@ -355,6 +355,16 @@ data.$el.on(Events.click, onClick);
 | `touchStart` | Default | `touchstart.namespace` |
 | `transitionEnd` | Default | `transitionEnd.namespace` |
 
+### Document Ready
+
+Changes introduced to the `ready` event handler in jQuery 3 can cause a flash of unstyled content before widget plugins have completely initialized. The `Formstone.Ready` handler utilizes the native 'DOMContentLoaded' event to avoid the flash and can be safely used a jQuery `ready` replacement:
+
+```javascript
+Formstone.Ready(function() {
+  ...
+});
+```
+
 ### No Conflict
 
 One benefit of Formstone is the module nature of the components, allowing developers to include only what's required. Certain edge cases may require overlapping namespaces between two or more libraries. To avoid (some) namespace collisions with other libraries, such as Bootstrap or Lightbox, developers can call the `Formstone.NoConflict()` method to restore all jQuery plugin namespaces to their 'original' functions. Other libraries should be included before Formstone components, however Formstone will remember this flag and avoid registering un-namespaced plugins included after the initial call. Note: This does not effect data attributes or events, only the jQuery plugin namespace.
@@ -362,14 +372,3 @@ One benefit of Formstone is the module nature of the components, allowing develo
 ```javascript
 Formstone.NoConflict();
 ```
-
-### Modernizr Support
-
-Formstone styles depend on a few basic [Modernizr](https://modernizr.com/) classes:
-
-| Test |
-| --- |
-| csstransforms |
-| csstransforms3d |
-| opacity |
-| touchevents |

@@ -28,6 +28,7 @@
 
   h2 {
     font-size: 150%;
+
     a {
       color: $color-link;
     }
@@ -41,6 +42,7 @@
   #controls-blocks {
     margin: 5px 0 0;
   }
+
   .control-block {
     font-size: 14px;
     background: $color-controls;
@@ -69,11 +71,13 @@
       &:not(:last-child) {
         margin-bottom: 2px;
       }
+
       &.field--label-inline {
         .field__label {
           color: $color-label;
         }
-        &> .field__item {
+
+        & > .field__item {
           padding-right: 0;
         }
       }
@@ -83,6 +87,7 @@
       .node-taxonomy-container {
         margin: 0;
         padding: 0;
+
         h3 {
           color: $color-label;
           margin-right: 1em;
@@ -90,16 +95,20 @@
           line-height: 1.4;
           font-size: 1em;
           font-weight: bold;
+
           &::after {
             content: ':';
 
           }
         }
+
         ul.taxonomy-terms {
           margin: 0;
+
           li {
             padding: 0;
           }
+
           a {
             border: none;
             padding: 0;
@@ -111,6 +120,7 @@
 
   .form-checkboxes {
     margin: 0;
+
     .form-item {
       margin: 0;
     }
@@ -132,7 +142,7 @@
   fieldset.form-composite {
     position: relative;
     margin: 0 0 5px 0;
-//  margin-bottom: 5px;
+    //  margin-bottom: 5px;
 
     legend {
       border-radius: 8px;
@@ -154,6 +164,7 @@
 
   .form-item-theme--selectblock {
     margin: 0 0 10px;
+
     select {
       font-size: 120%;
     }
@@ -162,6 +173,7 @@
   .az-control-link {
     margin: 4px 10%;
     width: 80%;
+
     a {
       display: block;
       color: $color-white;
@@ -176,9 +188,11 @@
   .az-control-toggle {
     transition: color .5s;
     color: rgba($color-button-inactive, .5);
+
     &.az-selected {
       color: $color-icon-selected;
     }
+
     &:hover {
       color: $color-icon-hover;
     }
@@ -199,6 +213,7 @@
     &.snapshot--save {
       margin-top: 15px;
     }
+
     hr {
       margin: 5px 0;
       border-top: 2px solid $color-border;
@@ -211,6 +226,7 @@
     margin: 0 0 5px;
     color: $color-label;
     text-align: center;
+
     &:before {
       margin-right: 5px;
       color: $color-icon-selected;
@@ -219,8 +235,8 @@
 
   .az-label {
     font-weight: bold;
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
   }
 
   .az-indent .az-name {
@@ -229,8 +245,9 @@
 
   .az-control-text {
     font-size: 100%;
+
     .text-label {
-//    color: $color-label;
+      //    color: $color-label;
       font-weight: bold;
       display: inline-block;
       width: 8em;
@@ -261,7 +278,9 @@
     .form-item-value {
       vertical-align: middle;
       display: inline-flex;
+
       .az-value {
+        color: $color-white;
         text-align: right;
         width: 2.5em;
         padding: 0;
@@ -294,12 +313,15 @@
     .az-name {
       width: 10%;
     }
+
     .az-value {
       background: $color-controls-wrapper;
     }
+
     .az-slider {
       width: 62%;
     }
+
     .atom--delete {
       margin-top: 16px;
     }
@@ -324,12 +346,15 @@
       width: 16px;
       height: 16px;
       vertical-align: middle;
+
       &.opaque {
         background: $color-white;
       }
+
       &.transparent {
         background: $color-dark-grey;
       }
+
       &.notvisible {
         background: $color-black;
       }
@@ -338,6 +363,7 @@
     .form-item-value {
       vertical-align: middle;
       display: inline-flex;
+
       .az-value {
         border-radius: 0;
         text-align: right;
@@ -379,12 +405,14 @@
   .form-item-selectyml {
     margin-top: 0;
   }
+
   .selectyml {
     font-size: 125%;
   }
 
-  .form-type-color {
+  .js-form-type-color {
     margin: 0;
+
     &not:first-child {
       border-top: 2px solid #aaa;
       padding-top: 10px;
@@ -398,7 +426,7 @@
       display: inline-block;
       vertical-align: top;
       font-size: 14px;
-//    font-weight: bold;
+      //    font-weight: bold;
       width: 68%;
       margin: 0;
       color: $color-white;
@@ -423,7 +451,7 @@
   }
 
   .form-type-checkbox {
-    margin: 0 0 0 10px ;
+    margin: 0 0 0 10px;
   }
 
   .button {
@@ -440,6 +468,7 @@
 
     .form-item-radio {
       margin: 0;
+
       .form-type-checkbox {
 
         margin: 0 0 0 10px;
@@ -462,7 +491,10 @@
 
   .az-min,
   .az-max,
-  .az-label,
+  .az-label {
+    display: inline-block
+  }
+
   .form-item-value,
   .form-item-range {
     display: inline;
@@ -488,7 +520,7 @@
       }
     }
     hr {
-      margin-top: 15px;
+      margin: 10px 0;
     }
   }
 
@@ -584,9 +616,14 @@
 
   .proton--colors {
 
+    label {
+      position: relative;
+    }
+
     .proton-color {
       position: absolute;
-      left: 15px;
+      left: -18px;
+      top: 0;
       margin-top: 1px;
       width: 15px;
       height: 14px;

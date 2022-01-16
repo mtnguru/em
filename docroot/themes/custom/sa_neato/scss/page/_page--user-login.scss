@@ -1,4 +1,5 @@
 // body.user-login
+
 body.user-login {
 
   .status-messages {
@@ -8,6 +9,10 @@ body.user-login {
   }
 
   form.user-login-form {
+
+    max-width: 470px;
+    margin: 0 auto;
+    padding: 0 2rem;
 
     @include media($bp960) {
       text-align: center;

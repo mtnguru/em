@@ -2,7 +2,7 @@
   "name": "sa_neato",
   "version": "8.1.2",
   "devDependencies": {
-    "browser-sync": "^2.26.14",
+    "browser-sync": "^2.27.7",
     "duplexer2": "^0.1.4",
     "gulp-notify": "^2.2.0",
     "gulp-sass": "^2.1.0",

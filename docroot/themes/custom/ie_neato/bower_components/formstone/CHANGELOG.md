@@ -2,6 +2,148 @@
 
 <!-- -->
 
+### 1.4.22
+
+* Fixed greedy selector in Tabs
+
+### 1.4.21
+
+* Fixed version
+
+### 1.4.20
+
+* Removed deprecated `$.type()`
+* Fixed in-line regression in Lightbox
+
+### 1.4.19
+
+* Fixed issue with using `paged` and `maxWidth` options in Carousel
+* Fixed gallery regression in Lightbox
+
+### 1.4.18
+
+* Adding option to disable touch controls in Carousel
+* Fixed issue with control accessibility in Carousel (Thanks @nhall!)
+* Fixed issue with iFrame galleries in Lightbox
+
+### 1.4.17
+
+* Fixing issue with brackets in Checkbox
+
+### 1.4.16
+
+* Fixing issue with autoAdvance in linked Carousel
+
+### 1.4.15
+
+* Adding basic inline content gallery support to Lightbox
+
+### 1.4.14
+
+* Fixed issue with auto play videos in Background
+* Fixed issue with auto upload queues in Upload
+
+### 1.4.13
+
+* Fixed inner content issue in Tabs
+
+### 1.4.12
+
+* Added support for custom headers in Upload (Thanks @haagen!)
+* Fixed issue with nested Scrollbars
+
+### 1.4.11
+
+* Added YouTube tracking URL parameters in Lightbox (Thanks @mimoduo!)
+* Fixed issue with static item widths in Carousel
+* Fixed issue with item visibility in Carousel
+* Fixed issue with scroll position in Checkbox (Thanks @Bonscho!)
+* Fixed issue with stopPropagation in Checkbox (Thanks @matthisamoto!)
+
+### 1.4.10
+
+* Fixed issue with `paged` option in Carousel
+
+### 1.4.9
+
+* Added `autoplay` attribute to `video` tags in Background
+* Fixed issue with alignment on `-contained` and `-padded` cells in Grid
+
+### 1.4.8
+
+* Added mobile auto-play video support in Background
+* Added `threshold` and `time` options in Touch
+* Fixed issue with `matchWidth: false` paging in Carousel
+* Fixed issue with page scrolling in Carousel
+
+### 1.4.7
+
+* Fixed issue with nested cell widths in Grid for legacy IE
+
+### 1.4.6
+
+* Added `parent` scroll context support in Checkpoint
+* Fixed issue with Carousel
+
+### 1.4.5
+
+* Fixed issue with `-first` and `-last` classes in Grid
+* Fixed issue with inactive animations in Checkpoint
+
+### 1.4.4
+
+* Added option to select multiple items without pressing 'ctl' key in Dropdown (Thanks @qtsd!)
+* Fixed issue with `contained` classes in Grid
+* Fixed issue with default behavior in Number
+
+### 1.4.3
+
+* Fixed issue with 'autoAdvanced' in Carousel
+* Fixed issue with 'first' and 'last' cells in Grid
+* Fixed issue with image URL detection in Lightbox
+* Renamed 'mobile' to 'overlay' in Lightbox
+
+### 1.4.2
+
+* Fixed issue with 'paged' counts in Carousel
+* Fixed issue with cell alignment in Grid
+
+### 1.4.1
+
+* Added `alt` option in Background
+* Added aria labeling options in Carousel, Lightbox, and Pagination
+* Fixed issue with nested rows in Grid
+* Fixed issue with initialization in Checkpoint
+* Fixed issue with label selector in Dropdown
+* Fixed issue with rounding small steps in Number
+* Fixed issue with accessibility in Pagination (Thanks @nhall!)
+
+### 1.4.0
+
+* Updated minimum jQuery version
+* Updated to Gulp build process
+* Added flexbox based grid as default (legacy float based grid still available)
+* Added Checkpoint plugin for CSS animations scroll
+* Added Sticky plugin for sticky elements on scroll
+* Added Formstone.Ready handler to Core
+* Added additional AJAX parameters in Upload events
+* Fixed issue with moving input elements in Checkbox
+* Fixed issue with load order and `setup` calls
+* Renamed `mobile` option to `native` in Dropdown for clarity
+* Removed Modernizr requirement
+* Removed legacy browser support
+
+### 1.3.3
+
+* Added compiled theme files for each component
+* Fixed issue with un-contained Carousel item focus
+
+### 1.3.2
+
+* Fixed issue with Viewer in Lightbox (Thanks @mackensen!)
+* Fixed issue with inline content in Lightbox
+* Fixed issue with focus in Lightbox
+
 ### 1.3.1
 
 * Added viewport and gesture locking for touch based components

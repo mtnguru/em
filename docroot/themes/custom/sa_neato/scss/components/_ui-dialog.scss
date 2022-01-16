@@ -5,6 +5,7 @@
 
 .ui-dialog.ui-widget-content {
   overflow-y: scroll;
+  color: $color-white;
 
   .ui-dialog-titlebar {
     background-color: darken($color-dark-green, 10%);

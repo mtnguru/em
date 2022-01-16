@@ -1,3 +1,10 @@
+form {
+  color: $color-white;
+  input {
+    color: $color-black;
+  }
+
+}
 textarea {
   color: black;
 }
@@ -9,6 +16,12 @@ div.js-form-type-checkbox {
     width: 18px;
     height: 18px;
     border: none;
+  }
+}
+
+.js-form-type-color {
+  label {
+    font-weight: 500;
   }
 }
 

@@ -10,6 +10,10 @@ body.path-user {
 }
 
 form.user-login-form {
+  max-width: 530px;
+  margin: 0 auto;
+  padding: 0 2rem;
+
   .header {
     margin-bottom: 2em;
     padding-left: 1em;
@@ -22,3 +26,5 @@ form.user-login-form {
     margin-top: 3em;
   }
 }
+
+
