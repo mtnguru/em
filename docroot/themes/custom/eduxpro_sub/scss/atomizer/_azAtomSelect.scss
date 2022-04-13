@@ -73,10 +73,18 @@ body#landing_page-atom-builder {
     }
   }
 
+  .search-wrapper {
+    input {
+      background: $color-black;
+      color: $color-white;
+      padding: 3px 5px;
+    }
+  }
+
   .select-list {
     width: 100%;
     position: absolute;
-    top: 40px;
+    top: 68px;
     bottom: 0;
     right: 0;
     overflow-y: scroll;

@@ -141,7 +141,7 @@ gulp.task('flush', function() {
 gulp.task('watch', function() {
   let watcher;
   // watch scss for changes and clear drupal theme cache on change
-  gulp.watch(['scss/**/*.scss'], gulp.parallel('sass'));
+  gulp.watch(['scss/*','scss/**/*.scss'], gulp.parallel('sass'));
 
   // watch js for changes and clear drupal theme cache on change
   gulp.watch(['js/js-src/**/*.js'], gulp.parallel('sass'));
