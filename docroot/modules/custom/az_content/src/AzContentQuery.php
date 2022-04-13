@@ -13,7 +13,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Provides query for recent content 
+ * Provides query for recent content
  *   Array $settings configures query parameters.
  */
 class AzContentQuery {
@@ -36,6 +36,11 @@ class AzContentQuery {
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     //FILTERS
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    ////////// Filter on core Drupal published value
+    if (isset($set['nid'])) {
+      $query->condition('nfd.nid', $set['nid'], (is_array($set['nid'])) ? 'IN' : '=');
+    }
 
     ////////// Filter on core Drupal published value
     if (isset($set['status'])) {
@@ -157,7 +162,8 @@ class AzContentQuery {
           $sorted = true;
           break;
         case 'select-atom':
-          // Join in the element, Join in atomic number, Join # protons
+          // Join in the element, atomic number, # protons, abundance, half life
+          // @TODO trigger the joins based on if they're in $set['fields']
           // Order by Atomic #, # Protons, Title
 
           // Join Element entity
@@ -174,8 +180,8 @@ class AzContentQuery {
           // Join Abundance in
           $query->leftJoin('node__field_abundance', 'nfab', 'nfd.nid = nfab.entity_id');
 
-          // Join Abundance in
-          $query->leftJoin('node__field_half_life', 'nfhl', 'nfd.nid = nfab.entity_id');
+          // Join Half Life in
+          $query->leftJoin('node__field_half_life', 'nfhl', 'nfd.nid = nfhl.entity_id');
 
           // Order by the Atom name third.
           $query->orderBy('nfd.title', 'ASC');
