@@ -1,3 +1,4 @@
+@use "sass:math";
 // Typography
 $base-font-family: $helvetica;
 $heading-font-family: $base-font-family;
@@ -13,11 +14,11 @@ $heading-line-height: 1.1;
 $base-border-radius: 10px;
 $inner-border-radius: 8px;
 $base-spacing: ($base-line-height * 1.5em);
-$small-spacing: ($base-spacing / 2.5);
+$small-spacing: math.div($base-spacing, 2.5);
 
-$top-spacing: ($base-spacing / 2);
+$top-spacing: math.div($base-spacing, 2);
 
-$paragraph-spacing: ($base-spacing / 2);
+$paragraph-spacing: math.div($base-spacing, 2);
 $base-z-index: 0;
 // Animations
 

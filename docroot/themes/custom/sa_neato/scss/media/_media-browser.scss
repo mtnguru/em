@@ -18,7 +18,7 @@ div.media-library-widget-modal.ui-dialog--narrow {
     }
   }
   form.views-exposed-form {
-    
+
     margin-top: 20px;
   }
   .form-submit {
@@ -221,7 +221,7 @@ form.entity-browser-form {
 
       .views-field {
         width: 100%;
-        @include fixed-aspect(3/3 * 100%, '.field-content');
+        @include fixed-aspect(1 * 100%, '.field-content');
         background-color: inherit;
       }
       .views-field-name {

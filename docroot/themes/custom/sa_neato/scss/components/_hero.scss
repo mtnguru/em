@@ -4,7 +4,7 @@
   .field--name-field-hero-image {
 
     article {
-      @include fixed-aspect(1/ 3 * 100%, '.field--name-image');
+      @include fixed-aspect(.33 * 100%, '.field--name-image');
       width: 100%;
       padding-bottom: 20px;
 

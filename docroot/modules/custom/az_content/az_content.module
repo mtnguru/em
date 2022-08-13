@@ -895,6 +895,7 @@ function _az_content_group_status_page($node, &$variables) {
  */
 function _az_content_render_node($nid, $viewMode = 'full') {
   $node = \Drupal::entityManager()->getStorage('node')->load($nid);
+  if (!$node) return null;
   $body = $node->body->value;
   _az_content_add_SAM_tm($body);
   $node->body->setValue([

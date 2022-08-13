@@ -1,3 +1,4 @@
+@use "sass:math";
 .block-region-sidebar {
   .views-element-container {
     .content-container {
@@ -110,13 +111,13 @@
         width: 50%;
       }
       @include media($bp580only) {
-        width: calc(100% / 3);
+        width: math.div(100%, 3);
       }
       @include media($bp960only) {
-        width: calc(100% / 1);
+        width: math.div(100%, 1);
       }
       @include media($bp1280) {
-        width: calc(100% / 1);
+        width: math.div(100%, 1);
       }
     }
   }

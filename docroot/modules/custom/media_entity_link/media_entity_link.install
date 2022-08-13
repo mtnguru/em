@@ -13,7 +13,7 @@ function media_entity_link_install() {
   $destination = \Drupal::config('media.settings')->get('icon_base_uri');
   file_prepare_directory($destination, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
 
-  $files = file_scan_directory($source, '/.*\.(svg|png|jpg|jpeg|gif)$/');
+  $files = \Drupal\Core\File\FileSystemInterface::scanDirectory($source, '/.*\.(svg|png|jpg|jpeg|gif)$/');
   foreach ($files as $file) {
     // When reinstalling the media module we don't want to copy the icons when
     // they already exist. The icons could be replaced (by a contrib module or

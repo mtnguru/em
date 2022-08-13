@@ -9,7 +9,7 @@ form {
 
   label {
     font-weight: 600;
-    margin-bottom: $small-spacing / 2;
+    margin-bottom: calc($small-spacing / 2);
 
     &.required::after {
       content: "*";
