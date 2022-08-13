@@ -65,7 +65,7 @@
 
   .views-field {
     width: 100%;
-    @include fixed-aspect(22/22 * 100%, '.field-content');
+    @include fixed-aspect(1 * 100%, '.field-content');
     padding: 2px;
 
     .media-container {

@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')(require('sass'));
 var watch = require('gulp-watch');
 var shell = require('gulp-shell');
 var notify = require('gulp-notify');

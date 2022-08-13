@@ -1,3 +1,5 @@
+@use "sass:math";
+i
 .breadcrumb {
   $base-border-radius: $base-border-radius !default;
   $base-spacing: 1.5em !default;
@@ -18,7 +20,7 @@
     line-height: $breadcrumb-height;
     margin-bottom: 2px;
     margin-right: -5px;
-    padding: 0 ($breadcrumb-height / 4) 0 ($breadcrumb-height / 2);
+    padding: 0 math.div($breadcrumb-height, 4) 0 math.div($breadcrumb-height, 2);
     position: relative;
     text-decoration: none;
 
@@ -26,7 +28,7 @@
       border-bottom-left-radius: $base-border-radius;
       border-left: $breadcrumb-border;
       border-top-left-radius: $base-border-radius;
-      padding-left: $breadcrumb-height / 2;
+      padding-left: math.div($breadcrumb-height, 2);
     }
 
     &:last-child {
@@ -34,7 +36,7 @@
       border-bottom-right-radius: $base-border-radius;
       border-top-right-radius: $base-border-radius;
       color: $breadcrumb-color-active;
-      padding-right: $breadcrumb-height / 2;
+      padding-right: calc($breadcrumb-height / 2);
     }
 
     &:focus,
@@ -46,9 +48,9 @@
     &:after,
     &:before {
       @include position(absolute, 0px auto 0px 100%);
-      border-bottom: $breadcrumb-height / 2 solid transparent;
-      border-left: $breadcrumb-height / 4 solid transparent;
-      border-top: $breadcrumb-height / 2 solid transparent;
+      border-bottom: math.div($breadcrumb-height, 2) solid transparent;
+      border-left: math.div($breadcrumb-height, 4) solid transparent;
+      border-top: math.div($breadcrumb-height, 2) solid transparent;
       content: '';
       display: block;
       margin: auto;
@@ -71,7 +73,7 @@
 
     @include media($bp580only) {
       font-size: 1em;
-      padding: 0 ($breadcrumb-height / 2) 0 ($breadcrumb-height / 1.5);
+      padding: 0 math.div($breadcrumb-height, 2) 0 math.div($breadcrumb-height, 1.5);
     }
   }
 }
