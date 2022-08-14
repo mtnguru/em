@@ -1,3 +1,12 @@
+div#node-3088 {
+//display: none;
+
+  .block-page-title-block {
+    display: none;
+  }
+}
+
+////////////////////////////////////// Desktop display mode //////////
 body.page-node-type-atomizer {
 
   div.main-wrapper {
@@ -167,7 +176,6 @@ body.page-node-type-atomizer {
     }
   }
 
-  ////////////////////////////////////// Desktop display mode //////////
   @include media($bp960) {
 
     &.az-float-controls {
