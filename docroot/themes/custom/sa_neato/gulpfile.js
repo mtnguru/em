@@ -45,11 +45,11 @@ gulp.task('sass', function () {
     })
     .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('./css'))
-    .pipe(notify({
-      title: "SASS Compiled",
-      message: "All SASS files have been recompiled to CSS.",
-      onLast: true
-    }));
+//  .pipe(notify({
+//    title: "SASS Compiled",
+//    message: "All SASS files have been recompiled to CSS.",
+//    onLast: true
+//  }));
 });
 
 /**

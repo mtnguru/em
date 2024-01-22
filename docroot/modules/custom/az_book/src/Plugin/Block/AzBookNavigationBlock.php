@@ -283,7 +283,24 @@ class AzBookNavigationBlock extends BookNavigationBlock {
             '#markup' => '<h4>' .  t('Tools') . '</h4>',
           ];
 
-          // Add link to the Atom Builder
+          // Add atom-viewer-nuclets to the Atom Builder
+          if (\Drupal::currentUser()->hasPermission('atomizer display atom builder nuclets')) {
+            $build['#group_links']['atom_viewer_nuclets'] = [
+              '#type' => 'container',
+              '#attributes' => ['class' => ['atom-viewer-nuclets-link']],
+              'link' => [
+                '#type' => 'link',
+                '#title' => t('Atom Viewer - Deluxe '),
+                '#attributes' => [
+                  'title' => t('Interactive program to build atoms according to SAM.'),
+                ],
+                '#url' => Url::fromUri('base:atomizer/atom-viewer-nuclets', [
+                  'absolute' => TRUE,
+                ]),
+              ],
+            ];
+          }
+          // Add atom-builder link to the Atom Builder
           if (\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
             $build['#group_links']['atom_builder'] = [
               '#type' => 'container',

@@ -43,6 +43,23 @@ class AzSamToolsBlock extends BlockBase {
         ],
       ];
     }
+    // Add link to the Atom Viewer with Nuclets
+    if (\Drupal::currentUser()->hasPermission('atomizer display atom builder nuclets')) {
+      $build['atom_viewer_nuclets'] = [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['atom-viewer-nuclets-link']],
+        'link' => [
+          '#type' => 'link',
+          '#title' => t('Atom Viewer Experimenter'),
+          '#attributes' => [
+            'title' => t('Interactive program to build atoms according to SAM.'),
+          ],
+          '#url' => Url::fromUri('base:atomizer/atom-viewer-nuclets', [
+            'absolute' => TRUE,
+          ]),
+        ],
+      ];
+    }
 
     // Add link to the Atom Viewer
       $build['atom_viewer'] = [

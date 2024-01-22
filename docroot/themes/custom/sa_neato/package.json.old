@@ -12,6 +12,9 @@
     "rimraf": "^3.0.2",
     "run-sequence": "^2.2.1"
   },
+  "scripts": {
+    "postinstall": "node_modules/.bin/rimraf node_modules/**/*.info && gulp sass && gulp compress"
+  },
   "dependencies": {
     "gulp": "^3.9.1",
     "gulp-sass": "^5.1.0",

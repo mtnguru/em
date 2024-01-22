@@ -185,6 +185,9 @@ function az_content_entity_access(EntityInterface $entity, $op, AccountInterface
       if (($entity->id() == '511')  && !\Drupal::currentUser()->hasPermission('atomizer display atom builder')) {
         return AccessResult::forbidden();
       }
+      if (($entity->id() == '3090')  && !\Drupal::currentUser()->hasPermission('atomizer display atom viewer nuclets')) {
+        return AccessResult::forbidden();
+      }
       break;
 
     case 'group':
