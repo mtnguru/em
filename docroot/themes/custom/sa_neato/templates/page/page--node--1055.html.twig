@@ -1,0 +1,18 @@
+<div id="page-view" role="document" class="page">
+
+  {%  if page.featured %}
+    <section id="featured">
+      <div class="columns">
+        {{ page.featured }}
+      </div>
+    </section>
+  {% endif %}
+
+  <div class="main-wrapper">
+    <main role="main" class="outer-wrapper">
+      <a id="main-content" tabindex="-1"></a>
+
+      {{ page.content }}
+    </main>
+  </div>
+</div>
