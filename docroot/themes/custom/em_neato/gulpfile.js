@@ -76,6 +76,7 @@ gulp.task('drush:cc', function () {
     return;
   }
 
+  return;
   return gulp.src('', {read: false})
     .pipe(shell([
       config.drush.alias.css_js
@@ -141,7 +142,8 @@ gulp.task('flush', function() {
 gulp.task('watch', function() {
 
   // watch scss for changes and clear drupal theme cache on change
-  gulp.watch(['scss/**/*.scss'], gulp.parallel(['sass', 'drush:cc']));
+//gulp.watch(['scss/**/*.scss'], gulp.parallel(['sass', 'drush:cc']));
+  gulp.watch(['scss/**/*.scss'], gulp.parallel(['sass']));
 
   // watch js for changes and clear drupal theme cache on change
   gulp.watch(['js/js-src/**/*.js'], gulp.parallel(['compress', 'drush:cc']));

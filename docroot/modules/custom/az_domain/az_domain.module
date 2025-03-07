@@ -65,7 +65,13 @@ function az_domain_preprocess_page(&$variables) {
 function az_domain_preprocess_html(&$variables) {
   $active = \Drupal::service('domain.negotiator')->getActiveDomain();
 
+//if ($active) {
+//  print "is active\n";
+//} else {
+//  print "is not active\n";
+//}
   $variables['active_domain'] = str_replace('_', '-', $active->id());
+//$variables['active_domain'] = 'az';
   return;
 }
 
